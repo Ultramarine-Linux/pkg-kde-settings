@@ -2,13 +2,13 @@
 Summary: Config files for kde
 Name:    kde-settings
 Version: 3.5
-Release: 20%{?dist}
+Release: 21%{?dist}
 
 Group:   System Environment/Base
 License: Public Domain
 # This is a package which is specific to our distribution.  
 # Thus the source is only available from within this srpm.
-Source0: kde-settings-%{version}-17.tar.gz
+Source0: kde-settings-%{version}-21.tar.gz
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildArch: noarch
 
@@ -38,30 +38,23 @@ Requires: xorg-x11-xdm
 %prep
 %setup -q -c -n %{name}
 
-# Use Bluecurve Theme if available, do hacks here so we can keep 
-# a single tar/source file for all releases. -- Rex
-%if 0%{?fedora} > 3  || 0%{?rhel} > 4
+# fc6+ uses FedoraDNA
+%if 0%{?fedora} > 5 
 sed -i \
-  -e "s|^#Theme=.*|Theme=%{_datadir}/apps/kdm/themes/Bluecurve|" \
-  -e "s|^Theme=.*|Theme=%{_datadir}/apps/kdm/themes/Bluecurve|" \
-  -e "s|^#UseTheme=.*|UseTheme=true|" \
-  -e "s|^UseTheme=.*|UseTheme=true|" \
-  etc/kde/kdm/kdmrc 
-sed -i \
-  -e "s|^#Theme=.*|Theme=Bluecurve|" \
-  -e "s|^Theme=.*|Theme=Bluecurve|" \
-  usr/share/config/ksplashrc
-%endif
-
-# or better yet, FedoraDNA
-%if 0%{?fedora} > 5
-sed -i \
-  -e "s|^#Theme=.*|Theme=%{_datadir}/apps/kdm/themes/FedoraDNA|" \
   -e "s|^Theme=.*|Theme=%{_datadir}/apps/kdm/themes/FedoraDNA|" \
-  -e "s|^#UseTheme=.*|UseTheme=true|" \
-  -e "s|^UseTheme=.*|UseTheme=true|" \
   etc/kde/kdm/kdmrc
 %endif
+
+# fc7 uses FedoraFlyingHigh
+%if 0%{?fedora} > 6
+sed -i \
+  -e "s|^ColorScheme=.*|ColorScheme=FedoraFlyingHigh|" \
+  -e "s|^Theme=.*|Theme=%{_datadir}/apps/kdm/themes/FedoraFlyingHigh|" \
+  etc/kde/kdm/kdmrc
+%endif
+
+
+
 
 
 %build
@@ -120,12 +113,12 @@ rm -rf $RPM_BUILD_ROOT
 
 
 
-%files -f %{name}.list
+%files 
 %defattr(-,root,root,-)
 %{_sysconfdir}/skel/.kde/
-%config(noreplace) %{_sysconfdir}/kderc
-# belongs in -kdm below
-%exclude %{_datadir}/config/kdm
+# drop noreplace, so we can be sure to get the new kiosk bits
+%config %{_sysconfdir}/kderc
+%{_datadir}/kde-settings/
 
 %files kdm
 %defattr(-,root,root,-)
@@ -148,6 +141,10 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Tue May 15 2007 Rex Dieter <rdieter[AT]fedoraproject.org> 3.5-21
+- kiosk-style configs (finally)
+- kdm use UserLists, FedoraFlyingHigh color scheme (#239701) 
+
 * Tue May 01 2007 Rex Dieter <rdieter[AT]fedoraproject.org> 3.5-20
 - don't mix tab/spaces
 - %%setup -q
