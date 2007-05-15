@@ -2,7 +2,7 @@
 Summary: Config files for kde
 Name:    kde-settings
 Version: 3.5
-Release: 21%{?dist}
+Release: 22%{?dist}
 
 Group:   System Environment/Base
 License: Public Domain
@@ -141,6 +141,11 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Tue May 15 2007 Rex Dieter <rdieter[AT]fedoraproject.org> 3.5-22
+- backgroundrc: Background=default.jpg 
+- kderc: kioskAdmin=root:
+- omit (previously accidentally included) alternative konq throbbers
+
 * Tue May 15 2007 Rex Dieter <rdieter[AT]fedoraproject.org> 3.5-21
 - kiosk-style configs (finally)
 - kdm use UserLists, FedoraFlyingHigh color scheme (#239701) 
