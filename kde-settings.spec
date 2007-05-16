@@ -1,14 +1,16 @@
 
+%define rel 24
+
 Summary: Config files for kde
 Name:    kde-settings
 Version: 3.5
-Release: 23%{?dist}
+Release: %{rel}%{?dist}
 
 Group:   System Environment/Base
 License: Public Domain
 # This is a package which is specific to our distribution.  
 # Thus the source is only available from within this srpm.
-Source0: kde-settings-%{version}-22.tar.gz
+Source0: kde-settings-%{version}-%{rel}.tar.gz
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildArch: noarch
 
@@ -18,7 +20,6 @@ Obsoletes: kde-config < %{version}-%{release}
 
 %description
 %{summary}.
-
 
 %package kdm
 Summary: Config files for kdebase(kdm)
@@ -141,6 +142,10 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Tue May 15 2007 Rex Dieter <rdieter[AT]fedoraproject.org> 3.5-24
+- omit FedoraFlyingHigh.kcsrc (it's now in redhat-artwork-kde)
+- kdeglobals: xdg-user-dirs integration: Desktop, Documents
+
 * Tue May 15 2007 Rex Dieter <rdieter[AT]fedoraproject.org> 3.5-23
 - backgroundrc: Background=default.jpg 
 - kderc: kioskAdmin=root:
