@@ -144,7 +144,7 @@ rm -rf $RPM_BUILD_ROOT
 %changelog
 * Tue May 15 2007 Rex Dieter <rdieter[AT]fedoraproject.org> 3.5-24
 - omit FedoraFlyingHigh.kcsrc (it's now in redhat-artwork-kde)
-- kdeglobals: xdg-user-dirs integration: Desktop, Documents
+- kdeglobals: xdg-user-dirs integration: Desktop, Documents (#238371)
 
 * Tue May 15 2007 Rex Dieter <rdieter[AT]fedoraproject.org> 3.5-23
 - backgroundrc: Background=default.jpg 
