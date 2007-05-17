@@ -1,5 +1,5 @@
 
-%define rel 25
+%define rel 26
 
 Summary: Config files for kde
 Name:    kde-settings
@@ -125,6 +125,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Thu May 17 2007 Rex Dieter <rdieter[AT]fedoraproject.org> 3.5-26
+- omit kde-profile/default/share/icons
+
 * Tue May 15 2007 Rex Dieter <rdieter[AT]fedoraproject.org> 3.5-25
 - ksplashrc does not contain Echo (#233881)
 - kdmrc: MaxShowUID=65530, so we don't see nfsnobody
