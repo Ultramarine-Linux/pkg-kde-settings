@@ -1,5 +1,5 @@
 
-%define rel 24
+%define rel 25
 
 Summary: Config files for kde
 Name:    kde-settings
@@ -46,12 +46,15 @@ sed -i \
   etc/kde/kdm/kdmrc
 %endif
 
-# fc7 uses FedoraFlyingHigh
+# fc7 uses Echo,FedoraFlyingHigh
 %if 0%{?fedora} > 6
 sed -i \
   -e "s|^ColorScheme=.*|ColorScheme=FedoraFlyingHigh|" \
   -e "s|^Theme=.*|Theme=%{_datadir}/apps/kdm/themes/FedoraFlyingHigh|" \
   etc/kde/kdm/kdmrc
+sed -i \
+  -e "s|^Theme=.*|Theme=Echo|" \
+  usr/share/kde-settings/kde-profile/default/share/config/ksplashrc  
 %endif
 
 
@@ -72,31 +75,11 @@ tar cpf - etc/ usr/ | tar --directory $RPM_BUILD_ROOT -xvpf -
 rm -rf   $RPM_BUILD_ROOT%{_datadir}/config/kdm
 ln -sf ../../../etc/kde/kdm $RPM_BUILD_ROOT%{_datadir}/config/kdm
 
-# xdg_config_dirs-hack
-#install -D -p -m755 %{SOURCE10} $RPM_BUILD_ROOT%{_sysconfdir}/kde/env/xdg_env-hack.sh
-
-touch %{name}.list
-
-## NOTE: see also
-## kdelibs: use FHS-friendly /etc/kde (vs. /usr/share/config), bug #238136
-## can move items to /etc/kde when/if fixed.
-for file in \
- $(find $RPM_BUILD_ROOT%{_sysconfdir}/kde -type f -maxdepth 1) \
- $(find $RPM_BUILD_ROOT%{_datadir}/config -type f -maxdepth 1) \
- ; do
-  file_tmp=$(echo $file | sed -e "s|^$RPM_BUILD_ROOT||" )
-  echo "%config(noreplace) $file_tmp" >> %{name}.list
-done
-
-
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 
-## Use pre or triggerun kdebase ?  -- Rex
-#triggerun kdebase < 6:3.5.5
-#if [ $2 -gt 0 ]; then
 %pre kdm
 ## KDM fixup(s)
 # handle move from /etc/X11/xdm/kdmrc to /etc/kde/kdm/kdmrc
@@ -142,6 +125,11 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Tue May 15 2007 Rex Dieter <rdieter[AT]fedoraproject.org> 3.5-25
+- ksplashrc does not contain Echo (#233881)
+- kdmrc: MaxShowUID=65530, so we don't see nfsnobody
+- kdmrc: HiddenUsers=root (MinShowUID=500 doesn't work?)
+
 * Tue May 15 2007 Rex Dieter <rdieter[AT]fedoraproject.org> 3.5-24
 - omit FedoraFlyingHigh.kcsrc (it's now in redhat-artwork-kde)
 - kdeglobals: xdg-user-dirs integration: Desktop, Documents (#238371)
