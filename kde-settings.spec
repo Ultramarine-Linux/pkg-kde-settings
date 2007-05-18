@@ -1,5 +1,5 @@
 
-%define rel 26
+%define rel 27
 
 Summary: Config files for kde
 Name:    kde-settings
@@ -15,6 +15,7 @@ BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildArch: noarch
 
 Requires: kdelibs >= %{version}
+Requires: xdg-user-dirs
 
 Obsoletes: kde-config < %{version}-%{release}
 
@@ -125,6 +126,11 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Fri May 18 2007 Rex Dieter <rdieter[AT]fedoraproject.org> 3.5-27
+- kdeglobals: [Icons] Theme = crystalsvg
+- kdeglobals: [Paths] Trash[$e]=$(xdg-user-dir DESKTOP)/Trash/
+- Requires: xdg-user-dirs
+
 * Thu May 17 2007 Rex Dieter <rdieter[AT]fedoraproject.org> 3.5-26
 - omit kde-profile/default/share/icons
 
