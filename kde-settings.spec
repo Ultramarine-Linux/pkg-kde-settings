@@ -1,5 +1,5 @@
 
-%define rel 27
+%define rel 28
 
 Summary: Config files for kde
 Name:    kde-settings
@@ -10,7 +10,7 @@ Group:   System Environment/Base
 License: Public Domain
 # This is a package which is specific to our distribution.  
 # Thus the source is only available from within this srpm.
-Source0: kde-settings-%{version}-%{rel}.tar.gz
+Source0: kde-settings-%{version}-%{rel}.tar.bz2
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildArch: noarch
 
@@ -126,6 +126,12 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Mon May 21 2007 Than Ngo <than@redhat.com> - 3.5-28
+- don't hardcode locale in kdeglobals config
+- cleanup clock setting
+- plastik as default colorscheme
+- use bzip2
+
 * Fri May 18 2007 Rex Dieter <rdieter[AT]fedoraproject.org> 3.5-27
 - kdeglobals: [Icons] Theme = crystalsvg
 - kdeglobals: [Paths] Trash[$e]=$(xdg-user-dir DESKTOP)/Trash/
