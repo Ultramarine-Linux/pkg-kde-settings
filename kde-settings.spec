@@ -1,5 +1,5 @@
 
-%define rel 29
+%define rel 30
 
 Summary: Config files for kde
 Name:    kde-settings
@@ -102,6 +102,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Mon Jul 02 2007 Than Ngo <than@redhat.com> -  3.5-30
+- fix bz#245100
+
 * Mon Jun 18 2007 Than Ngo <than@redhat.com> -  3.5-29
 - cleanup kde-setings, bz#242564
 
