@@ -1,16 +1,16 @@
 
-%define rel 27
+%define rel 30
 
 Summary: Config files for kde
 Name:    kde-settings
 Version: 3.5
-Release: %{rel}%{?dist}.1
+Release: %{rel}%{?dist}
 
 Group:   System Environment/Base
 License: Public Domain
 # This is a package which is specific to our distribution.  
 # Thus the source is only available from within this srpm.
-Source0: kde-settings-%{version}-%{rel}.tar.gz
+Source0: kde-settings-%{version}-%{rel}.tar.bz2
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildArch: noarch
 
@@ -40,31 +40,8 @@ Requires: xorg-x11-xdm
 %prep
 %setup -q -c -n %{name}
 
-# fc6+ uses FedoraDNA
-%if 0%{?fedora} > 5 
-sed -i \
-  -e "s|^Theme=.*|Theme=%{_datadir}/apps/kdm/themes/FedoraDNA|" \
-  etc/kde/kdm/kdmrc
-%endif
-
-# fc7 uses Echo,FedoraFlyingHigh
-%if 0%{?fedora} > 6
-sed -i \
-  -e "s|^ColorScheme=.*|ColorScheme=FedoraFlyingHigh|" \
-  -e "s|^Theme=.*|Theme=%{_datadir}/apps/kdm/themes/FedoraFlyingHigh|" \
-  etc/kde/kdm/kdmrc
-sed -i \
-  -e "s|^Theme=.*|Theme=Echo|" \
-  usr/share/kde-settings/kde-profile/default/share/config/ksplashrc  
-%endif
-
-
-
-
-
 %build
 # Intentionally left blank.  Nothing to see here.
-
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -113,7 +90,6 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{_sysconfdir}/kde/kdm
 %config(noreplace) %{_sysconfdir}/kde/kdm/backgroundrc
 %config(noreplace) %{_sysconfdir}/kde/kdm/kdmrc
-%ghost %config(missingok,noreplace) %verify(not md5 size mtime) %{_sysconfdir}/kde/kdm/kdmrc.bak
 %ghost %config(missingok,noreplace) %verify(not md5 size mtime) %{_sysconfdir}/kde/kdm/README*
 %{_sysconfdir}/kde/kdm/Xaccess
 %{_sysconfdir}/kde/kdm/Xresources
@@ -126,6 +102,18 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Mon Jul 02 2007 Than Ngo <than@redhat.com> -  3.5-30
+- fix bz#245100
+
+* Mon Jun 18 2007 Than Ngo <than@redhat.com> -  3.5-29
+- cleanup kde-setings, bz#242564
+
+* Mon May 21 2007 Than Ngo <than@redhat.com> - 3.5-28
+- don't hardcode locale in kdeglobals config
+- cleanup clock setting
+- plastik as default colorscheme
+- use bzip2
+
 * Fri May 18 2007 Rex Dieter <rdieter[AT]fedoraproject.org> 3.5-27
 - kdeglobals: [Icons] Theme = crystalsvg
 - kdeglobals: [Paths] Trash[$e]=$(xdg-user-dir DESKTOP)/Trash/
