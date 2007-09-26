@@ -1,5 +1,5 @@
 
-%define rel 30
+%define rel 31
 
 Summary: Config files for kde
 Name:    kde-settings
@@ -14,7 +14,7 @@ Source0: kde-settings-%{version}-%{rel}.tar.bz2
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildArch: noarch
 
-Requires: kdelibs >= %{version}
+Requires: kdelibs3
 Requires: xdg-user-dirs
 
 Obsoletes: kde-config < %{version}-%{release}
@@ -102,6 +102,11 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Wed Sep 26 2007 Rex Dieter <rdieter[AT]fedoraproject.org> - 3.5-31
+- kdesktoprc: [Desktop0] Wallpaper=/usr/share/backgrounds/images/default.png
+  (#290571)
+- kopeterc: [ContactList] SmoothScrolling=false
+
 * Mon Jul 02 2007 Than Ngo <than@redhat.com> -  3.5-30
 - fix bz#245100
 
