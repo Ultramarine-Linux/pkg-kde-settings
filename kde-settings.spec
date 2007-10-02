@@ -1,5 +1,5 @@
 
-%define rel 31
+%define rel 32
 
 Summary: Config files for kde
 Name:    kde-settings
@@ -27,11 +27,14 @@ Summary: Config files for kdebase(kdm)
 Group:	 System Environment/Base
 Obsoletes: kde-config-kdm < %{version}-%{release}
 Requires: kdebase-kdm >= %{version}
-%if 0%{?fedora} > 6 || 0%{?rhel} > 5
-Requires: redhat-artwork-kde
-%else
-Requires: redhat-artwork
+%define kdm_theme redhat-artwork
+%if 0%{?fedora} == 8
+%define kdm_theme fedorainfinity-kdm-theme
 %endif
+%if 0%{?fedora} == 7
+%define kdm_theme redhat-artwork-kde
+%endif
+Requires: %{kdm_theme}
 Requires: xorg-x11-xdm
 %description kdm
 %{summary}.
@@ -102,6 +105,11 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Tue Oct 02 2007 Rex Dieter <rdieter[AT]fedoraproject.org> - 3.5-32
+- f8: Requires: fedorainfinity-kdm-theme (#314041)
+      kdmrc: [X-*-Greeter] Theme=.../FedoraInfinity
+      kdmrc: [X-*-Greeter] ColorScheme=FedoraInfinity
+
 * Wed Sep 26 2007 Rex Dieter <rdieter[AT]fedoraproject.org> - 3.5-31
 - kdesktoprc: [Desktop0] Wallpaper=/usr/share/backgrounds/images/default.png
   (#290571)
