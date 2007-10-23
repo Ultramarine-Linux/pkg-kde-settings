@@ -1,5 +1,5 @@
 
-%define rel 32
+%define rel 33
 
 Summary: Config files for kde
 Name:    kde-settings
@@ -105,6 +105,11 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Tue Oct 23 2007 Rex Dieter <rdieter[AT]fedoraproject.org> - 3.5-33
+- kdmrc: ColorScheme=FedoraInfinityKDM
+- ksplashrc: drop Theme=Echo (ie, revert to Default)
+- kdeglobals: colorScheme=FedoraInfinity.kcsrc
+
 * Tue Oct 02 2007 Rex Dieter <rdieter[AT]fedoraproject.org> - 3.5-32
 - f8: Requires: fedorainfinity-kdm-theme (#314041)
       kdmrc: [X-*-Greeter] Theme=.../FedoraInfinity
