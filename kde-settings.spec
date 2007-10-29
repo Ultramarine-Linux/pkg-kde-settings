@@ -1,10 +1,10 @@
 
-%define rel 33
+%define rel 34
 
 Summary: Config files for kde
 Name:    kde-settings
 Version: 3.5
-Release: %{rel}%{?dist}.1
+Release: %{rel}%{?dist}
 
 Group:   System Environment/Base
 License: Public Domain
@@ -125,6 +125,9 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Mon Oct 29 2007 Kevin Kofler <Kevin@tigcc.ticalc.org> - 3.5-34
+- ksplashrc: Theme=FedoraInfinity (thanks to Chitlesh Goorah)
+
 * Tue Oct 23 2007 Rex Dieter <rdieter[AT]fedoraproject.org> - 3.5-33.1
 - -pulseaudio: new subpkg, to enable pulseaudio support
 
