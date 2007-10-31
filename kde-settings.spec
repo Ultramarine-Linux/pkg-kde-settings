@@ -1,5 +1,5 @@
 
-%define rel 34
+%define rel 35
 
 Summary: Config files for kde
 Name:    kde-settings
@@ -125,6 +125,9 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Wed Oct 31 2007 Rex Dieter <rdieter[AT]fedoraproject.org> - 3.5-35
+- kdeglobals: remove [WM] section, which overrides ColorScheme
+
 * Mon Oct 29 2007 Kevin Kofler <Kevin@tigcc.ticalc.org> - 3.5-34
 - ksplashrc: Theme=FedoraInfinity (thanks to Chitlesh Goorah)
 
