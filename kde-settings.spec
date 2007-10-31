@@ -1,5 +1,5 @@
 
-%define rel 32
+%define rel 35
 
 Summary: Config files for kde
 Name:    kde-settings
@@ -11,6 +11,7 @@ License: Public Domain
 # This is a package which is specific to our distribution.  
 # Thus the source is only available from within this srpm.
 Source0: kde-settings-%{version}-%{rel}.tar.bz2
+Source1: pulseaudio.sh
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildArch: noarch
 
@@ -39,6 +40,18 @@ Requires: xorg-x11-xdm
 %description kdm
 %{summary}.
 
+%package pulseaudio
+Summary: Enable pulseaudio support
+Group:   System Environment/Base
+Requires: %{name} = %{version}-%{release}
+Requires: alsa-plugins-pulseaudio
+Requires: pulseaudio
+# +pulseaudio-utils until http://bugzilla.redhat.com/349751 fixed
+Requires: pulseaudio-module-x11 pulseaudio-utils
+#Requires: xine-lib-extras
+%description pulseaudio
+%{summary}.
+
 
 %prep
 %setup -q -c -n %{name}
@@ -47,18 +60,21 @@ Requires: xorg-x11-xdm
 # Intentionally left blank.  Nothing to see here.
 
 %install
-rm -rf $RPM_BUILD_ROOT
-mkdir -p $RPM_BUILD_ROOT{%{_datadir}/config,%{_sysconfdir}/kde/kdm}
+rm -rf %{buildroot}
+mkdir -p %{buildroot}{%{_datadir}/config,%{_sysconfdir}/kde/kdm}
 
-tar cpf - etc/ usr/ | tar --directory $RPM_BUILD_ROOT -xvpf -
+tar cpf - etc/ usr/ | tar --directory %{buildroot} -xvpf -
 
 # kdebase/kdm symlink
-rm -rf   $RPM_BUILD_ROOT%{_datadir}/config/kdm
-ln -sf ../../../etc/kde/kdm $RPM_BUILD_ROOT%{_datadir}/config/kdm
+rm -rf   %{buildroot}%{_datadir}/config/kdm
+ln -sf ../../../etc/kde/kdm %{buildroot}%{_datadir}/config/kdm
+
+# pulseaudio (auto)start
+install -p -m755 -D %{SOURCE1} %{buildroot}%{_sysconfdir}/kde/env/pulseaudio.sh
 
 
 %clean
-rm -rf $RPM_BUILD_ROOT
+rm -rf %{buildroot}
 
 
 %pre kdm
@@ -103,8 +119,26 @@ rm -rf $RPM_BUILD_ROOT
 # hack needed for older rpm's
 #exclude %{_sysconfdir}/X11/xdm/X*
 
+%files pulseaudio
+%defattr(-,root,root,-)
+%{_sysconfdir}/kde/env/*.sh
+
 
 %changelog
+* Wed Oct 31 2007 Rex Dieter <rdieter[AT]fedoraproject.org> - 3.5-35
+- kdeglobals: remove [WM] section, which overrides ColorScheme
+
+* Mon Oct 29 2007 Kevin Kofler <Kevin@tigcc.ticalc.org> - 3.5-34
+- ksplashrc: Theme=FedoraInfinity (thanks to Chitlesh Goorah)
+
+* Tue Oct 23 2007 Rex Dieter <rdieter[AT]fedoraproject.org> - 3.5-33.1
+- -pulseaudio: new subpkg, to enable pulseaudio support
+
+* Tue Oct 23 2007 Rex Dieter <rdieter[AT]fedoraproject.org> - 3.5-33
+- kdmrc: ColorScheme=FedoraInfinityKDM
+- ksplashrc: drop Theme=Echo (ie, revert to Default)
+- kdeglobals: colorScheme=FedoraInfinity.kcsrc
+
 * Tue Oct 02 2007 Rex Dieter <rdieter[AT]fedoraproject.org> - 3.5-32
 - f8: Requires: fedorainfinity-kdm-theme (#314041)
       kdmrc: [X-*-Greeter] Theme=.../FedoraInfinity
