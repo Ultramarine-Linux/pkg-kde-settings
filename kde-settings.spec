@@ -1,9 +1,9 @@
 
-%define rel 35
+%define rel 1
 
 Summary: Config files for kde
 Name:    kde-settings
-Version: 3.5
+Version: 4.0
 Release: %{rel}%{?dist}
 
 Group:   System Environment/Base
@@ -15,7 +15,7 @@ Source1: pulseaudio.sh
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildArch: noarch
 
-Requires: kdelibs3
+Requires: kde-filesystem
 Requires: xdg-user-dirs
 
 Obsoletes: kde-config < %{version}-%{release}
@@ -125,6 +125,11 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Mon Dec 03 2007 Kevin Kofler <Kevin@tigcc.ticalc.org> - 4.0-1
+- kdmrc: fix ClientLogFile and EchoMode->EchoPasswd for KDE 4 KDM
+- kdmrc: disable Infinity theme (revert to circles), incompatible with KDE 4
+- Require kde-filesystem instead of kdelibs3
+
 * Wed Oct 31 2007 Rex Dieter <rdieter[AT]fedoraproject.org> - 3.5-35
 - kdeglobals: remove [WM] section, which overrides ColorScheme
 
