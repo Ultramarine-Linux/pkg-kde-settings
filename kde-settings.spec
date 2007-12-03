@@ -28,6 +28,7 @@ Summary: Config files for kdebase(kdm)
 Group:	 System Environment/Base
 Obsoletes: kde-config-kdm < %{version}-%{release}
 Requires: kdebase-kdm >= %{version}
+%if 0%{?fedora} < 9
 %define kdm_theme redhat-artwork
 %if 0%{?fedora} == 8
 %define kdm_theme fedorainfinity-kdm-theme
@@ -36,6 +37,7 @@ Requires: kdebase-kdm >= %{version}
 %define kdm_theme redhat-artwork-kde
 %endif
 Requires: %{kdm_theme}
+%endif
 Requires: xorg-x11-xdm
 %description kdm
 %{summary}.
@@ -129,6 +131,7 @@ rm -rf %{buildroot}
 - kdmrc: fix ClientLogFile and EchoMode->EchoPasswd for KDE 4 KDM
 - kdmrc: disable Infinity theme (revert to circles), incompatible with KDE 4
 - Require kde-filesystem instead of kdelibs3
+- don't Require redhat-artwork
 
 * Wed Oct 31 2007 Rex Dieter <rdieter[AT]fedoraproject.org> - 3.5-35
 - kdeglobals: remove [WM] section, which overrides ColorScheme
