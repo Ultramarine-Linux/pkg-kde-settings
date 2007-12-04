@@ -1,5 +1,5 @@
 
-%define rel 1
+%define rel 2
 
 Summary: Config files for kde
 Name:    kde-settings
@@ -127,6 +127,9 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Tue Dec 04 2007 Than Ngo <than@redhat.com> 4.0-2
+- kdmrc: circles as kdm default theme
+
 * Mon Dec 03 2007 Kevin Kofler <Kevin@tigcc.ticalc.org> - 4.0-1
 - kdmrc: fix ClientLogFile and EchoMode->EchoPasswd for KDE 4 KDM
 - kdmrc: disable Infinity theme (revert to circles), incompatible with KDE 4
