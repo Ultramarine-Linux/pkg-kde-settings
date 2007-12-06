@@ -4,18 +4,22 @@
 Summary: Config files for kde
 Name:    kde-settings
 Version: 4.0
-Release: %{rel}%{?dist}
+Release: 3%{?dist}
 
 Group:   System Environment/Base
 License: Public Domain
 # This is a package which is specific to our distribution.  
 # Thus the source is only available from within this srpm.
 Source0: kde-settings-%{version}-%{rel}.tar.bz2
-Source1: pulseaudio.sh
+Source1: kdm.pam
+Source2: kde.pam
+Source3: pulseaudio.sh
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildArch: noarch
 
 Requires: kde-filesystem
+# /etc/pam.d/ ownership
+Requires: pam
 Requires: xdg-user-dirs
 
 Obsoletes: kde-config < %{version}-%{release}
@@ -24,7 +28,7 @@ Obsoletes: kde-config < %{version}-%{release}
 %{summary}.
 
 %package kdm
-Summary: Config files for kdebase(kdm)
+Summary: Config files for kdebase-workspace(kdm)
 Group:	 System Environment/Base
 Obsoletes: kde-config-kdm < %{version}-%{release}
 Requires: kdebase-kdm >= %{version}
@@ -43,14 +47,15 @@ Requires: xorg-x11-xdm
 %{summary}.
 
 %package pulseaudio
-Summary: Enable pulseaudio support
+Summary: Enable pulseaudio support in KDE
 Group:   System Environment/Base
 Requires: %{name} = %{version}-%{release}
-Requires: alsa-plugins-pulseaudio
 Requires: pulseaudio
-# +pulseaudio-utils until http://bugzilla.redhat.com/349751 fixed
-Requires: pulseaudio-module-x11 pulseaudio-utils
-#Requires: xine-lib-extras
+Requires: pulseaudio-module-x11
+# kde3
+Requires: alsa-plugins-pulseaudio
+# kde4, xine-lib pulseaudio support
+Requires: xine-lib-extras
 %description pulseaudio
 %{summary}.
 
@@ -71,8 +76,13 @@ tar cpf - etc/ usr/ | tar --directory %{buildroot} -xvpf -
 rm -rf   %{buildroot}%{_datadir}/config/kdm
 ln -sf ../../../etc/kde/kdm %{buildroot}%{_datadir}/config/kdm
 
+# pam
+install -p -m644 -D %{SOURCE1} %{buildroot}/etc/pam.d/kdm
+install -p -m644 -D %{SOURCE2} %{buildroot}/etc/pam.d/kcheckpass
+install -p -m644 -D %{SOURCE2} %{buildroot}/etc/pam.d/kscreensaver
+
 # pulseaudio (auto)start
-install -p -m755 -D %{SOURCE1} %{buildroot}%{_sysconfdir}/kde/env/pulseaudio.sh
+install -p -m755 -D %{SOURCE3} %{buildroot}%{_sysconfdir}/kde/env/pulseaudio.sh
 
 
 %clean
@@ -95,9 +105,10 @@ rm -rf %{buildroot}
   %{__cp} -a %{_sysconfdir}/kde/kdm/kdmrc.rpmnew %{_sysconfdir}/kde/kdm/kdmrc ||:
 
 
-
 %files 
 %defattr(-,root,root,-)
+%config(noreplace) /etc/pam.d/kcheckpass
+%config(noreplace) /etc/pam.d/kscreensaver
 %{_sysconfdir}/skel/.kde/
 # drop noreplace, so we can be sure to get the new kiosk bits
 %config %{_sysconfdir}/kderc
@@ -105,6 +116,7 @@ rm -rf %{buildroot}
 
 %files kdm
 %defattr(-,root,root,-)
+%config(noreplace) /etc/pam.d/kdm
 #%{_sysconfdir}/kde/env/xdg_*-hack.sh
 # compat symlink
 %{_datadir}/config/kdm
@@ -127,6 +139,10 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Wed Dec 05 2007 Rex Dieter <rdieter[AT]fedoraproject.org> 4.0-3
+- include pam configs
+- -pulseaudio: Requires: xine-lib-extras
+
 * Tue Dec 04 2007 Than Ngo <than@redhat.com> 4.0-2
 - kdmrc: circles as kdm default theme
 
