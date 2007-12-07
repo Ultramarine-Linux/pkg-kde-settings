@@ -1,5 +1,5 @@
 
-%define rel 35
+%define rel 36
 
 Summary: Config files for kde
 Name:    kde-settings
@@ -125,6 +125,9 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Fri Dec 07 2007 Than Ngo <than@redhat.com> 3.5-36
+- kdmrc: ServerTimeout=30
+
 * Wed Oct 31 2007 Rex Dieter <rdieter[AT]fedoraproject.org> - 3.5-35
 - kdeglobals: remove [WM] section, which overrides ColorScheme
 
