@@ -1,10 +1,10 @@
 
-%define rel 2
+%define rel 3
 
 Summary: Config files for kde
 Name:    kde-settings
 Version: 4.0
-Release: 3%{?dist}
+Release: 4%{?dist}
 
 Group:   System Environment/Base
 License: Public Domain
@@ -139,6 +139,9 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Fri Dec 07 2007 Than Ngo <than@redhat.com> 4.0-4
+- kdmrc: ServerTimeout=30
+
 * Wed Dec 05 2007 Rex Dieter <rdieter[AT]fedoraproject.org> 4.0-3
 - include pam configs
 - -pulseaudio: Requires: xine-lib-extras
