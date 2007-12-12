@@ -4,7 +4,7 @@
 Summary: Config files for kde
 Name:    kde-settings
 Version: 4.0
-Release: 4%{?dist}
+Release: 5%{?dist}
 
 Group:   System Environment/Base
 License: Public Domain
@@ -13,7 +13,8 @@ License: Public Domain
 Source0: kde-settings-%{version}-%{rel}.tar.bz2
 Source1: kdm.pam
 Source2: kde.pam
-Source3: pulseaudio.sh
+Source3: kdm-np.pam
+Source4: pulseaudio.sh
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildArch: noarch
 
@@ -80,9 +81,10 @@ ln -sf ../../../etc/kde/kdm %{buildroot}%{_datadir}/config/kdm
 install -p -m644 -D %{SOURCE1} %{buildroot}/etc/pam.d/kdm
 install -p -m644 -D %{SOURCE2} %{buildroot}/etc/pam.d/kcheckpass
 install -p -m644 -D %{SOURCE2} %{buildroot}/etc/pam.d/kscreensaver
+install -p -m644 -D %{SOURCE3} %{buildroot}/etc/pam.d/kdm
 
 # pulseaudio (auto)start
-install -p -m755 -D %{SOURCE3} %{buildroot}%{_sysconfdir}/kde/env/pulseaudio.sh
+install -p -m755 -D %{SOURCE4} %{buildroot}%{_sysconfdir}/kde/env/pulseaudio.sh
 
 
 %clean
@@ -139,6 +141,9 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Wed Dec 12 2007 Than Ngo <than@redhat.com> 4.0-5
+- add missing kdm-np pam, bz421931
+
 * Fri Dec 07 2007 Than Ngo <than@redhat.com> 4.0-4
 - kdmrc: ServerTimeout=30
 
