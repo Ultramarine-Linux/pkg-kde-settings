@@ -81,7 +81,7 @@ ln -sf ../../../etc/kde/kdm %{buildroot}%{_datadir}/config/kdm
 install -p -m644 -D %{SOURCE1} %{buildroot}/etc/pam.d/kdm
 install -p -m644 -D %{SOURCE2} %{buildroot}/etc/pam.d/kcheckpass
 install -p -m644 -D %{SOURCE2} %{buildroot}/etc/pam.d/kscreensaver
-install -p -m644 -D %{SOURCE3} %{buildroot}/etc/pam.d/kdm
+install -p -m644 -D %{SOURCE3} %{buildroot}/etc/pam.d/kdm-np
 
 # pulseaudio (auto)start
 install -p -m755 -D %{SOURCE4} %{buildroot}%{_sysconfdir}/kde/env/pulseaudio.sh
