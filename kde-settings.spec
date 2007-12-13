@@ -118,7 +118,7 @@ rm -rf %{buildroot}
 
 %files kdm
 %defattr(-,root,root,-)
-%config(noreplace) /etc/pam.d/kdm
+%config(noreplace) /etc/pam.d/kdm*
 #%{_sysconfdir}/kde/env/xdg_*-hack.sh
 # compat symlink
 %{_datadir}/config/kdm
