@@ -1,10 +1,10 @@
 
-%define rel 3
+%define rel 6
 
 Summary: Config files for kde
 Name:    kde-settings
 Version: 4.0
-Release: 5%{?dist}
+Release: %{rel}%{?dist}
 
 Group:   System Environment/Base
 License: Public Domain
@@ -141,6 +141,9 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Sat Dec 22 2007 Kevin Kofler <Kevin@tigcc.ticalc.org> - 4.0-6
+- kdeglobals: KSpell_Client=4 (Hunspell), add KSpell_Encoding=11 (UTF-8)
+
 * Wed Dec 12 2007 Than Ngo <than@redhat.com> 4.0-5
 - add missing kdm-np pam, bz421931
 
