@@ -111,7 +111,6 @@ rm -rf %{buildroot}
 %defattr(-,root,root,-)
 %config(noreplace) /etc/pam.d/kcheckpass
 %config(noreplace) /etc/pam.d/kscreensaver
-%{_sysconfdir}/skel/.kde/
 # drop noreplace, so we can be sure to get the new kiosk bits
 %config %{_sysconfdir}/kderc
 %{_datadir}/kde-settings/
