@@ -1,5 +1,5 @@
 
-%define rel 6
+%define rel 7
 
 Summary: Config files for kde
 Name:    kde-settings
@@ -53,10 +53,10 @@ Group:   System Environment/Base
 Requires: %{name} = %{version}-%{release}
 Requires: pulseaudio
 Requires: pulseaudio-module-x11
-# kde3
+## kde3
 Requires: alsa-plugins-pulseaudio
-# kde4, xine-lib pulseaudio support
-Requires: xine-lib-extras
+## kde4, xine-lib pulseaudio support (omit, too buggy for now)
+#Requires: xine-lib-extras
 %description pulseaudio
 %{summary}.
 
@@ -141,6 +141,10 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Fri Jan 04 2008 Rex Dieter <rdieter[AT]fedoraproject.org> 4.0-7
+- omit legacy/crufy etc/skel bits
+- -pulseaudio: -Requires: xine-lib-extras (too buggy)
+
 * Sat Dec 22 2007 Kevin Kofler <Kevin@tigcc.ticalc.org> - 4.0-6
 - kdeglobals: KSpell_Client=4 (Hunspell), add KSpell_Encoding=11 (UTF-8)
 
@@ -152,7 +156,7 @@ rm -rf %{buildroot}
 
 * Wed Dec 05 2007 Rex Dieter <rdieter[AT]fedoraproject.org> 4.0-3
 - include pam configs
-- -pulseaudio: Requires: xine-lib-extras
+- -pulseaudio: +Requires: xine-lib-extras
 
 * Tue Dec 04 2007 Than Ngo <than@redhat.com> 4.0-2
 - kdmrc: circles as kdm default theme
