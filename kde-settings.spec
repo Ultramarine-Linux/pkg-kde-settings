@@ -1,5 +1,5 @@
 
-%define rel 7
+%define rel 8
 
 Summary: Config files for kde
 Name:    kde-settings
@@ -11,10 +11,6 @@ License: Public Domain
 # This is a package which is specific to our distribution.  
 # Thus the source is only available from within this srpm.
 Source0: kde-settings-%{version}-%{rel}.tar.bz2
-Source1: kdm.pam
-Source2: kde.pam
-Source3: kdm-np.pam
-Source4: pulseaudio.sh
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildArch: noarch
 
@@ -32,8 +28,6 @@ Obsoletes: kde-config < %{version}-%{release}
 Summary: Config files for kdebase-workspace(kdm)
 Group:	 System Environment/Base
 Obsoletes: kde-config-kdm < %{version}-%{release}
-Requires: kdebase-kdm >= %{version}
-%if 0%{?fedora} < 9
 %define kdm_theme redhat-artwork
 %if 0%{?fedora} == 8
 %define kdm_theme fedorainfinity-kdm-theme
@@ -42,7 +36,6 @@ Requires: kdebase-kdm >= %{version}
 %define kdm_theme redhat-artwork-kde
 %endif
 Requires: %{kdm_theme}
-%endif
 Requires: xorg-x11-xdm
 %description kdm
 %{summary}.
@@ -64,8 +57,10 @@ Requires: alsa-plugins-pulseaudio
 %prep
 %setup -q -c -n %{name}
 
+
 %build
 # Intentionally left blank.  Nothing to see here.
+
 
 %install
 rm -rf %{buildroot}
@@ -76,15 +71,6 @@ tar cpf - etc/ usr/ | tar --directory %{buildroot} -xvpf -
 # kdebase/kdm symlink
 rm -rf   %{buildroot}%{_datadir}/config/kdm
 ln -sf ../../../etc/kde/kdm %{buildroot}%{_datadir}/config/kdm
-
-# pam
-install -p -m644 -D %{SOURCE1} %{buildroot}/etc/pam.d/kdm
-install -p -m644 -D %{SOURCE2} %{buildroot}/etc/pam.d/kcheckpass
-install -p -m644 -D %{SOURCE2} %{buildroot}/etc/pam.d/kscreensaver
-install -p -m644 -D %{SOURCE3} %{buildroot}/etc/pam.d/kdm-np
-
-# pulseaudio (auto)start
-install -p -m755 -D %{SOURCE4} %{buildroot}%{_sysconfdir}/kde/env/pulseaudio.sh
 
 
 %clean
@@ -109,6 +95,7 @@ rm -rf %{buildroot}
 
 %files 
 %defattr(-,root,root,-)
+%{_sysconfdir}/kde/env/evn.sh
 %config(noreplace) /etc/pam.d/kcheckpass
 %config(noreplace) /etc/pam.d/kscreensaver
 # drop noreplace, so we can be sure to get the new kiosk bits
@@ -136,10 +123,15 @@ rm -rf %{buildroot}
 
 %files pulseaudio
 %defattr(-,root,root,-)
-%{_sysconfdir}/kde/env/*.sh
+%{_sysconfdir}/kde/env/pulseaudio.sh
 
 
 %changelog
+* Thu Jan 10 2008 Rex Dieter <rdieter[AT]fedoraproject.org> 4.0-8
+- include /etc/kde/env/env.sh (#426115)
+- move extra sources into tarball
+- -kdm: cleanup deps
+
 * Fri Jan 04 2008 Rex Dieter <rdieter[AT]fedoraproject.org> 4.0-7
 - omit legacy/crufy etc/skel bits
 - -pulseaudio: -Requires: xine-lib-extras (too buggy)
