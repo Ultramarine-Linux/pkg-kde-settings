@@ -1,4 +1,7 @@
 
+# THIS SPECFILE IS FOR F9+ ONLY!
+# Sorry, it is just too different for conditionals to be worth it.
+
 %define rel 8
 
 Summary: Config files for kde
@@ -28,14 +31,6 @@ Obsoletes: kde-config < %{version}-%{release}
 Summary: Config files for kdebase-workspace(kdm)
 Group:	 System Environment/Base
 Obsoletes: kde-config-kdm < %{version}-%{release}
-%define kdm_theme redhat-artwork
-%if 0%{?fedora} == 8
-%define kdm_theme fedorainfinity-kdm-theme
-%endif
-%if 0%{?fedora} == 7
-%define kdm_theme redhat-artwork-kde
-%endif
-Requires: %{kdm_theme}
 Requires: xorg-x11-xdm
 %description kdm
 %{summary}.
@@ -95,7 +90,7 @@ rm -rf %{buildroot}
 
 %files 
 %defattr(-,root,root,-)
-%{_sysconfdir}/kde/env/evn.sh
+%{_sysconfdir}/kde/env/env.sh
 %config(noreplace) /etc/pam.d/kcheckpass
 %config(noreplace) /etc/pam.d/kscreensaver
 # drop noreplace, so we can be sure to get the new kiosk bits
