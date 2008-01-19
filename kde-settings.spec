@@ -2,7 +2,7 @@
 # THIS SPECFILE IS FOR F9+ ONLY!
 # Sorry, it is just too different for conditionals to be worth it.
 
-%define rel 8
+%define rel 9
 
 Summary: Config files for kde
 Name:    kde-settings
@@ -122,6 +122,9 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Sat Jan 19 2008 Kevin Kofler <Kevin@tigcc.ticalc.org> - 4.0-9
+- kdeglobals: also set K3Spell_Client=4 and K3Spell_Encoding=11
+
 * Thu Jan 10 2008 Rex Dieter <rdieter[AT]fedoraproject.org> 4.0-8
 - include /etc/kde/env/env.sh (#426115)
 - move extra sources into tarball
