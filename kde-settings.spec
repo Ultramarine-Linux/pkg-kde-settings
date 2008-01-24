@@ -4,7 +4,7 @@
 Summary: Config files for kde
 Name:    kde-settings
 Version: 3.5
-Release: %{rel}%{?dist}
+Release: %{rel}%{?dist}.1
 
 Group:   System Environment/Base
 License: Public Domain
@@ -14,6 +14,11 @@ Source0: kde-settings-%{version}-%{rel}.tar.bz2
 Source1: pulseaudio.sh
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildArch: noarch
+
+Source10: gpg-agent-startup.sh
+Source11: gpg-agent-shutdown.sh
+# sed/kill used in gpg-agent-(startup/shutdown).sh
+Requires: fileutils util-linux
 
 Requires: kdelibs3
 Requires: xdg-user-dirs
@@ -72,6 +77,10 @@ ln -sf ../../../etc/kde/kdm %{buildroot}%{_datadir}/config/kdm
 # pulseaudio (auto)start
 install -p -m755 -D %{SOURCE1} %{buildroot}%{_sysconfdir}/kde/env/pulseaudio.sh
 
+# enable auto-startup/shutdown of gpg-agent
+install -p -m0755 -D %{SOURCE10} %{buildroot}%{_sysconfdir}/kde/env/gpg-agent-startup.sh
+install -p -m0755 -D %{SOURCE11} %{buildroot}%{_sysconfdir}/kde/shutdown/gpg-agent-shutdown.sh
+
 
 %clean
 rm -rf %{buildroot}
@@ -96,6 +105,8 @@ rm -rf %{buildroot}
 
 %files 
 %defattr(-,root,root,-)
+%{_sysconfdir}/kde/env/gpg-agent*.sh
+%{_sysconfdir}/kde/shutdown/gpg-agent*.sh
 %{_sysconfdir}/skel/.kde/
 # drop noreplace, so we can be sure to get the new kiosk bits
 %config %{_sysconfdir}/kderc
@@ -121,10 +132,13 @@ rm -rf %{buildroot}
 
 %files pulseaudio
 %defattr(-,root,root,-)
-%{_sysconfdir}/kde/env/*.sh
+%{_sysconfdir}/kde/env/pulseaudio.sh
 
 
 %changelog
+* Wed Jan 23 2008 Rex Dieter <rdieter@fedoraproject.org> 3.5-36.1 
+- include gpg-agent scripts here (#427316)
+
 * Fri Dec 07 2007 Than Ngo <than@redhat.com> 3.5-36
 - kdmrc: ServerTimeout=30
 
