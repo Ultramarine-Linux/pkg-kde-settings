@@ -7,7 +7,7 @@
 Summary: Config files for kde
 Name:    kde-settings
 Version: 4.0
-Release: %{rel}%{?dist}
+Release: %{rel}%{?dist}.1
 
 Group:   System Environment/Base
 License: Public Domain
@@ -17,10 +17,15 @@ Source0: kde-settings-%{version}-%{rel}.tar.bz2
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildArch: noarch
 
+Source10: gpg-agent-startup.sh
+Source11: gpg-agent-shutdown.sh
+
 Requires: kde-filesystem
 # /etc/pam.d/ ownership
 Requires: pam
 Requires: xdg-user-dirs
+# sed/kill used in gpg-agent-(startup/shutdown).sh
+Requires: fileutils util-linux
 
 Obsoletes: kde-config < %{version}-%{release}
 
@@ -67,6 +72,10 @@ tar cpf - etc/ usr/ | tar --directory %{buildroot} -xvpf -
 rm -rf   %{buildroot}%{_datadir}/config/kdm
 ln -sf ../../../etc/kde/kdm %{buildroot}%{_datadir}/config/kdm
 
+# enable auto-startup/shutdown of gpg-agent
+install -p -m0755 -D %{SOURCE10} %{buildroot}%{_sysconfdir}/kde/env/gpg-agent-startup.sh
+install -p -m0755 -D %{SOURCE11} %{buildroot}%{_sysconfdir}/kde/shutdown/gpg-agent-shutdown.sh
+
 
 %clean
 rm -rf %{buildroot}
@@ -91,6 +100,8 @@ rm -rf %{buildroot}
 %files 
 %defattr(-,root,root,-)
 %{_sysconfdir}/kde/env/env.sh
+%{_sysconfdir}/kde/env/gpg-agent*.sh
+%{_sysconfdir}/kde/shutdown/gpg-agent*.sh
 %config(noreplace) /etc/pam.d/kcheckpass
 %config(noreplace) /etc/pam.d/kscreensaver
 # drop noreplace, so we can be sure to get the new kiosk bits
@@ -122,6 +133,9 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Wed Jan 23 2008 Rex Dieter <rdieter@fedoraproject.org> 4.0-9.1
+- include gpg-agent scripts here (#427316)
+
 * Sat Jan 19 2008 Kevin Kofler <Kevin@tigcc.ticalc.org> - 4.0-9
 - kdeglobals: also set K3Spell_Client=4 and K3Spell_Encoding=11
 
