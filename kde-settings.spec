@@ -4,7 +4,7 @@
 Summary: Config files for kde
 Name:    kde-settings
 Version: 3.5
-Release: %{rel}%{?dist}
+Release: %{rel}%{?dist}.1
 
 Group:   System Environment/Base
 License: Public Domain
@@ -14,7 +14,12 @@ Source0: kde-settings-%{version}-%{rel}.tar.bz2
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildArch: noarch
 
-Requires: kdelibs >= %{version}
+Source10: gpg-agent-startup.sh
+Source11: gpg-agent-shutdown.sh
+# sed/kill used in gpg-agent-(startup/shutdown).sh
+Requires: fileutils util-linux
+
+Requires: kdelibs3
 Requires: xdg-user-dirs
 
 Obsoletes: kde-config < %{version}-%{release}
@@ -44,18 +49,22 @@ Requires: xorg-x11-xdm
 # Intentionally left blank.  Nothing to see here.
 
 %install
-rm -rf $RPM_BUILD_ROOT
-mkdir -p $RPM_BUILD_ROOT{%{_datadir}/config,%{_sysconfdir}/kde/kdm}
+rm -rf %{buildroot}
+mkdir -p %{buildroot}{%{_datadir}/config,%{_sysconfdir}/kde/kdm}
 
-tar cpf - etc/ usr/ | tar --directory $RPM_BUILD_ROOT -xvpf -
+tar cpf - etc/ usr/ | tar --directory %{buildroot} -xvpf -
 
 # kdebase/kdm symlink
-rm -rf   $RPM_BUILD_ROOT%{_datadir}/config/kdm
-ln -sf ../../../etc/kde/kdm $RPM_BUILD_ROOT%{_datadir}/config/kdm
+rm -rf   %{buildroot}%{_datadir}/config/kdm
+ln -sf ../../../etc/kde/kdm %{buildroot}%{_datadir}/config/kdm
+
+# enable auto-startup/shutdown of gpg-agent
+install -p -m0755 -D %{SOURCE10} %{buildroot}%{_sysconfdir}/kde/env/gpg-agent-startup.sh
+install -p -m0755 -D %{SOURCE11} %{buildroot}%{_sysconfdir}/kde/shutdown/gpg-agent-shutdown.sh
 
 
 %clean
-rm -rf $RPM_BUILD_ROOT
+rm -rf %{buildroot}
 
 
 %pre kdm
@@ -77,6 +86,8 @@ rm -rf $RPM_BUILD_ROOT
 
 %files 
 %defattr(-,root,root,-)
+%{_sysconfdir}/kde/env/gpg-agent*.sh
+%{_sysconfdir}/kde/shutdown/gpg-agent*.sh
 %{_sysconfdir}/skel/.kde/
 # drop noreplace, so we can be sure to get the new kiosk bits
 %config %{_sysconfdir}/kderc
@@ -102,6 +113,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Wed Jan 23 2008 Rex Dieter <rdieter@fedoraproject.org> 3.5-30.1
+- include gpg-agent scripts here (#427316)
+
 * Mon Jul 02 2007 Than Ngo <than@redhat.com> -  3.5-30
 - fix bz#245100
 
