@@ -4,7 +4,7 @@
 Summary: Config files for kde
 Name:    kde-settings
 Version: 3.5
-Release: %{rel}%{?dist}.1
+Release: %{rel}%{?dist}.2
 
 Group:   System Environment/Base
 License: Public Domain
@@ -38,6 +38,7 @@ Requires: redhat-artwork-kde
 Requires: redhat-artwork
 %endif
 Requires: xorg-x11-xdm
+Requires: xorg-x11-xfs
 %description kdm
 %{summary}.
 
@@ -113,6 +114,9 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Mon Feb 04 2008 Rex Dieter <rdieter@fedoraproject.org> 3.5-30.2
+- -kdm: Req: xorg-x11-xfs (#431398)
+
 * Wed Jan 23 2008 Rex Dieter <rdieter@fedoraproject.org> 3.5-30.1
 - include gpg-agent scripts here (#427316)
 
