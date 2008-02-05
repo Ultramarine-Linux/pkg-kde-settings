@@ -4,7 +4,7 @@
 Summary: Config files for kde
 Name:    kde-settings
 Version: 3.5
-Release: %{rel}%{?dist}.2
+Release: %{rel}%{?dist}.3
 
 Group:   System Environment/Base
 License: Public Domain
@@ -42,7 +42,6 @@ Requires: kdebase-kdm >= %{version}
 %endif
 Requires: %{kdm_theme}
 Requires: xorg-x11-xdm
-Requires: xorg-x11-xfs
 %description kdm
 %{summary}.
 
@@ -137,6 +136,9 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Tue Feb 05 2008 Rex Dieter <rdieter@fedoraproject.org> 3.5-36.3
+- revert #431398 fix (only a bandaid, doesn't fix underlying problem)
+
 * Mon Feb 04 2008 Rex Dieter <rdieter@fedoraproject.org> 3.5-36.2
 - -kdm: Req: xorg-x11-xfs (#431398)
 
