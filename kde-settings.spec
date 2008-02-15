@@ -14,13 +14,8 @@ License: Public Domain
 # This is a package which is specific to our distribution.  
 # Thus the source is only available from within this srpm.
 Source0: kde-settings-%{version}-%{rel}.tar.bz2
-Source1: fedora-bookmarks.sh
-Source2: bookmarks.xml
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildArch: noarch
-
-Source10: gpg-agent-startup.sh
-Source11: gpg-agent-shutdown.sh
 
 Requires: kde-filesystem
 # /etc/pam.d/ ownership
@@ -73,14 +68,6 @@ tar cpf - etc/ usr/ | tar --directory %{buildroot} -xvpf -
 # kdebase/kdm symlink
 rm -rf   %{buildroot}%{_datadir}/config/kdm
 ln -sf ../../../etc/kde/kdm %{buildroot}%{_datadir}/config/kdm
-
-# enable auto-startup/shutdown of gpg-agent
-install -p -m0755 -D %{SOURCE10} %{buildroot}%{_sysconfdir}/kde/env/gpg-agent-startup.sh
-install -p -m0755 -D %{SOURCE11} %{buildroot}%{_sysconfdir}/kde/shutdown/gpg-agent-shutdown.sh
-
-# fedora-bookmarks
-install -p -m755 -D %{SOURCE1} %{buildroot}%{_sysconfdir}/kde/env/fedora-bookmarks.sh
-install -p -m644 -D %{SOURCE2} %{buildroot}%{_datadir}/kde-settings/kde-profile/default/share/apps/konqueror/bookmarks.xml
 
 %clean
 rm -rf %{buildroot}
