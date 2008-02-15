@@ -79,8 +79,8 @@ install -p -m0755 -D %{SOURCE10} %{buildroot}%{_sysconfdir}/kde/env/gpg-agent-st
 install -p -m0755 -D %{SOURCE11} %{buildroot}%{_sysconfdir}/kde/shutdown/gpg-agent-shutdown.sh
 
 # fedora-bookmarks
-install -p -m755 -D %{SOURCE5} %{buildroot}%{_sysconfdir}/kde/env/fedora-bookmarks.sh
-install -p -m644 -D %{SOURCE6} %{buildroot}%{_datadir}/kde-settings/kde-profile/default/share/apps/konqueror/bookmarks.xml
+install -p -m755 -D %{SOURCE1} %{buildroot}%{_sysconfdir}/kde/env/fedora-bookmarks.sh
+install -p -m644 -D %{SOURCE2} %{buildroot}%{_datadir}/kde-settings/kde-profile/default/share/apps/konqueror/bookmarks.xml
 
 %clean
 rm -rf %{buildroot}
