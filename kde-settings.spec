@@ -2,18 +2,20 @@
 # THIS SPECFILE IS FOR F9+ ONLY!
 # Sorry, it is just too different for conditionals to be worth it.
 
-%define rel 9
+%define rel 10
 
 Summary: Config files for kde
 Name:    kde-settings
 Version: 4.0
-Release: %{rel}%{?dist}.1
+Release: %{rel}%{?dist}
 
 Group:   System Environment/Base
 License: Public Domain
 # This is a package which is specific to our distribution.  
 # Thus the source is only available from within this srpm.
 Source0: kde-settings-%{version}-%{rel}.tar.bz2
+Source1: fedora-bookmarks.sh
+Source2: bookmarks.xml
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildArch: noarch
 
@@ -76,6 +78,9 @@ ln -sf ../../../etc/kde/kdm %{buildroot}%{_datadir}/config/kdm
 install -p -m0755 -D %{SOURCE10} %{buildroot}%{_sysconfdir}/kde/env/gpg-agent-startup.sh
 install -p -m0755 -D %{SOURCE11} %{buildroot}%{_sysconfdir}/kde/shutdown/gpg-agent-shutdown.sh
 
+# fedora-bookmarks
+install -p -m755 -D %{SOURCE5} %{buildroot}%{_sysconfdir}/kde/env/fedora-bookmarks.sh
+install -p -m644 -D %{SOURCE6} %{buildroot}%{_datadir}/kde-settings/kde-profile/default/share/apps/konqueror/bookmarks.xml
 
 %clean
 rm -rf %{buildroot}
@@ -101,6 +106,7 @@ rm -rf %{buildroot}
 %defattr(-,root,root,-)
 %{_sysconfdir}/kde/env/env.sh
 %{_sysconfdir}/kde/env/gpg-agent*.sh
+%{_sysconfdir}/kde/env/fedora-bookmarks.sh
 %{_sysconfdir}/kde/shutdown/gpg-agent*.sh
 %config(noreplace) /etc/pam.d/kcheckpass
 %config(noreplace) /etc/pam.d/kscreensaver
@@ -133,6 +139,10 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Fri Feb 15 2008 Than Ngo <than@redhat.com> 4.0-10
+- added default bookmarks (imported from fedora-bookmarks),
+  thanks Sebastian Vahl 
+
 * Wed Jan 23 2008 Rex Dieter <rdieter@fedoraproject.org> 4.0-9.1
 - include gpg-agent scripts here (#427316)
 
