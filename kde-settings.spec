@@ -2,7 +2,7 @@
 # THIS SPECFILE IS FOR F9+ ONLY!
 # Sorry, it is just too different for conditionals to be worth it.
 
-%define rel 10
+%define rel 11
 
 Summary: Config files for kde
 Name:    kde-settings
@@ -126,6 +126,15 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Tue Feb 19 2008 Rex Dieter <rdieter@fedoraproject.org> 4.0-11
+- kdmrc: BootManager=Grub (#374011)
+- omit errant clock_pannelapplet_wkid..._rc (#431890)
+- include (initially empty) applications/defaults.list
+- env.sh: set XDG_CONFIG_DATA
+- ksplashrc: disable FedoraInfinity (for now, doesn't work)
+- kdeglobals: cleanup, set oxygen defaults mostly
+- kickerrc 'n friends: nuke
+
 * Fri Feb 15 2008 Than Ngo <than@redhat.com> 4.0-10
 - added default bookmarks (imported from fedora-bookmarks),
   thanks Sebastian Vahl 
