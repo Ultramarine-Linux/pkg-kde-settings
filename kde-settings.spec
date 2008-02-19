@@ -1,22 +1,19 @@
 
-%define rel 36
+%define rel 37
 
 Summary: Config files for kde
 Name:    kde-settings
 Version: 3.5
-Release: %{rel}%{?dist}.3
+Release: %{rel}%{?dist}
 
 Group:   System Environment/Base
 License: Public Domain
 # This is a package which is specific to our distribution.  
 # Thus the source is only available from within this srpm.
 Source0: kde-settings-%{version}-%{rel}.tar.bz2
-Source1: pulseaudio.sh
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildArch: noarch
 
-Source10: gpg-agent-startup.sh
-Source11: gpg-agent-shutdown.sh
 # sed/kill used in gpg-agent-(startup/shutdown).sh
 Requires: fileutils util-linux
 
@@ -74,13 +71,6 @@ tar cpf - etc/ usr/ | tar --directory %{buildroot} -xvpf -
 rm -rf   %{buildroot}%{_datadir}/config/kdm
 ln -sf ../../../etc/kde/kdm %{buildroot}%{_datadir}/config/kdm
 
-# pulseaudio (auto)start
-install -p -m755 -D %{SOURCE1} %{buildroot}%{_sysconfdir}/kde/env/pulseaudio.sh
-
-# enable auto-startup/shutdown of gpg-agent
-install -p -m0755 -D %{SOURCE10} %{buildroot}%{_sysconfdir}/kde/env/gpg-agent-startup.sh
-install -p -m0755 -D %{SOURCE11} %{buildroot}%{_sysconfdir}/kde/shutdown/gpg-agent-shutdown.sh
-
 
 %clean
 rm -rf %{buildroot}
@@ -136,6 +126,10 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Tue Feb 19 2008 Rex Dieter <rdieter@fedoraproject.org> 3.5-37
+- omit errant clock_pannelapplet_wkid..._rc (#431890)
+- include pulseaudio.sh, gpg-agent-*.sh scripts in tarball too
+
 * Tue Feb 05 2008 Rex Dieter <rdieter@fedoraproject.org> 3.5-36.3
 - revert #431398 fix (only a bandaid, doesn't fix underlying problem)
 
