@@ -4,7 +4,7 @@
 Summary: Config files for kde
 Name:    kde-settings
 Version: 3.5
-Release: %{rel}%{?dist}
+Release: %{rel}%{?dist}.1
 
 Group:   System Environment/Base
 License: Public Domain
@@ -71,6 +71,8 @@ tar cpf - etc/ usr/ | tar --directory %{buildroot} -xvpf -
 rm -rf   %{buildroot}%{_datadir}/config/kdm
 ln -sf ../../../etc/kde/kdm %{buildroot}%{_datadir}/config/kdm
 
+ln -s kderc %{buildroot}%{_sysconfdir}/kde4rc
+
 
 %clean
 rm -rf %{buildroot}
@@ -100,6 +102,7 @@ rm -rf %{buildroot}
 %{_sysconfdir}/skel/.kde/
 # drop noreplace, so we can be sure to get the new kiosk bits
 %config %{_sysconfdir}/kderc
+%config %{_sysconfdir}/kde4rc
 %{_datadir}/kde-settings/
 
 %files kdm
@@ -126,6 +129,9 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Sun Mar 09 2008 Kevin Kofler <Kevin@tigcc.ticalc.org> 3.5-37.1
+- symlink /etc/kderc to /etc/kde4rc
+
 * Tue Feb 19 2008 Rex Dieter <rdieter@fedoraproject.org> 3.5-37
 - omit errant clock_pannelapplet_wkid..._rc (#431890)
 - include pulseaudio.sh, gpg-agent-*.sh scripts in tarball too
