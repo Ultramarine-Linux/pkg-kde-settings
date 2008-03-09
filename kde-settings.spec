@@ -4,7 +4,7 @@
 Summary: Config files for kde
 Name:    kde-settings
 Version: 3.5
-Release: %{rel}%{?dist}.2
+Release: %{rel}%{?dist}.3
 
 Group:   System Environment/Base
 License: Public Domain
@@ -63,6 +63,8 @@ ln -sf ../../../etc/kde/kdm %{buildroot}%{_datadir}/config/kdm
 install -p -m0755 -D %{SOURCE10} %{buildroot}%{_sysconfdir}/kde/env/gpg-agent-startup.sh
 install -p -m0755 -D %{SOURCE11} %{buildroot}%{_sysconfdir}/kde/shutdown/gpg-agent-shutdown.sh
 
+ln -s kderc %{buildroot}%{_sysconfdir}/kde4rc
+
 
 %clean
 rm -rf %{buildroot}
@@ -92,6 +94,7 @@ rm -rf %{buildroot}
 %{_sysconfdir}/skel/.kde/
 # drop noreplace, so we can be sure to get the new kiosk bits
 %config %{_sysconfdir}/kderc
+%config %{_sysconfdir}/kde4rc
 %{_datadir}/kde-settings/
 
 %files kdm
@@ -114,6 +117,9 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Sun Mar 09 2008 Kevin Kofler <Kevin@tigcc.ticalc.org> 3.5-30.3
+- symlink /etc/kderc to /etc/kde4rc
+
 * Mon Feb 04 2008 Rex Dieter <rdieter@fedoraproject.org> 3.5-30.2
 - -kdm: Req: xorg-x11-xfs (#431398)
 
