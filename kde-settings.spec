@@ -2,7 +2,7 @@
 # THIS SPECFILE IS FOR F9+ ONLY!
 # Sorry, it is just too different for conditionals to be worth it.
 
-%define rel 11
+%define rel 12
 
 Summary: Config files for kde
 Name:    kde-settings
@@ -129,6 +129,10 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Mon Mar 10 2008 Than Ngo <than@redhat.com> 4.0-12.1
+- gestures disable as default
+- omit kdesktoprc
+
 * Sun Mar 09 2008 Kevin Kofler <Kevin@tigcc.ticalc.org> 4.0-11.1
 - symlink /etc/kderc to /etc/kde4rc
 
