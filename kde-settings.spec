@@ -4,7 +4,7 @@
 Summary: Config files for kde
 Name:    kde-settings
 Version: 3.5
-Release: %{rel}%{?dist}.3
+Release: %{rel}%{?dist}.4
 
 Group:   System Environment/Base
 License: Public Domain
@@ -38,7 +38,6 @@ Requires: redhat-artwork-kde
 Requires: redhat-artwork
 %endif
 Requires: xorg-x11-xdm
-Requires: xorg-x11-xfs
 %description kdm
 %{summary}.
 
@@ -117,6 +116,9 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Mon Mar 10 2008 Kevin Kofler <Kevin@tigcc.ticalc.org> 3.5-30.4
+- revert #431398 fix (only a bandaid, doesn't fix underlying problem)
+
 * Sun Mar 09 2008 Kevin Kofler <Kevin@tigcc.ticalc.org> 3.5-30.3
 - symlink /etc/kderc to /etc/kde4rc
 
