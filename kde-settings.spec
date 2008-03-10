@@ -2,7 +2,7 @@
 # THIS SPECFILE IS FOR F9+ ONLY!
 # Sorry, it is just too different for conditionals to be worth it.
 
-%define rel 12
+%define rel 13
 
 Summary: Config files for kde
 Name:    kde-settings
@@ -129,6 +129,9 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Mon Mar 10 2008 Than Ngo <than@redhat.com> 4.0-13.1
+- make oxygen the default windows manager
+
 * Mon Mar 10 2008 Than Ngo <than@redhat.com> 4.0-12.1
 - gestures disable as default
 - omit kdesktoprc
