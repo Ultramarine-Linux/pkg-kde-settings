@@ -4,7 +4,7 @@
 Summary: Config files for kde
 Name:    kde-settings
 Version: 3.5
-Release: %{rel}%{?dist}.4
+Release: %{rel}%{?dist}.5
 
 Group:   System Environment/Base
 License: Public Domain
@@ -13,6 +13,8 @@ License: Public Domain
 Source0: kde-settings-%{version}-%{rel}.tar.bz2
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildArch: noarch
+
+Source1:  kde4rc
 
 Source10: gpg-agent-startup.sh
 Source11: gpg-agent-shutdown.sh
@@ -62,7 +64,7 @@ ln -sf ../../../etc/kde/kdm %{buildroot}%{_datadir}/config/kdm
 install -p -m0755 -D %{SOURCE10} %{buildroot}%{_sysconfdir}/kde/env/gpg-agent-startup.sh
 install -p -m0755 -D %{SOURCE11} %{buildroot}%{_sysconfdir}/kde/shutdown/gpg-agent-shutdown.sh
 
-ln -s kderc %{buildroot}%{_sysconfdir}/kde4rc
+install -p -m0644 -D %{SOURCE1}  %{buildroot}%{_sysconfdir}/kde4rc
 
 
 %clean
@@ -116,6 +118,9 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Tue Mar 11 2008 Rex Dieter <rdieter@fedoraproject.org> 3.5-30.5
+- kde4rc: omit userProfileMapFile key
+
 * Mon Mar 10 2008 Kevin Kofler <Kevin@tigcc.ticalc.org> 3.5-30.4
 - revert #431398 fix (only a bandaid, doesn't fix underlying problem)
 
