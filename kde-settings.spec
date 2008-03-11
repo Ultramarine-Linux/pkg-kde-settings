@@ -2,12 +2,12 @@
 # THIS SPECFILE IS FOR F9+ ONLY!
 # Sorry, it is just too different for conditionals to be worth it.
 
-%define rel 13
+%define rel 14
 
 Summary: Config files for kde
 Name:    kde-settings
 Version: 4.0
-Release: %{rel}%{?dist}.1
+Release: %{rel}%{?dist}
 
 Group:   System Environment/Base
 License: Public Domain
@@ -69,7 +69,6 @@ tar cpf - etc/ usr/ | tar --directory %{buildroot} -xvpf -
 rm -rf   %{buildroot}%{_datadir}/config/kdm
 ln -sf ../../../etc/kde/kdm %{buildroot}%{_datadir}/config/kdm
 
-ln -s kderc %{buildroot}%{_sysconfdir}/kde4rc
 
 %clean
 rm -rf %{buildroot}
@@ -129,6 +128,9 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Tue Mar 11 2008 Rex Dieter <rdieter@fedoraproject.org> 4.0-14
+- kde4rc: omit userProfileMapFile key
+
 * Mon Mar 10 2008 Than Ngo <than@redhat.com> 4.0-13.1
 - make oxygen the default windows manager
 
