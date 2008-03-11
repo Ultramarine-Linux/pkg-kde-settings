@@ -1,10 +1,10 @@
 
-%define rel 37
+%define rel 38
 
 Summary: Config files for kde
 Name:    kde-settings
 Version: 3.5
-Release: %{rel}%{?dist}.1
+Release: %{rel}%{?dist}
 
 Group:   System Environment/Base
 License: Public Domain
@@ -71,8 +71,6 @@ tar cpf - etc/ usr/ | tar --directory %{buildroot} -xvpf -
 rm -rf   %{buildroot}%{_datadir}/config/kdm
 ln -sf ../../../etc/kde/kdm %{buildroot}%{_datadir}/config/kdm
 
-ln -s kderc %{buildroot}%{_sysconfdir}/kde4rc
-
 
 %clean
 rm -rf %{buildroot}
@@ -129,6 +127,9 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Tue Mar 11 2008 Rex Dieter <rdieter@fedoraproject.org> 3.5-38 
+- kde4rc: omit userProfileMapFile key
+
 * Sun Mar 09 2008 Kevin Kofler <Kevin@tigcc.ticalc.org> 3.5-37.1
 - symlink /etc/kderc to /etc/kde4rc
 
