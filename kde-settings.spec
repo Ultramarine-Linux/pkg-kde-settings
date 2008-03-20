@@ -7,7 +7,7 @@
 Summary: Config files for kde
 Name:    kde-settings
 Version: 4.0
-Release: %{rel}%{?dist}
+Release: %{rel}%{?dist}.1
 
 Group:   System Environment/Base
 License: Public Domain
@@ -18,6 +18,7 @@ BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildArch: noarch
 
 Requires: kde-filesystem
+Requires: oxygen-icon-theme
 # /etc/pam.d/ ownership
 Requires: pam
 Requires: xdg-user-dirs
@@ -128,6 +129,9 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Thu Mar 20 2008 Rex Dieter <rdieter@fedoraproject.org> 4.0-14.1
+- Requires: oxygen-icon-theme
+
 * Tue Mar 11 2008 Rex Dieter <rdieter@fedoraproject.org> 4.0-14
 - kde4rc: omit userProfileMapFile key
 
