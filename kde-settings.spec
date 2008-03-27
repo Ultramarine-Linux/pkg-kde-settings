@@ -2,12 +2,12 @@
 # THIS SPECFILE IS FOR F9+ ONLY!
 # Sorry, it is just too different for conditionals to be worth it.
 
-%define rel 14
+%define rel 15
 
 Summary: Config files for kde
 Name:    kde-settings
 Version: 4.0
-Release: %{rel}%{?dist}.1
+Release: %{rel}%{?dist}
 
 Group:   System Environment/Base
 License: Public Domain
@@ -129,6 +129,9 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Thu Mar 27 2008 Rex Dieter <rdieter@fedoraproject.org> 4.0-15
+- ksplashrc: [KSplash] Theme=Waves
+
 * Thu Mar 20 2008 Rex Dieter <rdieter@fedoraproject.org> 4.0-14.1
 - Requires: oxygen-icon-theme
 
