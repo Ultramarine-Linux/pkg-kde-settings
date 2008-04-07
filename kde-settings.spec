@@ -1,4 +1,3 @@
-
 # THIS SPECFILE IS FOR F9+ ONLY!
 # Sorry, it is just too different for conditionals to be worth it.
 
@@ -7,7 +6,7 @@
 Summary: Config files for kde
 Name:    kde-settings
 Version: 4.0
-Release: %{rel}%{?dist}
+Release: %{rel}%{?dist}.1
 
 Group:   System Environment/Base
 License: Public Domain
@@ -46,8 +45,8 @@ Requires: pulseaudio
 Requires: pulseaudio-module-x11
 ## kde3
 Requires: alsa-plugins-pulseaudio
-## kde4, xine-lib pulseaudio support (omit, too buggy for now)
-#Requires: xine-lib-extras
+## kde4
+Requires: xine-lib-pulseaudio
 %description pulseaudio
 %{summary}.
 
@@ -129,6 +128,9 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Mon Apr 07 2008 Rex Dieter <rdieter@fedoraproject.org> 4.0-16.1
+- -pulseaudio: Requires: xine-lib-pulseaudio
+
 * Mon Apr 07 2008 Rex Dieter <rdieter@fedoraproject.org> 4.0-16
 - backgroundrc,kdmrc: first stab at F9/sulfur theming (#441167)
 - kdmrc: ServerArgsLocal=-br (suggested by ajax)
