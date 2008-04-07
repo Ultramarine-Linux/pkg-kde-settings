@@ -129,6 +129,10 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Mon Apr 07 2008 Rex Dieter <rdieter@fedoraproject.org> 4.0-16
+- backgroundrc,kdmrc: first stab at F9/sulfur theming (#441167)
+- kdmrc: ServerArgsLocal=-br (suggested by ajax)
+
 * Thu Mar 27 2008 Rex Dieter <rdieter@fedoraproject.org> 4.0-15
 - ksplashrc: [KSplash] Theme=Waves
 
