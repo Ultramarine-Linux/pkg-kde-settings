@@ -2,7 +2,7 @@
 # THIS SPECFILE IS FOR F9+ ONLY!
 # Sorry, it is just too different for conditionals to be worth it.
 
-%define rel 15
+%define rel 16
 
 Summary: Config files for kde
 Name:    kde-settings
