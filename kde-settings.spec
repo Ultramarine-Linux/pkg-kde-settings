@@ -1,7 +1,7 @@
 # THIS SPECFILE IS FOR F9+ ONLY!
 # Sorry, it is just too different for conditionals to be worth it.
 
-%define rel 18
+%define rel 19
 
 Summary: Config files for kde
 Name:    kde-settings
@@ -137,6 +137,11 @@ touch --no-create %{_datadir}/kde-settings/kde-profile/default/share/icons/Fedor
 
 
 %changelog
+* Thu Apr 10 2008 Rex Dieter <rdieter@fedoraproject.org> 4.0-19
+- kmixrc: Visible=false
+- ksmserverrc: start kmix (could use autostart for this too)
+- kwalletrc: (sane defaults)
+
 * Thu Apr 10 2008 Rex Dieter <rdieter@fedoraproject.org> 4.0-18
 - kdmrc: [X-*-Greeter] Theme=FedoraWaves
 - ksplashrc: [KSplash] Theme=FedoraWaves
