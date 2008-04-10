@@ -1,12 +1,12 @@
 # THIS SPECFILE IS FOR F9+ ONLY!
 # Sorry, it is just too different for conditionals to be worth it.
 
-%define rel 16
+%define rel 17
 
 Summary: Config files for kde
 Name:    kde-settings
 Version: 4.0
-Release: %{rel}%{?dist}.1
+Release: %{rel}%{?dist}
 
 Group:   System Environment/Base
 License: Public Domain
@@ -33,6 +33,7 @@ Obsoletes: kde-config < %{version}-%{release}
 Summary: Config files for kdebase-workspace(kdm)
 Group:	 System Environment/Base
 Obsoletes: kde-config-kdm < %{version}-%{release}
+#Requires: kdebase-workspace
 Requires: xorg-x11-xdm
 %description kdm
 %{summary}.
@@ -73,6 +74,12 @@ ln -sf ../../../etc/kde/kdm %{buildroot}%{_datadir}/config/kdm
 %clean
 rm -rf %{buildroot}
 
+
+%post
+touch --no-create %{_datadir}/kde-settings/kde-profile/default/share/icons/Fedora-KDE ||:
+
+%postun
+touch --no-create %{_datadir}/kde-settings/kde-profile/default/share/icons/Fedora-KDE ||:
 
 %pre kdm
 ## KDM fixup(s)
@@ -128,6 +135,12 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Wed Apr 09 2008 Rex Dieter <rdieter@fedoraproject.org> 4.0-17
+- env.sh: XDG_CONFIG_DATA -> XDG_DATA_DIRS (oops)
+- kdmrc: [X-*-Greeter] ColorScheme=ObsidianCoast
+- include Fedora-KDE icon theme
+- kdeglobals: [Icons] Theme=Fedora-KDE
+
 * Mon Apr 07 2008 Rex Dieter <rdieter@fedoraproject.org> 4.0-16.1
 - -pulseaudio: Requires: xine-lib-pulseaudio
 
