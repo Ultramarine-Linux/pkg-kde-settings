@@ -1,7 +1,7 @@
 # THIS SPECFILE IS FOR F9+ ONLY!
 # Sorry, it is just too different for conditionals to be worth it.
 
-%define rel 19
+%define rel 20
 
 Summary: Config files for kde
 Name:    kde-settings
@@ -24,6 +24,8 @@ Requires: pam
 Requires: xdg-user-dirs
 # sed/kill used in gpg-agent-(startup/shutdown).sh
 Requires: fileutils util-linux
+# Fedora_Waves theme for wallpaper
+Requires: desktop-backgrounds-basic
 
 Obsoletes: kde-config < %{version}-%{release}
 
@@ -137,6 +139,9 @@ touch --no-create %{_datadir}/kde-settings/kde-profile/default/share/icons/Fedor
 
 
 %changelog
+* Fri Apr 11 2008 Than Ngo <than@redhat.com> 4.0-20
+- set Fedora_Waves wallpaper theme default
+
 * Thu Apr 10 2008 Rex Dieter <rdieter@fedoraproject.org> 4.0-19
 - kmixrc: Visible=false
 - ksmserverrc: start kmix (could use autostart for this too)
