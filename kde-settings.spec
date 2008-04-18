@@ -1,7 +1,7 @@
 # THIS SPECFILE IS FOR F9+ ONLY!
 # Sorry, it is just too different for conditionals to be worth it.
 
-%define rel 20
+%define rel 21
 
 Summary: Config files for kde
 Name:    kde-settings
@@ -139,6 +139,9 @@ touch --no-create %{_datadir}/kde-settings/kde-profile/default/share/icons/Fedor
 
 
 %changelog
+* Fri Apr 18 2008 Rex Dieter <rdieter@fedoraproject.org> 4.0-21
+- kglobalshortsrc: add keyboard shortcuts for Virtual desktop switching (#440415)
+
 * Fri Apr 11 2008 Than Ngo <than@redhat.com> 4.0-20
 - set Fedora_Waves wallpaper theme default
 
