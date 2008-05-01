@@ -1,7 +1,7 @@
 # THIS SPECFILE IS FOR F9+ ONLY!
 # Sorry, it is just too different for conditionals to be worth it.
 
-%define rel 21
+%define rel 22
 
 Summary: Config files for kde
 Name:    kde-settings
@@ -16,6 +16,8 @@ Source0: kde-settings-%{version}-%{rel}.tar.bz2
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildArch: noarch
 
+BuildRequires: kde-filesystem
+
 Requires: kde-filesystem
 # default (ok, inherited) icon theme
 Requires: oxygen-icon-theme
@@ -23,9 +25,12 @@ Requires: oxygen-icon-theme
 Requires: pam
 Requires: xdg-user-dirs
 # sed/kill used in gpg-agent-(startup/shutdown).sh
-Requires: fileutils util-linux
+Requires: coreutils sed util-linux
 # Fedora_Waves theme for wallpaper
 Requires: desktop-backgrounds-basic
+
+Requires(post): coreutils
+Requires(postun): coreutils
 
 Obsoletes: kde-config < %{version}-%{release}
 
@@ -39,6 +44,9 @@ Obsoletes: kde-config-kdm < %{version}-%{release}
 Requires: fedorawaves-kdm-theme
 #Requires: kdebase-workspace
 Requires: xorg-x11-xdm
+Requires(pre): coreutils
+Requires(post): coreutils grep sed
+Requires(post): kde4-macros(api) = %{_kde4_macros_api}
 %description kdm
 %{summary}.
 
@@ -99,6 +107,12 @@ touch --no-create %{_datadir}/kde-settings/kde-profile/default/share/icons/Fedor
 # handle move from /etc/X11/xdm/kdmrc to /etc/kde/kdm/kdmrc
 [ ! -f %{_sysconfdir}/kde/kdm/kdmrc -a -f %{_sysconfdir}/kde/kdm/kdmrc.rpmnew ] && \
   %{__cp} -a %{_sysconfdir}/kde/kdm/kdmrc.rpmnew %{_sysconfdir}/kde/kdm/kdmrc ||:
+# kdm v3 themes don't work (#444730)
+# this hack assumes %_datadir != %_kde4_datadir
+(grep "^Theme=%{_datadir}/apps/kdm/themes/" %{_sysconfdir}/kde/kdm/kdmrc > /dev/null && \
+ sed -i -e "s|^Theme=%{_datadir}/apps/kdm/themes/.*|Theme=%{_kde4_datadir}/apps/kdm/themes/FedoraWaves|" \
+ %{_sysconfdir}/kde/kdm/kdmrc
+) ||:
 
 
 %files 
@@ -139,6 +153,11 @@ touch --no-create %{_datadir}/kde-settings/kde-profile/default/share/icons/Fedor
 
 
 %changelog
+* Thu May 01 2008 Rex Dieter <rdieter@fedoraproject.org> 4.0-22
+- kdmrc: TerminateServer=true hack until Xserver fixed properly (#443320)
+- %%post kdm: don't try to use old kde3 kdm themes (#444730)
+- add/fix scriptlet deps
+
 * Fri Apr 18 2008 Rex Dieter <rdieter@fedoraproject.org> 4.0-21
 - kglobalshortsrc: add keyboard shortcuts for Virtual desktop switching (#440415)
 
