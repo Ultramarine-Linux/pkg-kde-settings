@@ -6,7 +6,7 @@
 Summary: Config files for kde
 Name:    kde-settings
 Version: 4.0
-Release: %{rel}%{?dist}
+Release: %{rel}%{?dist}.1
 
 Group:   System Environment/Base
 License: Public Domain
@@ -110,7 +110,7 @@ touch --no-create %{_datadir}/kde-settings/kde-profile/default/share/icons/Fedor
 # kdm v3 themes don't work (#444730)
 # this hack assumes %_datadir != %_kde4_datadir
 (grep "^Theme=%{_datadir}/apps/kdm/themes/" %{_sysconfdir}/kde/kdm/kdmrc > /dev/null && \
- sed -i -e "s|^Theme=%{_datadir}/apps/kdm/themes/.*|Theme=%{_kde4_datadir}/apps/kdm/themes/FedoraWaves|" \
+ sed -i -e "s|^Theme=%{_datadir}/apps/kdm/themes/.*|Theme=%{_kde4_appsdir}/kdm/themes/FedoraWaves|" \
  %{_sysconfdir}/kde/kdm/kdmrc
 ) ||:
 
@@ -153,6 +153,9 @@ touch --no-create %{_datadir}/kde-settings/kde-profile/default/share/icons/Fedor
 
 
 %changelog
+* Thu May 01 2008 Kevin Kofler <Kevin@tigcc.ticalc.org> 4.0-22.1
+- use correct _kde4_appsdir for kdm theme upgrade hack (#444730)
+
 * Thu May 01 2008 Rex Dieter <rdieter@fedoraproject.org> 4.0-22
 - kdmrc: TerminateServer=true hack until Xserver fixed properly (#443307)
 - %%post kdm: don't try to use old kde3 kdm themes (#444730)
