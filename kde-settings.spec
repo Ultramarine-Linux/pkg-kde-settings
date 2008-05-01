@@ -154,7 +154,7 @@ touch --no-create %{_datadir}/kde-settings/kde-profile/default/share/icons/Fedor
 
 %changelog
 * Thu May 01 2008 Rex Dieter <rdieter@fedoraproject.org> 4.0-22
-- kdmrc: TerminateServer=true hack until Xserver fixed properly (#443320)
+- kdmrc: TerminateServer=true hack until Xserver fixed properly (#443307)
 - %%post kdm: don't try to use old kde3 kdm themes (#444730)
 - add/fix scriptlet deps
 
