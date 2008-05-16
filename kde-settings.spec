@@ -1,12 +1,12 @@
 # THIS SPECFILE IS FOR F9+ ONLY!
 # Sorry, it is just too different for conditionals to be worth it.
 
-%define rel 22
+%define rel 23
 
 Summary: Config files for kde
 Name:    kde-settings
 Version: 4.0
-Release: %{rel}%{?dist}.1
+Release: %{rel}%{?dist}
 
 Group:   System Environment/Base
 License: Public Domain
@@ -153,6 +153,9 @@ touch --no-create %{_datadir}/kde-settings/kde-profile/default/share/icons/Fedor
 
 
 %changelog
+* Fri May 16 2008 Rex Dieter <rdieter@fedoraproject.org> 4.0-23
+- don't set XDG_CONFIG_DIRS (#249109)
+
 * Thu May 01 2008 Kevin Kofler <Kevin@tigcc.ticalc.org> 4.0-22.1
 - use correct _kde4_appsdir for kdm theme upgrade hack (#444730)
 
