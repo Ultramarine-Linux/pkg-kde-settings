@@ -1,7 +1,7 @@
 # THIS SPECFILE IS FOR F9+ ONLY!
 # Sorry, it is just too different for conditionals to be worth it.
 
-%define rel 23
+%define rel 24
 
 Summary: Config files for kde
 Name:    kde-settings
@@ -153,6 +153,9 @@ touch --no-create %{_datadir}/kde-settings/kde-profile/default/share/icons/Fedor
 
 
 %changelog
+* Tue May 20 2008 Rex Dieter <rdieter@fedoraproject.org> 4.0-24
+- kdm pam settings need to sync with gdm (#447245)
+
 * Fri May 16 2008 Rex Dieter <rdieter@fedoraproject.org> 4.0-23
 - don't set XDG_CONFIG_DIRS (#249109)
 
