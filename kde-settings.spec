@@ -20,6 +20,7 @@ BuildRequires: kde-filesystem
 
 Requires: kde-filesystem
 # default (ok, inherited) icon theme
+# omit when bootstrapping kde builds
 Requires: oxygen-icon-theme
 # /etc/pam.d/ ownership
 Requires: pam
