@@ -1,7 +1,7 @@
 # THIS SPECFILE IS FOR F9+ ONLY!
 # Sorry, it is just too different for conditionals to be worth it.
 
-%define rel 24
+%define rel 25
 
 Summary: Config files for kde
 Name:    kde-settings
@@ -20,7 +20,6 @@ BuildRequires: kde-filesystem
 
 Requires: kde-filesystem
 # default (ok, inherited) icon theme
-# omit when bootstrapping kde builds
 Requires: oxygen-icon-theme
 # /etc/pam.d/ ownership
 Requires: pam
@@ -154,6 +153,9 @@ touch --no-create %{_datadir}/kde-settings/kde-profile/default/share/icons/Fedor
 
 
 %changelog
+* Wed Jul 30 2008 Rex Dieter <rdieter@fedoraproject.org> 4.0-25
+- kcminputrc: [Mouse] cursorTheme=default
+
 * Tue May 20 2008 Rex Dieter <rdieter@fedoraproject.org> 4.0-24
 - kdm pam settings need to sync with gdm (#447245)
 
