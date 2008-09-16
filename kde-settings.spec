@@ -1,7 +1,7 @@
 # THIS SPECFILE IS FOR F9+ ONLY!
 # Sorry, it is just too different for conditionals to be worth it.
 
-%define rel 26
+%define rel 27
 
 Summary: Config files for kde
 Name:    kde-settings
@@ -153,6 +153,9 @@ touch --no-create %{_datadir}/kde-settings/kde-profile/default/share/icons/Fedor
 
 
 %changelog
+* Tue Sep 16 2008 Than Ngo <than@redhat.com> 4.0-27
+- remove unneeded symlinks in Fedora-KDE icon theme
+
 * Tue Sep 16 2008 Than Ngo <than@redhat.com> 4.0-26
 - fix, systemsettings->icons doesn't show icons by Fedora-KDE
   icon theme
