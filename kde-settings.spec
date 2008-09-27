@@ -1,7 +1,9 @@
 # THIS SPECFILE IS FOR F9+ ONLY!
 # Sorry, it is just too different for conditionals to be worth it.
+# The actuall tarball DIFFERS between F9 and F10+!
+# Use kde-settings trunk for F10+, F-9 branch for F9.
 
-%define rel 27
+%define rel 28
 
 Summary: Config files for kde
 Name:    kde-settings
@@ -153,6 +155,9 @@ touch --no-create %{_datadir}/kde-settings/kde-profile/default/share/icons/Fedor
 
 
 %changelog
+* Sat Sep 27 2008 Kevin Kofler <Kevin@tigcc.ticalc.org> 4.0-28
+- kxkbrc: set default keyboard model to evdev (matches F10+ X11 setup, #464101)
+
 * Tue Sep 16 2008 Than Ngo <than@redhat.com> 4.0-27
 - remove unneeded symlinks in Fedora-KDE icon theme
 
