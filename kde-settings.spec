@@ -1,9 +1,9 @@
-# THIS SPECFILE IS FOR F9+ ONLY!
+# THIS SPECFILE IS FOR F10+ ONLY!
 # Sorry, it is just too different for conditionals to be worth it.
-# The actuall tarball DIFFERS between F9 and F10+!
-# Use kde-settings trunk for F10+, F-9 branch for F9.
+# The actuall tarball also DIFFERS between releases!
+# Use kde-settings trunk for F10+, F-9 branch for F9, F-8 branch for F8.
 
-%define rel 28
+%define rel 29
 
 Summary: Config files for kde
 Name:    kde-settings
@@ -151,10 +151,13 @@ touch --no-create %{_datadir}/kde-settings/kde-profile/default/share/icons/Fedor
 
 %files pulseaudio
 %defattr(-,root,root,-)
-%{_sysconfdir}/kde/env/pulseaudio.sh
+# nothing, this is a metapackage
 
 
 %changelog
+* Sat Sep 27 2008 Kevin Kofler <Kevin@tigcc.ticalc.org> 4.0-29
+- remove /etc/kde/env/pulseaudio.sh, no longer needed in F10
+
 * Sat Sep 27 2008 Kevin Kofler <Kevin@tigcc.ticalc.org> 4.0-28
 - kxkbrc: set default keyboard model to evdev (matches F10+ X11 setup, #464101)
 
