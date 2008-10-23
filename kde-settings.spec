@@ -1,7 +1,7 @@
 # THIS SPECFILE IS FOR F9+ ONLY!
 # Sorry, it is just too different for conditionals to be worth it.
 
-%define rel 25
+%define rel 26
 
 Summary: Config files for kde
 Name:    kde-settings
@@ -153,6 +153,10 @@ touch --no-create %{_datadir}/kde-settings/kde-profile/default/share/icons/Fedor
 
 
 %changelog
+* Thu Oct 23 2008 Lukáš Tinkl <ltinkl@redhat.com> 4.0-26
+- #467089 - kde-settings: Fedora-KDE/index.theme: Inherits = ... should
+  not contain spaces
+
 * Wed Jul 30 2008 Rex Dieter <rdieter@fedoraproject.org> 4.0-25
 - kcminputrc: [Mouse] cursorTheme=default
 
