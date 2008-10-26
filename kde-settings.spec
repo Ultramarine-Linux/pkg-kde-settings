@@ -3,11 +3,11 @@
 # The actuall tarball also DIFFERS between releases!
 # Use kde-settings trunk for F10+, F-9 branch for F9, F-8 branch for F8.
 
-%define rel 29
+%define rel 1
 
 Summary: Config files for kde
 Name:    kde-settings
-Version: 4.0
+Version: 4.1
 Release: %{rel}%{?dist}
 
 Group:   System Environment/Base
@@ -28,8 +28,8 @@ Requires: pam
 Requires: xdg-user-dirs
 # sed/kill used in gpg-agent-(startup/shutdown).sh
 Requires: coreutils sed util-linux
-# Fedora_Waves theme for wallpaper
-Requires: desktop-backgrounds-basic
+# Solar theme for wallpaper, KSplash
+Requires: solar-kde-theme
 
 Requires(post): coreutils
 Requires(postun): coreutils
@@ -43,7 +43,8 @@ Obsoletes: kde-config < %{version}-%{release}
 Summary: Config files for kdebase-workspace(kdm)
 Group:	 System Environment/Base
 Obsoletes: kde-config-kdm < %{version}-%{release}
-Requires: fedorawaves-kdm-theme
+# Solar theme for KDM
+Requires: solar-kde-theme
 #Requires: kdebase-workspace
 Requires: xorg-x11-xdm
 Requires(pre): coreutils
@@ -112,7 +113,7 @@ touch --no-create %{_datadir}/kde-settings/kde-profile/default/share/icons/Fedor
 # kdm v3 themes don't work (#444730)
 # this hack assumes %_datadir != %_kde4_datadir
 (grep "^Theme=%{_datadir}/apps/kdm/themes/" %{_sysconfdir}/kde/kdm/kdmrc > /dev/null && \
- sed -i -e "s|^Theme=%{_datadir}/apps/kdm/themes/.*|Theme=%{_kde4_appsdir}/kdm/themes/FedoraWaves|" \
+ sed -i -e "s|^Theme=%{_datadir}/apps/kdm/themes/.*|Theme=%{_kde4_appsdir}/kdm/themes/SolarMania|" \
  %{_sysconfdir}/kde/kdm/kdmrc
 ) ||:
 
@@ -155,6 +156,9 @@ touch --no-create %{_datadir}/kde-settings/kde-profile/default/share/icons/Fedor
 
 
 %changelog
+* Sun Oct 26 2008 Kevin Kofler <Kevin@tigcc.ticalc.org> 4.1-1
+- default to Solar artwork
+
 * Sat Sep 27 2008 Kevin Kofler <Kevin@tigcc.ticalc.org> 4.0-29
 - remove /etc/kde/env/pulseaudio.sh, no longer needed in F10 (#448477)
 
