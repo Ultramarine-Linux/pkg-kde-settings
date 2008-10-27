@@ -3,7 +3,7 @@
 # The actuall tarball also DIFFERS between releases!
 # Use kde-settings trunk for F10+, F-9 branch for F9, F-8 branch for F8.
 
-%define rel 1
+%define rel 2
 
 Summary: Config files for kde
 Name:    kde-settings
@@ -156,6 +156,9 @@ touch --no-create %{_datadir}/kde-settings/kde-profile/default/share/icons/Fedor
 
 
 %changelog
+* Mon Oct 27 2008 Jaroslav Reznik <jreznik@redhat.com> 4.1-2
+- Fedoraproject homepages for Konqueror
+
 * Sun Oct 26 2008 Kevin Kofler <Kevin@tigcc.ticalc.org> 4.1-1
 - default to Solar artwork
 
