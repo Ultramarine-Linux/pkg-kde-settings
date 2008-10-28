@@ -3,18 +3,19 @@
 # The actuall tarball also DIFFERS between releases!
 # Use kde-settings trunk for F10+, F-9 branch for F9, F-8 branch for F8.
 
-%define rel 2
+%define rel 20081028svn
 
 Summary: Config files for kde
 Name:    kde-settings
 Version: 4.1
-Release: %{rel}%{?dist}
+Release: 3.%{rel}%{?dist}
 
 Group:   System Environment/Base
 License: Public Domain
-# This is a package which is specific to our distribution.  
-# Thus the source is only available from within this srpm.
-Source0: kde-settings-%{version}-%{rel}.tar.bz2
+Url:     http://fedorahosted.org/kde-settings
+Source0: kde-settings-%{rel}.tar.bz2
+# used to generate Source0
+Source1: kde-settings-svn.sh
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildArch: noarch
 
@@ -68,7 +69,7 @@ Requires: xine-lib-pulseaudio
 
 
 %prep
-%setup -q -c -n %{name}
+%setup -q -n %{name} 
 
 
 %build
@@ -156,6 +157,11 @@ touch --no-create %{_datadir}/kde-settings/kde-profile/default/share/icons/Fedor
 
 
 %changelog
+* Tue Oct 28 2008 Rex Dieter <rdieter@fedoraproject.org> 4.1-3
+- kdmrc: ServerVTs=1 , drop tty1 from ConsoleTTYs
+- kde-settings-20081028
+- Url: fedorahosted.org/kde-settings
+
 * Mon Oct 27 2008 Jaroslav Reznik <jreznik@redhat.com> 4.1-2
 - Fedoraproject homepages for Konqueror
 
