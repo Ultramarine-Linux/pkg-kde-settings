@@ -10,6 +10,7 @@ Release: %{rel}%{?dist}
 
 Group:   System Environment/Base
 License: Public Domain
+Url:     http://fedorahosted.org/kde-settings
 # This is a package which is specific to our distribution.  
 # Thus the source is only available from within this srpm.
 Source0: kde-settings-%{version}-%{rel}.tar.bz2
@@ -155,6 +156,7 @@ touch --no-create %{_datadir}/kde-settings/kde-profile/default/share/icons/Fedor
 %changelog
 * Tue Nov 25 2008 Kevin Kofler <Kevin@tigcc.ticalc.org> 4.0-30
 - KPackageKit: [CheckUpdate] autoUpdate=0 (#469375)
+- add Url tag
 
 * Thu Oct 23 2008 Lukáš Tinkl <ltinkl@redhat.com> 4.0-26
 - #467089 - kde-settings: Fedora-KDE/index.theme: Inherits = ... should
