@@ -1,7 +1,7 @@
 # THIS SPECFILE IS FOR F9+ ONLY!
 # Sorry, it is just too different for conditionals to be worth it.
 
-%define rel 26
+%define rel 30
 
 Summary: Config files for kde
 Name:    kde-settings
@@ -153,6 +153,9 @@ touch --no-create %{_datadir}/kde-settings/kde-profile/default/share/icons/Fedor
 
 
 %changelog
+* Tue Nov 25 2008 Kevin Kofler <Kevin@tigcc.ticalc.org> 4.0-30
+- KPackageKit: [CheckUpdate] autoUpdate=0 (#469375)
+
 * Thu Oct 23 2008 Lukáš Tinkl <ltinkl@redhat.com> 4.0-26
 - #467089 - kde-settings: Fedora-KDE/index.theme: Inherits = ... should
   not contain spaces
