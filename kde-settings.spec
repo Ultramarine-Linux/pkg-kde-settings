@@ -1,5 +1,7 @@
-# THIS SPECFILE IS FOR F9+ ONLY!
+# THIS SPECFILE IS FOR F9 ONLY!
 # Sorry, it is just too different for conditionals to be worth it.
+# The actuall tarball also DIFFERS between releases!
+# Use kde-settings trunk for F10+, F-9 branch for F9, F-8 branch for F8.
 
 %define rel 30
 
