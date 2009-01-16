@@ -3,12 +3,12 @@
 # The actuall tarball also DIFFERS between releases!
 # Use kde-settings trunk for F10+, F-9 branch for F9, F-8 branch for F8.
 
-%define rel 20081031svn
+%define rel 20090116svn
 
 Summary: Config files for kde
 Name:    kde-settings
 Version: 4.1
-Release: 4.%{rel}%{?dist}
+Release: 5.%{rel}%{?dist}
 
 Group:   System Environment/Base
 License: Public Domain
@@ -157,6 +157,9 @@ touch --no-create %{_datadir}/kde-settings/kde-profile/default/share/icons/Fedor
 
 
 %changelog
+* Fri Jan 16 2009 Than Ngo <than@redhat.com> - 4.1-5
+- wallpaper theme for new plasma in 4.2
+
 * Fri Oct 31 2008 Rex Dieter <rdieter@fedoraproject.org> 4.1-4
 - KPackageKit: [CheckUpdate] autoUpdate=0 (#469375)
 
