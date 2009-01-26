@@ -1,19 +1,19 @@
-# THIS SPECFILE IS FOR F10+ ONLY!
+# THIS SPECFILE IS FOR F11 ONLY!
 # Sorry, it is just too different for conditionals to be worth it.
 # The actuall tarball also DIFFERS between releases!
-# Use kde-settings trunk for F10+, F-9 branch for F9, F-8 branch for F8.
+# Use kde-settings trunk for F11+, F-10 branch of F10, F-9 branch for F9.
 
-%define rel 20090116svn
+%define rel 20090126svn
 
 Summary: Config files for kde
 Name:    kde-settings
-Version: 4.1
-Release: 5.%{rel}%{?dist}
+Version: 4.2
+Release: 1.%{rel}%{?dist}
 
 Group:   System Environment/Base
 License: Public Domain
 Url:     http://fedorahosted.org/kde-settings
-Source0: kde-settings-%{rel}.tar.bz2
+Source0: kde-settings-%{version}-%{rel}.tar.bz2
 # used to generate Source0
 Source1: kde-settings-svn.sh
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
@@ -69,7 +69,7 @@ Requires: xine-lib-pulseaudio
 
 
 %prep
-%setup -q -n %{name} 
+%setup -q 
 
 
 %build
@@ -157,6 +157,9 @@ touch --no-create %{_datadir}/kde-settings/kde-profile/default/share/icons/Fedor
 
 
 %changelog
+* Mon Jan 23 2009 Rex Dieter <rdieter@fedoraproject.org> - 4.2-1
+- rev/branch 4.2 for F-11
+
 * Fri Jan 16 2009 Than Ngo <than@redhat.com> - 4.1-5
 - wallpaper theme for new plasma in 4.2
 
