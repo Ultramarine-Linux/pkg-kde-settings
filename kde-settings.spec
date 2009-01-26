@@ -1,19 +1,19 @@
-# THIS SPECFILE IS FOR F10+ ONLY!
+# THIS SPECFILE IS FOR F10 ONLY!
 # Sorry, it is just too different for conditionals to be worth it.
 # The actuall tarball also DIFFERS between releases!
-# Use kde-settings trunk for F10+, F-9 branch for F9, F-8 branch for F8.
+# Use kde-settings trunk for F11+, F-10 branch of F10, F-9 branch for F9.
 
-%define rel 20081031svn
+%define rel 20090126svn
 
 Summary: Config files for kde
 Name:    kde-settings
 Version: 4.1
-Release: 4.%{rel}%{?dist}
+Release: 5.%{rel}%{?dist}
 
 Group:   System Environment/Base
 License: Public Domain
 Url:     http://fedorahosted.org/kde-settings
-Source0: kde-settings-%{rel}.tar.bz2
+Source0: kde-settings-%{version}-%{rel}.tar.bz2
 # used to generate Source0
 Source1: kde-settings-svn.sh
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
@@ -60,16 +60,17 @@ Group:   System Environment/Base
 Requires: %{name} = %{version}-%{release}
 Requires: pulseaudio
 Requires: pulseaudio-module-x11
-## kde3
+## kde3/legacy bits
 Requires: alsa-plugins-pulseaudio
 ## kde4
+#Requires: phonon-backend-xine
 Requires: xine-lib-pulseaudio
 %description pulseaudio
 %{summary}.
 
 
 %prep
-%setup -q -n %{name} 
+%setup -q
 
 
 %build
@@ -157,6 +158,9 @@ touch --no-create %{_datadir}/kde-settings/kde-profile/default/share/icons/Fedor
 
 
 %changelog
+* Mon Jan 26 2009 Rex Dieter <rdieter@fedoraproject.org> 4.1-5.20090129svn
+- kwinrc: [Compositing] Enabled=false 
+
 * Fri Oct 31 2008 Rex Dieter <rdieter@fedoraproject.org> 4.1-4
 - KPackageKit: [CheckUpdate] autoUpdate=0 (#469375)
 
