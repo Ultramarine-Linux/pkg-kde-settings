@@ -8,7 +8,7 @@
 Summary: Config files for kde
 Name:    kde-settings
 Version: 4.1
-Release: 5.%{rel}%{?dist}
+Release: 6.%{rel}%{?dist}
 
 Group:   System Environment/Base
 License: Public Domain
@@ -158,6 +158,10 @@ touch --no-create %{_datadir}/kde-settings/kde-profile/default/share/icons/Fedor
 
 
 %changelog
+* Fri Feb 06 2009 Rex Dieter <rdieter@fedoraproject.org> - 4.1-6.20090206svn
+- remove defaults.list, add mimeapps.list, including
+  prefs to fix "mime-type/extension for .rpm is wrong" (#457783)
+
 * Mon Jan 26 2009 Rex Dieter <rdieter@fedoraproject.org> 4.1-5.20090129svn
 - kwinrc: [Compositing] Enabled=false 
 
