@@ -3,12 +3,12 @@
 # The actuall tarball also DIFFERS between releases!
 # Use kde-settings trunk for F11+, F-10 branch of F10, F-9 branch for F9.
 
-%define rel 20090126svn
+%define rel 20090206svn
 
 Summary: Config files for kde
 Name:    kde-settings
 Version: 4.2
-Release: 1.%{rel}%{?dist}
+Release: 2.%{rel}%{?dist}
 
 Group:   System Environment/Base
 License: Public Domain
@@ -157,6 +157,10 @@ touch --no-create %{_datadir}/kde-settings/kde-profile/default/share/icons/Fedor
 
 
 %changelog
+* Fri Feb 06 2009 Rex Dieter <rdieter@fedoraproject.org> - 4.2-2
+- remove defaults.list, add mimeapps.list, including
+  prefs to fix "mime-type/extension for .rpm is wrong" (#457783)
+
 * Mon Jan 23 2009 Rex Dieter <rdieter@fedoraproject.org> - 4.2-1
 - rev/branch 4.2 for F-11
 
