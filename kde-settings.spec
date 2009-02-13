@@ -3,12 +3,12 @@
 # The actuall tarball also DIFFERS between releases!
 # Use kde-settings trunk for F11+, F-10 branch of F10, F-9 branch for F9.
 
-%define rel 20090206svn
+%define rel 20090213svn
 
 Summary: Config files for kde
 Name:    kde-settings
 Version: 4.0
-Release: 33.%{rel}%{?dist}
+Release: 34.%{rel}%{?dist}
 
 Group:   System Environment/Base
 License: Public Domain
@@ -158,7 +158,10 @@ touch --no-create %{_datadir}/kde-settings/kde-profile/default/share/icons/Fedor
 
 
 %changelog
-* Fri Feb 06 2009 Rex Dieter <rdieter@fedoraproject.org> - 4.0-33.20090206svn 
+* Fri Feb 13 2009 Kevin Kofler <Kevin@tigcc.ticalc.org> 4.0-34.20090213svn
+- fix typo in the name of plasma-appletsrc (fixes default wallpaper setting)
+
+* Fri Feb 06 2009 Rex Dieter <rdieter@fedoraproject.org> 4.0-33.20090206svn
 - remove defaults.list, add mimeapps.list, including
   prefs to fix "mime-type/extension for .rpm is wrong" (#457783)
 
