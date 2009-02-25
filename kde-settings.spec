@@ -3,7 +3,7 @@
 # The actuall tarball also DIFFERS between releases!
 # Use kde-settings trunk for F11+, F-10 branch of F10, F-9 branch for F9.
 
-%define rel 20090218svn
+%define rel 20090219svn
 
 Summary: Config files for kde
 Name:    kde-settings
@@ -157,6 +157,9 @@ touch --no-create %{_datadir}/kde-settings/kde-profile/default/share/icons/Fedor
 
 
 %changelog
+* Wed Feb 25 2009 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 4.2-3.20090219svn
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_11_Mass_Rebuild
+
 * Wed Feb 18 2009 Rex Dieter <rdieter@fedoraproject.org> - 4.2-3
 - gpg-agent-startup.sh: use gpg-agent --with-env-file (#486025)
 
