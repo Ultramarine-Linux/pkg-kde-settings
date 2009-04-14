@@ -3,12 +3,12 @@
 # The actuall tarball also DIFFERS between releases!
 # Use kde-settings trunk for F11+, F-10 branch of F10, F-9 branch for F9.
 
-%define rel 20090225svn
+%define rel 20090414svn
 
 Summary: Config files for kde
 Name:    kde-settings
 Version: 4.2
-Release: 4.%{rel}%{?dist}
+Release: 5.%{rel}%{?dist}
 
 Group:   System Environment/Base
 License: Public Domain
@@ -95,7 +95,9 @@ rm -rf %{buildroot}
 touch --no-create %{_datadir}/kde-settings/kde-profile/default/share/icons/Fedora-KDE ||:
 
 %postun
+if [ $1 -eq 0 ] ; then
 touch --no-create %{_datadir}/kde-settings/kde-profile/default/share/icons/Fedora-KDE ||:
+fi
 
 %pre kdm
 ## KDM fixup(s)
@@ -157,6 +159,10 @@ touch --no-create %{_datadir}/kde-settings/kde-profile/default/share/icons/Fedor
 
 
 %changelog
+* Tue Apr 14 2009 Rex Dieter <rdieter@fedoraproject.org> - 4.2-5.20090414
+- include kde-centric defaults.list
+- kcmnspluginrc: include nspluginwrapper paths (#495632)
+
 * Wed Feb 25 2009 Jaroslav Reznik <jreznik@redhat.com> - 4.2-4.20090225svn
 - disable desktop effects by default
 
