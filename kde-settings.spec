@@ -3,12 +3,12 @@
 # The actuall tarball also DIFFERS between releases!
 # Use kde-settings trunk for F11+, F-10 branch of F10, F-9 branch for F9.
 
-%define rel 20090414svn
+%define rel 20090416svn
 
 Summary: Config files for kde
 Name:    kde-settings
 Version: 4.2
-Release: 5.%{rel}%{?dist}
+Release: 6.%{rel}%{?dist}
 
 Group:   System Environment/Base
 License: Public Domain
@@ -29,8 +29,8 @@ Requires: pam
 Requires: xdg-user-dirs
 # sed/kill used in gpg-agent-(startup/shutdown).sh
 Requires: coreutils sed util-linux
-# Solar theme for wallpaper, KSplash
-Requires: solar-kde-theme
+# theme for kdm, KSplash, wallpaper
+Requires: leonidas-kde-theme
 
 Requires(post): coreutils
 Requires(postun): coreutils
@@ -95,9 +95,7 @@ rm -rf %{buildroot}
 touch --no-create %{_datadir}/kde-settings/kde-profile/default/share/icons/Fedora-KDE ||:
 
 %postun
-if [ $1 -eq 0 ] ; then
 touch --no-create %{_datadir}/kde-settings/kde-profile/default/share/icons/Fedora-KDE ||:
-fi
 
 %pre kdm
 ## KDM fixup(s)
@@ -116,7 +114,7 @@ fi
 # kdm v3 themes don't work (#444730)
 # this hack assumes %_datadir != %_kde4_datadir
 (grep "^Theme=%{_datadir}/apps/kdm/themes/" %{_sysconfdir}/kde/kdm/kdmrc > /dev/null && \
- sed -i -e "s|^Theme=%{_datadir}/apps/kdm/themes/.*|Theme=%{_kde4_appsdir}/kdm/themes/SolarMania|" \
+ sed -i -e "s|^Theme=%{_datadir}/apps/kdm/themes/.*|Theme=%{_kde4_appsdir}/kdm/themes/leonidas|" \
  %{_sysconfdir}/kde/kdm/kdmrc
 ) ||:
 
@@ -159,6 +157,9 @@ fi
 
 
 %changelog
+* Thu Apr 16 2009 Rex Dieter <rdieter@fedoraproject.org> - 4.2-6.20090416
+- update for leonidas-kde-theme
+
 * Tue Apr 14 2009 Rex Dieter <rdieter@fedoraproject.org> - 4.2-5.20090414
 - include kde-centric defaults.list
 - kcmnspluginrc: include nspluginwrapper paths (#495632)
