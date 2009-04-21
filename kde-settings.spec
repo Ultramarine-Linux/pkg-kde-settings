@@ -8,7 +8,7 @@
 Summary: Config files for kde
 Name:    kde-settings
 Version: 4.2
-Release: 6.%{rel}%{?dist}
+Release: 7.%{rel}%{?dist}
 
 Group:   System Environment/Base
 License: Public Domain
@@ -44,8 +44,8 @@ Obsoletes: kde-config < %{version}-%{release}
 Summary: Config files for kdebase-workspace(kdm)
 Group:	 System Environment/Base
 Obsoletes: kde-config-kdm < %{version}-%{release}
-# Solar theme for KDM
-Requires: solar-kde-theme
+# leonidas theme for KDM
+Requires: leonidas-kde-theme
 #Requires: kdebase-workspace
 Requires: xorg-x11-xdm
 Requires(pre): coreutils
@@ -157,6 +157,9 @@ touch --no-create %{_datadir}/kde-settings/kde-profile/default/share/icons/Fedor
 
 
 %changelog
+* Tue Apr 21 2009 Than Ngo <than@redhat.com> - 4.2-7.20090416svn
+- get rid of requires on solar-kde-theme, it should leonidas-kde-theme for F11
+
 * Thu Apr 16 2009 Rex Dieter <rdieter@fedoraproject.org> - 4.2-6.20090416
 - update for leonidas-kde-theme
 
