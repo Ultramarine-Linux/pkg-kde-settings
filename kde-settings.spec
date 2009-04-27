@@ -3,12 +3,12 @@
 # The actuall tarball also DIFFERS between releases!
 # Use kde-settings trunk for F11+, F-10 branch of F10, F-9 branch for F9.
 
-%define rel 20090416svn
+%define rel 20090427svn
 
 Summary: Config files for kde
 Name:    kde-settings
 Version: 4.2
-Release: 7.%{rel}%{?dist}
+Release: 8.%{rel}%{?dist}
 
 Group:   System Environment/Base
 License: Public Domain
@@ -41,16 +41,17 @@ Obsoletes: kde-config < %{version}-%{release}
 %{summary}.
 
 %package kdm
-Summary: Config files for kdebase-workspace(kdm)
+Summary: Configuration files for kdm
 Group:	 System Environment/Base
-Obsoletes: kde-config-kdm < %{version}-%{release}
+Obsoletes: kde-config-kdm < 4.0 
 # leonidas theme for KDM
 Requires: leonidas-kde-theme
-#Requires: kdebase-workspace
 Requires: xorg-x11-xdm
 Requires(pre): coreutils
 Requires(post): coreutils grep sed
 Requires(post): kde4-macros(api) = %{_kde4_macros_api}
+# failsafe session (rhbz#491251)
+Requires: xterm
 %description kdm
 %{summary}.
 
@@ -157,6 +158,9 @@ touch --no-create %{_datadir}/kde-settings/kde-profile/default/share/icons/Fedor
 
 
 %changelog
+* Mon Apr 27 2009 Rex Dieter <rdieter@fedoraproject.org> - 4.2-8.20090427svn
+- -kdm: Requires: xterm (#491251), touchup Summary a bit
+
 * Tue Apr 21 2009 Than Ngo <than@redhat.com> - 4.2-7.20090416svn
 - get rid of requires on solar-kde-theme, it should leonidas-kde-theme for F11
 
