@@ -3,12 +3,12 @@
 # The actuall tarball also DIFFERS between releases!
 # Use kde-settings trunk for F11+, F-10 branch of F10, F-9 branch for F9.
 
-%define rel 20090427svn
+%define rel 20090429svn
 
 Summary: Config files for kde
 Name:    kde-settings
 Version: 4.2
-Release: 8.%{rel}%{?dist}
+Release: 9.%{rel}%{?dist}
 
 Group:   System Environment/Base
 License: Public Domain
@@ -158,6 +158,9 @@ touch --no-create %{_datadir}/kde-settings/kde-profile/default/share/icons/Fedor
 
 
 %changelog
+* Wed Apr 29 2009 Rex Dieter <rdieter@fedoraproject.org> - 4.2-9.20090429svn
+- krunnerrc: disable contacts plugin, avoids akonadi launch on first login
+
 * Mon Apr 27 2009 Rex Dieter <rdieter@fedoraproject.org> - 4.2-8.20090427svn
 - -kdm: Requires: xterm (#491251), touchup Summary a bit
 
