@@ -3,6 +3,8 @@
 # The actuall tarball also DIFFERS between releases!
 # Use kde-settings trunk for F11+, F-10 branch of F10, F-9 branch for F9.
 
+Error:
+
 %define rel 20090431svn
 
 Summary: Config files for kde
