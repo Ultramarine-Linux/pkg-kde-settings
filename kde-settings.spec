@@ -3,7 +3,7 @@
 # The actuall tarball also DIFFERS between releases!
 # Use kde-settings trunk for F11+, F-10 branch of F10, F-9 branch for F9.
 
-%define rel 20090430svn
+%define rel 20090431svn
 
 Summary: Config files for kde
 Name:    kde-settings
@@ -158,6 +158,9 @@ touch --no-create %{_datadir}/kde-settings/kde-profile/default/share/icons/Fedor
 
 
 %changelog
+* Fri Jul 24 2009 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 4.2-10.20090431svn
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_12_Mass_Rebuild
+
 * Thu Apr 30 2009 Rex Dieter <rdieter@fedoraproject.org> - 4.2-10.20090430svn
 - nepomukserverrc: disable nepomuk
 
