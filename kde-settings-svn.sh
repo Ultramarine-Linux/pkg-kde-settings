@@ -1,7 +1,7 @@
 #/bin/sh
 
 DATE=$(date +%Y%m%d)
-EXPORT_DIR=kde-settings-4.2
+EXPORT_DIR=kde-settings-4.3
 
 set -x
 rm -rf $EXPORT_DIR

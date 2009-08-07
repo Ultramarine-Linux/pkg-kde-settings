@@ -1,21 +1,14 @@
-# THIS SPECFILE IS FOR F11 ONLY!
-# Sorry, it is just too different for conditionals to be worth it.
-# The actuall tarball also DIFFERS between releases!
-# Use kde-settings trunk for F11+, F-10 branch of F10, F-9 branch for F9.
-
-%define svndate 20090430svn
+# THIS SPECFILE IS FOR F12 ONLY!
 
 Summary: Config files for kde
 Name:    kde-settings
-Version: 4.2
-Release: 11.%{svndate}%{?dist}
+Version: 4.3
+Release: 1
 
 Group:   System Environment/Base
 License: Public Domain
 Url:     http://fedorahosted.org/kde-settings
-Source0: kde-settings-%{version}-%{svndate}.tar.bz2
-# used to generate Source0
-Source1: kde-settings-svn.sh
+Source0: https://fedorahosted.org/releases/k/d/kde-settings/%{name}-%{version}-%{release}.tar.bz2
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildArch: noarch
 
@@ -70,7 +63,7 @@ Requires: xine-lib-pulseaudio
 
 
 %prep
-%setup -q 
+%setup -q -n %{name}-%{version}-%{release}
 
 
 %build
@@ -158,6 +151,9 @@ touch --no-create %{_datadir}/kde-settings/kde-profile/default/share/icons/Fedor
 
 
 %changelog
+* Fri Aug 07 2009 Rex Dieter <rdieter@fedoraproject.org> - 4.3-1
+- upstream branch for F-12 (kde-4.3)
+
 * Sat Jul 25 2009 Kevin Kofler <Kevin@tigcc.ticalc.org> - 4.2-11.20090430svn
 - rebuild for https://fedoraproject.org/wiki/Fedora_12_Mass_Rebuild
 - rename %%{rel} to %%{svndate} to fix automated bumps
