@@ -1,20 +1,13 @@
 # THIS SPECFILE IS FOR F11 ONLY!
-# Sorry, it is just too different for conditionals to be worth it.
-# The actuall tarball also DIFFERS between releases!
-# Use kde-settings trunk for F11+, F-10 branch of F10, F-9 branch for F9.
-
-%define rel 20090430svn
 
 Summary: Config files for kde
 Name:    kde-settings
 Version: 4.2
-Release: 10.%{rel}%{?dist}
-
+Release: 11
 Group:   System Environment/Base
 License: Public Domain
 Url:     http://fedorahosted.org/kde-settings
-Source0: kde-settings-%{version}-%{rel}.tar.bz2
-# used to generate Source0
+Source0: https://fedorahosted.org/releases/k/d/kde-settings/%{name}-%{version}-%{release}.tar.bz2
 Source1: kde-settings-svn.sh
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildArch: noarch
@@ -70,7 +63,7 @@ Requires: xine-lib-pulseaudio
 
 
 %prep
-%setup -q 
+%setup -q -n %{name}-%{version}-%{release}
 
 
 %build
@@ -158,6 +151,9 @@ touch --no-create %{_datadir}/kde-settings/kde-profile/default/share/icons/Fedor
 
 
 %changelog
+* Fri Aug 07 2009 Rex Dieter <rdieter@fedoraproject.org> - 4.2-11
+- add default plasmarc, plasma-desktop-appletrc (#516263)
+
 * Thu Apr 30 2009 Rex Dieter <rdieter@fedoraproject.org> - 4.2-10.20090430svn
 - nepomukserverrc: disable nepomuk
 
