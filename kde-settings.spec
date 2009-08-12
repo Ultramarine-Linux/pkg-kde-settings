@@ -3,7 +3,7 @@
 Summary: Config files for kde
 Name:    kde-settings
 Version: 4.3
-Release: 2
+Release: 3
 
 Group:   System Environment/Base
 License: Public Domain
@@ -22,8 +22,8 @@ Requires: pam
 Requires: xdg-user-dirs
 # sed/kill used in gpg-agent-(startup/shutdown).sh
 Requires: coreutils sed util-linux
-# theme for kdm, KSplash, wallpaper
-Requires: leonidas-kde-theme
+# for wallpaper
+Requires: constantine-backgrounds-kde 
 
 Requires(post): coreutils
 Requires(postun): coreutils
@@ -37,8 +37,7 @@ Obsoletes: kde-config < %{version}-%{release}
 Summary: Configuration files for kdm
 Group:	 System Environment/Base
 Obsoletes: kde-config-kdm < 4.0 
-# leonidas theme for KDM
-Requires: leonidas-kde-theme
+#Requires: constantine-kdm-theme
 Requires: xorg-x11-xdm
 Requires(pre): coreutils
 Requires(post): coreutils grep sed
@@ -56,8 +55,8 @@ Requires: pulseaudio
 Requires: pulseaudio-module-x11
 ## kde3
 Requires: alsa-plugins-pulseaudio
-## kde4
-Requires: xine-lib-pulseaudio
+## kde4, not hard-coded, let phonon-backend deps pull in the right stuff
+#Requires: gstreamer-plugins-pulseaudio
 %description pulseaudio
 %{summary}.
 
@@ -108,7 +107,7 @@ touch --no-create %{_datadir}/kde-settings/kde-profile/default/share/icons/Fedor
 # kdm v3 themes don't work (#444730)
 # this hack assumes %_datadir != %_kde4_datadir
 (grep "^Theme=%{_datadir}/apps/kdm/themes/" %{_sysconfdir}/kde/kdm/kdmrc > /dev/null && \
- sed -i -e "s|^Theme=%{_datadir}/apps/kdm/themes/.*|Theme=%{_kde4_appsdir}/kdm/themes/leonidas|" \
+ sed -i -e "s|^Theme=%{_datadir}/apps/kdm/themes/.*|Theme=%{_kde4_appsdir}/kdm/themes/oxygen-air|" \
  %{_sysconfdir}/kde/kdm/kdmrc
 ) ||:
 
@@ -151,6 +150,11 @@ touch --no-create %{_datadir}/kde-settings/kde-profile/default/share/icons/Fedor
 
 
 %changelog
+* Wed Aug 12 2009 Rex Dieter <rdieter@fedoraproject.org> - 4.3-3
+- kdm/ksplash: use default/air until constantine-themed bits land
+- plasma-desktop-appletsrc: constantine slideshow
+- pulseaudio: drop hard-coded pa-related phonon bits
+
 * Fri Aug 07 2009 Rex Dieter <rdieter@fedoraproject.org> - 4.3-2
 - add default plasmarc, plasma-desktop-appletrc (#516263)
 
