@@ -3,7 +3,7 @@
 Summary: Config files for kde
 Name:    kde-settings
 Version: 4.2
-Release: 11
+Release: 12
 Group:   System Environment/Base
 License: Public Domain
 Url:     http://fedorahosted.org/kde-settings
@@ -151,6 +151,9 @@ touch --no-create %{_datadir}/kde-settings/kde-profile/default/share/icons/Fedor
 
 
 %changelog
+* Tue Aug 18 2009 Rex Dieter <rdieter@fedoraproject.org> - 4.2-12
+- KPackageKit: [CheckUpdate] interval=86400
+
 * Fri Aug 07 2009 Rex Dieter <rdieter@fedoraproject.org> - 4.2-11
 - add default plasmarc, plasma-desktop-appletrc (#516263)
 
