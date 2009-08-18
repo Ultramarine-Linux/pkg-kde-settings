@@ -3,7 +3,7 @@
 Summary: Config files for kde
 Name:    kde-settings
 Version: 4.3
-Release: 3
+Release: 4
 
 Group:   System Environment/Base
 License: Public Domain
@@ -150,6 +150,9 @@ touch --no-create %{_datadir}/kde-settings/kde-profile/default/share/icons/Fedor
 
 
 %changelog
+* Tue Aug 18 2009 Rex Dieter <rdieter@fedoraproject.org> - 4.3-4
+- KPackageKit: [CheckUpdate] interval=86400
+
 * Wed Aug 12 2009 Rex Dieter <rdieter@fedoraproject.org> - 4.3-3
 - kdm/ksplash: use default/air until constantine-themed bits land
 - plasma-desktop-appletsrc: constantine slideshow
