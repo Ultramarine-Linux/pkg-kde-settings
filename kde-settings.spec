@@ -1,14 +1,16 @@
 # THIS SPECFILE IS FOR F12 ONLY!
 
+%define rel 4
+
 Summary: Config files for kde
 Name:    kde-settings
 Version: 4.3
-Release: 4
+Release: %{rel}.1 
 
 Group:   System Environment/Base
 License: Public Domain
 Url:     http://fedorahosted.org/kde-settings
-Source0: https://fedorahosted.org/releases/k/d/kde-settings/%{name}-%{version}-%{release}.tar.bz2
+Source0: https://fedorahosted.org/releases/k/d/kde-settings/%{name}-%{version}-%{rel}.tar.bz2
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildArch: noarch
 
@@ -23,7 +25,8 @@ Requires: xdg-user-dirs
 # sed/kill used in gpg-agent-(startup/shutdown).sh
 Requires: coreutils sed util-linux
 # for wallpaper
-Requires: constantine-backgrounds-kde 
+# FIXME/TODO: use a symlink (or something) to a known default location
+Requires: system-backgrounds-kde 
 
 Requires(post): coreutils
 Requires(postun): coreutils
@@ -37,7 +40,7 @@ Obsoletes: kde-config < %{version}-%{release}
 Summary: Configuration files for kdm
 Group:	 System Environment/Base
 Obsoletes: kde-config-kdm < 4.0 
-#Requires: constantine-kdm-theme
+#Requires: system-kdm-theme
 Requires: xorg-x11-xdm
 Requires(pre): coreutils
 Requires(post): coreutils grep sed
@@ -62,7 +65,7 @@ Requires: alsa-plugins-pulseaudio
 
 
 %prep
-%setup -q -n %{name}-%{version}-%{release}
+%setup -q -n %{name}-%{version}-%{rel}
 
 
 %build
@@ -150,6 +153,9 @@ touch --no-create %{_datadir}/kde-settings/kde-profile/default/share/icons/Fedor
 
 
 %changelog
+* Thu Aug 20 2009 Rex Dieter <rdieter@fedoraproject.org> - 4.3-4.1
+- Requires: system-backgrounds-kde
+
 * Tue Aug 18 2009 Rex Dieter <rdieter@fedoraproject.org> - 4.3-4
 - KPackageKit: [CheckUpdate] interval=86400
 
