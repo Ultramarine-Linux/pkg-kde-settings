@@ -5,7 +5,7 @@
 Summary: Config files for kde
 Name:    kde-settings
 Version: 4.3
-Release: %{rel}.1 
+Release: %{rel}.2
 
 Group:   System Environment/Base
 License: Public Domain
@@ -24,9 +24,6 @@ Requires: pam
 Requires: xdg-user-dirs
 # sed/kill used in gpg-agent-(startup/shutdown).sh
 Requires: coreutils sed util-linux
-# for wallpaper
-# FIXME/TODO: use a symlink (or something) to a known default location
-Requires: system-backgrounds-kde 
 
 Requires(post): coreutils
 Requires(postun): coreutils
@@ -153,6 +150,9 @@ touch --no-create %{_datadir}/kde-settings/kde-profile/default/share/icons/Fedor
 
 
 %changelog
+* Wed Aug 26 2009 Rex Dieter <rdieter@fedoraproject.org> - 4.3-4.2
+- drop Requires: system-backgrounds-kde (move to kdebase-workspace)
+
 * Thu Aug 20 2009 Rex Dieter <rdieter@fedoraproject.org> - 4.3-4.1
 - Requires: system-backgrounds-kde
 
