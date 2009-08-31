@@ -1,13 +1,15 @@
 # THIS SPECFILE IS FOR F11 ONLY!
 
+%define rel 12
+
 Summary: Config files for kde
 Name:    kde-settings
 Version: 4.2
-Release: 12
+Release: %{rel}.1 
 Group:   System Environment/Base
 License: Public Domain
 Url:     http://fedorahosted.org/kde-settings
-Source0: https://fedorahosted.org/releases/k/d/kde-settings/%{name}-%{version}-%{release}.tar.bz2
+Source0: https://fedorahosted.org/releases/k/d/kde-settings/%{name}-%{version}-%{rel}.tar.bz2
 Source1: kde-settings-svn.sh
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildArch: noarch
@@ -22,8 +24,8 @@ Requires: pam
 Requires: xdg-user-dirs
 # sed/kill used in gpg-agent-(startup/shutdown).sh
 Requires: coreutils sed util-linux
-# theme for kdm, KSplash, wallpaper
-Requires: leonidas-kde-theme
+# theme for kdm, KSplash, wallpaper (moved to kdebase-workspace)
+# Requires: leonidas-kde-theme
 
 Requires(post): coreutils
 Requires(postun): coreutils
@@ -39,6 +41,7 @@ Group:	 System Environment/Base
 Obsoletes: kde-config-kdm < 4.0 
 # leonidas theme for KDM
 Requires: leonidas-kde-theme
+#Requires: system-kdm-theme
 Requires: xorg-x11-xdm
 Requires(pre): coreutils
 Requires(post): coreutils grep sed
@@ -63,7 +66,7 @@ Requires: xine-lib-pulseaudio
 
 
 %prep
-%setup -q -n %{name}-%{version}-%{release}
+%setup -q -n %{name}-%{version}-%{rel}
 
 
 %build
@@ -151,6 +154,9 @@ touch --no-create %{_datadir}/kde-settings/kde-profile/default/share/icons/Fedor
 
 
 %changelog
+* Mon Aug 31 2009 Rex Dieter <rdieter@fedoraproject.org> - 4.2-12.1
+- drop Requires: leonidas-kde-theme (#504123)
+
 * Tue Aug 18 2009 Rex Dieter <rdieter@fedoraproject.org> - 4.2-12
 - KPackageKit: [CheckUpdate] interval=86400
 
