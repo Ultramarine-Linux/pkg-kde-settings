@@ -1,11 +1,11 @@
 # THIS SPECFILE IS FOR F12 ONLY!
 
-%define rel 4
+%define rel 5
 
 Summary: Config files for kde
 Name:    kde-settings
 Version: 4.3
-Release: %{rel}.2
+Release: %{rel}
 
 Group:   System Environment/Base
 License: Public Domain
@@ -150,6 +150,9 @@ touch --no-create %{_datadir}/kde-settings/kde-profile/default/share/icons/Fedor
 
 
 %changelog
+* Thu Sep 03 2009 Rex Dieter <rdieter@fedoraproject.org> - 4.3-5
+- plasma-desktop-appletsrc: wallpaper=/usr/share/wallpapers/Constantine_Mosaico/
+
 * Wed Aug 26 2009 Rex Dieter <rdieter@fedoraproject.org> - 4.3-4.2
 - drop Requires: system-backgrounds-kde (move to kdebase-workspace)
 
