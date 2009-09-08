@@ -1,6 +1,6 @@
 # THIS SPECFILE IS FOR F12 ONLY!
 
-%define rel 5
+%define rel 6
 
 Summary: Config files for kde
 Name:    kde-settings
@@ -150,6 +150,11 @@ touch --no-create %{_datadir}/kde-settings/kde-profile/default/share/icons/Fedor
 
 
 %changelog
+* Thu Sep 08 2009 Rex Dieter <rdieter@fedoraproject.org> - 4.3-6
+- konversationrc: preconfigure #fedora #fedora-kde #kde #konversation channels
+- kdmrc: Theme=.../Constantine
+- ksplashrc: Theme=Constantine
+
 * Thu Sep 03 2009 Rex Dieter <rdieter@fedoraproject.org> - 4.3-5
 - plasma-desktop-appletsrc: wallpaper=/usr/share/wallpapers/Constantine_Mosaico/
 
