@@ -5,7 +5,7 @@
 Summary: Config files for kde
 Name:    kde-settings
 Version: 4.3
-Release: %{rel}
+Release: %{rel}.1
 
 Group:   System Environment/Base
 License: Public Domain
@@ -107,7 +107,7 @@ touch --no-create %{_datadir}/kde-settings/kde-profile/default/share/icons/Fedor
 # kdm v3 themes don't work (#444730)
 # this hack assumes %_datadir != %_kde4_datadir
 (grep "^Theme=%{_datadir}/apps/kdm/themes/" %{_sysconfdir}/kde/kdm/kdmrc > /dev/null && \
- sed -i -e "s|^Theme=%{_datadir}/apps/kdm/themes/.*|Theme=%{_kde4_appsdir}/kdm/themes/oxygen-air|" \
+ sed -i -e "s|^Theme=%{_datadir}/apps/kdm/themes/.*|Theme=%{_kde4_appsdir}/kdm/themes/Constantine|" \
  %{_sysconfdir}/kde/kdm/kdmrc
 ) ||:
 
@@ -150,6 +150,9 @@ touch --no-create %{_datadir}/kde-settings/kde-profile/default/share/icons/Fedor
 
 
 %changelog
+* Sat Sep 12 2009 Rex Dieter <rdieter@fedoraproject.org> - 4.3-6.1
+- kdm: fix up %%post, s/oxygen-air/Constantine/
+
 * Thu Sep 08 2009 Rex Dieter <rdieter@fedoraproject.org> - 4.3-6
 - konversationrc: preconfigure #fedora #fedora-kde #kde #konversation channels
 - kdmrc: Theme=.../Constantine
