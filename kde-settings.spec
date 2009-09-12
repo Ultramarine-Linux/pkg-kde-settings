@@ -37,7 +37,7 @@ Obsoletes: kde-config < %{version}-%{release}
 Summary: Configuration files for kdm
 Group:	 System Environment/Base
 Obsoletes: kde-config-kdm < 4.0 
-#Requires: system-kdm-theme
+Requires: system-kdm-theme
 Requires: xorg-x11-xdm
 Requires(pre): coreutils
 Requires(post): coreutils grep sed
@@ -151,7 +151,8 @@ touch --no-create %{_datadir}/kde-settings/kde-profile/default/share/icons/Fedor
 
 %changelog
 * Sat Sep 12 2009 Rex Dieter <rdieter@fedoraproject.org> - 4.3-6.1
-- kdm: fix up %%post, s/oxygen-air/Constantine/
+- -kdm: fix up %%post, s/oxygen-air/Constantine/
+- -kdm: Requires: system-kdm-theme
 
 * Thu Sep 08 2009 Rex Dieter <rdieter@fedoraproject.org> - 4.3-6
 - konversationrc: preconfigure #fedora #fedora-kde #kde #konversation channels
