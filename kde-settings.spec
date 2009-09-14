@@ -1,11 +1,11 @@
 # THIS SPECFILE IS FOR F12 ONLY!
 
-%define rel 6
+%define rel 7
 
 Summary: Config files for kde
 Name:    kde-settings
 Version: 4.3
-Release: %{rel}.1
+Release: %{rel}
 
 Group:   System Environment/Base
 License: Public Domain
@@ -150,6 +150,9 @@ touch --no-create %{_datadir}/kde-settings/kde-profile/default/share/icons/Fedor
 
 
 %changelog
+* Mon Sep 14 2009 Rex Dieter <rdieter@fedoraproject.org> - 4.3-7
+- plasma-desktop-appletsrc: Constantine_Mosaico virus wallpaper default (#519320)
+
 * Sat Sep 12 2009 Rex Dieter <rdieter@fedoraproject.org> - 4.3-6.1
 - -kdm: fix up %%post, s/oxygen-air/Constantine/
 - -kdm: Requires: system-kdm-theme
