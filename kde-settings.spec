@@ -1,6 +1,6 @@
 # THIS SPECFILE IS FOR F12 ONLY!
 
-%define rel 7
+%define rel 8
 
 Summary: Config files for kde
 Name:    kde-settings
@@ -79,6 +79,9 @@ tar cpf - etc/ usr/ | tar --directory %{buildroot} -xvpf -
 rm -rf   %{buildroot}%{_datadir}/config/kdm
 ln -sf ../../../etc/kde/kdm %{buildroot}%{_datadir}/config/kdm
 
+# own /var/run/kdm
+mkdir -p %{buildroot}%{_localstatedir}/run/kdm
+
 
 %clean
 rm -rf %{buildroot}
@@ -143,6 +146,7 @@ touch --no-create %{_datadir}/kde-settings/kde-profile/default/share/icons/Fedor
 %{_sysconfdir}/kde/kdm/Xsetup
 # hack needed for older rpm's
 #exclude %{_sysconfdir}/X11/xdm/X*
+%attr(1777,root,root) %dir %{_localstatedir}/run/kdm
 
 %files pulseaudio
 %defattr(-,root,root,-)
@@ -150,6 +154,9 @@ touch --no-create %{_datadir}/kde-settings/kde-profile/default/share/icons/Fedor
 
 
 %changelog
+* Mon Sep 21 2009 Rex Dieter <rdieter@fedoraproject.org> - 4.3-8
+- kdmrc: use /var/run/kdm for pid/xauth (#524583)
+
 * Mon Sep 14 2009 Rex Dieter <rdieter@fedoraproject.org> - 4.3-7
 - plasma-desktop-appletsrc: Constantine_Mosaico virus wallpaper default (#519320)
 
