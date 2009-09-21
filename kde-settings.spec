@@ -1,6 +1,6 @@
 # THIS SPECFILE IS FOR F12 ONLY!
 
-%define rel 8
+%define rel 9
 
 Summary: Config files for kde
 Name:    kde-settings
@@ -154,6 +154,9 @@ touch --no-create %{_datadir}/kde-settings/kde-profile/default/share/icons/Fedor
 
 
 %changelog
+* Mon Sep 21 2009 Rex Dieter <rdieter@fedoraproject.org> - 4.3-9
+- kdmrc: ForceUserAuthDir=true (#524583)
+
 * Mon Sep 21 2009 Rex Dieter <rdieter@fedoraproject.org> - 4.3-8
 - kdmrc: use /var/run/kdm for pid/xauth (#524583)
 
