@@ -1,6 +1,6 @@
 # THIS SPECFILE IS FOR F12 ONLY!
 
-%define rel 9
+%define rel 10
 
 Summary: Config files for kde
 Name:    kde-settings
@@ -29,6 +29,9 @@ Requires(post): coreutils
 Requires(postun): coreutils
 
 Obsoletes: kde-config < %{version}-%{release}
+
+# when profile.d/kde.(sh|csh) was moved here
+Conflicts: kdelibs3 < 3.5.10-17
 
 %description
 %{summary}.
@@ -117,6 +120,7 @@ touch --no-create %{_datadir}/kde-settings/kde-profile/default/share/icons/Fedor
 
 %files 
 %defattr(-,root,root,-)
+%config(noreplace) %{_sysconfdir}/profile.d/kde.*
 %{_sysconfdir}/kde/env/env.sh
 %{_sysconfdir}/kde/env/gpg-agent*.sh
 %{_sysconfdir}/kde/env/fedora-bookmarks.sh
@@ -154,6 +158,9 @@ touch --no-create %{_datadir}/kde-settings/kde-profile/default/share/icons/Fedor
 
 
 %changelog
+* Wed Sep 23 2009 Rex Dieter <rdieter@fedoraproject.org> - 4.3-10
+- include /etc/profile.d/kde.(sh|csh) here, renable KDE_IS_PRELINKED
+
 * Mon Sep 21 2009 Rex Dieter <rdieter@fedoraproject.org> - 4.3-9
 - kdmrc: ForceUserAuthDir=true (#524583)
 
