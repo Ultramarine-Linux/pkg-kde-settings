@@ -5,7 +5,7 @@
 Summary: Config files for kde
 Name:    kde-settings
 Version: 4.3
-Release: %{rel}
+Release: %{rel}.1
 
 Group:   System Environment/Base
 License: Public Domain
@@ -85,6 +85,11 @@ ln -sf ../../../etc/kde/kdm %{buildroot}%{_datadir}/config/kdm
 # own /var/run/kdm
 mkdir -p %{buildroot}%{_localstatedir}/run/kdm
 
+# rhel stuff
+%if 0%{?rhel}
+rm -f %{buildroot}%{_sysconfdir}/kde/env/fedora-bookmarks.sh \
+      %{buildroot}%{_sysconfdir}/kde/shutdown/gpg-agent*.sh
+%endif
 
 %clean
 rm -rf %{buildroot}
@@ -123,8 +128,10 @@ touch --no-create %{_datadir}/kde-settings/kde-profile/default/share/icons/Fedor
 %config(noreplace) %{_sysconfdir}/profile.d/kde.*
 %{_sysconfdir}/kde/env/env.sh
 %{_sysconfdir}/kde/env/gpg-agent*.sh
+%if 0%{?fedora}
 %{_sysconfdir}/kde/env/fedora-bookmarks.sh
 %{_sysconfdir}/kde/shutdown/gpg-agent*.sh
+%endif
 %config(noreplace) /etc/pam.d/kcheckpass
 %config(noreplace) /etc/pam.d/kscreensaver
 # drop noreplace, so we can be sure to get the new kiosk bits
@@ -158,6 +165,9 @@ touch --no-create %{_datadir}/kde-settings/kde-profile/default/share/icons/Fedor
 
 
 %changelog
+* Thu Sep 24 2009 Than Ngo <than@redhat.com> - 4.3-10.1
+- rhel cleanup
+
 * Wed Sep 23 2009 Rex Dieter <rdieter@fedoraproject.org> - 4.3-10
 - include /etc/profile.d/kde.(sh|csh) here, renable KDE_IS_PRELINKED
 
