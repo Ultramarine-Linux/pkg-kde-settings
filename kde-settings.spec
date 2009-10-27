@@ -1,11 +1,11 @@
 # THIS SPECFILE IS FOR F12 ONLY!
 
-%define rel 10
+%define rel 12
 
 Summary: Config files for kde
 Name:    kde-settings
 Version: 4.3
-Release: %{rel}.1
+Release: %{rel}
 
 Group:   System Environment/Base
 License: Public Domain
@@ -153,7 +153,6 @@ touch --no-create %{_datadir}/kde-settings/kde-profile/default/share/icons/Fedor
 %{_sysconfdir}/kde/kdm/Xresources
 %{_sysconfdir}/kde/kdm/Xsession
 %{_sysconfdir}/kde/kdm/Xwilling
-%{_sysconfdir}/kde/kdm/Xservers
 %{_sysconfdir}/kde/kdm/Xsetup
 # hack needed for older rpm's
 #exclude %{_sysconfdir}/X11/xdm/X*
@@ -165,6 +164,10 @@ touch --no-create %{_datadir}/kde-settings/kde-profile/default/share/icons/Fedor
 
 
 %changelog
+* Tue Oct 27 2009 Rex Dieter <rdieter@fedoraproject.org> 4.3-12
+- plasma-desktop-appletsrc: Constantine wallpaper
+- drop /etc/kde/kdm/Xservers (#530660)
+
 * Thu Sep 24 2009 Than Ngo <than@redhat.com> - 4.3-10.1
 - rhel cleanup
 
