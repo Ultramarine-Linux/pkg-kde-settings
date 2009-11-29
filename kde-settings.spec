@@ -5,7 +5,7 @@
 Summary: Config files for kde
 Name:    kde-settings
 Version: 4.3
-Release: %{rel}.1
+Release: %{rel}.2
 
 Group:   System Environment/Base
 License: Public Domain
@@ -164,6 +164,9 @@ touch --no-create %{_datadir}/kde-settings/kde-profile/default/share/icons/Fedor
 
 
 %changelog
+* Sun Nov 29 2009 Kevin Kofler <Kevin@tigcc.ticalc.org> 4.3-12.2
+- bump for F13 devel
+
 * Sun Nov 29 2009 Kevin Kofler <Kevin@tigcc.ticalc.org> 4.3-12.1
 - -pulseaudio: Requires: xine-lib-pulseaudio
 
