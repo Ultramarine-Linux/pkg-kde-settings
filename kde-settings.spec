@@ -5,7 +5,7 @@
 Summary: Config files for kde
 Name:    kde-settings
 Version: 4.3
-Release: %{rel}
+Release: %{rel}.1
 
 Group:   System Environment/Base
 License: Public Domain
@@ -58,8 +58,8 @@ Requires: pulseaudio
 Requires: pulseaudio-module-x11
 ## kde3
 Requires: alsa-plugins-pulseaudio
-## kde4, not hard-coded, let phonon-backend deps pull in the right stuff
-#Requires: gstreamer-plugins-pulseaudio
+## kde4
+Requires: xine-lib-pulseaudio
 %description pulseaudio
 %{summary}.
 
@@ -164,6 +164,9 @@ touch --no-create %{_datadir}/kde-settings/kde-profile/default/share/icons/Fedor
 
 
 %changelog
+* Sun Nov 29 2009 Kevin Kofler <Kevin@tigcc.ticalc.org> 4.3-12.1
+- -pulseaudio: Requires: xine-lib-pulseaudio
+
 * Tue Oct 27 2009 Rex Dieter <rdieter@fedoraproject.org> 4.3-12
 - plasma-desktop-appletsrc: Constantine wallpaper
 - drop /etc/kde/kdm/Xservers (#530660)
