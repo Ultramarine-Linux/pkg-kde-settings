@@ -1,11 +1,11 @@
-# THIS SPECFILE IS FOR F12 ONLY!
+# THIS SPECFILE IS FOR F13 ONLY!
 
-%define rel 12
+%define rel 1
 
 Summary: Config files for kde
 Name:    kde-settings
-Version: 4.3
-Release: %{rel}.2
+Version: 4.4
+Release: %{rel}
 
 Group:   System Environment/Base
 License: Public Domain
@@ -58,8 +58,7 @@ Requires: pulseaudio
 Requires: pulseaudio-module-x11
 ## kde3
 Requires: alsa-plugins-pulseaudio
-## kde4
-Requires: xine-lib-pulseaudio
+## kde4: -pulseaudio plugins are installed for all phonon backends by default
 %description pulseaudio
 %{summary}.
 
@@ -142,7 +141,6 @@ touch --no-create %{_datadir}/kde-settings/kde-profile/default/share/icons/Fedor
 %files kdm
 %defattr(-,root,root,-)
 %config(noreplace) /etc/pam.d/kdm*
-#%{_sysconfdir}/kde/env/xdg_*-hack.sh
 # compat symlink
 %{_datadir}/config/kdm
 %dir %{_sysconfdir}/kde/kdm
@@ -154,8 +152,6 @@ touch --no-create %{_datadir}/kde-settings/kde-profile/default/share/icons/Fedor
 %{_sysconfdir}/kde/kdm/Xsession
 %{_sysconfdir}/kde/kdm/Xwilling
 %{_sysconfdir}/kde/kdm/Xsetup
-# hack needed for older rpm's
-#exclude %{_sysconfdir}/X11/xdm/X*
 %attr(1777,root,root) %dir %{_localstatedir}/run/kdm
 
 %files pulseaudio
@@ -164,6 +160,9 @@ touch --no-create %{_datadir}/kde-settings/kde-profile/default/share/icons/Fedor
 
 
 %changelog
+* Sun Nov 29 2009 Rex Dieter <rdieter@fedoraproject.org> 4.4-1
+- -pulseaudio: drop xine-lib-pulseaudio (subpkg no longer exists)
+
 * Sun Nov 29 2009 Kevin Kofler <Kevin@tigcc.ticalc.org> 4.3-12.2
 - bump for F13 devel
 
