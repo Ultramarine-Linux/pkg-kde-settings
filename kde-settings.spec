@@ -1,6 +1,6 @@
 # THIS SPECFILE IS FOR F11 ONLY!
 
-%define rel 13
+%define rel 14
 
 Summary: Config files for kde
 Name:    kde-settings
@@ -154,6 +154,9 @@ touch --no-create %{_datadir}/kde-settings/kde-profile/default/share/icons/Fedor
 
 
 %changelog
+* Tue Dec 01 2009 Rex Dieter <rdieter@fedoraproject.org> 4.2-14
+- kdmrc: ServerArgsLocal=-nr , for better transition from plymouth
+
 * Tue Dec 01 2009 Rex Dieter <rdieter@fedoraproject.org> 4.2-13
 - kdmrc: revert to ServerVTs=-1 (#475890)
 
