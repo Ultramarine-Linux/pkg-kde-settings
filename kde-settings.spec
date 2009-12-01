@@ -1,11 +1,11 @@
 # THIS SPECFILE IS FOR F11 ONLY!
 
-%define rel 12
+%define rel 13
 
 Summary: Config files for kde
 Name:    kde-settings
 Version: 4.2
-Release: %{rel}.1 
+Release: %{rel}
 Group:   System Environment/Base
 License: Public Domain
 Url:     http://fedorahosted.org/kde-settings
@@ -154,6 +154,9 @@ touch --no-create %{_datadir}/kde-settings/kde-profile/default/share/icons/Fedor
 
 
 %changelog
+* Tue Dec 01 2009 Rex Dieter <rdieter@fedoraproject.org> 4.2-13
+- kdmrc: revert to ServerVTs=-1 (#475890)
+
 * Mon Aug 31 2009 Rex Dieter <rdieter@fedoraproject.org> - 4.2-12.1
 - drop Requires: leonidas-kde-theme (#504123)
 
