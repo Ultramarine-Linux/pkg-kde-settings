@@ -3,7 +3,7 @@
 Summary: Config files for kde
 Name:    kde-settings
 Version: 4.1
-Release: 8 
+Release: 9 
 
 Group:   System Environment/Base
 License: Public Domain
@@ -152,6 +152,9 @@ touch --no-create %{_datadir}/kde-settings/kde-profile/default/share/icons/Fedor
 
 
 %changelog
+* Tue Dec 01 2009 Rex Dieter <rdieter@fedoraproject.org> 4.1-9
+- kdmrc: revert to ServerVTs=-1 (#475890)
+
 * Tue Aug 18 2009 Rex Dieter <rdieter@fedoraproject.org> - 4.1-8
 - KPackageKit: [CheckUpdate] interval=86400
 
