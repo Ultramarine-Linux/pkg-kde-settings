@@ -5,7 +5,7 @@
 Summary: Config files for kde
 Name:    kde-settings
 Version: 4.3
-Release: %{rel}
+Release: %{rel}.1
 
 Group:   System Environment/Base
 License: Public Domain
@@ -58,8 +58,7 @@ Requires: pulseaudio
 Requires: pulseaudio-module-x11
 ## kde3
 Requires: alsa-plugins-pulseaudio
-## kde4
-Requires: xine-lib-pulseaudio
+## kde4: -pulseaudio plugins are installed for all phonon backends by default
 %description pulseaudio
 %{summary}.
 
@@ -164,6 +163,9 @@ touch --no-create %{_datadir}/kde-settings/kde-profile/default/share/icons/Fedor
 
 
 %changelog
+* Thu Dec 03 2009 Rex Dieter <rdieter@fedoraproject.org> 4.3-15.1
+- -pulseaudio: drop Req: xine-lib-pulseaudio (handled elsewhere)
+
 * Tue Dec 01 2009 Rex Dieter <rdieter@fedoraproject.org> 4.3-15
 - kdmrc: ServerArgsLocal=-nr , for better transition from plymouth
 
