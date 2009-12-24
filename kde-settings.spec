@@ -1,6 +1,6 @@
 # THIS SPECFILE IS FOR F13 ONLY!
 
-%define rel 3
+%define rel 4
 
 Summary: Config files for kde
 Name:    kde-settings
@@ -160,6 +160,9 @@ touch --no-create %{_datadir}/kde-settings/kde-profile/default/share/icons/Fedor
 
 
 %changelog
+* Wed Dec 23 2009 Rex Dieter <rdieter@fedoraproject.org> 4.4-4
+- enable nepomuk, with some conservative defaults (#549436)
+
 * Tue Dec 01 2009 Rex Dieter <rdieter@fedoraproject.org> 4.4-3
 - kdmrc: ServerArgsLocal=-nr , for better transition from plymouth
 
