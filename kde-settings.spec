@@ -127,6 +127,7 @@ touch --no-create %{_datadir}/kde-settings/kde-profile/default/share/icons/Fedor
 %config(noreplace) %{_sysconfdir}/profile.d/kde.*
 %{_sysconfdir}/kde/env/env.sh
 %{_sysconfdir}/kde/env/gpg-agent*.sh
+%{_sysconfdir}/kde/env/gtk2_rc_files.sh
 %if 0%{?fedora}
 %{_sysconfdir}/kde/env/fedora-bookmarks.sh
 %{_sysconfdir}/kde/shutdown/gpg-agent*.sh
