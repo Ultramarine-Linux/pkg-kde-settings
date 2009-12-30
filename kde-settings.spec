@@ -5,7 +5,7 @@
 Summary: Config files for kde
 Name:    kde-settings
 Version: 4.4
-Release: %{rel}
+Release: %{rel}.1
 
 Group:   System Environment/Base
 License: Public Domain
@@ -40,6 +40,7 @@ Conflicts: kdelibs3 < 3.5.10-17
 Summary: Configuration files for kdm
 Group:	 System Environment/Base
 Obsoletes: kde-config-kdm < 4.0 
+Requires: kdm
 Requires: system-kdm-theme
 Requires: xorg-x11-xdm
 Requires(pre): coreutils
@@ -161,6 +162,9 @@ touch --no-create %{_datadir}/kde-settings/kde-profile/default/share/icons/Fedor
 
 
 %changelog
+* Wed Dec 30 2009 Rex Dieter <rdieter@fedoraproject.org> 4.4-6.1
+- -kdm: Requires: kdm
+
 * Fri Dec 25 2009 Rex Dieter <rdieter@fedoraproject.org> 4.4-6
 - use qtcurve-gtk2 by default (#547700)
 
