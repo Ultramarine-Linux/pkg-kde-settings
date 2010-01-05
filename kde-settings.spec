@@ -5,7 +5,7 @@
 Summary: Config files for kde
 Name:    kde-settings
 Version: 4.3
-Release: %{rel}.1
+Release: %{rel}.2
 
 Group:   System Environment/Base
 License: Public Domain
@@ -84,6 +84,10 @@ ln -sf ../../../etc/kde/kdm %{buildroot}%{_datadir}/config/kdm
 # own /var/run/kdm
 mkdir -p %{buildroot}%{_localstatedir}/run/kdm
 
+# own as part of plymouth/kdm integration hacks (#551310)
+mkdir -p -m775 %{buildroot}%{_localstatedir}/spool/gdm
+
+
 # rhel stuff
 %if 0%{?rhel}
 rm -f %{buildroot}%{_sysconfdir}/kde/env/fedora-bookmarks.sh \
@@ -141,7 +145,6 @@ touch --no-create %{_datadir}/kde-settings/kde-profile/default/share/icons/Fedor
 %files kdm
 %defattr(-,root,root,-)
 %config(noreplace) /etc/pam.d/kdm*
-#%{_sysconfdir}/kde/env/xdg_*-hack.sh
 # compat symlink
 %{_datadir}/config/kdm
 %dir %{_sysconfdir}/kde/kdm
@@ -153,9 +156,8 @@ touch --no-create %{_datadir}/kde-settings/kde-profile/default/share/icons/Fedor
 %{_sysconfdir}/kde/kdm/Xsession
 %{_sysconfdir}/kde/kdm/Xwilling
 %{_sysconfdir}/kde/kdm/Xsetup
-# hack needed for older rpm's
-#exclude %{_sysconfdir}/X11/xdm/X*
 %attr(1777,root,root) %dir %{_localstatedir}/run/kdm
+%attr(0775,root,root) %dir %{_localstatedir}/spool/gdm
 
 %files pulseaudio
 %defattr(-,root,root,-)
@@ -163,6 +165,9 @@ touch --no-create %{_datadir}/kde-settings/kde-profile/default/share/icons/Fedor
 
 
 %changelog
+* Tue Jan 05 2010 Rex Dieter <rdieter@fedoraproject.org> 4.3-15.2
+- -kdm: own /var/spool/gdm (#551310)
+
 * Thu Dec 03 2009 Rex Dieter <rdieter@fedoraproject.org> 4.3-15.1
 - -pulseaudio: drop Req: xine-lib-pulseaudio (handled elsewhere)
 
