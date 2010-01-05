@@ -5,7 +5,7 @@
 Summary: Config files for kde
 Name:    kde-settings
 Version: 4.2
-Release: %{rel}
+Release: %{rel}.1
 Group:   System Environment/Base
 License: Public Domain
 Url:     http://fedorahosted.org/kde-settings
@@ -83,6 +83,9 @@ tar cpf - etc/ usr/ | tar --directory %{buildroot} -xvpf -
 rm -rf   %{buildroot}%{_datadir}/config/kdm
 ln -sf ../../../etc/kde/kdm %{buildroot}%{_datadir}/config/kdm
 
+# own as part of plymouth/kdm integration hacks (#551310)
+mkdir -p -m775 %{buildroot}%{_localstatedir}/spool/gdm
+
 
 %clean
 rm -rf %{buildroot}
@@ -132,7 +135,6 @@ touch --no-create %{_datadir}/kde-settings/kde-profile/default/share/icons/Fedor
 %files kdm
 %defattr(-,root,root,-)
 %config(noreplace) /etc/pam.d/kdm*
-#%{_sysconfdir}/kde/env/xdg_*-hack.sh
 # compat symlink
 %{_datadir}/config/kdm
 %dir %{_sysconfdir}/kde/kdm
@@ -145,8 +147,7 @@ touch --no-create %{_datadir}/kde-settings/kde-profile/default/share/icons/Fedor
 %{_sysconfdir}/kde/kdm/Xwilling
 %{_sysconfdir}/kde/kdm/Xservers
 %{_sysconfdir}/kde/kdm/Xsetup
-# hack needed for older rpm's
-#exclude %{_sysconfdir}/X11/xdm/X*
+%attr(0775,root,root) %dir %{_localstatedir}/spool/gdm
 
 %files pulseaudio
 %defattr(-,root,root,-)
@@ -154,6 +155,9 @@ touch --no-create %{_datadir}/kde-settings/kde-profile/default/share/icons/Fedor
 
 
 %changelog
+* Tue Jan 05 2010 Rex Dieter <rdieter@fedoraproject.org> 4.3-15.2
+- -kdm: own /var/spool/gdm (#551310)
+
 * Tue Dec 01 2009 Rex Dieter <rdieter@fedoraproject.org> 4.2-14
 - kdmrc: ServerArgsLocal=-nr , for better transition from plymouth
 
