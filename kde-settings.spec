@@ -155,7 +155,7 @@ touch --no-create %{_datadir}/kde-settings/kde-profile/default/share/icons/Fedor
 
 
 %changelog
-* Tue Jan 05 2010 Rex Dieter <rdieter@fedoraproject.org> 4.3-15.2
+* Tue Jan 05 2010 Rex Dieter <rdieter@fedoraproject.org> 4.2-14.1
 - -kdm: own /var/spool/gdm (#551310)
 
 * Tue Dec 01 2009 Rex Dieter <rdieter@fedoraproject.org> 4.2-14
