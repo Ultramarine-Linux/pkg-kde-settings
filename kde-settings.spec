@@ -1,11 +1,11 @@
 # THIS SPECFILE IS FOR F13 ONLY!
 
-%define rel 6
+%define rel 7
 
 Summary: Config files for kde
 Name:    kde-settings
 Version: 4.4
-Release: %{rel}.1
+Release: %{rel}
 
 Group:   System Environment/Base
 License: Public Domain
@@ -17,8 +17,7 @@ BuildArch: noarch
 BuildRequires: kde-filesystem
 
 Requires: kde-filesystem
-# default (ok, inherited) icon theme
-Requires: oxygen-icon-theme
+Requires: system-kde-icon-theme
 # /etc/pam.d/ ownership
 Requires: pam
 Requires: xdg-user-dirs
@@ -95,12 +94,6 @@ rm -f %{buildroot}%{_sysconfdir}/kde/env/fedora-bookmarks.sh \
 rm -rf %{buildroot}
 
 
-%post
-touch --no-create %{_datadir}/kde-settings/kde-profile/default/share/icons/Fedora-KDE ||:
-
-%postun
-touch --no-create %{_datadir}/kde-settings/kde-profile/default/share/icons/Fedora-KDE ||:
-
 %pre kdm
 ## KDM fixup(s)
 # handle move from /etc/X11/xdm/kdmrc to /etc/kde/kdm/kdmrc
@@ -162,6 +155,9 @@ touch --no-create %{_datadir}/kde-settings/kde-profile/default/share/icons/Fedor
 
 
 %changelog
+* Tue Jan 05 2010 Rex Dieter <rdieter@fedoraproject.org> 4.4-7
+- externalize fedora-kde-icon-theme (#547701)
+
 * Wed Dec 30 2009 Rex Dieter <rdieter@fedoraproject.org> 4.4-6.1
 - -kdm: Requires: kdm
 
