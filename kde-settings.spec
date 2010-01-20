@@ -1,6 +1,6 @@
 # THIS SPECFILE IS FOR F13 ONLY!
 
-%define rel 7
+%define rel 8
 
 Summary: Config files for kde
 Name:    kde-settings
@@ -155,6 +155,9 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Wed Jan 20 2010 Rex Dieter <rdieter@fedoraproject.org> 4.4-8
+- plasma-netbook workspace has no wallpaper configured (#549996)
+
 * Tue Jan 05 2010 Rex Dieter <rdieter@fedoraproject.org> 4.4-7
 - externalize fedora-kde-icon-theme (#547701)
 
