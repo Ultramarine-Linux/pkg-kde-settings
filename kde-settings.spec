@@ -1,11 +1,11 @@
 # THIS SPECFILE IS FOR F11 ONLY!
 
-%define rel 14
+%define rel 16
 
 Summary: Config files for kde
 Name:    kde-settings
 Version: 4.2
-Release: %{rel}.1
+Release: %{rel}
 Group:   System Environment/Base
 License: Public Domain
 Url:     http://fedorahosted.org/kde-settings
@@ -155,6 +155,12 @@ touch --no-create %{_datadir}/kde-settings/kde-profile/default/share/icons/Fedor
 
 
 %changelog
+* Fri Jan 29 2010 Rex Dieter <rdieter@fedoraproject.org> 4.2-16
+- krunnerrc: disable nepomuksearch plugin by default (#559977)
+- plasma-desktop-appletsrc: include [virus] wallpaper variant
+- +nepomukstrigirc: conservative defaults
+- +plasma-netbook-appletsrc
+
 * Tue Jan 05 2010 Rex Dieter <rdieter@fedoraproject.org> 4.2-14.1
 - -kdm: own /var/spool/gdm (#551310)
 
