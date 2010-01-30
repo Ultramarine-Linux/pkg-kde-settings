@@ -5,7 +5,7 @@
 Summary: Config files for kde
 Name:    kde-settings
 Version: 4.2
-Release: %{rel}
+Release: %{rel}.1
 Group:   System Environment/Base
 License: Public Domain
 Url:     http://fedorahosted.org/kde-settings
@@ -68,6 +68,8 @@ Requires: xine-lib-pulseaudio
 %prep
 %setup -q -n %{name}-%{version}-%{rel}
 
+rm -fv Makefile
+
 
 %build
 # Intentionally left blank.  Nothing to see here.
@@ -77,11 +79,15 @@ Requires: xine-lib-pulseaudio
 rm -rf %{buildroot}
 mkdir -p %{buildroot}{%{_datadir}/config,%{_sysconfdir}/kde/kdm}
 
-tar cpf - etc/ usr/ | tar --directory %{buildroot} -xvpf -
+tar cpf - . | tar --directory %{buildroot} -xvpf -
 
 # kdebase/kdm symlink
 rm -rf   %{buildroot}%{_datadir}/config/kdm
 ln -sf ../../../etc/kde/kdm %{buildroot}%{_datadir}/config/kdm
+
+# own these
+mkdir -p %{buildroot}%{_localstatedir}/lib/kdm
+mkdir -p %{buildroot}%{_localstatedir}/run/kdm
 
 # own as part of plymouth/kdm integration hacks (#551310)
 mkdir -p -m775 %{buildroot}%{_localstatedir}/spool/gdm
@@ -147,6 +153,8 @@ touch --no-create %{_datadir}/kde-settings/kde-profile/default/share/icons/Fedor
 %{_sysconfdir}/kde/kdm/Xwilling
 %{_sysconfdir}/kde/kdm/Xservers
 %{_sysconfdir}/kde/kdm/Xsetup
+%dir %{_localstatedir}/lib/kdm
+%attr(1777,root,root) %dir %{_localstatedir}/run/kdm
 %attr(0775,root,root) %dir %{_localstatedir}/spool/gdm
 
 %files pulseaudio
@@ -155,6 +163,10 @@ touch --no-create %{_datadir}/kde-settings/kde-profile/default/share/icons/Fedor
 
 
 %changelog
+* Sat Jan 30 2010 Rex Dieter <rdieter@fedoraproject.org> 4.2-16.1
+- own /var/lib/kdm (regression, #442081)
+- own /var/run/kdm
+
 * Fri Jan 29 2010 Rex Dieter <rdieter@fedoraproject.org> 4.2-16
 - krunnerrc: disable nepomuksearch plugin by default (#559977)
 - plasma-desktop-appletsrc: include [virus] wallpaper variant
