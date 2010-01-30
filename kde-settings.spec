@@ -1,6 +1,6 @@
 # THIS SPECFILE IS FOR F13 ONLY!
 
-%define rel 8
+%define rel 10
 
 Summary: Config files for kde
 Name:    kde-settings
@@ -66,6 +66,9 @@ Requires: alsa-plugins-pulseaudio
 %prep
 %setup -q -n %{name}-%{version}-%{rel}
 
+# unpackaged files, should probably omit this from the tarball. ;) -- Rex
+rm -fv Makefile
+
 
 %build
 # Intentionally left blank.  Nothing to see here.
@@ -75,13 +78,14 @@ Requires: alsa-plugins-pulseaudio
 rm -rf %{buildroot}
 mkdir -p %{buildroot}{%{_datadir}/config,%{_sysconfdir}/kde/kdm}
 
-tar cpf - etc/ usr/ | tar --directory %{buildroot} -xvpf -
+tar cpf - . | tar --directory %{buildroot} -xvpf -
 
 # kdebase/kdm symlink
 rm -rf   %{buildroot}%{_datadir}/config/kdm
 ln -sf ../../../etc/kde/kdm %{buildroot}%{_datadir}/config/kdm
 
-# own /var/run/kdm
+# own these
+mkdir -p %{buildroot}%{_localstatedir}/lib/kdm
 mkdir -p %{buildroot}%{_localstatedir}/run/kdm
 
 # rhel stuff
@@ -139,8 +143,9 @@ rm -rf %{buildroot}
 # compat symlink
 %{_datadir}/config/kdm
 %dir %{_sysconfdir}/kde/kdm
-%config(noreplace) %{_sysconfdir}/kde/kdm/backgroundrc
 %config(noreplace) %{_sysconfdir}/kde/kdm/kdmrc
+%dir %{_localstatedir}/lib/kdm
+%config(noreplace) %{_localstatedir}/lib/kdm/backgroundrc
 %ghost %config(missingok,noreplace) %verify(not md5 size mtime) %{_sysconfdir}/kde/kdm/README*
 %{_sysconfdir}/kde/kdm/Xaccess
 %{_sysconfdir}/kde/kdm/Xresources
@@ -155,6 +160,13 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Sat Jan 30 2010 Rex Dieter <rdieter@fedoraproject.org> 4.4-10
+- move /etc/kde/kdm/backgroundrc => /var/lib/kdm/backgroundrc (#522513)
+- own /var/lib/kdm (regression, #442081)
+
+* Fri Jan 29 2010 Rex Dieter <rdieter@fedoraproject.org> 4.4-9
+- krunnerrc: disable nepomuksearch plugin by default (#559977)
+
 * Wed Jan 20 2010 Rex Dieter <rdieter@fedoraproject.org> 4.4-8
 - plasma-netbook workspace has no wallpaper configured (#549996)
 
