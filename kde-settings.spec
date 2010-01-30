@@ -5,7 +5,7 @@
 Summary: Config files for kde
 Name:    kde-settings
 Version: 4.3
-Release: %{rel}
+Release: %{rel}.1
 
 Group:   System Environment/Base
 License: Public Domain
@@ -66,6 +66,8 @@ Requires: alsa-plugins-pulseaudio
 %prep
 %setup -q -n %{name}-%{version}-%{rel}
 
+rm -fv Makefile
+
 
 %build
 # Intentionally left blank.  Nothing to see here.
@@ -75,13 +77,14 @@ Requires: alsa-plugins-pulseaudio
 rm -rf %{buildroot}
 mkdir -p %{buildroot}{%{_datadir}/config,%{_sysconfdir}/kde/kdm}
 
-tar cpf - etc/ usr/ | tar --directory %{buildroot} -xvpf -
+tar cpf - . | tar --directory %{buildroot} -xvpf -
 
 # kdebase/kdm symlink
 rm -rf   %{buildroot}%{_datadir}/config/kdm
 ln -sf ../../../etc/kde/kdm %{buildroot}%{_datadir}/config/kdm
 
-# own /var/run/kdm
+# own these
+mkdir -p %{buildroot}%{_localstatedir}/lib/kdm
 mkdir -p %{buildroot}%{_localstatedir}/run/kdm
 
 # own as part of plymouth/kdm integration hacks (#551310)
@@ -93,6 +96,7 @@ mkdir -p -m775 %{buildroot}%{_localstatedir}/spool/gdm
 rm -f %{buildroot}%{_sysconfdir}/kde/env/fedora-bookmarks.sh \
       %{buildroot}%{_sysconfdir}/kde/shutdown/gpg-agent*.sh
 %endif
+
 
 %clean
 rm -rf %{buildroot}
@@ -156,6 +160,7 @@ touch --no-create %{_datadir}/kde-settings/kde-profile/default/share/icons/Fedor
 %{_sysconfdir}/kde/kdm/Xsession
 %{_sysconfdir}/kde/kdm/Xwilling
 %{_sysconfdir}/kde/kdm/Xsetup
+%dir %{_localstatedir}/lib/kdm
 %attr(1777,root,root) %dir %{_localstatedir}/run/kdm
 %attr(0775,root,root) %dir %{_localstatedir}/spool/gdm
 
@@ -165,6 +170,9 @@ touch --no-create %{_datadir}/kde-settings/kde-profile/default/share/icons/Fedor
 
 
 %changelog
+* Sat Jan 30 2010 Rex Dieter <rdieter@fedoraproject.org> 4.3-16.1
+- own /var/lib/kdm (regression, #442081)
+
 * Fri Jan 29 2010 Rex Dieter <rdieter@fedoraproject.org> 4.3-16
 - krunnerrc: disable nepomuksearch plugin by default (#559977)
 
