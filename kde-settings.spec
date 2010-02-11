@@ -1,11 +1,11 @@
 # THIS SPECFILE IS FOR F12 ONLY!
 
-%define rel 16
+%define rel 17
 
 Summary: Config files for kde
 Name:    kde-settings
 Version: 4.3
-Release: %{rel}.1
+Release: %{rel}
 
 Group:   System Environment/Base
 License: Public Domain
@@ -133,6 +133,7 @@ touch --no-create %{_datadir}/kde-settings/kde-profile/default/share/icons/Fedor
 %files 
 %defattr(-,root,root,-)
 %config(noreplace) %{_sysconfdir}/profile.d/kde.*
+%config(noreplace) %{_sysconfdir}/profile.d/kmix_pulseaudio_disable.*
 %{_sysconfdir}/kde/env/env.sh
 %{_sysconfdir}/kde/env/gpg-agent*.sh
 %if 0%{?fedora}
@@ -170,6 +171,9 @@ touch --no-create %{_datadir}/kde-settings/kde-profile/default/share/icons/Fedor
 
 
 %changelog
+* Thu Feb 11 2010 Rex Dieter <rdieter@fedoraproject.org> 4.3-17
+- Disable kmix/pulseaudio integration by default (#563741)
+
 * Sat Jan 30 2010 Rex Dieter <rdieter@fedoraproject.org> 4.3-16.1
 - own /var/lib/kdm (regression, #442081)
 
