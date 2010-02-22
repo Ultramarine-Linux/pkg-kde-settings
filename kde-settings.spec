@@ -1,11 +1,11 @@
 # THIS SPECFILE IS FOR F13 ONLY!
 
-%define rel 11
+%define rel 12
 
 Summary: Config files for kde
 Name:    kde-settings
 Version: 4.4
-Release: %{rel}
+Release: %{rel}%{?dist}
 
 Group:   System Environment/Base
 License: Public Domain
@@ -160,6 +160,9 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Mon Feb 22 2010 Jaroslav Reznik <jreznik@redhat.com> 4.4-12
+- added dist tag to release
+
 * Mon Feb 22 2010 Jaroslav Reznik <jreznik@redhat.com> 4.4-11
 - goddard kde theme as default
 
