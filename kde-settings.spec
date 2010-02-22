@@ -1,6 +1,6 @@
 # THIS SPECFILE IS FOR F13 ONLY!
 
-%define rel 10
+%define rel 11
 
 Summary: Config files for kde
 Name:    kde-settings
@@ -115,7 +115,7 @@ rm -rf %{buildroot}
 # kdm v3 themes don't work (#444730)
 # this hack assumes %_datadir != %_kde4_datadir
 (grep "^Theme=%{_datadir}/apps/kdm/themes/" %{_sysconfdir}/kde/kdm/kdmrc > /dev/null && \
- sed -i -e "s|^Theme=%{_datadir}/apps/kdm/themes/.*|Theme=%{_kde4_appsdir}/kdm/themes/Constantine|" \
+ sed -i -e "s|^Theme=%{_datadir}/apps/kdm/themes/.*|Theme=%{_kde4_appsdir}/kdm/themes/Goddard|" \
  %{_sysconfdir}/kde/kdm/kdmrc
 ) ||:
 
@@ -160,6 +160,9 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Mon Feb 22 2010 Jaroslav Reznik <jreznik@redhat.com> 4.4-11
+- goddard kde theme as default
+
 * Sat Jan 30 2010 Rex Dieter <rdieter@fedoraproject.org> 4.4-10
 - move /etc/kde/kdm/backgroundrc => /var/lib/kdm/backgroundrc (#522513)
 - own /var/lib/kdm (regression, #442081)
