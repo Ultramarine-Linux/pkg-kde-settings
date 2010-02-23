@@ -161,7 +161,7 @@ rm -rf %{buildroot}
 
 %changelog
 * Tue Feb 23 2010 Rex Dieter <rdieter@fedoraproject.org> 4.5-1
-- 4.5 branch for F-13
+- 4.5 branch for F-14
 - (re)enable kdebug
 
 * Tue Feb 23 2010 Rex Dieter <rdieter@fedoraproject.org> 4.4-13
