@@ -1,10 +1,10 @@
 # THIS SPECFILE IS FOR F13 ONLY!
 
-%define rel 13
+%define rel 1
 
 Summary: Config files for kde
 Name:    kde-settings
-Version: 4.4
+Version: 4.5
 Release: %{rel}%{?dist}
 
 Group:   System Environment/Base
@@ -160,6 +160,10 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Tue Feb 23 2010 Rex Dieter <rdieter@fedoraproject.org> 4.5-1
+- 4.5 branch for F-13
+- (re)enable kdebug
+
 * Tue Feb 23 2010 Rex Dieter <rdieter@fedoraproject.org> 4.4-13
 - disable kdebug by default (#560508)
 
