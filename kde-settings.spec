@@ -1,6 +1,6 @@
 # THIS SPECFILE IS FOR F13 ONLY!
 
-%define rel 12
+%define rel 13
 
 Summary: Config files for kde
 Name:    kde-settings
@@ -160,6 +160,9 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Tue Feb 23 2010 Rex Dieter <rdieter@fedoraproject.org> 4.4-13
+- disable kdebug by default (#560508)
+
 * Mon Feb 22 2010 Jaroslav Reznik <jreznik@redhat.com> 4.4-12
 - added dist tag to release
 
