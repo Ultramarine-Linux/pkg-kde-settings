@@ -1,6 +1,6 @@
 # THIS SPECFILE IS FOR F12 ONLY!
 
-%define rel 17
+%define rel 18
 
 Summary: Config files for kde
 Name:    kde-settings
@@ -171,6 +171,9 @@ touch --no-create %{_datadir}/kde-settings/kde-profile/default/share/icons/Fedor
 
 
 %changelog
+* Thu Mar 04 2010 Rex Dieter <rdieter@fedoraproject.org> 4.3-18
+- nepomukserverrc: [Basic Settings] Start Nepomuk=true
+
 * Thu Feb 11 2010 Rex Dieter <rdieter@fedoraproject.org> 4.3-17
 - Disable kmix/pulseaudio integration by default (#563741)
 
