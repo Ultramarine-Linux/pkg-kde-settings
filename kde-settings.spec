@@ -1,11 +1,11 @@
 # THIS SPECFILE IS FOR F13 ONLY!
 
-%define rel 13
+%define rel 15
 
 Summary: Config files for kde
 Name:    kde-settings
 Version: 4.4
-Release: %{rel}%{?dist}.1
+Release: %{rel}%{?dist}
 
 Group:   System Environment/Base
 License: Public Domain
@@ -39,6 +39,7 @@ Conflicts: kdelibs3 < 3.5.10-17
 Summary: Configuration files for kdm
 Group:	 System Environment/Base
 Obsoletes: kde-config-kdm < 4.0 
+Requires: desktop-backgrounds-compat
 Requires: kdm
 Requires: system-kdm-theme
 Requires: xorg-x11-xdm
@@ -164,6 +165,11 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Thu Apr 22 2010 Rex Dieter <rdieter@fedoraproject.org> 4.4-15
+- profile.d scripts should not be executable (#571057)
+- change default GUIStyle and ColorScheme in kdm to provide more consistent look (#553445)
+- -kdm: Requires: desktop-backgrounds-compat
+
 * Tue Apr 13 2010 Rex Dieter <rdieter@fedoraproject.org> 4.4-13.1
 - -kdm: own /var/spool/gdm (#551310,#577482)
 
