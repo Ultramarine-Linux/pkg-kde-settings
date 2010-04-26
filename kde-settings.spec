@@ -152,8 +152,8 @@ rm -rf %{buildroot}
 %config(noreplace) %{_sysconfdir}/kde/kdm/Xaccess
 %config(noreplace) %{_sysconfdir}/kde/kdm/Xresources
 %config(noreplace) %{_sysconfdir}/kde/kdm/Xsession
-%config(noreplace) %{_sysconfdir}/kde/kdm/Xwilling
 %config(noreplace) %{_sysconfdir}/kde/kdm/Xsetup
+%config(noreplace) %{_sysconfdir}/kde/kdm/Xwilling
 %attr(1777,root,root) %dir %{_localstatedir}/run/kdm
 %attr(0775,root,root) %dir %{_localstatedir}/spool/gdm
 
