@@ -1,11 +1,11 @@
 # THIS SPECFILE IS FOR F13 ONLY!
 
-%define rel 1
+%define rel 2
 
 Summary: Config files for kde
 Name:    kde-settings
 Version: 4.5
-Release: %{rel}%{?dist}.1
+Release: %{rel}%{?dist}
 
 Group:   System Environment/Base
 License: Public Domain
@@ -41,7 +41,6 @@ Group:	 System Environment/Base
 Obsoletes: kde-config-kdm < 4.0 
 Requires: kdm
 Requires: system-kdm-theme
-Requires: xorg-x11-xdm
 Requires(pre): coreutils
 Requires(post): coreutils grep sed
 Requires(post): kde4-macros(api) = %{_kde4_macros_api}
@@ -150,11 +149,11 @@ rm -rf %{buildroot}
 %dir %{_localstatedir}/lib/kdm
 %config(noreplace) %{_localstatedir}/lib/kdm/backgroundrc
 %ghost %config(missingok,noreplace) %verify(not md5 size mtime) %{_sysconfdir}/kde/kdm/README*
-%{_sysconfdir}/kde/kdm/Xaccess
-%{_sysconfdir}/kde/kdm/Xresources
-%{_sysconfdir}/kde/kdm/Xsession
-%{_sysconfdir}/kde/kdm/Xwilling
-%{_sysconfdir}/kde/kdm/Xsetup
+%config(noreplace) %{_sysconfdir}/kde/kdm/Xaccess
+%config(noreplace) %{_sysconfdir}/kde/kdm/Xresources
+%config(noreplace) %{_sysconfdir}/kde/kdm/Xsession
+%config(noreplace) %{_sysconfdir}/kde/kdm/Xwilling
+%config(noreplace) %{_sysconfdir}/kde/kdm/Xsetup
 %attr(1777,root,root) %dir %{_localstatedir}/run/kdm
 %attr(0775,root,root) %dir %{_localstatedir}/spool/gdm
 
@@ -164,6 +163,9 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Mon Apr 26 2010 Rex Dieter <rdieter@fedoraproject.org> 4.5-2
+- kde-settings-kdm depends on xorg-x11-xdm (#537608)
+
 * Tue Apr 13 2010 Rex Dieter <rdieter@fedoraproject.org> 4.5-1.1
 - -kdm: own /var/spool/gdm (#551310,#577482)
 
