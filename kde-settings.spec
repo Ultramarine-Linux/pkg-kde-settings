@@ -1,6 +1,6 @@
-# THIS SPECFILE IS FOR F13 ONLY!
+# THIS SPECFILE IS FOR F14+ ONLY!
 
-%define rel 2
+%define rel 3
 
 Summary: Config files for kde
 Name:    kde-settings
@@ -117,7 +117,7 @@ rm -rf %{buildroot}
 # kdm v3 themes don't work (#444730)
 # this hack assumes %_datadir != %_kde4_datadir
 (grep "^Theme=%{_datadir}/apps/kdm/themes/" %{_sysconfdir}/kde/kdm/kdmrc > /dev/null && \
- sed -i -e "s|^Theme=%{_datadir}/apps/kdm/themes/.*|Theme=%{_kde4_appsdir}/kdm/themes/Goddard|" \
+ sed -i -e "s|^Theme=%{_datadir}/apps/kdm/themes/.*|Theme=%{_kde4_appsdir}/kdm/themes/Laughlin|" \
  %{_sysconfdir}/kde/kdm/kdmrc
 ) ||:
 
@@ -163,6 +163,9 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Tue Aug 03 2010 Jaroslav Reznik <jreznik@redhat.com> 4.5-3
+- laughlin kde theme as default
+
 * Mon Apr 26 2010 Rex Dieter <rdieter@fedoraproject.org> 4.5-2
 - kde-settings-kdm depends on xorg-x11-xdm (#537608)
 
