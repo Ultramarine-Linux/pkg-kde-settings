@@ -1,6 +1,6 @@
 # THIS SPECFILE IS FOR F14+ ONLY!
 
-%define rel 3
+%define rel 4
 
 Summary: Config files for kde
 Name:    kde-settings
@@ -17,7 +17,8 @@ BuildArch: noarch
 BuildRequires: kde-filesystem
 
 Requires: kde-filesystem
-Requires: system-kde-icon-theme
+## as-of 4.5-4 , no longer using any external icon bits (#615621)
+#Requires: system-kde-icon-theme
 # /etc/pam.d/ ownership
 Requires: pam
 Requires: xdg-user-dirs
@@ -163,6 +164,9 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Fri Sep 03 2010 Rex Dieter <rdieter@fedoraproject.org. 4.5-4
+- kdeglobals : drop [Icons] Theme=Fedora-KDE (bug #615621)
+
 * Tue Aug 03 2010 Jaroslav Reznik <jreznik@redhat.com> 4.5-3
 - laughlin kde theme as default
 
