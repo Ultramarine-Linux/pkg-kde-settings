@@ -1,6 +1,6 @@
 # THIS SPECFILE IS FOR F13 ONLY!
 
-%define rel 16
+%define rel 17
 
 Summary: Config files for kde
 Name:    kde-settings
@@ -164,6 +164,9 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Tue Sep 28 2010 Rex Dieter <rdieter@fedoraproject.org> 4.4-17
+- 00-start-here-kde-fedora.js plasma updates script (#615621)
+
 * Mon Apr 26 2010 Rex Dieter <rdieter@fedoraproject.org> 4.4-16
 - kde-settings-kdm depends on xorg-x11-xdm (#537608)
 
