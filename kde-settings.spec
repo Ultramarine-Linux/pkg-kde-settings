@@ -1,6 +1,6 @@
 # THIS SPECFILE IS FOR F14+ ONLY!
 
-%define rel 5
+%define rel 6
 
 Summary: Config files for kde
 Name:    kde-settings
@@ -139,7 +139,6 @@ rm -rf %{buildroot}
 %config %{_sysconfdir}/kderc
 %config %{_sysconfdir}/kde4rc
 %{_datadir}/kde-settings/
-%{_kde4_appsdir}/plasma-desktop/
 
 %files kdm
 %defattr(-,root,root,-)
@@ -165,6 +164,9 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Tue Sep 28 2010 Rex Dieter <rdieter@fedoraproject.org> 4.5-6
+- move plamsa-desktop bits into kde-settings/kde-profile instead
+
 * Tue Sep 28 2010 Rex Dieter <rdieter@fedoraproject.org> 4.5-5
 - 00-start-here-kde-fedora.js plasma updates script (#615621)
 
