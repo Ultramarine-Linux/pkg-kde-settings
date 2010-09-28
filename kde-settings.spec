@@ -1,6 +1,6 @@
 # THIS SPECFILE IS FOR F14+ ONLY!
 
-%define rel 4
+%define rel 5
 
 Summary: Config files for kde
 Name:    kde-settings
@@ -139,6 +139,7 @@ rm -rf %{buildroot}
 %config %{_sysconfdir}/kderc
 %config %{_sysconfdir}/kde4rc
 %{_datadir}/kde-settings/
+%{_kde4_appsdir}/plasma-desktop/
 
 %files kdm
 %defattr(-,root,root,-)
@@ -164,8 +165,11 @@ rm -rf %{buildroot}
 
 
 %changelog
-* Fri Sep 03 2010 Rex Dieter <rdieter@fedoraproject.org. 4.5-4
-- kdeglobals : drop [Icons] Theme=Fedora-KDE (bug #615621)
+* Tue Sep 28 2010 Rex Dieter <rdieter@fedoraproject.org> 4.5-5
+- 00-start-here-kde-fedora.js plasma updates script (#615621)
+
+* Fri Sep 03 2010 Rex Dieter <rdieter@fedoraproject.org> 4.5-4
+- kdeglobals : drop [Icons] Theme=Fedora-KDE (#615621)
 
 * Tue Aug 03 2010 Jaroslav Reznik <jreznik@redhat.com> 4.5-3
 - laughlin kde theme as default
