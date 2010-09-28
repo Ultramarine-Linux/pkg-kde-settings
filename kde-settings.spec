@@ -1,6 +1,6 @@
 # THIS SPECFILE IS FOR F13 ONLY!
 
-%define rel 17
+%define rel 18
 
 Summary: Config files for kde
 Name:    kde-settings
@@ -164,6 +164,9 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Tue Sep 28 2010 Rex Dieter <rdieter@fedoraproject.org. 4.4-18
+- kdeglobals: [Icons] drop Theme=Fedora-KDE (#615621)
+
 * Tue Sep 28 2010 Rex Dieter <rdieter@fedoraproject.org> 4.4-17
 - 00-start-here-kde-fedora.js plasma updates script (#615621)
 
