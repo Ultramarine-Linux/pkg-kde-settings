@@ -165,7 +165,7 @@ rm -rf %{buildroot}
 
 %changelog
 * Tue Sep 28 2010 Rex Dieter <rdieter@fedoraproject.org> 4.5-6
-- move plamsa-desktop bits into kde-settings/kde-profile instead
+- move plasma-desktop bits into kde-settings/kde-profile instead
 
 * Tue Sep 28 2010 Rex Dieter <rdieter@fedoraproject.org> 4.5-5
 - 00-start-here-kde-fedora.js plasma updates script (#615621)
