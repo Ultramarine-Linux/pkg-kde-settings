@@ -1,6 +1,6 @@
 # THIS SPECFILE IS FOR F14+ ONLY!
 
-%define rel 6
+%define rel 7
 
 Summary: Config files for kde
 Name:    kde-settings
@@ -164,6 +164,9 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Fri Oct 08 2010 Rex Dieter <rdieter@fedoraproject.org> 4.5-7
+- make 00-start-here-kde-fedora.js look for simplelauncher too (#615621)
+
 * Tue Sep 28 2010 Rex Dieter <rdieter@fedoraproject.org> 4.5-6
 - move plasma-desktop bits into kde-settings/kde-profile instead
 
