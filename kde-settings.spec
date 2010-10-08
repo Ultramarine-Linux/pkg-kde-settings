@@ -1,6 +1,6 @@
 # THIS SPECFILE IS FOR F13 ONLY!
 
-%define rel 18
+%define rel 19
 
 Summary: Config files for kde
 Name:    kde-settings
@@ -164,6 +164,9 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Fri Oct 08 2010 Rex Dieter <rdieter@fedoraproject.org> 4.4-19
+- make 00-start-here-kde-fedora.js look for simplelauncher too (#615621)
+
 * Tue Sep 28 2010 Rex Dieter <rdieter@fedoraproject.org. 4.4-18
 - kdeglobals: [Icons] drop Theme=Fedora-KDE (#615621)
 
