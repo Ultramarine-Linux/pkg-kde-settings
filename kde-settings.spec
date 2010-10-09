@@ -1,6 +1,6 @@
 # THIS SPECFILE IS FOR F14+ ONLY!
 
-%define rel 7
+%define rel 8
 
 Summary: Config files for kde
 Name:    kde-settings
@@ -164,6 +164,9 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Sat Oct 09 2010 Rex Dieter <rdieter@fedoraproject.org> 4.5-8
+- rename 00-start-here script to ensure it runs (again).
+
 * Fri Oct 08 2010 Rex Dieter <rdieter@fedoraproject.org> 4.5-7
 - make 00-start-here-kde-fedora.js look for simplelauncher too (#615621)
 
