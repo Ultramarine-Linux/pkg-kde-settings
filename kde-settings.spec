@@ -1,6 +1,6 @@
 # THIS SPECFILE IS FOR F13 ONLY!
 
-%define rel 19
+%define rel 20
 
 Summary: Config files for kde
 Name:    kde-settings
@@ -164,6 +164,9 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Sat Oct 09 2010 Rex Dieter <rdieter@fedoraproject.org> 4.4-20
+- rename 00-start-here script to ensure it runs (again).
+
 * Fri Oct 08 2010 Rex Dieter <rdieter@fedoraproject.org> 4.4-19
 - make 00-start-here-kde-fedora.js look for simplelauncher too (#615621)
 
