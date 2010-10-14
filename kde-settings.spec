@@ -1,6 +1,6 @@
 # THIS SPECFILE IS FOR F14+ ONLY!
 
-%define rel 8
+%define rel 9
 
 Summary: Config files for kde
 Name:    kde-settings
@@ -164,6 +164,10 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Thu Oct 14 2010 Rex Dieter <rdieter@fedoraproject.org> 4.5-9
+- drop plasma-{desktop,netbook}-appletsrc
+- plasmarc: set default plasma(-netbook) themes (#642763)
+
 * Sat Oct 09 2010 Rex Dieter <rdieter@fedoraproject.org> 4.5-8
 - rename 00-start-here script to ensure it runs (again).
 
