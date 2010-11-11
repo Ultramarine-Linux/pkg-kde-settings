@@ -1,6 +1,6 @@
 # THIS SPECFILE IS FOR F14+ ONLY!
 
-%define rel 10
+%define rel 11
 
 Summary: Config files for kde
 Name:    kde-settings
@@ -164,6 +164,9 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Thu Nov 11 2010 Rex Dieter <rdieter@fedoraproject.org> 4.5-11
+- kdebugrc: DisableAll=true (#652367)
+
 * Fri Oct 29 2010 Rex Dieter <rdieter@fedoraproject.org> 4.5-10
 - kdmrc: UserList=false
 
