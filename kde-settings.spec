@@ -1,16 +1,18 @@
-# THIS SPECFILE IS FOR F14+ ONLY!
+# THIS SPECFILE IS FOR F15+ ONLY!
 
-%define rel 11
+%define rel 1
 
 Summary: Config files for kde
 Name:    kde-settings
-Version: 4.5
+Version: 4.6
 Release: %{rel}%{?dist}
 
 Group:   System Environment/Base
 License: Public Domain
 Url:     http://fedorahosted.org/kde-settings
 Source0: https://fedorahosted.org/releases/k/d/kde-settings/%{name}-%{version}-%{rel}.tar.bz2
+# extra source for now
+Source1: kdm.conf
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildArch: noarch
 
@@ -97,6 +99,10 @@ rm -f %{buildroot}%{_sysconfdir}/kde/env/fedora-bookmarks.sh \
       %{buildroot}%{_sysconfdir}/kde/shutdown/gpg-agent*.sh
 %endif
 
+# /var/run tempfs fun
+install -D -p -m644 %{SOURCE1} %{buildroot}%{_sysconfdir}/tmpfiles.d/kdm.conf
+
+
 %clean
 rm -rf %{buildroot}
 
@@ -155,7 +161,7 @@ rm -rf %{buildroot}
 %config(noreplace) %{_sysconfdir}/kde/kdm/Xsession
 %config(noreplace) %{_sysconfdir}/kde/kdm/Xsetup
 %config(noreplace) %{_sysconfdir}/kde/kdm/Xwilling
-%attr(1777,root,root) %dir %{_localstatedir}/run/kdm
+%{_sysconfdir}/tmpfiles.d/kdm.conf
 %attr(0775,root,root) %dir %{_localstatedir}/spool/gdm
 
 %files pulseaudio
@@ -164,6 +170,10 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Mon Nov 29 2010 Rex Dieter <rdieter@fedoraproject.org> 4.6-1 
+- init 4.6 
+- /var/run/kdm/ fails to be created on boot (#657785)
+
 * Thu Nov 11 2010 Rex Dieter <rdieter@fedoraproject.org> 4.5-11
 - kdebugrc: DisableAll=true (#652367)
 
