@@ -1,6 +1,6 @@
 # THIS SPECFILE IS FOR F15+ ONLY!
 
-%define rel 1
+%define rel 2
 
 Summary: Config files for kde
 Name:    kde-settings
@@ -29,11 +29,6 @@ Requires: coreutils sed util-linux
 
 Requires(post): coreutils
 Requires(postun): coreutils
-
-Obsoletes: kde-config < %{version}-%{release}
-
-# when profile.d/kde.(sh|csh) was moved here
-Conflicts: kdelibs3 < 3.5.10-17
 
 %description
 %{summary}.
@@ -170,6 +165,10 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Fri Dec 03 2010 Rex Dieter <rdieter@fedoraproject.org> - 4.6-2
+- drop old Conflicts
+- Xserver-1.10: Fatal server error: Unrecognized option: -nr (#659684)
+
 * Mon Nov 29 2010 Rex Dieter <rdieter@fedoraproject.org> 4.6-1 
 - init 4.6 
 - /var/run/kdm/ fails to be created on boot (#657785)
