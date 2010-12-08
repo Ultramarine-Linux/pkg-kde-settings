@@ -5,7 +5,7 @@
 Summary: Config files for kde
 Name:    kde-settings
 Version: 4.6
-Release: %{rel}%{?dist}
+Release: %{rel}%{?dist}.1
 
 Group:   System Environment/Base
 License: Public Domain
@@ -102,24 +102,9 @@ install -D -p -m644 %{SOURCE1} %{buildroot}%{_sysconfdir}/tmpfiles.d/kdm.conf
 rm -rf %{buildroot}
 
 
-%pre kdm
-## KDM fixup(s)
-# handle move from /etc/X11/xdm/kdmrc to /etc/kde/kdm/kdmrc
-[ -L %{_sysconfdir}/kde/kdm/kdmrc ] && \
-  %{__mv} -v %{_sysconfdir}/kde/kdm/kdmrc %{_sysconfdir}/kde/kdm/kdmrc.rpmorig ||:
-# handle %%_datadir/config/kdm -> /etc/kde/kdm
-[ -d %{_datadir}/config/kdm -a ! -L %{_datadir}/config/kdm ] && \
-  %{__mv} -v %{_datadir}/config/kdm %{_datadir}/config/kdm.rpmorig ||:
-
 %post kdm
-## KDM fixup(s)
-# handle move from /etc/X11/xdm/kdmrc to /etc/kde/kdm/kdmrc
-[ ! -f %{_sysconfdir}/kde/kdm/kdmrc -a -f %{_sysconfdir}/kde/kdm/kdmrc.rpmnew ] && \
-  %{__cp} -a %{_sysconfdir}/kde/kdm/kdmrc.rpmnew %{_sysconfdir}/kde/kdm/kdmrc ||:
-# kdm v3 themes don't work (#444730)
-# this hack assumes %_datadir != %_kde4_datadir
-(grep "^Theme=%{_datadir}/apps/kdm/themes/" %{_sysconfdir}/kde/kdm/kdmrc > /dev/null && \
- sed -i -e "s|^Theme=%{_datadir}/apps/kdm/themes/.*|Theme=%{_kde4_appsdir}/kdm/themes/Laughlin|" \
+(grep "^ServerArgsLocal=-nr" %{_sysconfdir}/kde/kdm/kdmrc > /dev/null && \
+ sed -i -e "s|^ServerArgsLocal=-nr|ServerArgsLocal=-background none|" \
  %{_sysconfdir}/kde/kdm/kdmrc
 ) ||:
 
@@ -165,6 +150,10 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Wed Dec 08 2010 Rex Dieter <rdieter@fedoraproject.org> 4.6-2.1
+- %post kdm : sed -e 's|-nr|-background none|' kdmrc (#659684)
+- %post kdm : drop old stuff
+
 * Fri Dec 03 2010 Rex Dieter <rdieter@fedoraproject.org> - 4.6-2
 - drop old Conflicts
 - Xserver-1.10: Fatal server error: Unrecognized option: -nr (#659684)
