@@ -1,11 +1,11 @@
 # THIS SPECFILE IS FOR F15+ ONLY!
 
-%define rel 2
+%define rel 3
 
 Summary: Config files for kde
 Name:    kde-settings
 Version: 4.6
-Release: %{rel}%{?dist}.1
+Release: %{rel}%{?dist}
 
 Group:   System Environment/Base
 License: Public Domain
@@ -150,6 +150,9 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Tue Feb 01 2011 Rex Dieter <rdieter@fedoraproject.org> 4.6-3
+- add support for the postlogin PAM stack to kdm (#665060)
+
 * Wed Dec 08 2010 Rex Dieter <rdieter@fedoraproject.org> 4.6-2.1
 - %post kdm : sed -e 's|-nr|-background none|' kdmrc (#659684)
 - %post kdm : drop old stuff
