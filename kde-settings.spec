@@ -1,6 +1,6 @@
 # THIS SPECFILE IS FOR F15+ ONLY!
 
-%define rel 3
+%define rel 4
 
 Summary: Config files for kde
 Name:    kde-settings
@@ -26,6 +26,8 @@ Requires: pam
 Requires: xdg-user-dirs
 # sed/kill used in gpg-agent-(startup/shutdown).sh
 Requires: coreutils sed util-linux
+# hard-code dmz-cursor-themes to workaround https://bugzilla.redhat.com/show_bug.cgi?id=675509
+Requires: dmz-cursor-themes
 
 Requires(post): coreutils
 Requires(postun): coreutils
@@ -38,7 +40,8 @@ Summary: Configuration files for kdm
 Group:	 System Environment/Base
 Obsoletes: kde-config-kdm < 4.0 
 Requires: kdm
-Requires: system-kdm-theme
+# use kde defaults for now -- Rex
+#Requires: system-kdm-theme
 Requires(pre): coreutils
 Requires(post): coreutils grep sed
 Requires(post): kde4-macros(api) = %{_kde4_macros_api}
@@ -150,6 +153,10 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Mon Feb 07 2011 Rex Dieter <rdieter@fedoraproject.org> 4.6-4
+- de-Laughlin-ize theming, be genericish/upstream (for now)
+- kcminputrc: theme=dmz-aa, Requires: dmz-cursor-themes (#675509)
+
 * Tue Feb 01 2011 Rex Dieter <rdieter@fedoraproject.org> 4.6-3
 - add support for the postlogin PAM stack to kdm (#665060)
 
