@@ -5,7 +5,7 @@
 Summary: Config files for kde
 Name:    kde-settings
 Version: 4.6
-Release: %{rel}%{?dist}
+Release: %{rel}%{?dist}.1
 
 Group:   System Environment/Base
 License: Public Domain
@@ -149,6 +149,9 @@ rm -rf %{buildroot}
 - use lovelock-kdm-theme
 - /var/log/kdm.log is never clean up (logrotate) (#682761)
 - -kdm, move xterm dep to comps (#491251)
+
+* Mon Feb 07 2011 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 4.6-4.1
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_15_Mass_Rebuild
 
 * Mon Feb 07 2011 Rex Dieter <rdieter@fedoraproject.org> 4.6-4
 - de-Laughlin-ize theming, be genericish/upstream (for now)
