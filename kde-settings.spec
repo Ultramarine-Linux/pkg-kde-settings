@@ -1,6 +1,6 @@
 # THIS SPECFILE IS FOR F15+ ONLY!
 
-%define rel 6
+%define rel 7
 
 Summary: Config files for kde
 Name:    kde-settings
@@ -22,8 +22,7 @@ Requires: pam
 Requires: xdg-user-dirs
 # sed/kill used in gpg-agent-(startup/shutdown).sh
 Requires: coreutils sed util-linux
-# hard-code dmz-cursor-themes to workaround https://bugzilla.redhat.com/show_bug.cgi?id=675509
-Requires: dmz-cursor-themes
+Requires: adwaita-cursor-theme 
 
 Requires(post): coreutils
 Requires(postun): coreutils
@@ -145,6 +144,9 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Mon Mar 07 2011 Rex Dieter <rdieter@fedoraproject.org> 4.6-7
+- use adwaita-cursor-theme
+
 * Mon Mar 07 2011 Rex Dieter <rdieter@fedoraproject.org> 4.6-6
 - use lovelock-kdm-theme
 - /var/log/kdm.log is never clean up (logrotate) (#682761)
