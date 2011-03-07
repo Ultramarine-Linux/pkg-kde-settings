@@ -1,6 +1,6 @@
 # THIS SPECFILE IS FOR F15+ ONLY!
 
-%define rel 4
+%define rel 6
 
 Summary: Config files for kde
 Name:    kde-settings
@@ -11,16 +11,12 @@ Group:   System Environment/Base
 License: Public Domain
 Url:     http://fedorahosted.org/kde-settings
 Source0: https://fedorahosted.org/releases/k/d/kde-settings/%{name}-%{version}-%{rel}.tar.bz2
-# extra source for now
-Source1: kdm.conf
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildArch: noarch
 
 BuildRequires: kde-filesystem
 
 Requires: kde-filesystem
-## as-of 4.5-4 , no longer using any external icon bits (#615621)
-#Requires: system-kde-icon-theme
 # /etc/pam.d/ ownership
 Requires: pam
 Requires: xdg-user-dirs
@@ -38,15 +34,11 @@ Requires(postun): coreutils
 %package kdm
 Summary: Configuration files for kdm
 Group:	 System Environment/Base
-Obsoletes: kde-config-kdm < 4.0 
 Requires: kdm
-# use kde defaults for now -- Rex
-#Requires: system-kdm-theme
+Requires: system-kdm-theme
 Requires(pre): coreutils
 Requires(post): coreutils grep sed
 Requires(post): kde4-macros(api) = %{_kde4_macros_api}
-# failsafe session (rhbz#491251)
-Requires: xterm
 %description kdm
 %{summary}.
 
@@ -97,9 +89,6 @@ rm -f %{buildroot}%{_sysconfdir}/kde/env/fedora-bookmarks.sh \
       %{buildroot}%{_sysconfdir}/kde/shutdown/gpg-agent*.sh
 %endif
 
-# /var/run tempfs fun
-install -D -p -m644 %{SOURCE1} %{buildroot}%{_sysconfdir}/tmpfiles.d/kdm.conf
-
 
 %clean
 rm -rf %{buildroot}
@@ -144,6 +133,9 @@ rm -rf %{buildroot}
 %config(noreplace) %{_sysconfdir}/kde/kdm/Xsession
 %config(noreplace) %{_sysconfdir}/kde/kdm/Xsetup
 %config(noreplace) %{_sysconfdir}/kde/kdm/Xwilling
+# own logrotate.d/ avoiding hard dep on logrotate
+%dir %{_sysconfdir}/logrotate.d
+%config(noreplace) %{_sysconfdir}/logrotate.d/kdm
 %{_sysconfdir}/tmpfiles.d/kdm.conf
 %attr(0775,root,root) %dir %{_localstatedir}/spool/gdm
 
@@ -153,6 +145,11 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Mon Mar 07 2011 Rex Dieter <rdieter@fedoraproject.org> 4.6-6
+- use lovelock-kdm-theme
+- /var/log/kdm.log is never clean up (logrotate) (#682761)
+- -kdm, move xterm dep to comps (#491251)
+
 * Mon Feb 07 2011 Rex Dieter <rdieter@fedoraproject.org> 4.6-4
 - de-Laughlin-ize theming, be genericish/upstream (for now)
 - kcminputrc: theme=dmz-aa, Requires: dmz-cursor-themes (#675509)
