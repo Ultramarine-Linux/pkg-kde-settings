@@ -1,6 +1,6 @@
 # THIS SPECFILE IS FOR F15+ ONLY!
 
-%define rel 7
+%define rel 8
 
 Summary: Config files for kde
 Name:    kde-settings
@@ -144,6 +144,9 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Thu Mar 10 2011 Rex Dieter <rdieter@fedoraproject.org> 4.6-8
+- s/QtCurve/oxygen-gtk/
+
 * Mon Mar 07 2011 Rex Dieter <rdieter@fedoraproject.org> 4.6-7
 - use adwaita-cursor-theme
 
