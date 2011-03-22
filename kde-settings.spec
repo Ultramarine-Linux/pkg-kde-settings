@@ -5,7 +5,8 @@
 Summary: Config files for kde
 Name:    kde-settings
 Version: 4.6
-Release: %{rel}%{?dist}
+#Release: %{rel}%{?dist}
+Release: 9%{?dist}
 
 Group:   System Environment/Base
 License: Public Domain
@@ -22,7 +23,8 @@ Requires: pam
 Requires: xdg-user-dirs
 # sed/kill used in gpg-agent-(startup/shutdown).sh
 Requires: coreutils sed util-linux
-Requires: adwaita-cursor-theme 
+Requires: adwaita-cursor-theme
+Requires: polkit-desktop-policy
 
 Requires(post): coreutils
 Requires(postun): coreutils
@@ -144,6 +146,9 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Tue Mar 22 2011 Kevin Kofler <Kevin@tigcc.ticalc.org> 4.6-9
+- Requires: polkit-desktop-policy
+
 * Thu Mar 10 2011 Rex Dieter <rdieter@fedoraproject.org> 4.6-8
 - s/QtCurve/oxygen-gtk/
 
