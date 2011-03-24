@@ -1,12 +1,11 @@
 # THIS SPECFILE IS FOR F15+ ONLY!
 
-%define rel 8
+%define rel 10
 
 Summary: Config files for kde
 Name:    kde-settings
 Version: 4.6
-#Release: %{rel}%{?dist}
-Release: 9%{?dist}
+Release: %{rel}%{?dist}
 
 Group:   System Environment/Base
 License: Public Domain
@@ -146,6 +145,10 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Thu Mar 24 2011 Rex Dieter <rdieter@fedoraproject.org> 4.6-10
+- konq webbrowsing profile: start.fedoraproject.org
+- konq tabbedbrowsing : start.fedoraproject.org, fedoraproject.org/wiki/KDE
+
 * Tue Mar 22 2011 Kevin Kofler <Kevin@tigcc.ticalc.org> 4.6-9
 - Requires: polkit-desktop-policy
 
