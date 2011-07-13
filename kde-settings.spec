@@ -1,10 +1,10 @@
-# THIS SPECFILE IS FOR F15+ ONLY!
+# THIS SPECFILE IS FOR F16+ ONLY!
 
-%define rel 10
+%define rel 2
 
 Summary: Config files for kde
 Name:    kde-settings
-Version: 4.6
+Version: 4.7
 Release: %{rel}%{?dist}
 
 Group:   System Environment/Base
@@ -145,6 +145,9 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Wed Jul 13 2011 Rex Dieter <rdieter@fedoraproject.org> 4.7-2
+- kmixrc: [Global] startkdeRestore=false
+
 * Thu Mar 24 2011 Rex Dieter <rdieter@fedoraproject.org> 4.6-10
 - konq webbrowsing profile: start.fedoraproject.org
 - konq tabbedbrowsing : start.fedoraproject.org, fedoraproject.org/wiki/KDE
