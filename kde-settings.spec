@@ -1,6 +1,6 @@
 # THIS SPECFILE IS FOR F16+ ONLY!
 
-%define rel 2
+%define rel 3
 
 Summary: Config files for kde
 Name:    kde-settings
@@ -145,6 +145,9 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Tue Aug 02 2011 Jaroslav Reznik <jreznik@redhat.com> 4.7-3
+- update to Verne theming/branding
+
 * Wed Jul 13 2011 Rex Dieter <rdieter@fedoraproject.org> 4.7-2
 - kmixrc: [Global] startkdeRestore=false
 
