@@ -6,13 +6,13 @@ Summary: Config files for kde
 Name:    kde-settings
 Version: 4.7
 #Release: %{rel}%{?dist}
-Release: 4%{?dist}
+Release: 5%{?dist}
 
 Group:   System Environment/Base
 License: Public Domain
 Url:     http://fedorahosted.org/kde-settings
 Source0: https://fedorahosted.org/releases/k/d/kde-settings/%{name}-%{version}-%{rel}.tar.bz2
-Source1: kde-settings-plasma-rpm-20110617.tar.xz
+Source1: kde-settings-plasma-rpm-20110821.tar.xz
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildArch: noarch
 
@@ -150,6 +150,9 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Sun Aug 21 2011 Kevin Kofler <Kevin@tigcc.ticalc.org> 4.7-5
+- fix the RPM dependency generators to also accept ServiceTypes= (#732271)
+
 * Sun Aug 21 2011 Kevin Kofler <Kevin@tigcc.ticalc.org> 4.7-4
 - add the RPM dependency generators for Plasma (GSoC 2011), as Source1 for now
 
