@@ -5,12 +5,14 @@
 Summary: Config files for kde
 Name:    kde-settings
 Version: 4.7
-Release: %{rel}%{?dist}
+#Release: %{rel}%{?dist}
+Release: 4%{?dist}
 
 Group:   System Environment/Base
 License: Public Domain
 Url:     http://fedorahosted.org/kde-settings
 Source0: https://fedorahosted.org/releases/k/d/kde-settings/%{name}-%{version}-%{rel}.tar.bz2
+Source1: kde-settings-plasma-rpm-20110617.tar.xz
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildArch: noarch
 
@@ -56,7 +58,7 @@ Requires: alsa-plugins-pulseaudio
 
 
 %prep
-%setup -q -n %{name}-%{version}-%{rel}
+%setup -q -n %{name}-%{version}-%{rel} -a 1
 
 # unpackaged files, should probably omit this from the tarball. ;) -- Rex
 rm -fv Makefile
@@ -117,6 +119,9 @@ rm -rf %{buildroot}
 %config %{_sysconfdir}/kderc
 %config %{_sysconfdir}/kde4rc
 %{_datadir}/kde-settings/
+%{_prefix}/lib/rpm/plasma4.prov
+%{_prefix}/lib/rpm/plasma4.req
+%{_prefix}/lib/rpm/fileattrs/plasma4.attr
 
 %files kdm
 %defattr(-,root,root,-)
@@ -145,6 +150,9 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Sun Aug 21 2011 Kevin Kofler <Kevin@tigcc.ticalc.org> 4.7-4
+- add the RPM dependency generators for Plasma (GSoC 2011), as Source1 for now
+
 * Tue Aug 02 2011 Jaroslav Reznik <jreznik@redhat.com> 4.7-3
 - update to Verne theming/branding
 
