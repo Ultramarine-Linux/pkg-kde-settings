@@ -6,13 +6,14 @@ Summary: Config files for kde
 Name:    kde-settings
 Version: 4.7
 #Release: %{rel}%{?dist}
-Release: 5%{?dist}
+Release: 6%{?dist}
 
 Group:   System Environment/Base
-License: Public Domain
+License: MIT
 Url:     http://fedorahosted.org/kde-settings
 Source0: https://fedorahosted.org/releases/k/d/kde-settings/%{name}-%{version}-%{rel}.tar.bz2
 Source1: kde-settings-plasma-rpm-20110821.tar.xz
+Source2: COPYING
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildArch: noarch
 
@@ -47,6 +48,8 @@ Requires(post): kde4-macros(api) = %{_kde4_macros_api}
 %package pulseaudio
 Summary: Enable pulseaudio support in KDE
 Group:   System Environment/Base
+# nothing here to license
+License: Public Domain
 Requires: %{name} = %{version}-%{release}
 Requires: pulseaudio
 Requires: pulseaudio-module-x11
@@ -73,6 +76,8 @@ rm -rf %{buildroot}
 mkdir -p %{buildroot}{%{_datadir}/config,%{_sysconfdir}/kde/kdm}
 
 tar cpf - . | tar --directory %{buildroot} -xvpf -
+
+cp -p %{SOURCE2} .
 
 # kdebase/kdm symlink
 rm -rf   %{buildroot}%{_datadir}/config/kdm
@@ -105,6 +110,7 @@ rm -rf %{buildroot}
 
 %files 
 %defattr(-,root,root,-)
+%doc COPYING
 %config(noreplace) %{_sysconfdir}/profile.d/kde.*
 %{_sysconfdir}/kde/env/env.sh
 %{_sysconfdir}/kde/env/gpg-agent*.sh
@@ -125,6 +131,7 @@ rm -rf %{buildroot}
 
 %files kdm
 %defattr(-,root,root,-)
+%doc COPYING
 %config(noreplace) /etc/pam.d/kdm*
 # compat symlink
 %{_datadir}/config/kdm
@@ -150,6 +157,9 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Wed Aug 31 2011 Kevin Kofler <Kevin@tigcc.ticalc.org> 4.7-6
+- put under the MIT license as agreed with the other contributors
+
 * Sun Aug 21 2011 Kevin Kofler <Kevin@tigcc.ticalc.org> 4.7-5
 - fix the RPM dependency generators to also accept ServiceTypes= (#732271)
 
