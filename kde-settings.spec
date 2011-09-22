@@ -41,7 +41,8 @@ Requires(postun): coreutils
 %package kdm
 Summary: Configuration files for kdm
 Group:	 System Environment/Base
-Requires: kdm
+# MinShowUID=-1 is only supported from 4.7.1-2 on
+Requires: kdm >= 4.7.1-2
 Requires: system-kdm-theme
 Requires(pre): coreutils
 Requires(post): coreutils grep sed
@@ -166,6 +167,7 @@ rm -rf %{buildroot}
 - don't rm Makefile, no longer in the tarball
 - set up a folder view on the desktop by default for new users (#740676)
 - kdmrc: set MinShowUID=-1 (use /etc/login.defs) instead of 500 (#717115)
+- -kdm: Requires: kdm >= 4.7.1-2 (required for MinShowUID=-1)
 
 * Wed Aug 31 2011 Kevin Kofler <Kevin@tigcc.ticalc.org> 4.7-6
 - put under the MIT license as agreed with the other contributors
