@@ -1,17 +1,21 @@
 # THIS SPECFILE IS FOR F16+ ONLY!
 
-%define rel 3
+# ship the Plasma RPM dependency generators only on F17+
+%if 0%{?fedora} > 16
+%global plasma_rpm 1
+%endif
+
+%global rel 7
 
 Summary: Config files for kde
 Name:    kde-settings
 Version: 4.7
-#Release: %{rel}%{?dist}
-Release: 6%{?dist}
+Release: %{rel}%{?dist}
 
 Group:   System Environment/Base
 License: MIT
 Url:     http://fedorahosted.org/kde-settings
-Source0: https://fedorahosted.org/releases/k/d/kde-settings/%{name}-%{version}-%{rel}.tar.bz2
+Source0: https://fedorahosted.org/releases/k/d/kde-settings/%{name}-%{version}-%{rel}.tar.xz
 Source1: kde-settings-plasma-rpm-20110821.tar.xz
 Source2: COPYING
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
@@ -61,10 +65,7 @@ Requires: alsa-plugins-pulseaudio
 
 
 %prep
-%setup -q -n %{name}-%{version}-%{rel} -a 1
-
-# unpackaged files, should probably omit this from the tarball. ;) -- Rex
-rm -fv Makefile
+%setup -q -n %{name}-%{version}-%{rel} %{?plasma_rpm:-a 1}
 
 
 %build
@@ -125,9 +126,11 @@ rm -rf %{buildroot}
 %config %{_sysconfdir}/kderc
 %config %{_sysconfdir}/kde4rc
 %{_datadir}/kde-settings/
+%if 0%{?plasma_rpm}
 %{_prefix}/lib/rpm/plasma4.prov
 %{_prefix}/lib/rpm/plasma4.req
 %{_prefix}/lib/rpm/fileattrs/plasma4.attr
+%endif
 
 %files kdm
 %defattr(-,root,root,-)
@@ -157,6 +160,13 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Thu Sep 22 2011 Kevin Kofler <Kevin@tigcc.ticalc.org> 4.7-7
+- ship the Plasma RPM dependency generators only on F17+
+- use xz tarball
+- don't rm Makefile, no longer in the tarball
+- set up a folder view on the desktop by default for new users (#740676)
+- kdmrc: set MinShowUID=-1 (use /etc/login.defs) instead of 500 (#717115)
+
 * Wed Aug 31 2011 Kevin Kofler <Kevin@tigcc.ticalc.org> 4.7-6
 - put under the MIT license as agreed with the other contributors
 
