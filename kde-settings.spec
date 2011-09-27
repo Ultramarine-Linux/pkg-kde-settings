@@ -10,13 +10,14 @@
 Summary: Config files for kde
 Name:    kde-settings
 Version: 4.7
-Release: %{rel}%{?dist}
+Release: 8%{?dist}
+#Release: %{rel}%{?dist}
 
 Group:   System Environment/Base
 License: MIT
 Url:     http://fedorahosted.org/kde-settings
 Source0: https://fedorahosted.org/releases/k/d/kde-settings/%{name}-%{version}-%{rel}.tar.xz
-Source1: kde-settings-plasma-rpm-20110821.tar.xz
+Source1: kde-settings-plasma-rpm-20110927.tar.xz
 Source2: COPYING
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildArch: noarch
@@ -161,6 +162,9 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Tue Sep 27 2011 Kevin Kofler <Kevin@tigcc.ticalc.org> 4.7-8
+- plasma4.prov: don't trust the Name of script engines, always use the API
+
 * Thu Sep 22 2011 Kevin Kofler <Kevin@tigcc.ticalc.org> 4.7-7
 - ship the Plasma RPM dependency generators only on F17+
 - use xz tarball
