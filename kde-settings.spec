@@ -10,7 +10,7 @@
 Summary: Config files for kde
 Name:    kde-settings
 Version: 4.7
-Release: 8%{?dist}
+Release: 9%{?dist}
 #Release: %{rel}%{?dist}
 
 Group:   System Environment/Base
@@ -45,6 +45,7 @@ Group:	 System Environment/Base
 # MinShowUID=-1 is only supported from 4.7.1-2 on
 Requires: kdm >= 4.7.1-2
 Requires: system-kdm-theme
+Requires: xorg-x11-xinit
 Requires(pre): coreutils
 Requires(post): coreutils grep sed
 Requires(post): kde4-macros(api) = %{_kde4_macros_api}
@@ -162,6 +163,9 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Fri Sep 30 2011 Rex Dieter <rdieter@fedoraproject.org> 4.7-9
+- -kdm: add explicit Requires: xorg-x11-xinit
+
 * Tue Sep 27 2011 Kevin Kofler <Kevin@tigcc.ticalc.org> 4.7-8
 - plasma4.prov: don't trust the Name of script engines, always use the API
 
