@@ -5,13 +5,12 @@
 %global plasma_rpm 1
 %endif
 
-%global rel 7
+%global rel 10
 
 Summary: Config files for kde
 Name:    kde-settings
 Version: 4.7
-Release: 9%{?dist}
-#Release: %{rel}%{?dist}
+Release: %{rel}%{?dist}
 
 Group:   System Environment/Base
 License: MIT
@@ -163,6 +162,9 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Wed Oct 05 2011 Rex Dieter <rdieter@fedoraproject.org> 4.7-10
+- don't spam syslog if pam-gnome-keyring is not present (#743044)
+
 * Fri Sep 30 2011 Rex Dieter <rdieter@fedoraproject.org> 4.7-9
 - -kdm: add explicit Requires: xorg-x11-xinit
 
