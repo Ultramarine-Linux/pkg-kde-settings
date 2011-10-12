@@ -5,7 +5,7 @@
 %global plasma_rpm 1
 %endif
 
-%global rel 10
+%global rel 11
 
 Summary: Config files for kde
 Name:    kde-settings
@@ -153,7 +153,8 @@ rm -rf %{buildroot}
 # own logrotate.d/ avoiding hard dep on logrotate
 %dir %{_sysconfdir}/logrotate.d
 %config(noreplace) %{_sysconfdir}/logrotate.d/kdm
-%{_sysconfdir}/tmpfiles.d/kdm.conf
+%config(noreplace) %{_sysconfdir}/tmpfiles.d/kdm.conf
+%attr(1777,root,root) %dir %{_localstatedir}/run/kdm
 %attr(0775,root,root) %dir %{_localstatedir}/spool/gdm
 
 %files pulseaudio
@@ -162,6 +163,10 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Wed Oct 12 2011 Rex Dieter <rdieter@fedoraproject.org> 4.7-11
+- krunnerrc: org.kde.events_runnerEnabled=false
+- follow Packaging:Tmpfiles.d guildelines
+
 * Wed Oct 05 2011 Rex Dieter <rdieter@fedoraproject.org> 4.7-10
 - don't spam syslog if pam-gnome-keyring is not present (#743044)
 
