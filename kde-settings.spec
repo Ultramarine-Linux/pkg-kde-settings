@@ -5,7 +5,7 @@
 %global plasma_rpm 1
 %endif
 
-%global rel 11
+%global rel 12
 
 Summary: Config files for kde
 Name:    kde-settings
@@ -163,6 +163,9 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Sat Oct 15 2011 Kevin Kofler <Kevin@tigcc.ticalc.org> 4.7-12
+- disable the default Plasma digital-clock's displayEvents option by default
+
 * Wed Oct 12 2011 Rex Dieter <rdieter@fedoraproject.org> 4.7-11
 - krunnerrc: org.kde.events_runnerEnabled=false
 - follow Packaging:Tmpfiles.d guildelines
