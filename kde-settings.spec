@@ -5,7 +5,7 @@
 %global plasma_rpm 1
 %endif
 
-%global rel 12
+%global rel 13
 
 Summary: Config files for kde
 Name:    kde-settings
@@ -27,13 +27,10 @@ Requires: kde-filesystem
 # /etc/pam.d/ ownership
 Requires: pam
 Requires: xdg-user-dirs
-# sed/kill used in gpg-agent-(startup/shutdown).sh
-Requires: coreutils sed util-linux
 Requires: adwaita-cursor-theme
 Requires: polkit-desktop-policy
 
-Requires(post): coreutils
-Requires(postun): coreutils
+Requires(post): coreutils sed
 
 %description
 %{summary}.
@@ -95,8 +92,7 @@ mkdir -p -m775 %{buildroot}%{_localstatedir}/spool/gdm
 
 # rhel stuff
 %if 0%{?rhel}
-rm -f %{buildroot}%{_sysconfdir}/kde/env/fedora-bookmarks.sh \
-      %{buildroot}%{_sysconfdir}/kde/shutdown/gpg-agent*.sh
+rm -f %{buildroot}%{_sysconfdir}/kde/env/fedora-bookmarks.sh
 %endif
 
 
@@ -116,11 +112,9 @@ rm -rf %{buildroot}
 %doc COPYING
 %config(noreplace) %{_sysconfdir}/profile.d/kde.*
 %{_sysconfdir}/kde/env/env.sh
-%{_sysconfdir}/kde/env/gpg-agent*.sh
 %{_sysconfdir}/kde/env/gtk2_rc_files.sh
 %if 0%{?fedora}
 %{_sysconfdir}/kde/env/fedora-bookmarks.sh
-%{_sysconfdir}/kde/shutdown/gpg-agent*.sh
 %endif
 %config(noreplace) /etc/pam.d/kcheckpass
 %config(noreplace) /etc/pam.d/kscreensaver
@@ -163,6 +157,10 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Fri Oct 21 2011 Rex Dieter <rdieter@fedoraproject.org> 4.7-13
+- s/kpackagekit/apper/ configs
+- drop gpg-agent scripts (autostarts on demand now)
+
 * Sat Oct 15 2011 Kevin Kofler <Kevin@tigcc.ticalc.org> 4.7-12
 - disable the default Plasma digital-clock's displayEvents option by default
 
