@@ -6,11 +6,12 @@
 %endif
 
 %global rel 13
+%global system_kde_theme_ver 15.90
 
 Summary: Config files for kde
 Name:    kde-settings
 Version: 4.7
-Release: %{rel}%{?dist}.2
+Release: %{rel}%{?dist}.3
 
 Group:   System Environment/Base
 License: MIT
@@ -40,12 +41,24 @@ Summary: Configuration files for kdm
 Group:	 System Environment/Base
 # MinShowUID=-1 is only supported from 4.7.1-2 on
 Requires: kdm >= 4.7.1-2
-Requires: system-kdm-theme >= 15.90
+Requires: system-kdm-theme >= %{system_kde_theme_ver} 
 Requires: xorg-x11-xinit
 Requires(pre): coreutils
 Requires(post): coreutils grep sed
 Requires(post): kde4-macros(api) = %{_kde4_macros_api}
 %description kdm
+%{summary}.
+
+%package ksplash
+Summary: Configuration files for ksplash
+Requires: system-ksplash-theme >= %{system_kde_theme_ver} 
+%description ksplash 
+%{summary}.
+
+%package plasma
+Summary: Configuration files for plasma 
+Requires: system-plasma-desktoptheme >= %{system_kde_theme_ver} 
+%description plasma 
 %{summary}.
 
 %package pulseaudio
@@ -151,12 +164,22 @@ rm -rf %{buildroot}
 %attr(1777,root,root) %dir %{_localstatedir}/run/kdm
 %attr(0775,root,root) %dir %{_localstatedir}/spool/gdm
 
+%files ksplash
+%{_datadir}/kde-settings/kde-profile/default/share/config/ksplashrc
+
+%files plasma
+%{_datadir}/kde-settings/kde-profile/default/share/config/plasmarc
+
 %files pulseaudio
 %defattr(-,root,root,-)
 # nothing, this is a metapackage
 
 
 %changelog
+* Mon Oct 31 2011 Rex Dieter <rdieter@fedoraproject.org> 4.7-13.3
+- -ksplash: Requires: system-ksplash-theme >= 15.90
+- -plasma: Requires: system-plasma-desktoptheme >= 15.90
+
 * Mon Oct 31 2011 Rex Dieter <rdieter@fedoraproject.org> 4.7-13.2
 - -kdm: Requires: system-kdm-theme >= 15.90
 
