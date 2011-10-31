@@ -10,7 +10,7 @@
 Summary: Config files for kde
 Name:    kde-settings
 Version: 4.7
-Release: %{rel}%{?dist}
+Release: %{rel}%{?dist}.1
 
 Group:   System Environment/Base
 License: MIT
@@ -41,6 +41,8 @@ Group:	 System Environment/Base
 # MinShowUID=-1 is only supported from 4.7.1-2 on
 Requires: kdm >= 4.7.1-2
 Requires: system-kdm-theme
+# hardcode theme, workaround for older themes not being availble on DVD media
+Requires: verne-kdm-theme
 Requires: xorg-x11-xinit
 Requires(pre): coreutils
 Requires(post): coreutils grep sed
@@ -157,6 +159,9 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Mon Oct 31 2011 Rex Dieter <rdieter@fedoraproject.org> 4.7-13.1
+- -kdm: Requires: verne-kdm-theme (#651305) 
+
 * Fri Oct 21 2011 Rex Dieter <rdieter@fedoraproject.org> 4.7-13
 - s/kpackagekit/apper/ configs
 - drop gpg-agent scripts (autostarts on demand now)
