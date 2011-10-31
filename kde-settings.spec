@@ -11,7 +11,7 @@
 Summary: Config files for kde
 Name:    kde-settings
 Version: 4.7
-Release: %{rel}%{?dist}.3
+Release: %{rel}%{?dist}.4
 
 Group:   System Environment/Base
 License: MIT
@@ -51,12 +51,14 @@ Requires(post): kde4-macros(api) = %{_kde4_macros_api}
 
 %package ksplash
 Summary: Configuration files for ksplash
+Requires: %{name} = %{version}-%{release}
 Requires: system-ksplash-theme >= %{system_kde_theme_ver} 
 %description ksplash 
 %{summary}.
 
 %package plasma
 Summary: Configuration files for plasma 
+Requires: %{name} = %{version}-%{release}
 Requires: system-plasma-desktoptheme >= %{system_kde_theme_ver} 
 %description plasma 
 %{summary}.
@@ -176,6 +178,9 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Mon Oct 31 2011 Rex Dieter <rdieter@fedoraproject.org> 4.7-13.4
+- make new-subpkgs Requires: %%name for added safety
+
 * Mon Oct 31 2011 Rex Dieter <rdieter@fedoraproject.org> 4.7-13.3
 - -ksplash: Requires: system-ksplash-theme >= 15.90
 - -plasma: Requires: system-plasma-desktoptheme >= 15.90
