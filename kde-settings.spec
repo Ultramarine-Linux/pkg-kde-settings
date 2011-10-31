@@ -10,7 +10,7 @@
 Summary: Config files for kde
 Name:    kde-settings
 Version: 4.7
-Release: %{rel}%{?dist}.1
+Release: %{rel}%{?dist}.2
 
 Group:   System Environment/Base
 License: MIT
@@ -40,9 +40,7 @@ Summary: Configuration files for kdm
 Group:	 System Environment/Base
 # MinShowUID=-1 is only supported from 4.7.1-2 on
 Requires: kdm >= 4.7.1-2
-Requires: system-kdm-theme
-# hardcode theme, workaround for older themes not being availble on DVD media
-Requires: verne-kdm-theme
+Requires: system-kdm-theme >= 15.90
 Requires: xorg-x11-xinit
 Requires(pre): coreutils
 Requires(post): coreutils grep sed
@@ -159,6 +157,9 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Mon Oct 31 2011 Rex Dieter <rdieter@fedoraproject.org> 4.7-13.2
+- -kdm: Requires: system-kdm-theme >= 15.90
+
 * Mon Oct 31 2011 Rex Dieter <rdieter@fedoraproject.org> 4.7-13.1
 - -kdm: Requires: verne-kdm-theme (#651305) 
 
