@@ -5,13 +5,13 @@
 %global plasma_rpm 1
 %endif
 
-%global rel 13
+%global rel 14
 %global system_kde_theme_ver 15.90
 
 Summary: Config files for kde
 Name:    kde-settings
 Version: 4.7
-Release: %{rel}%{?dist}.4
+Release: %{rel}%{?dist}
 
 Group:   System Environment/Base
 License: MIT
@@ -178,6 +178,10 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Sat Nov 19 2011 Rex Dieter <rdieter@fedoraproject.org> 4.7-14
+- add explicit apper defaults
+- add script to init $XDG_DATA_HOME (to workaround bug #750423)
+
 * Mon Oct 31 2011 Rex Dieter <rdieter@fedoraproject.org> 4.7-13.4
 - make new-subpkgs Requires: %%name for added safety
 
