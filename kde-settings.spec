@@ -128,6 +128,7 @@ rm -rf %{buildroot}
 %config(noreplace) %{_sysconfdir}/profile.d/kde.*
 %{_sysconfdir}/kde/env/env.sh
 %{_sysconfdir}/kde/env/gtk2_rc_files.sh
+%{_sysconfdir}/kde/env/xdg_data_home_init.sh
 %if 0%{?fedora}
 %{_sysconfdir}/kde/env/fedora-bookmarks.sh
 %endif
