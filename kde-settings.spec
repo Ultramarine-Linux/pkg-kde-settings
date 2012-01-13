@@ -11,7 +11,7 @@
 Summary: Config files for kde
 Name:    kde-settings
 Version: 4.7
-Release: %{rel}%{?dist}
+Release: %{rel}%{?dist}.1
 
 Group:   System Environment/Base
 License: MIT
@@ -179,6 +179,9 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Fri Jan 13 2012 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 4.7-14.1
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_17_Mass_Rebuild
+
 * Sat Nov 19 2011 Rex Dieter <rdieter@fedoraproject.org> 4.7-14
 - add explicit apper defaults
 - add script to init $XDG_DATA_HOME (to workaround bug #750423)
