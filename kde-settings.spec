@@ -1,17 +1,17 @@
-# THIS SPECFILE IS FOR F16+ ONLY!
+# THIS SPECFILE IS FOR F17+ ONLY!
 
 # ship the Plasma RPM dependency generators only on F17+
 %if 0%{?fedora} > 16
 %global plasma_rpm 1
 %endif
 
-%global rel 14
+%global rel 1
 %global system_kde_theme_ver 15.90
 
 Summary: Config files for kde
 Name:    kde-settings
-Version: 4.7
-Release: %{rel}%{?dist}.1
+Version: 4.8
+Release: %{rel}%{?dist}
 
 Group:   System Environment/Base
 License: MIT
@@ -179,6 +179,9 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Mon Jan 16 2012 Rex Dieter <rdieter@fedoraproject.org> 4.8-1
+- kwinrc: drop [Compsiting] Enabled=false
+
 * Fri Jan 13 2012 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 4.7-14.1
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_17_Mass_Rebuild
 
