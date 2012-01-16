@@ -1,11 +1,6 @@
 # THIS SPECFILE IS FOR F17+ ONLY!
 
-# ship the Plasma RPM dependency generators only on F17+
-%if 0%{?fedora} > 16
-%global plasma_rpm 1
-%endif
-
-%global rel 1
+%global rel 2
 %global system_kde_theme_ver 15.90
 
 Summary: Config files for kde
@@ -79,7 +74,7 @@ Requires: alsa-plugins-pulseaudio
 
 
 %prep
-%setup -q -n %{name}-%{version}-%{rel} %{?plasma_rpm:-a 1}
+%setup -q -n %{name}-%{version}-%{rel} -a 1
 
 
 %build
@@ -138,11 +133,9 @@ rm -rf %{buildroot}
 %config %{_sysconfdir}/kderc
 %config %{_sysconfdir}/kde4rc
 %{_datadir}/kde-settings/
-%if 0%{?plasma_rpm}
 %{_prefix}/lib/rpm/plasma4.prov
 %{_prefix}/lib/rpm/plasma4.req
 %{_prefix}/lib/rpm/fileattrs/plasma4.attr
-%endif
 
 %files kdm
 %defattr(-,root,root,-)
@@ -179,8 +172,11 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Mon Jan 16 2012 Kevin Kofler <Kevin@tigcc.ticalc.org> 4.8-2
+- Allow org.kde.kcontrol.kcmclock.save without password for wheel again
+
 * Mon Jan 16 2012 Rex Dieter <rdieter@fedoraproject.org> 4.8-1
-- kwinrc: drop [Compsiting] Enabled=false
+- kwinrc: drop [Compositing] Enabled=false
 
 * Fri Jan 13 2012 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 4.7-14.1
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_17_Mass_Rebuild
