@@ -1,6 +1,6 @@
 # THIS SPECFILE IS FOR F17+ ONLY!
 
-%global rel 2
+%global rel 3
 %global system_kde_theme_ver 15.90
 
 Summary: Config files for kde
@@ -12,8 +12,7 @@ Group:   System Environment/Base
 License: MIT
 Url:     http://fedorahosted.org/kde-settings
 Source0: https://fedorahosted.org/releases/k/d/kde-settings/%{name}-%{version}-%{rel}.tar.xz
-Source1: kde-settings-plasma-rpm-20110927.tar.xz
-Source2: COPYING
+Source1: COPYING
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildArch: noarch
 
@@ -75,7 +74,7 @@ Requires: alsa-plugins-pulseaudio
 
 
 %prep
-%setup -q -n %{name}-%{version}-%{rel} -a 1
+%setup -q -n %{name}-%{version}-%{rel}
 
 
 %build
@@ -88,7 +87,7 @@ mkdir -p %{buildroot}{%{_datadir}/config,%{_sysconfdir}/kde/kdm}
 
 tar cpf - . | tar --directory %{buildroot} -xvpf -
 
-cp -p %{SOURCE2} .
+cp -p %{SOURCE1} .
 
 # kdebase/kdm symlink
 rm -rf   %{buildroot}%{_datadir}/config/kdm
@@ -174,8 +173,11 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Mon Jan 16 2012 Kevin Kofler <Kevin@tigcc.ticalc.org> 4.8-3
+- merge the plasma-rpm tarball into the SVN trunk and thus the main tarball
+
 * Mon Jan 16 2012 Kevin Kofler <Kevin@tigcc.ticalc.org> 4.8-2
-- Allow org.kde.kcontrol.kcmclock.save without password for wheel again
+- allow org.kde.kcontrol.kcmclock.save without password for wheel again
 - Requires: polkit (instead of polkit-desktop-policy)
 
 * Mon Jan 16 2012 Rex Dieter <rdieter@fedoraproject.org> 4.8-1
