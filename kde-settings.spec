@@ -24,7 +24,8 @@ Requires: kde-filesystem
 Requires: pam
 Requires: xdg-user-dirs
 Requires: adwaita-cursor-theme
-Requires: polkit-desktop-policy
+# /var/lib/polkit-1/localauthority/10-vendor.d/ ownership
+Requires: polkit
 
 Requires(post): coreutils sed
 
@@ -136,6 +137,7 @@ rm -rf %{buildroot}
 %{_prefix}/lib/rpm/plasma4.prov
 %{_prefix}/lib/rpm/plasma4.req
 %{_prefix}/lib/rpm/fileattrs/plasma4.attr
+%{_localstatedir}/lib/polkit-1/localauthority/10-vendor.d/11-fedora-kde-policy.pkla
 
 %files kdm
 %defattr(-,root,root,-)
@@ -174,6 +176,7 @@ rm -rf %{buildroot}
 %changelog
 * Mon Jan 16 2012 Kevin Kofler <Kevin@tigcc.ticalc.org> 4.8-2
 - Allow org.kde.kcontrol.kcmclock.save without password for wheel again
+- Requires: polkit (instead of polkit-desktop-policy)
 
 * Mon Jan 16 2012 Rex Dieter <rdieter@fedoraproject.org> 4.8-1
 - kwinrc: drop [Compositing] Enabled=false
