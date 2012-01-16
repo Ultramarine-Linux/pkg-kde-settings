@@ -1,9 +1,4 @@
-# THIS SPECFILE IS FOR F16+ ONLY!
-
-# ship the Plasma RPM dependency generators only on F17+
-%if 0%{?fedora} > 16
-%global plasma_rpm 1
-%endif
+# THIS SPECFILE IS FOR F16 ONLY!
 
 %global rel 14
 %global system_kde_theme_ver 15.90
@@ -79,7 +74,7 @@ Requires: alsa-plugins-pulseaudio
 
 
 %prep
-%setup -q -n %{name}-%{version}-%{rel} %{?plasma_rpm:-a 1}
+%setup -q -n %{name}-%{version}-%{rel}
 
 
 %build
@@ -138,11 +133,6 @@ rm -rf %{buildroot}
 %config %{_sysconfdir}/kderc
 %config %{_sysconfdir}/kde4rc
 %{_datadir}/kde-settings/
-%if 0%{?plasma_rpm}
-%{_prefix}/lib/rpm/plasma4.prov
-%{_prefix}/lib/rpm/plasma4.req
-%{_prefix}/lib/rpm/fileattrs/plasma4.attr
-%endif
 
 %files kdm
 %defattr(-,root,root,-)
