@@ -12,8 +12,7 @@ Group:   System Environment/Base
 License: MIT
 Url:     http://fedorahosted.org/kde-settings
 Source0: https://fedorahosted.org/releases/k/d/kde-settings/%{name}-%{version}-%{rel}.tar.xz
-Source1: kde-settings-plasma-rpm-20110927.tar.xz
-Source2: COPYING
+Source1: COPYING
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildArch: noarch
 
@@ -87,7 +86,7 @@ mkdir -p %{buildroot}{%{_datadir}/config,%{_sysconfdir}/kde/kdm}
 
 tar cpf - . | tar --directory %{buildroot} -xvpf -
 
-cp -p %{SOURCE2} .
+cp -p %{SOURCE1} .
 
 # kdebase/kdm symlink
 rm -rf   %{buildroot}%{_datadir}/config/kdm
