@@ -1,7 +1,7 @@
 # THIS SPECFILE IS FOR F17+ ONLY!
 
-%global rel 3
-%global system_kde_theme_ver 15.90
+%global rel 4
+%global system_kde_theme_ver 16.91
 
 Summary: Config files for kde
 Name:    kde-settings
@@ -173,6 +173,11 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Tue Feb 14 2012 Kevin Kofler <Kevin@tigcc.ticalc.org> 4.8-4
+- kdmrc: GreetString=Fedora 17 (Beefy Miracle)
+- kdmrc, ksplashrc, plasmarc: s/Verne/BeefyMiracle/g (for the artwork themes)
+- bump system_kde_theme_ver to 16.91
+
 * Mon Jan 16 2012 Kevin Kofler <Kevin@tigcc.ticalc.org> 4.8-3
 - merge the plasma-rpm tarball into the SVN trunk and thus the main tarball
 
