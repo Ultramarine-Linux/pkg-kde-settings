@@ -1,6 +1,6 @@
 # THIS SPECFILE IS FOR F17+ ONLY!
 
-%global rel 4
+%global rel 5
 %global system_kde_theme_ver 16.91
 
 Summary: Config files for kde
@@ -173,6 +173,9 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Tue Feb 14 2012 Jaroslav Reznik <jreznik@redhat.com> 4.8-5
+- fix plasmarc Beefy Miracle reference
+
 * Tue Feb 14 2012 Kevin Kofler <Kevin@tigcc.ticalc.org> 4.8-4
 - kdmrc: GreetString=Fedora 17 (Beefy Miracle)
 - kdmrc, ksplashrc, plasmarc: s/Verne/BeefyMiracle/g (for the artwork themes)
