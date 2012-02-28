@@ -1,6 +1,6 @@
 # THIS SPECFILE IS FOR F17+ ONLY!
 
-%global rel 5
+%global rel 6
 %global system_kde_theme_ver 16.91
 
 Summary: Config files for kde
@@ -173,6 +173,9 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Tue Feb 28 2012 Rex Dieter <rdieter@fedoraproject.org> 4.8-6
+- kslideshow.kssrc: include some sane/working defaults
+
 * Tue Feb 14 2012 Jaroslav Reznik <jreznik@redhat.com> 4.8-5
 - fix plasmarc Beefy Miracle reference
 
