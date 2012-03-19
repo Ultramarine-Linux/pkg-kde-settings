@@ -1,6 +1,6 @@
 # THIS SPECFILE IS FOR F17+ ONLY!
 
-%global rel 6
+%global rel 7
 %global system_kde_theme_ver 16.91
 
 Summary: Config files for kde
@@ -173,6 +173,9 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Mon Mar 19 2012 Kevin Kofler <Kevin@tigcc.ticalc.org> 4.8-7
+- plasma4.prov: change spaces in runner names to underscores
+
 * Tue Feb 28 2012 Rex Dieter <rdieter@fedoraproject.org> 4.8-6
 - kslideshow.kssrc: include some sane/working defaults
 
