@@ -6,7 +6,7 @@
 Summary: Config files for kde
 Name:    kde-settings
 Version: 4.8
-Release: %{rel}%{?dist}
+Release: %{rel}%{?dist}.1
 
 Group:   System Environment/Base
 License: MIT
@@ -36,7 +36,12 @@ Summary: Configuration files for kdm
 Group:	 System Environment/Base
 # MinShowUID=-1 is only supported from 4.7.1-2 on
 Requires: kdm >= 4.7.1-2
-Requires: system-kdm-theme >= %{system_kde_theme_ver} 
+%if 0%{?fedora}
+Requires: system-kdm-theme >= %{system_kde_theme_ver}
+%else
+Requires: redhat-logos >= 69.0.0
+%endif
+
 Requires: xorg-x11-xinit
 Requires(pre): coreutils
 Requires(post): coreutils grep sed
@@ -47,14 +52,22 @@ Requires(post): kde4-macros(api) = %{_kde4_macros_api}
 %package ksplash
 Summary: Configuration files for ksplash
 Requires: %{name} = %{version}-%{release}
-Requires: system-ksplash-theme >= %{system_kde_theme_ver} 
+%if 0%{?fedora}
+Requires: system-ksplash-theme >= %{system_kde_theme_ver}
+%else
+Requires: redhat-logos >= 69.0.0
+%endif
 %description ksplash 
 %{summary}.
 
 %package plasma
 Summary: Configuration files for plasma 
 Requires: %{name} = %{version}-%{release}
-Requires: system-plasma-desktoptheme >= %{system_kde_theme_ver} 
+%if 0%{?fedora}
+Requires: system-plasma-desktoptheme >= %{system_kde_theme_ver}
+%else
+Requires: redhat-logos >= 69.0.0
+%endif
 %description plasma 
 %{summary}.
 
@@ -102,7 +115,16 @@ mkdir -p -m775 %{buildroot}%{_localstatedir}/spool/gdm
 
 # rhel stuff
 %if 0%{?rhel}
-rm -f %{buildroot}%{_sysconfdir}/kde/env/fedora-bookmarks.sh
+rm -rf %{buildroot}%{_sysconfdir}/kde/env/fedora-bookmarks.sh \
+       %{buildroot}%{_prefix}/lib/rpm \
+       %{_localstatedir}/lib/polkit-1/
+echo "[Theme]" > %{buildroot}%{_datadir}/kde-settings/kde-profile/default/share/config/plasmarc
+echo "name=RHEL7" >> %{buildroot}%{_datadir}/kde-settings/kde-profile/default/share/config/plasmarc
+echo "[KSplash]" > %{buildroot}%{_datadir}/kde-settings/kde-profile/default/share/config/ksplashrc
+echo "Theme=RHEL7" >> %{buildroot}%{_datadir}/kde-settings/kde-profile/default/share/config/ksplashrc
+perl -pi -e "s,^Theme=.*,Theme=/usr/share/kde4/apps/kdm/themes/RHEL7," %{buildroot}%{_sysconfdir}/kde/kdm/kdmrc
+perl -pi -e "s,^HomeURL=.*,HomeURL=file:///usr/share/doc/HTML/index.html," %{buildroot}%{_datadir}/kde-settings/kde-profile/default/share/config/konquerorrc
+perl -pi -e "s,^View0_URL=.*,View0_URL=file:///usr/share/doc/HTML/index.html," %{buildroot}%{_datadir}/kde-settings/kde-profile/default/share/apps/konqueror/profiles/webbrowsing
 %endif
 
 
@@ -126,6 +148,11 @@ rm -rf %{buildroot}
 %{_sysconfdir}/kde/env/xdg_data_home_init.sh
 %if 0%{?fedora}
 %{_sysconfdir}/kde/env/fedora-bookmarks.sh
+%{_datadir}/kde-settings/
+%{_prefix}/lib/rpm/plasma4.prov
+%{_prefix}/lib/rpm/plasma4.req
+%{_prefix}/lib/rpm/fileattrs/plasma4.attr
+%{_localstatedir}/lib/polkit-1/localauthority/10-vendor.d/11-fedora-kde-policy.pkla
 %endif
 %config(noreplace) /etc/pam.d/kcheckpass
 %config(noreplace) /etc/pam.d/kscreensaver
@@ -133,10 +160,6 @@ rm -rf %{buildroot}
 %config %{_sysconfdir}/kderc
 %config %{_sysconfdir}/kde4rc
 %{_datadir}/kde-settings/
-%{_prefix}/lib/rpm/plasma4.prov
-%{_prefix}/lib/rpm/plasma4.req
-%{_prefix}/lib/rpm/fileattrs/plasma4.attr
-%{_localstatedir}/lib/polkit-1/localauthority/10-vendor.d/11-fedora-kde-policy.pkla
 
 %files kdm
 %defattr(-,root,root,-)
@@ -173,6 +196,9 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Wed Apr 18 2012 Than Ngo <than@redhat.com> - 4.8-7.1
+- add rhel condition
+
 * Mon Mar 19 2012 Kevin Kofler <Kevin@tigcc.ticalc.org> 4.8-7
 - plasma4.prov: change spaces in runner names to underscores
 
