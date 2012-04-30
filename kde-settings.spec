@@ -1,12 +1,12 @@
 # THIS SPECFILE IS FOR F17+ ONLY!
 
-%global rel 7
+%global rel 8
 %global system_kde_theme_ver 16.91
 
 Summary: Config files for kde
 Name:    kde-settings
 Version: 4.8
-Release: %{rel}%{?dist}.1
+Release: %{rel}%{?dist}
 
 Group:   System Environment/Base
 License: MIT
@@ -196,6 +196,9 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Mon Apr 30 2012 Rex Dieter <rdieter@fedoraproject.org> 4.8-8
+- fix application/x-rpm mimetype defaults
+
 * Wed Apr 18 2012 Than Ngo <than@redhat.com> - 4.8-7.1
 - add rhel condition
 
