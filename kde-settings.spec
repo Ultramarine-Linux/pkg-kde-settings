@@ -6,7 +6,7 @@
 Summary: Config files for kde
 Name:    kde-settings
 Version: 4.8
-Release: %{rel}%{?dist}
+Release: %{rel}%{?dist}.1
 
 Group:   System Environment/Base
 License: MIT
@@ -102,6 +102,13 @@ tar cpf - . | tar --directory %{buildroot} -xvpf -
 
 cp -p %{SOURCE1} .
 
+# workaround for cirrus
+cat >>%{buildroot}/etc/kde/env/env.sh<<EOF
+if ( lspci | grep -qi "VGA compatible controller: Cirrus Logic GD 5446" ) ; then
+    export QT_GRAPHICSSYSTEM=native
+fi
+EOF
+
 # kdebase/kdm symlink
 rm -rf   %{buildroot}%{_datadir}/config/kdm
 ln -sf ../../../etc/kde/kdm %{buildroot}%{_datadir}/config/kdm
@@ -196,6 +203,9 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Tue May 08 2012 Than Ngo <than@redhat.com> - 4.8-8.1
+- add workaround for cirrus
+
 * Mon Apr 30 2012 Rex Dieter <rdieter@fedoraproject.org> 4.8-8
 - fix application/x-rpm mimetype defaults
 
