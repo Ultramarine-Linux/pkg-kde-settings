@@ -6,7 +6,7 @@
 Summary: Config files for kde
 Name:    kde-settings
 Version: 4.8
-Release: %{rel}%{?dist}.1
+Release: %{rel}%{?dist}.2
 
 Group:   System Environment/Base
 License: MIT
@@ -124,7 +124,7 @@ mkdir -p -m775 %{buildroot}%{_localstatedir}/spool/gdm
 %if 0%{?rhel}
 rm -rf %{buildroot}%{_sysconfdir}/kde/env/fedora-bookmarks.sh \
        %{buildroot}%{_prefix}/lib/rpm \
-       %{_localstatedir}/lib/polkit-1/
+       %{buildroot}%{_localstatedir}/lib/polkit-1/
 echo "[Theme]" > %{buildroot}%{_datadir}/kde-settings/kde-profile/default/share/config/plasmarc
 echo "name=RHEL7" >> %{buildroot}%{_datadir}/kde-settings/kde-profile/default/share/config/plasmarc
 echo "[KSplash]" > %{buildroot}%{_datadir}/kde-settings/kde-profile/default/share/config/ksplashrc
@@ -203,6 +203,9 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Wed May 09 2012 Than Ngo <than@redhat.com> - 4.8-8.2
+- fix rhel condition
+
 * Tue May 08 2012 Than Ngo <than@redhat.com> - 4.8-8.1
 - add workaround for cirrus
 
