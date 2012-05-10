@@ -1,12 +1,12 @@
 # THIS SPECFILE IS FOR F17+ ONLY!
 
-%global rel 8
+%global rel 10
 %global system_kde_theme_ver 16.91
 
 Summary: Config files for kde
 Name:    kde-settings
 Version: 4.8
-Release: %{rel}%{?dist}.2
+Release: %{rel}%{?dist}
 
 Group:   System Environment/Base
 License: MIT
@@ -85,6 +85,13 @@ Requires: alsa-plugins-pulseaudio
 %description pulseaudio
 %{summary}.
 
+%package -n qt-settings
+Summary: Configuration files for Qt 
+# qt-graphicssystem.* scripts use lspci
+Requires: pciutils
+%description -n qt-settings
+%{summary}.
+
 
 %prep
 %setup -q -n %{name}-%{version}-%{rel}
@@ -101,13 +108,6 @@ mkdir -p %{buildroot}{%{_datadir}/config,%{_sysconfdir}/kde/kdm}
 tar cpf - . | tar --directory %{buildroot} -xvpf -
 
 cp -p %{SOURCE1} .
-
-# workaround for cirrus
-cat >>%{buildroot}/etc/kde/env/env.sh<<EOF
-if ( lspci | grep -qi "VGA compatible controller: Cirrus Logic GD 5446" ) ; then
-    export QT_GRAPHICSSYSTEM=native
-fi
-EOF
 
 # kdebase/kdm symlink
 rm -rf   %{buildroot}%{_datadir}/config/kdm
@@ -147,7 +147,6 @@ rm -rf %{buildroot}
 
 
 %files 
-%defattr(-,root,root,-)
 %doc COPYING
 %config(noreplace) %{_sysconfdir}/profile.d/kde.*
 %{_sysconfdir}/kde/env/env.sh
@@ -169,7 +168,6 @@ rm -rf %{buildroot}
 %{_datadir}/kde-settings/
 
 %files kdm
-%defattr(-,root,root,-)
 %doc COPYING
 %config(noreplace) /etc/pam.d/kdm*
 # compat symlink
@@ -198,11 +196,18 @@ rm -rf %{buildroot}
 %{_datadir}/kde-settings/kde-profile/default/share/config/plasmarc
 
 %files pulseaudio
-%defattr(-,root,root,-)
 # nothing, this is a metapackage
+
+%files -n qt-settings
+%doc COPYING
+%config(noreplace) %{_sysconfdir}/Trolltech.conf
+%config(noreplace) %{_sysconfdir}/profile.d/qt-graphicssystem.*
 
 
 %changelog
+* Thu May 10 2012 Rex Dieter <rdieter@fedoraproject.org> 4.8-10
+- +qt-settings: move cirrus workaround(s) here (#810161)
+
 * Wed May 09 2012 Than Ngo <than@redhat.com> - 4.8-8.2
 - fix rhel condition
 
