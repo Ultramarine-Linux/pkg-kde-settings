@@ -1,6 +1,6 @@
 # THIS SPECFILE IS FOR F17+ ONLY!
 
-%global rel 10
+%global rel 12
 %global system_kde_theme_ver 16.91
 
 Summary: Config files for kde
@@ -151,7 +151,6 @@ rm -rf %{buildroot}
 %config(noreplace) %{_sysconfdir}/profile.d/kde.*
 %{_sysconfdir}/kde/env/env.sh
 %{_sysconfdir}/kde/env/gtk2_rc_files.sh
-%{_sysconfdir}/kde/env/xdg_data_home_init.sh
 %if 0%{?fedora}
 %{_sysconfdir}/kde/env/fedora-bookmarks.sh
 %{_datadir}/kde-settings/
@@ -185,7 +184,7 @@ rm -rf %{buildroot}
 # own logrotate.d/ avoiding hard dep on logrotate
 %dir %{_sysconfdir}/logrotate.d
 %config(noreplace) %{_sysconfdir}/logrotate.d/kdm
-%config(noreplace) %{_sysconfdir}/tmpfiles.d/kdm.conf
+%{_prefix}/lib/tmpfiles.d/kdm.conf
 %attr(1777,root,root) %dir %{_localstatedir}/run/kdm
 %attr(0775,root,root) %dir %{_localstatedir}/spool/gdm
 
@@ -205,6 +204,10 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Mon May 14 2012 Rex Dieter <rdieter@fedoraproject.org> 4.8-12
+- drop hack/workaround for bug #750423
+- move /etc/tmpfiles.d => /usr/lib/tmpfiles.d
+
 * Thu May 10 2012 Rex Dieter <rdieter@fedoraproject.org> 4.8-10
 - +qt-settings: move cirrus workaround(s) here (#810161)
 
