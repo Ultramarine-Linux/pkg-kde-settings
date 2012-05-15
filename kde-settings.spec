@@ -1,6 +1,6 @@
 # THIS SPECFILE IS FOR F17+ ONLY!
 
-%global rel 12
+%global rel 13
 %global system_kde_theme_ver 16.91
 
 Summary: Config files for kde
@@ -204,6 +204,9 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Tue May 15 2012 Rex Dieter <rdieter@fedoraproject.org> 4.8-
+- kdmrc: GUIStyle=Plastique (#810161)
+
 * Mon May 14 2012 Rex Dieter <rdieter@fedoraproject.org> 4.8-12
 - drop hack/workaround for bug #750423
 - move /etc/tmpfiles.d => /usr/lib/tmpfiles.d
