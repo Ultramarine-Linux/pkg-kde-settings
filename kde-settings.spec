@@ -6,7 +6,7 @@
 Summary: Config files for kde
 Name:    kde-settings
 Version: 4.8
-Release: %{rel}%{?dist}
+Release: %{rel}%{?dist}.1
 
 Group:   System Environment/Base
 License: MIT
@@ -165,6 +165,9 @@ rm -rf %{buildroot}
 %config %{_sysconfdir}/kderc
 %config %{_sysconfdir}/kde4rc
 %{_datadir}/kde-settings/
+%if 0%{?rhel}
+%exclude %{_datadir}/kde-settings/kde-profile/default/share/apps/plasma-desktop/init/00-defaultLayout.js
+%endif
 
 %files kdm
 %doc COPYING
@@ -204,6 +207,9 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Fri May 25 2012 Than Ngo <than@redhat.com> - 4.8-14.1
+- rhel/fedora condtion
+
 * Wed May 16 2012 Rex Dieter <rdieter@fedoraproject.org> 4.8-14
 - Pure Qt applications can't use KDE styles outside of KDE (#821062)
 
