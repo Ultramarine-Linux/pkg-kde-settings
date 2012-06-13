@@ -6,7 +6,7 @@
 Summary: Config files for kde
 Name:    kde-settings
 Version: 4.8
-Release: %{rel}%{?dist}
+Release: %{rel}%{?dist}.1
 
 Group:   System Environment/Base
 License: MIT
@@ -117,8 +117,10 @@ ln -sf ../../../etc/kde/kdm %{buildroot}%{_datadir}/config/kdm
 mkdir -p %{buildroot}%{_localstatedir}/lib/kdm
 mkdir -p %{buildroot}%{_localstatedir}/run/kdm
 
+%if 0%{?fedora} < 18
 # own as part of plymouth/kdm integration hacks (#551310)
 mkdir -p -m775 %{buildroot}%{_localstatedir}/spool/gdm
+%endif
 
 # rhel stuff
 %if 0%{?rhel}
@@ -189,7 +191,9 @@ rm -rf %{buildroot}
 %config(noreplace) %{_sysconfdir}/logrotate.d/kdm
 %{_prefix}/lib/tmpfiles.d/kdm.conf
 %attr(1777,root,root) %dir %{_localstatedir}/run/kdm
+%if 0%{?fedora} < 18
 %attr(0775,root,root) %dir %{_localstatedir}/spool/gdm
+%endif
 
 %files ksplash
 %{_datadir}/kde-settings/kde-profile/default/share/config/ksplashrc
@@ -207,6 +211,9 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Wed Jun 13 2012 Rex Dieter <rdieter@fedoraproject.org> 4.8-15.1
+- kde-settings-kdm conflicts with gdm (#819254)
+
 * Wed Jun 13 2012 Rex Dieter <rdieter@fedoraproject.org> 4.8-15
 - qt-settings does NOT fully quallify path to lspci in /etc/profile.d/qt-graphicssystem.{csh,sh} (#827440)
 
