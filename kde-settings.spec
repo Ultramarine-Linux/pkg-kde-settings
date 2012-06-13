@@ -1,12 +1,12 @@
 # THIS SPECFILE IS FOR F17+ ONLY!
 
-%global rel 14
+%global rel 15
 %global system_kde_theme_ver 16.91
 
 Summary: Config files for kde
 Name:    kde-settings
 Version: 4.8
-Release: %{rel}%{?dist}.1
+Release: %{rel}%{?dist}
 
 Group:   System Environment/Base
 License: MIT
@@ -207,6 +207,9 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Wed Jun 13 2012 Rex Dieter <rdieter@fedoraproject.org> 4.8-15
+- qt-settings does NOT fully quallify path to lspci in /etc/profile.d/qt-graphicssystem.{csh,sh} (#827440)
+
 * Fri May 25 2012 Than Ngo <than@redhat.com> - 4.8-14.1
 - rhel/fedora condtion
 
