@@ -1,12 +1,12 @@
 # THIS SPECFILE IS FOR F17+ ONLY!
 
-%global rel 15
+%global rel 16
 %global system_kde_theme_ver 16.91
 
 Summary: Config files for kde
 Name:    kde-settings
 Version: 4.8
-Release: %{rel}%{?dist}.1
+Release: %{rel}%{?dist}
 
 Group:   System Environment/Base
 License: MIT
@@ -211,6 +211,9 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Fri Jun 29 2012 Rex Dieter <rdieter@fedoraproject.org> 4.8-16
+- qt-graphicssystem.csh: fix typo s|/usr/bin/lspci|/usr/sbin/lspci| (#827440)
+
 * Wed Jun 13 2012 Rex Dieter <rdieter@fedoraproject.org> 4.8-15.1
 - kde-settings-kdm conflicts with gdm (#819254)
 
