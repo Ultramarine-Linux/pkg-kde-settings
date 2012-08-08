@@ -1,22 +1,21 @@
-# THIS SPECFILE IS FOR F17+ ONLY!
+# THIS SPECFILE IS FOR F18+ ONLY!
 
-%global rel 16
+%global rel 1 
 %global system_kde_theme_ver 16.91
 
 Summary: Config files for kde
 Name:    kde-settings
-Version: 4.8
-Release: %{rel}%{?dist}.1
+Version: 4.9
+Release: %{rel}%{?dist}
 
-Group:   System Environment/Base
 License: MIT
 Url:     http://fedorahosted.org/kde-settings
 Source0: https://fedorahosted.org/releases/k/d/kde-settings/%{name}-%{version}-%{rel}.tar.xz
 Source1: COPYING
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildArch: noarch
 
 BuildRequires: kde-filesystem
+BuildRequires: systemd
 
 Requires: kde-filesystem
 # /etc/pam.d/ ownership
@@ -33,7 +32,6 @@ Requires(post): coreutils sed
 
 %package kdm
 Summary: Configuration files for kdm
-Group:	 System Environment/Base
 # MinShowUID=-1 is only supported from 4.7.1-2 on
 Requires: kdm >= 4.7.1-2
 %if 0%{?fedora}
@@ -46,6 +44,9 @@ Requires: xorg-x11-xinit
 Requires(pre): coreutils
 Requires(post): coreutils grep sed
 Requires(post): kde4-macros(api) = %{_kde4_macros_api}
+Requires(post): systemd
+Requires(preun): systemd
+Requires(postun): systemd
 %description kdm
 %{summary}.
 
@@ -73,7 +74,6 @@ Requires: redhat-logos >= 69.0.0
 
 %package pulseaudio
 Summary: Enable pulseaudio support in KDE
-Group:   System Environment/Base
 # nothing here to license
 License: Public Domain
 Requires: %{name} = %{version}-%{release}
@@ -102,7 +102,6 @@ Requires: pciutils
 
 
 %install
-rm -rf %{buildroot}
 mkdir -p %{buildroot}{%{_datadir}/config,%{_sysconfdir}/kde/kdm}
 
 tar cpf - . | tar --directory %{buildroot} -xvpf -
@@ -117,11 +116,6 @@ ln -sf ../../../etc/kde/kdm %{buildroot}%{_datadir}/config/kdm
 mkdir -p %{buildroot}%{_localstatedir}/lib/kdm
 mkdir -p %{buildroot}%{_localstatedir}/run/kdm
 
-%if 0%{?fedora} < 18
-# own as part of plymouth/kdm integration hacks (#551310)
-mkdir -p -m775 %{buildroot}%{_localstatedir}/spool/gdm
-%endif
-
 # rhel stuff
 %if 0%{?rhel}
 rm -rf %{buildroot}%{_sysconfdir}/kde/env/fedora-bookmarks.sh \
@@ -135,17 +129,6 @@ perl -pi -e "s,^Theme=.*,Theme=/usr/share/kde4/apps/kdm/themes/RHEL7," %{buildro
 perl -pi -e "s,^HomeURL=.*,HomeURL=file:///usr/share/doc/HTML/index.html," %{buildroot}%{_datadir}/kde-settings/kde-profile/default/share/config/konquerorrc
 perl -pi -e "s,^View0_URL=.*,View0_URL=file:///usr/share/doc/HTML/index.html," %{buildroot}%{_datadir}/kde-settings/kde-profile/default/share/apps/konqueror/profiles/webbrowsing
 %endif
-
-
-%clean
-rm -rf %{buildroot}
-
-
-%post kdm
-(grep "^ServerArgsLocal=-nr" %{_sysconfdir}/kde/kdm/kdmrc > /dev/null && \
- sed -i -e "s|^ServerArgsLocal=-nr|ServerArgsLocal=-background none|" \
- %{_sysconfdir}/kde/kdm/kdmrc
-) ||:
 
 
 %files 
@@ -171,6 +154,17 @@ rm -rf %{buildroot}
 %exclude %{_datadir}/kde-settings/kde-profile/default/share/apps/plasma-desktop/init/00-defaultLayout.js
 %endif
 
+%post kdm
+%{systemd_post} kdm.service
+(grep "^ServerArgsLocal=-nr" %{_sysconfdir}/kde/kdm/kdmrc > /dev/null && \
+ sed -i -e "s|^ServerArgsLocal=-nr|ServerArgsLocal=-background none|" \
+ %{_sysconfdir}/kde/kdm/kdmrc
+) ||:
+%preun kdm
+%{systemd_preun} kdm.service
+%postun kdm
+%{systemd_postun}
+
 %files kdm
 %doc COPYING
 %config(noreplace) /etc/pam.d/kdm*
@@ -191,9 +185,7 @@ rm -rf %{buildroot}
 %config(noreplace) %{_sysconfdir}/logrotate.d/kdm
 %{_prefix}/lib/tmpfiles.d/kdm.conf
 %attr(1777,root,root) %dir %{_localstatedir}/run/kdm
-%if 0%{?fedora} < 18
-%attr(0775,root,root) %dir %{_localstatedir}/spool/gdm
-%endif
+%{_unitdir}/kdm.service
 
 %files ksplash
 %{_datadir}/kde-settings/kde-profile/default/share/config/ksplashrc
@@ -211,6 +203,9 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Wed Aug 08 2012 Rex Dieter <rdieter@fedoraproject.org> - 4.9-1
+- adapt kdm for display manager rework feature (#846145)
+
 * Thu Jul 19 2012 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 4.8-16.1
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_18_Mass_Rebuild
 
