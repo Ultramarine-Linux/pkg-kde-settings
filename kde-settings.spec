@@ -1,6 +1,6 @@
 # THIS SPECFILE IS FOR F18+ ONLY!
 
-%global rel 1 
+%global rel 2 
 %global system_kde_theme_ver 16.91
 
 Summary: Config files for kde
@@ -203,6 +203,9 @@ perl -pi -e "s,^View0_URL=.*,View0_URL=file:///usr/share/doc/HTML/index.html," %
 
 
 %changelog
+* Thu Aug 09 2012 Rex Dieter <rdieter@fedoraproject.org> 4.9-2
+- /etc/pam.d/kdm missing: -session optional pam_ck_connector.so (#847114)
+
 * Wed Aug 08 2012 Rex Dieter <rdieter@fedoraproject.org> - 4.9-1
 - adapt kdm for display manager rework feature (#846145)
 
