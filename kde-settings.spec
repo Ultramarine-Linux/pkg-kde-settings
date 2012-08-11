@@ -1,12 +1,12 @@
 # THIS SPECFILE IS FOR F18+ ONLY!
 
-%global rel 2 
+%global rel 2
 %global system_kde_theme_ver 16.91
 
 Summary: Config files for kde
 Name:    kde-settings
 Version: 4.9
-Release: %{rel}%{?dist}
+Release: %{rel}%{?dist}.1
 
 License: MIT
 Url:     http://fedorahosted.org/kde-settings
@@ -155,15 +155,11 @@ perl -pi -e "s,^View0_URL=.*,View0_URL=file:///usr/share/doc/HTML/index.html," %
 %endif
 
 %post kdm
-%{systemd_post} kdm.service
-(grep "^ServerArgsLocal=-nr" %{_sysconfdir}/kde/kdm/kdmrc > /dev/null && \
- sed -i -e "s|^ServerArgsLocal=-nr|ServerArgsLocal=-background none|" \
- %{_sysconfdir}/kde/kdm/kdmrc
-) ||:
+%systemd_post kdm.service
 %preun kdm
-%{systemd_preun} kdm.service
+%systemd_preun kdm.service
 %postun kdm
-%{systemd_postun}
+%systemd_postun
 
 %files kdm
 %doc COPYING
@@ -203,6 +199,9 @@ perl -pi -e "s,^View0_URL=.*,View0_URL=file:///usr/share/doc/HTML/index.html," %
 
 
 %changelog
+* Sat Aug 11 2012 Rex Dieter <rdieter@fedoraproject.org> 4.9-2.1
+- -kdm: drop old stuff, fix systemd scriptlets
+
 * Thu Aug 09 2012 Rex Dieter <rdieter@fedoraproject.org> 4.9-2
 - /etc/pam.d/kdm missing: -session optional pam_ck_connector.so (#847114)
 
