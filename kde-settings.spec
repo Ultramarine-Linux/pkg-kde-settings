@@ -1,12 +1,12 @@
 # THIS SPECFILE IS FOR F18+ ONLY!
 
-%global rel 2
-%global system_kde_theme_ver 16.91
+%global rel 5
+%global system_kde_theme_ver 17.91
 
 Summary: Config files for kde
 Name:    kde-settings
 Version: 4.9
-Release: %{rel}%{?dist}.1
+Release: %{rel}%{?dist}
 
 License: MIT
 Url:     http://fedorahosted.org/kde-settings
@@ -199,6 +199,10 @@ perl -pi -e "s,^View0_URL=.*,View0_URL=file:///usr/share/doc/HTML/index.html," %
 
 
 %changelog
+* Tue Aug 21 2012 Martin Briza <mbriza@redhat.com> 4.9-5
+- Change strings to Fedora 18 (Spherical Cow)
+- bump system_kde_theme_ver to 17.91
+
 * Sat Aug 11 2012 Rex Dieter <rdieter@fedoraproject.org> 4.9-2.1
 - -kdm: drop old stuff, fix systemd scriptlets
 
