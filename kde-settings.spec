@@ -1,6 +1,6 @@
 # THIS SPECFILE IS FOR F18+ ONLY!
 
-%global rel 7
+%global rel 8
 %global system_kde_theme_ver 17.91
 
 Summary: Config files for kde
@@ -182,6 +182,7 @@ perl -pi -e "s,^View0_URL=.*,View0_URL=file:///usr/share/doc/HTML/index.html," %
 %{_prefix}/lib/tmpfiles.d/kdm.conf
 %attr(1777,root,root) %dir %{_localstatedir}/run/kdm
 %{_unitdir}/kdm.service
+%{_unitdir}-preset/81-fedora-kdm.preset
 
 %files ksplash
 %{_datadir}/kde-settings/kde-profile/default/share/config/ksplashrc
@@ -199,6 +200,9 @@ perl -pi -e "s,^View0_URL=.*,View0_URL=file:///usr/share/doc/HTML/index.html," %
 
 
 %changelog
+* Wed Aug 29 2012 Rex Dieter <rdieter@fedoraproject.org> 4.9-8
+- add 81-fedora-kdm.preset (#850775)
+
 * Wed Aug 29 2012 Rex Dieter <rdieter@fedoraproject.org> 4.9-7
 - kdm.pam: pam_gnome_keyring.so should be loaded after pam_systemd.so (#852723)
 
