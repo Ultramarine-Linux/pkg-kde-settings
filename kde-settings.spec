@@ -1,6 +1,6 @@
 # THIS SPECFILE IS FOR F17+ ONLY!
 
-%global rel 18
+%global rel 19
 %global system_kde_theme_ver 16.91
 
 Summary: Config files for kde
@@ -211,6 +211,9 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Wed Aug 29 2012 Rex Dieter <rdieter@fedoraproject.org> 4.8-19
+- kdm.pam: pam_gnome_keyring.so should be loaded after pam_systemd.so (#852723)
+
 * Thu Aug 09 2012 Rex Dieter <rdieter@fedoraproject.org> 4.8-18
 - /etc/pam.d/kdm missing: -session optional pam_ck_connector.so (#847114)
 
