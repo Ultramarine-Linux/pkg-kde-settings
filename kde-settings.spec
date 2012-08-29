@@ -201,7 +201,7 @@ perl -pi -e "s,^View0_URL=.*,View0_URL=file:///usr/share/doc/HTML/index.html," %
 
 %changelog
 * Wed Aug 29 2012 Rex Dieter <rdieter@fedoraproject.org> 4.9-8
-- add 81-fedora-kdm.preset (#850775)
+- add 81-fedora-kdm.preset (#852844)
 
 * Wed Aug 29 2012 Rex Dieter <rdieter@fedoraproject.org> 4.9-7
 - kdm.pam: pam_gnome_keyring.so should be loaded after pam_systemd.so (#852723)
