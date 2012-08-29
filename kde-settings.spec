@@ -1,6 +1,6 @@
 # THIS SPECFILE IS FOR F18+ ONLY!
 
-%global rel 5
+%global rel 7
 %global system_kde_theme_ver 17.91
 
 Summary: Config files for kde
@@ -199,6 +199,9 @@ perl -pi -e "s,^View0_URL=.*,View0_URL=file:///usr/share/doc/HTML/index.html," %
 
 
 %changelog
+* Wed Aug 29 2012 Rex Dieter <rdieter@fedoraproject.org> 4.9-7
+- kdm.pam: pam_gnome_keyring.so should be loaded after pam_systemd.so (#852723)
+
 * Tue Aug 21 2012 Martin Briza <mbriza@redhat.com> 4.9-5
 - Change strings to Fedora 18 (Spherical Cow)
 - bump system_kde_theme_ver to 17.91
