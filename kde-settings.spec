@@ -1,6 +1,6 @@
 # THIS SPECFILE IS FOR F18+ ONLY!
 
-%global rel 8
+%global rel 9
 %global system_kde_theme_ver 17.91
 
 Summary: Config files for kde
@@ -200,6 +200,9 @@ perl -pi -e "s,^View0_URL=.*,View0_URL=file:///usr/share/doc/HTML/index.html," %
 
 
 %changelog
+* Tue Sep 04 2012 Dan Vratil <dvratil@redhat.com> 4.9-9
+- start kdm.service after livesys-late.service
+
 * Wed Aug 29 2012 Rex Dieter <rdieter@fedoraproject.org> 4.9-8
 - add 81-fedora-kdm.preset (#852844)
 
