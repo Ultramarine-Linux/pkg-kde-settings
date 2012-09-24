@@ -1,10 +1,10 @@
 
-%global rel 3
+%global rel 4
 %global system_kde_theme_ver 17.91
 
 Summary: Config files for kde
 Name:    kde-settings
-Version: 19 
+Version: 19
 Release: %{rel}%{?dist}
 
 License: MIT
@@ -29,6 +29,13 @@ Requires(post): coreutils sed
 %description
 %{summary}.
 
+%package minimal
+Summary: Minimal configuration files for KDE
+Requires: kde-workspace-ksplash-themes
+Requires: xorg-x11-xinit
+%description minimal
+%{summary}.
+
 %package kdm
 Summary: Configuration files for kdm
 # MinShowUID=-1 is only supported from 4.7.1-2 on
@@ -38,7 +45,6 @@ Requires: system-kdm-theme >= %{system_kde_theme_ver}
 %else
 Requires: redhat-logos >= 69.0.0
 %endif
-
 Requires: xorg-x11-xinit
 Requires(pre): coreutils
 Requires(post): coreutils grep sed
@@ -148,10 +154,16 @@ perl -pi -e "s,^View0_URL=.*,View0_URL=file:///usr/share/doc/HTML/index.html," %
 # drop noreplace, so we can be sure to get the new kiosk bits
 %config %{_sysconfdir}/kderc
 %config %{_sysconfdir}/kde4rc
-%{_datadir}/kde-settings/
+%dir %{_datadir}/kde-settings/
+%dir %{_datadir}/kde-settings/kde-profile/
+%{_datadir}/kde-settings/kde-profile/default/
 %if 0%{?rhel}
 %exclude %{_datadir}/kde-settings/kde-profile/default/share/apps/plasma-desktop/init/00-defaultLayout.js
 %endif
+
+%files minimal
+%{_datadir}/kde-settings/kde-profile/minimal/
+%{_sysconfdir}/X11/xinit/xinitrc.d/20-kdedirs-minimal.sh
 
 %post kdm
 %systemd_post kdm.service
@@ -199,6 +211,9 @@ perl -pi -e "s,^View0_URL=.*,View0_URL=file:///usr/share/doc/HTML/index.html," %
 
 
 %changelog
+* Mon Sep 24 2012 Rex Dieter <rdieter@fedoraproject.org> 19-4
+- -minimal subpkg
+
 * Tue Sep 04 2012 Dan Vratil <dvratil@redhat.com> 19-3
 - add 81-fedora-kdm-preset (#850775)
 - start kdm.service after livesys-late.service
