@@ -31,6 +31,7 @@ Requires(post): coreutils sed
 
 %package minimal
 Summary: Minimal configuration files for KDE
+Requires: %{name} = %{version}-%{release}
 Requires: kde-workspace-ksplash-themes
 Requires: xorg-x11-xinit
 %description minimal
