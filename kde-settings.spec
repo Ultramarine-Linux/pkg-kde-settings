@@ -1,5 +1,5 @@
 
-%global rel 4
+%global rel 5
 %global system_kde_theme_ver 17.91
 
 Summary: Config files for kde
@@ -212,6 +212,10 @@ perl -pi -e "s,^View0_URL=.*,View0_URL=file:///usr/share/doc/HTML/index.html," %
 
 
 %changelog
+
+* Thu Sep 27 2012 Dan Vratil <dvratil@redhat.com> 19-5
+- fix indexing paths in nepomukstrigirc (#861129)
+
 * Mon Sep 24 2012 Rex Dieter <rdieter@fedoraproject.org> 19-4
 - -minimal subpkg
 
