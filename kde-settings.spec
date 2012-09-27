@@ -1,6 +1,6 @@
 # THIS SPECFILE IS FOR F18+ ONLY!
 
-%global rel 10 
+%global rel 11
 %global system_kde_theme_ver 17.91
 
 Summary: Config files for kde
@@ -214,6 +214,9 @@ perl -pi -e "s,^View0_URL=.*,View0_URL=file:///usr/share/doc/HTML/index.html," %
 
 
 %changelog
+* Thu Sep 27 2012 Dan Vratil <dvratil@redhat.com> 4.9-11
+- fix indexing paths in nepomukstrigirc (#861129)
+
 * Mon Sep 24 2012 Rex Dieter <rdieter@fedoraproject.org> 4.9-10
 - -minimal subpkg
 
