@@ -1,6 +1,6 @@
 # THIS SPECFILE IS FOR F16 ONLY!
 
-%global rel 14
+%global rel 15
 %global system_kde_theme_ver 15.90
 
 Summary: Config files for kde
@@ -168,6 +168,11 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Fri Oct 12 2012 Kevin Kofler <Kevin@tigcc.ticalc.org> 4.7-15
+- kslideshow.kssrc: include some sane/working defaults (rdieter, kde#182104)
+- fix application/x-rpm mimetype defaults (rdieter)
+- fix default indexing paths in nepomukstrigirc (dvratil, #861129)
+
 * Sat Nov 19 2011 Rex Dieter <rdieter@fedoraproject.org> 4.7-14
 - add explicit apper defaults
 - add script to init $XDG_DATA_HOME (to workaround bug #750423)
