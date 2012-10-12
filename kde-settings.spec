@@ -1,6 +1,6 @@
-# THIS SPECFILE IS FOR F17+ ONLY!
+# THIS SPECFILE IS FOR F17 ONLY!
 
-%global rel 20
+%global rel 21
 %global system_kde_theme_ver 16.91
 
 Summary: Config files for kde
@@ -24,7 +24,7 @@ Requires: pam
 Requires: xdg-user-dirs
 Requires: adwaita-cursor-theme
 # /var/lib/polkit-1/localauthority/10-vendor.d/ ownership
-Requires: polkit
+Requires: polkit < 0.106
 
 Requires(post): coreutils sed
 
@@ -211,8 +211,12 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Fri Oct 12 2012 Kevin Kofler <Kevin@tigcc.ticalc.org> 4.8-21
+- nepomukstrigirc: index translated xdg-user-dirs (dvratil, #861129)
+- Requires: polkit < 0.106 (rule syntax change, see #829881)
+
 * Thu Sep 27 2012 Dan Vratil <dvratil@redhat.com> 4.8-20
-- fix indesing paths in nepomukstrigirc (#861129)
+- fix indexing paths in nepomukstrigirc (#861129)
 
 * Wed Aug 29 2012 Rex Dieter <rdieter@fedoraproject.org> 4.8-19
 - kdm.pam: pam_gnome_keyring.so should be loaded after pam_systemd.so (#852723)
