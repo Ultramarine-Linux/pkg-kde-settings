@@ -1,5 +1,5 @@
 
-%global rel 7
+%global rel 8
 %global system_kde_theme_ver 17.91
 
 Summary: Config files for kde
@@ -212,6 +212,9 @@ perl -pi -e "s,^View0_URL=.*,View0_URL=file:///usr/share/doc/HTML/index.html," %
 
 
 %changelog
+* Fri Oct 12 2012 Kevin Kofler <Kevin@tigcc.ticalc.org> 19-8
+- kslideshow.kssrc: use xdg-user-dir instead of hardcoding $HOME/Pictures
+
 * Fri Oct 12 2012 Kevin Kofler <Kevin@tigcc.ticalc.org> 19-7
 - port 11-fedora-kde-policy from old pkla format to new polkit-1 rules (#829881)
 - nepomukstrigirc: index translated xdg-user-dirs (dvratil, #861129)
