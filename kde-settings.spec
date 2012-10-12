@@ -1,5 +1,5 @@
 
-%global rel 5
+%global rel 7
 %global system_kde_theme_ver 17.91
 
 Summary: Config files for kde
@@ -21,8 +21,8 @@ Requires: kde-filesystem
 Requires: pam
 Requires: xdg-user-dirs
 Requires: adwaita-cursor-theme
-# /var/lib/polkit-1/localauthority/10-vendor.d/ ownership
-Requires: polkit
+# /usr/share/polkit-1/rules.d/ ownership
+Requires: polkit >= 0.106
 
 Requires(post): coreutils sed
 
@@ -126,7 +126,7 @@ mkdir -p %{buildroot}%{_localstatedir}/run/kdm
 %if 0%{?rhel}
 rm -rf %{buildroot}%{_sysconfdir}/kde/env/fedora-bookmarks.sh \
        %{buildroot}%{_prefix}/lib/rpm \
-       %{buildroot}%{_localstatedir}/lib/polkit-1/
+       %{buildroot}%{_datadir}/polkit-1/
 echo "[Theme]" > %{buildroot}%{_datadir}/kde-settings/kde-profile/default/share/config/plasmarc
 echo "name=RHEL7" >> %{buildroot}%{_datadir}/kde-settings/kde-profile/default/share/config/plasmarc
 echo "[KSplash]" > %{buildroot}%{_datadir}/kde-settings/kde-profile/default/share/config/ksplashrc
@@ -148,7 +148,7 @@ perl -pi -e "s,^View0_URL=.*,View0_URL=file:///usr/share/doc/HTML/index.html," %
 %{_prefix}/lib/rpm/plasma4.prov
 %{_prefix}/lib/rpm/plasma4.req
 %{_prefix}/lib/rpm/fileattrs/plasma4.attr
-%{_localstatedir}/lib/polkit-1/localauthority/10-vendor.d/11-fedora-kde-policy.pkla
+%{_datadir}/polkit-1/rules.d/11-fedora-kde-policy.rules
 %endif
 %config(noreplace) /etc/pam.d/kcheckpass
 %config(noreplace) /etc/pam.d/kscreensaver
@@ -212,6 +212,9 @@ perl -pi -e "s,^View0_URL=.*,View0_URL=file:///usr/share/doc/HTML/index.html," %
 
 
 %changelog
+* Fri Oct 12 2012 Kevin Kofler <Kevin@tigcc.ticalc.org> 19-7
+- port 11-fedora-kde-policy from old pkla format to new polkit-1 rules (#829881)
+- nepomukstrigirc: index translated xdg-user-dirs (dvratil, #861129)
 
 * Thu Sep 27 2012 Dan Vratil <dvratil@redhat.com> 19-5
 - fix indexing paths in nepomukstrigirc (#861129)
