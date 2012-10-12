@@ -1,6 +1,6 @@
 # THIS SPECFILE IS FOR F17 ONLY!
 
-%global rel 21
+%global rel 22
 %global system_kde_theme_ver 16.91
 
 Summary: Config files for kde
@@ -211,6 +211,9 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Fri Oct 12 2012 Kevin Kofler <Kevin@tigcc.ticalc.org> 4.8-22
+- kslideshow.kssrc: use xdg-user-dir instead of hardcoding $HOME/Pictures
+
 * Fri Oct 12 2012 Kevin Kofler <Kevin@tigcc.ticalc.org> 4.8-21
 - nepomukstrigirc: index translated xdg-user-dirs (dvratil, #861129)
 - Requires: polkit < 0.106 (rule syntax change, see #829881)
