@@ -1,6 +1,6 @@
 # THIS SPECFILE IS FOR F18 ONLY!
 
-%global rel 14
+%global rel 15
 %global system_kde_theme_ver 17.91
 
 Summary: Config files for kde
@@ -122,7 +122,7 @@ ln -sf ../../../etc/kde/kdm %{buildroot}%{_datadir}/config/kdm
 
 # own these
 mkdir -p %{buildroot}%{_localstatedir}/lib/kdm
-mkdir -p %{buildroot}%{_localstatedir}/run/kdm
+mkdir -p %{buildroot}%{_localstatedir}/run/{kdm,xdmctl}
 
 # rhel stuff
 %if 0%{?rhel}
@@ -194,7 +194,8 @@ perl -pi -e "s,^View0_URL=.*,View0_URL=file:///usr/share/doc/HTML/index.html," %
 %dir %{_sysconfdir}/logrotate.d
 %config(noreplace) %{_sysconfdir}/logrotate.d/kdm
 %{_prefix}/lib/tmpfiles.d/kdm.conf
-%attr(1777,root,root) %dir %{_localstatedir}/run/kdm
+%attr(0711,root,root) %dir %{_localstatedir}/run/kdm
+%attr(0711,root,root) %dir %{_localstatedir}/run/xdmctl
 %{_unitdir}/kdm.service
 %{_unitdir}-preset/81-fedora-kdm.preset
 
@@ -214,6 +215,10 @@ perl -pi -e "s,^View0_URL=.*,View0_URL=file:///usr/share/doc/HTML/index.html," %
 
 
 %changelog
+* Thu Nov 08 2012 Rex Dieter <rdieter@fedoraproject.org> 4.9-15
+- tighten permissions on /var/run/kdm (#830433)
+- support /var/run/xdmctl
+
 * Fri Oct 12 2012 Kevin Kofler <Kevin@tigcc.ticalc.org> 4.9-14
 - kslideshow.kssrc: use xdg-user-dir instead of hardcoding $HOME/Pictures
 
