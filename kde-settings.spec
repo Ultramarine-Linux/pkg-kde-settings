@@ -6,7 +6,7 @@
 Summary: Config files for kde
 Name:    kde-settings
 Version: 4.9
-Release: %{rel}%{?dist}
+Release: %{rel}%{?dist}.1
 
 License: MIT
 Url:     http://fedorahosted.org/kde-settings
@@ -170,8 +170,14 @@ perl -pi -e "s,^View0_URL=.*,View0_URL=file:///usr/share/doc/HTML/index.html," %
 
 %post kdm
 %systemd_post kdm.service
+(grep '^UserAuthDir=/var/run/kdm$' %{_sysconfdir}/kde/kdm/kdmrc > /dev/null && \
+ sed -i.rpmsave -e 's|^UserAuthDir=/var/run/kdm$|#UserAuthDir=/tmp|' \
+ %{_sysconfdir}/kde/kdm/kdmrc
+) ||:
+
 %preun kdm
 %systemd_preun kdm.service
+
 %postun kdm
 %systemd_postun
 
@@ -215,6 +221,9 @@ perl -pi -e "s,^View0_URL=.*,View0_URL=file:///usr/share/doc/HTML/index.html," %
 
 
 %changelog
+* Sat Nov 10 2012 Rex Dieter <rdieter@fedoraproject.org> 4.9-15.1
+- fixup kdmrc for upgrader's who had UserAuthDir=/var/run/kdm
+
 * Thu Nov 08 2012 Rex Dieter <rdieter@fedoraproject.org> 4.9-15
 - tighten permissions on /var/run/kdm (#830433)
 - support /var/run/xdmctl
