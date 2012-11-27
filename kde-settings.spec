@@ -1,5 +1,5 @@
 
-%global rel 9
+%global rel 10
 %global system_kde_theme_ver 17.91
 
 Summary: Config files for kde
@@ -219,6 +219,9 @@ perl -pi -e "s,^View0_URL=.*,View0_URL=file:///usr/share/doc/HTML/index.html," %
 
 
 %changelog
+* Tue Nov 27 2012 Dan Vratil <dvratil@redhat.com> 19-10
+- provide kwin rules to fix maximization of some Gtk2 apps
+
 * Sun Nov 11 2012 Rex Dieter <rdieter@fedoraproject.org> 19-9.1
 - fixup kdmrc for upgraders who had UserAuthDir=/var/run/kdm
 
