@@ -1,5 +1,5 @@
 
-%global rel 11
+%global rel 12
 %global system_kde_theme_ver 17.91
 
 Summary: Config files for kde
@@ -219,6 +219,9 @@ perl -pi -e "s,^View0_URL=.*,View0_URL=file:///usr/share/doc/HTML/index.html," %
 
 
 %changelog
+* Wed Dec 05 2012 Rex Dieter <rdieter@fedoraproject.org> 19-12
+- plasma4.req: be more careful wrt IFS
+
 * Tue Dec 04 2012 Rex Dieter <rdieter@fedoraproject.org> 19-11
 - plasma4.req: allow for > 1 scriptengine
 
