@@ -1,12 +1,12 @@
 # THIS SPECFILE IS FOR F18 ONLY!
 
-%global rel 16
+%global rel 17
 %global system_kde_theme_ver 17.91
 
 Summary: Config files for kde
 Name:    kde-settings
 Version: 4.9
-Release: %{rel}%{?dist}.1
+Release: %{rel}%{?dist}
 
 License: MIT
 Url:     http://fedorahosted.org/kde-settings
@@ -221,6 +221,9 @@ perl -pi -e "s,^View0_URL=.*,View0_URL=file:///usr/share/doc/HTML/index.html," %
 
 
 %changelog
+* Tue Dec 04 2012 Rex Dieter <rdieter@fedoraproject.org> 4.9-17
+- plasma4.req: allow for > 1 scriptengine
+
 * Tue Nov 27 2012 Dan Vratil <dvratil@redhat.com> 4.9-16
 - provide kwin rules to fix maximization of some Gtk2 apps
 
