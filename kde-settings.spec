@@ -1,6 +1,6 @@
 # THIS SPECFILE IS FOR F17 ONLY!
 
-%global rel 22
+%global rel 23
 %global system_kde_theme_ver 16.91
 
 Summary: Config files for kde
@@ -153,6 +153,7 @@ rm -rf %{buildroot}
 %config(noreplace) %{_sysconfdir}/profile.d/kde.*
 %{_sysconfdir}/kde/env/env.sh
 %{_sysconfdir}/kde/env/gtk2_rc_files.sh
+%{_sysconfdir}/kde/env/fedora-kde-display-handler.sh
 %if 0%{?fedora}
 %{_sysconfdir}/kde/env/fedora-bookmarks.sh
 %{_datadir}/kde-settings/
@@ -211,6 +212,9 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Mon Jan 28 2013 Rex Dieter <rdieter@fedoraproject.org> 4.8-23
+- +fedora-kde-display-handler.sh
+
 * Fri Oct 12 2012 Kevin Kofler <Kevin@tigcc.ticalc.org> 4.8-22
 - kslideshow.kssrc: use xdg-user-dir instead of hardcoding $HOME/Pictures
 
