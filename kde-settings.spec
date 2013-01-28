@@ -1,5 +1,5 @@
 
-%global rel 12
+%global rel 13
 %global system_kde_theme_ver 17.91
 
 Summary: Config files for kde
@@ -158,6 +158,7 @@ perl -pi -e "s,^View0_URL=.*,View0_URL=file:///usr/share/doc/HTML/index.html," %
 %dir %{_datadir}/kde-settings/
 %dir %{_datadir}/kde-settings/kde-profile/
 %{_datadir}/kde-settings/kde-profile/default/
+%{_kde4_appsdir}/kconf_update/fedora-kde-display-handler.*
 %if 0%{?rhel}
 %exclude %{_datadir}/kde-settings/kde-profile/default/share/apps/plasma-desktop/init/00-defaultLayout.js
 %endif
@@ -219,6 +220,9 @@ perl -pi -e "s,^View0_URL=.*,View0_URL=file:///usr/share/doc/HTML/index.html," %
 
 
 %changelog
+* Mon Jan 28 2013 Rex Dieter <rdieter@fedoraproject.org> 19-13
+- +fedora-kde-display-handler kconf_update script
+
 * Wed Dec 05 2012 Rex Dieter <rdieter@fedoraproject.org> 19-12
 - plasma4.req: be more careful wrt IFS
 
