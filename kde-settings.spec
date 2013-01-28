@@ -1,6 +1,6 @@
 # THIS SPECFILE IS FOR F18 ONLY!
 
-%global rel 17
+%global rel 18
 %global system_kde_theme_ver 17.91
 
 Summary: Config files for kde
@@ -144,6 +144,7 @@ perl -pi -e "s,^View0_URL=.*,View0_URL=file:///usr/share/doc/HTML/index.html," %
 %config(noreplace) %{_sysconfdir}/profile.d/kde.*
 %{_sysconfdir}/kde/env/env.sh
 %{_sysconfdir}/kde/env/gtk2_rc_files.sh
+%{_sysconfdir}/kde/env/fedora-kde-display-handler.sh
 %if 0%{?fedora}
 %{_sysconfdir}/kde/env/fedora-bookmarks.sh
 %{_datadir}/kde-settings/
@@ -221,6 +222,9 @@ perl -pi -e "s,^View0_URL=.*,View0_URL=file:///usr/share/doc/HTML/index.html," %
 
 
 %changelog
+* Mon Jan 28 2013 Rex Dieter <rdieter@fedoraproject.org> 4.9-18
+- +fedora-kde-display-handler.sh
+
 * Tue Dec 04 2012 Rex Dieter <rdieter@fedoraproject.org> 4.9-17
 - plasma4.req: allow for > 1 scriptengine
 
