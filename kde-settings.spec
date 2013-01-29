@@ -1,6 +1,6 @@
 # THIS SPECFILE IS FOR F17 ONLY!
 
-%global rel 23
+%global rel 24
 %global system_kde_theme_ver 16.91
 
 Summary: Config files for kde
@@ -212,6 +212,9 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Tue Jan 29 2013 Dan Vrátil <dvratil@redhat.com> 4.8-24
+- use return instead of exit in fedora-kde-display-handler.sh
+
 * Mon Jan 28 2013 Rex Dieter <rdieter@fedoraproject.org> 4.8-23
 - +fedora-kde-display-handler.sh
 
