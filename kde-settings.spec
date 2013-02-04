@@ -5,7 +5,7 @@
 Summary: Config files for kde
 Name:    kde-settings
 Version: 19
-Release: %{rel}%{?dist}
+Release: %{rel}%{?dist}.1
 
 License: MIT
 Url:     http://fedorahosted.org/kde-settings
@@ -21,8 +21,10 @@ Requires: kde-filesystem
 Requires: pam
 Requires: xdg-user-dirs
 Requires: adwaita-cursor-theme
-# /usr/share/polkit-1/rules.d/ ownership
-Requires: polkit >= 0.106
+%if 0%{?fedora}
+# for 11-fedora-kde-policy.rules
+Requires: polkit-js-engine
+%endif
 
 Requires(post): coreutils sed
 
@@ -220,6 +222,9 @@ perl -pi -e "s,^View0_URL=.*,View0_URL=file:///usr/share/doc/HTML/index.html," %
 
 
 %changelog
+* Mon Feb 04 2012 Kevin Kofler <Kevin@tigcc.ticalc.org> 19-13.1
+- Requires: polkit-js-engine
+
 * Mon Jan 28 2013 Rex Dieter <rdieter@fedoraproject.org> 19-13
 - +fedora-kde-display-handler kconf_update script
 
