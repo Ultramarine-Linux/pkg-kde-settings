@@ -222,7 +222,7 @@ perl -pi -e "s,^View0_URL=.*,View0_URL=file:///usr/share/doc/HTML/index.html," %
 
 
 %changelog
-* Thu Mar 28 2013 Kevin Kofler <mbriza@redhat.com> 19-14
+* Thu Mar 28 2013 Martin Briza <mbriza@redhat.com> 19-14
 - Requires: polkit-js-engine
 
 * Mon Feb 04 2013 Kevin Kofler <Kevin@tigcc.ticalc.org> 19-13.1
