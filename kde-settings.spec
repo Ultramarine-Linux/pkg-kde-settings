@@ -223,7 +223,7 @@ perl -pi -e "s,^View0_URL=.*,View0_URL=file:///usr/share/doc/HTML/index.html," %
 
 %changelog
 * Thu Mar 28 2013 Martin Briza <mbriza@redhat.com> 19-14
-- Requires: polkit-js-engine
+- Changed the strings in the settings to Schrödinger's Cat instead of Spherical Cow
 
 * Mon Feb 04 2013 Kevin Kofler <Kevin@tigcc.ticalc.org> 19-13.1
 - Requires: polkit-js-engine
