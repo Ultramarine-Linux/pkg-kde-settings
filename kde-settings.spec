@@ -1,11 +1,11 @@
 
-%global rel 13
-%global system_kde_theme_ver 17.91
+%global rel 14
+%global system_kde_theme_ver 18.91
 
 Summary: Config files for kde
 Name:    kde-settings
 Version: 19
-Release: %{rel}%{?dist}.1
+Release: %{rel}%{?dist}
 
 License: MIT
 Url:     http://fedorahosted.org/kde-settings
@@ -222,6 +222,9 @@ perl -pi -e "s,^View0_URL=.*,View0_URL=file:///usr/share/doc/HTML/index.html," %
 
 
 %changelog
+* Thu Mar 28 2013 Kevin Kofler <mbriza@redhat.com> 19-14
+- Requires: polkit-js-engine
+
 * Mon Feb 04 2013 Kevin Kofler <Kevin@tigcc.ticalc.org> 19-13.1
 - Requires: polkit-js-engine
 
