@@ -222,6 +222,9 @@ perl -pi -e "s,^View0_URL=.*,View0_URL=file:///usr/share/doc/HTML/index.html," %
 
 
 %changelog
+* Wed Apr 03 2013 Martin Briza <mbriza@redhat.com> 19-16
+- Fedora release number was wrong in /etc/kde/kdm/kdmrc
+
 * Wed Apr 03 2013 Martin Briza <mbriza@redhat.com> 19-15
 - Fixed KDM theme name in /etc
 
