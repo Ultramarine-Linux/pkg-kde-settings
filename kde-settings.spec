@@ -1,5 +1,5 @@
 
-%global rel 14
+%global rel 15
 %global system_kde_theme_ver 18.91
 
 Summary: Config files for kde
@@ -222,6 +222,9 @@ perl -pi -e "s,^View0_URL=.*,View0_URL=file:///usr/share/doc/HTML/index.html," %
 
 
 %changelog
+* Wed Apr 03 2013 Martin Briza <mbriza@redhat.com> 19-15
+- Fixed KDM theme name in /etc
+
 * Thu Mar 28 2013 Martin Briza <mbriza@redhat.com> 19-14
 - Changed the strings in the settings to Schrödinger's Cat instead of Spherical Cow
 
