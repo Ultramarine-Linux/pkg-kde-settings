@@ -1,5 +1,5 @@
 
-%global rel 15
+%global rel 16
 %global system_kde_theme_ver 18.91
 
 Summary: Config files for kde
