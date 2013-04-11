@@ -1,5 +1,5 @@
 
-%global rel 16
+%global rel 17
 %global system_kde_theme_ver 18.91
 
 Summary: Config files for kde
@@ -49,6 +49,8 @@ Requires: system-kdm-theme >= %{system_kde_theme_ver}
 Requires: redhat-logos >= 69.0.0
 %endif
 Requires: xorg-x11-xinit
+# To avoid not starting KDM if the wrapper is ever removed
+Requires: /lib/systemd/systemd-multi-seat-x
 Requires(pre): coreutils
 Requires(post): coreutils grep sed
 Requires(post): kde4-macros(api) = %{_kde4_macros_api}
@@ -222,6 +224,9 @@ perl -pi -e "s,^View0_URL=.*,View0_URL=file:///usr/share/doc/HTML/index.html," %
 
 
 %changelog
+* Thu Apr 11 2013 Martin Briza <mbriza@redhat.com> 19-17
+- Use /lib/systemd/systemd-multi-seat-x as the X server in KDM
+
 * Wed Apr 03 2013 Martin Briza <mbriza@redhat.com> 19-16
 - Fedora release number was wrong in /etc/kde/kdm/kdmrc
 
