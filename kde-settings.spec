@@ -5,7 +5,7 @@
 Summary: Config files for kde
 Name:    kde-settings
 Version: 19
-Release: %{rel}%{?dist}
+Release: %{rel}%{?dist}.1
 
 License: MIT
 Url:     http://fedorahosted.org/kde-settings
@@ -202,7 +202,7 @@ perl -pi -e "s,^View0_URL=.*,View0_URL=file:///usr/share/doc/HTML/index.html," %
 # own logrotate.d/ avoiding hard dep on logrotate
 %dir %{_sysconfdir}/logrotate.d
 %config(noreplace) %{_sysconfdir}/logrotate.d/kdm
-%{_prefix}/lib/tmpfiles.d/kdm.conf
+%{_tmpfilesdir}/kdm.conf
 %attr(0711,root,root) %dir %{_localstatedir}/run/kdm
 %attr(0711,root,root) %dir %{_localstatedir}/run/xdmctl
 %{_unitdir}/kdm.service
@@ -224,6 +224,9 @@ perl -pi -e "s,^View0_URL=.*,View0_URL=file:///usr/share/doc/HTML/index.html," %
 
 
 %changelog
+* Sat Apr 13 2013 Rex Dieter <rdieter@fedoraproject.org> 19-17.1
+- use %%_tmpfilesdir macro
+
 * Thu Apr 11 2013 Martin Briza <mbriza@redhat.com> 19-17
 - Use /lib/systemd/systemd-multi-seat-x as the X server in KDM
 
