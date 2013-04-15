@@ -5,7 +5,7 @@
 Summary: Config files for kde
 Name:    kde-settings
 Version: 19
-Release: %{rel}%{?dist}.1
+Release: %{rel}%{?dist}.2
 
 License: MIT
 Url:     http://fedorahosted.org/kde-settings
@@ -50,7 +50,8 @@ Requires: redhat-logos >= 69.0.0
 %endif
 Requires: xorg-x11-xinit
 # To avoid not starting KDM if the wrapper is ever removed
-Requires: /lib/systemd/systemd-multi-seat-x
+# Requires: /lib/systemd/systemd-multi-seat-x
+Requires: systemd
 Requires(pre): coreutils
 Requires(post): coreutils grep sed
 Requires(post): kde4-macros(api) = %{_kde4_macros_api}
@@ -224,6 +225,9 @@ perl -pi -e "s,^View0_URL=.*,View0_URL=file:///usr/share/doc/HTML/index.html," %
 
 
 %changelog
+* Mon Apr 15 2013 Martin Briza <mbriza@redhat.com> 19-17.2
+- so depending on /lib/systemd/systemd-multi-seat-x is considered a broken dependency - kdm depends on systemd instead
+
 * Sat Apr 13 2013 Rex Dieter <rdieter@fedoraproject.org> 19-17.1
 - use %%_tmpfilesdir macro
 
