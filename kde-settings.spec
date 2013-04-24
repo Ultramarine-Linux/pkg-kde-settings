@@ -1,5 +1,5 @@
 
-%global rel 18
+%global rel 19
 %global system_kde_theme_ver 18.91
 
 Summary: Config files for kde
@@ -49,9 +49,6 @@ Requires: system-kdm-theme >= %{system_kde_theme_ver}
 Requires: redhat-logos >= 69.0.0
 %endif
 Requires: xorg-x11-xinit
-# To avoid not starting KDM if the wrapper is ever removed
-# Requires: /lib/systemd/systemd-multi-seat-x
-Requires: systemd
 Requires(pre): coreutils
 Requires(post): coreutils grep sed
 Requires(post): kde4-macros(api) = %{_kde4_macros_api}
@@ -225,6 +222,9 @@ perl -pi -e "s,^View0_URL=.*,View0_URL=file:///usr/share/doc/HTML/index.html," %
 
 
 %changelog
+* Wed Apr 24 2013 Martin Briza <mbriza@redhat.com> 19-19
+- Return to the usual X server invocation in case there's no systemd provided wrapper
+
 * Wed Apr 24 2013 Daniel Vrátil <dvratil@redhat.com> 19-18
 - remove Mugshot from Konqueror bookmarks (#951279)
 
