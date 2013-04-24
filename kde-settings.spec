@@ -1,6 +1,6 @@
 # THIS SPECFILE IS FOR F18 ONLY!
 
-%global rel 19
+%global rel 20
 %global system_kde_theme_ver 17.91
 
 Summary: Config files for kde
@@ -222,6 +222,9 @@ perl -pi -e "s,^View0_URL=.*,View0_URL=file:///usr/share/doc/HTML/index.html," %
 
 
 %changelog
+* Wed Apr 24 2013 Dan Vrátil <dvratil@redhat.com> 4.9-20
+- remove Mugshot from Konqueror bookmarks (#951279)
+
 * Tue Jan 29 2013 Dan Vrátil <dvratil@redhat.com> 4.9-19
 - use return instead of exit in fedora-kde-display-handler.sh (#905371)
 
