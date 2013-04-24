@@ -1,11 +1,11 @@
 
-%global rel 17
+%global rel 18
 %global system_kde_theme_ver 18.91
 
 Summary: Config files for kde
 Name:    kde-settings
 Version: 19
-Release: %{rel}%{?dist}.2
+Release: %{rel}%{?dist}
 
 License: MIT
 Url:     http://fedorahosted.org/kde-settings
@@ -225,6 +225,9 @@ perl -pi -e "s,^View0_URL=.*,View0_URL=file:///usr/share/doc/HTML/index.html," %
 
 
 %changelog
+* Wed Apr 24 2013 Daniel Vrátil <dvratil@redhat.com> 19-18
+- remove Mugshot from Konqueror bookmarks (#951279)
+
 * Mon Apr 15 2013 Martin Briza <mbriza@redhat.com> 19-17.2
 - so depending on /lib/systemd/systemd-multi-seat-x is considered a broken dependency - kdm depends on systemd instead
 
