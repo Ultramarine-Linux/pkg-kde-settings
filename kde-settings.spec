@@ -1,6 +1,6 @@
 # THIS SPECFILE IS FOR F17 ONLY!
 
-%global rel 24
+%global rel 25
 %global system_kde_theme_ver 16.91
 
 Summary: Config files for kde
@@ -212,6 +212,9 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Thu Apr 25 2013 Dan Vrátil <dvratil@redhat.com> 4.8-25
+- remove Mugshot from Konqueror bookmarks (#951279)
+
 * Tue Jan 29 2013 Dan Vrátil <dvratil@redhat.com> 4.8-24
 - use return instead of exit in fedora-kde-display-handler.sh
 
