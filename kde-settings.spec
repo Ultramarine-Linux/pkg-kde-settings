@@ -1,6 +1,6 @@
 # THIS SPECFILE IS FOR F18 ONLY!
 
-%global rel 20
+%global rel 21
 %global system_kde_theme_ver 17.91
 
 Summary: Config files for kde
@@ -222,6 +222,9 @@ perl -pi -e "s,^View0_URL=.*,View0_URL=file:///usr/share/doc/HTML/index.html," %
 
 
 %changelog
+* Mon May 13 2013 Rex Dieter <rdieter@fedoraproject.org> 4.9-21
+- plymouth-quit-wait service fails resulting in very long boot time (#921785)
+
 * Wed Apr 24 2013 Dan Vrátil <dvratil@redhat.com> 4.9-20
 - remove Mugshot from Konqueror bookmarks (#951279)
 
