@@ -1,5 +1,5 @@
 
-%global rel 21
+%global rel 22
 %global system_kde_theme_ver 18.91
 
 Summary: Config files for kde
@@ -219,6 +219,9 @@ perl -pi -e "s,^View0_URL=.*,View0_URL=file:///usr/share/doc/HTML/index.html," %
 
 
 %changelog
+* Wed May 22 2013 Than Ngo <than@redhat.com> - 19-22
+- disable java by default 
+
 * Tue May 21 2013 Rex Dieter <rdieter@fedoraproject.org> 19-21
 - cleanup systemd macros
 - kde-settings-kdm is misusing preset files (#963898)
