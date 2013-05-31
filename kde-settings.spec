@@ -1,5 +1,5 @@
 
-%global rel 22
+%global rel 23
 %global system_kde_theme_ver 18.91
 
 Summary: Config files for kde
@@ -219,6 +219,9 @@ perl -pi -e "s,^View0_URL=.*,View0_URL=file:///usr/share/doc/HTML/index.html," %
 
 
 %changelog
+* Fri May 31 2013 Martin Briza <mbriza@redhat.com> - 19-23
+- remove Console login menu option from KDM (#966095)
+
 * Wed May 22 2013 Than Ngo <than@redhat.com> - 19-22
 - disable java by default 
 
