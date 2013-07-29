@@ -5,7 +5,7 @@
 Summary: Config files for kde
 Name:    kde-settings
 Version: 19
-Release: %{rel}%{?dist}
+Release: %{rel}.1%{?dist}
 
 License: MIT
 Url:     http://fedorahosted.org/kde-settings
@@ -175,7 +175,7 @@ perl -pi -e "s,^View0_URL=.*,View0_URL=file:///usr/share/doc/HTML/index.html," %
 ) ||:
 
 %preun kdm
-%{?systemd_preun:%system_preun kdm.service}
+%{?systemd_preun:%systemd_preun kdm.service}
 
 %postun kdm
 %{?systemd_postun}
@@ -219,6 +219,9 @@ perl -pi -e "s,^View0_URL=.*,View0_URL=file:///usr/share/doc/HTML/index.html," %
 
 
 %changelog
+* Mon Jul 29 2013 Martin Briza <mbriza@redhat.com> - 19-23.1
+- Fixed a typo in systemd_preun (#989145)
+
 * Fri May 31 2013 Martin Briza <mbriza@redhat.com> - 19-23
 - remove Console login menu option from KDM (#966095)
 
