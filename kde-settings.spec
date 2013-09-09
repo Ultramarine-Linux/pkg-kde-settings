@@ -1,11 +1,11 @@
 
-%global rel 23
-%global system_kde_theme_ver 18.91
+%global rel 1
+%global system_kde_theme_ver 19.90
 
 Summary: Config files for kde
 Name:    kde-settings
-Version: 19
-Release: %{rel}.1%{?dist}
+Version: 20
+Release: %{rel}%{?dist}
 
 License: MIT
 Url:     http://fedorahosted.org/kde-settings
@@ -219,6 +219,10 @@ perl -pi -e "s,^View0_URL=.*,View0_URL=file:///usr/share/doc/HTML/index.html," %
 
 
 %changelog
+* Tue Sep 10 2013 Jaroslav Reznik <jreznik@fedoraproject.org> - 20-1
+- reset Version to match target fedora release (20)
+- default to Heisenbug artwork
+
 * Mon Jul 29 2013 Martin Briza <mbriza@redhat.com> - 19-23.1
 - Fixed a typo in systemd_preun (#989145)
 
