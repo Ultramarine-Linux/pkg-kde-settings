@@ -5,7 +5,7 @@
 Summary: Config files for kde
 Name:    kde-settings
 Version: 20
-Release: %{rel}%{?dist}
+Release: %{rel}.1%{?dist}
 
 License: MIT
 Url:     http://fedorahosted.org/kde-settings
@@ -60,7 +60,7 @@ Requires(post): kde4-macros(api) = %{_kde4_macros_api}
 Summary: Configuration files for SDDM
 Requires: sddm
 # Until sddm theme version is set directly
-Requires: system-kde-theme = %{system_kde_theme_ver}
+Requires: system-kde-theme >= %{system_kde_theme_ver}
 %description sddm
 
 %package ksplash
@@ -229,6 +229,9 @@ perl -pi -e "s,^View0_URL=.*,View0_URL=file:///usr/share/doc/HTML/index.html," %
 
 
 %changelog
+* Mon Sep 16 2013 Martin Briza <mbriza@redhat.com> - 20-2
+- typo in system-kde-theme version
+
 * Mon Sep 16 2013 Martin Briza <mbriza@redhat.com> - 20-2
 - sddm subpackage - added the config containing the Heisenbug artwork
 
