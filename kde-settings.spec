@@ -1,11 +1,11 @@
 
-%global rel 2
+%global rel 3
 %global system_kde_theme_ver 19.90
 
 Summary: Config files for kde
 Name:    kde-settings
 Version: 20
-Release: %{rel}.1%{?dist}
+Release: %{rel}%{?dist}
 
 License: MIT
 Url:     http://fedorahosted.org/kde-settings
@@ -127,7 +127,7 @@ ln -sf ../../../etc/kde/kdm %{buildroot}%{_datadir}/config/kdm
 
 # own these
 mkdir -p %{buildroot}%{_localstatedir}/lib/kdm
-mkdir -p %{buildroot}%{_localstatedir}/run/{kdm,xdmctl}
+mkdir -p %{buildroot}%{_localstatedir}/run/{kdm,sddm,xdmctl}
 
 # rhel stuff
 %if 0%{?rhel}
@@ -212,6 +212,8 @@ perl -pi -e "s,^View0_URL=.*,View0_URL=file:///usr/share/doc/HTML/index.html," %
 
 %files sddm
 %config %{_sysconfdir}/sddm.conf
+%{_tmpfilesdir}/sddm.conf
+%attr(0711,root,root) %dir %{_localstatedir}/run/kdm
 
 %files ksplash
 %{_datadir}/kde-settings/kde-profile/default/share/config/ksplashrc
@@ -229,6 +231,9 @@ perl -pi -e "s,^View0_URL=.*,View0_URL=file:///usr/share/doc/HTML/index.html," %
 
 
 %changelog
+* Sat Sep 21 2013 Rex Dieter <rdieter@fedoraproject.org> 20-3
+- -sddm: create/own /var/run/sddm (#1010590)
+
 * Mon Sep 16 2013 Martin Briza <mbriza@redhat.com> - 20-2
 - typo in system-kde-theme version
 
