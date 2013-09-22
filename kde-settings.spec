@@ -5,7 +5,7 @@
 Summary: Config files for kde
 Name:    kde-settings
 Version: 20
-Release: %{rel}%{?dist}
+Release: %{rel}%{?dist}.1
 
 License: MIT
 Url:     http://fedorahosted.org/kde-settings
@@ -62,6 +62,7 @@ Requires: sddm
 # Until sddm theme version is set directly
 Requires: system-kde-theme >= %{system_kde_theme_ver}
 %description sddm
+%{summary}.
 
 %package ksplash
 Summary: Configuration files for ksplash
@@ -213,7 +214,7 @@ perl -pi -e "s,^View0_URL=.*,View0_URL=file:///usr/share/doc/HTML/index.html," %
 %files sddm
 %config %{_sysconfdir}/sddm.conf
 %{_tmpfilesdir}/sddm.conf
-%attr(0711,root,root) %dir %{_localstatedir}/run/kdm
+%attr(0711,root,root) %dir %{_localstatedir}/run/sddm
 
 %files ksplash
 %{_datadir}/kde-settings/kde-profile/default/share/config/ksplashrc
@@ -231,6 +232,9 @@ perl -pi -e "s,^View0_URL=.*,View0_URL=file:///usr/share/doc/HTML/index.html," %
 
 
 %changelog
+* Sat Sep 21 2013 Rex Dieter <rdieter@fedoraproject.org> 20-3.1
+- -sddm: add/fix %%description, *really* own /var/run/sddm
+
 * Sat Sep 21 2013 Rex Dieter <rdieter@fedoraproject.org> 20-3
 - -sddm: create/own /var/run/sddm (#1010590)
 
