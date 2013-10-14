@@ -1,11 +1,11 @@
 
-%global rel 3
+%global rel 4
 %global system_kde_theme_ver 19.90
 
 Summary: Config files for kde
 Name:    kde-settings
 Version: 20
-Release: %{rel}%{?dist}.1
+Release: %{rel}%{?dist}
 
 License: MIT
 Url:     http://fedorahosted.org/kde-settings
@@ -54,14 +54,6 @@ Requires(post): coreutils grep sed
 Requires(post): kde4-macros(api) = %{_kde4_macros_api}
 %{?systemd_requires}
 %description kdm
-%{summary}.
-
-%package sddm
-Summary: Configuration files for SDDM
-Requires: sddm
-# Until sddm theme version is set directly
-Requires: system-kde-theme >= %{system_kde_theme_ver}
-%description sddm
 %{summary}.
 
 %package ksplash
@@ -128,7 +120,7 @@ ln -sf ../../../etc/kde/kdm %{buildroot}%{_datadir}/config/kdm
 
 # own these
 mkdir -p %{buildroot}%{_localstatedir}/lib/kdm
-mkdir -p %{buildroot}%{_localstatedir}/run/{kdm,sddm,xdmctl}
+mkdir -p %{buildroot}%{_localstatedir}/run/{kdm,xdmctl}
 
 # rhel stuff
 %if 0%{?rhel}
@@ -211,11 +203,6 @@ perl -pi -e "s,^View0_URL=.*,View0_URL=file:///usr/share/doc/HTML/index.html," %
 %attr(0711,root,root) %dir %{_localstatedir}/run/xdmctl
 %{_unitdir}/kdm.service
 
-%files sddm
-%config %{_sysconfdir}/sddm.conf
-%{_tmpfilesdir}/sddm.conf
-%attr(0711,root,root) %dir %{_localstatedir}/run/sddm
-
 %files ksplash
 %{_datadir}/kde-settings/kde-profile/default/share/config/ksplashrc
 
@@ -232,6 +219,9 @@ perl -pi -e "s,^View0_URL=.*,View0_URL=file:///usr/share/doc/HTML/index.html," %
 
 
 %changelog
+* Mon Oct 14 2013 Rex Dieter <rdieter@fedoraproject.org> 20-4
+- drop -sddm
+
 * Sat Sep 21 2013 Rex Dieter <rdieter@fedoraproject.org> 20-3.1
 - -sddm: add/fix %%description, *really* own /var/run/sddm
 
