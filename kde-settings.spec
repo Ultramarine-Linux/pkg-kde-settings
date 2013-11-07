@@ -1,5 +1,5 @@
 
-%global rel 24
+%global rel 25
 %global system_kde_theme_ver 18.91
 
 Summary: Config files for kde
@@ -149,6 +149,8 @@ perl -pi -e "s,^View0_URL=.*,View0_URL=file:///usr/share/doc/HTML/index.html," %
 %doc COPYING
 %config(noreplace) %{_sysconfdir}/profile.d/kde.*
 %{_sysconfdir}/kde/env/env.sh
+%{_sysconfdir}/kde/env/gpg-agent-startup.sh
+%{_sysconfdir}/kde/shutdown/gpg-agent-shutdown.sh
 %{_sysconfdir}/kde/env/gtk2_rc_files.sh
 %if 0%{?fedora}
 %{_sysconfdir}/kde/env/fedora-bookmarks.sh
@@ -232,6 +234,10 @@ perl -pi -e "s,^View0_URL=.*,View0_URL=file:///usr/share/doc/HTML/index.html," %
 
 
 %changelog
+* Thu Nov 07 2013 Rex Dieter <rdieter@fedoraproject.org> - 19-25
+- kdmrc: GrabInput=Always (#631767)
+- gpg-agent isn't started automatically with KDE anymore (#845492)
+
 * Sat Sep 21 2013 Rex Dieter <rdieter@fedoraproject.org> 19-24
 - -sddm subpkg
 
