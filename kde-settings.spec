@@ -1,5 +1,5 @@
 
-%global rel 6
+%global rel 7
 %global system_kde_theme_ver 19.90
 
 Summary: Config files for kde
@@ -221,6 +221,9 @@ perl -pi -e "s,^View0_URL=.*,View0_URL=file:///usr/share/doc/HTML/index.html," %
 
 
 %changelog
+* Fri Nov 08 2013 Rex Dieter <rdieter@fedoraproject.org> 20-7
+- kdmrc: ServerAttempts=2,ServerTimeout=60 (#967521)
+
 * Thu Nov 07 2013 Rex Dieter <rdieter@fedoraproject.org> 20-6
 - kmixrc: VolumeFeedback=true
 - kdmrc: ConfigVersion 2.4
