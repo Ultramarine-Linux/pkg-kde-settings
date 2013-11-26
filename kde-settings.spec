@@ -222,7 +222,7 @@ perl -pi -e "s,^View0_URL=.*,View0_URL=file:///usr/share/doc/HTML/index.html," %
 
 %changelog
 * Mon Nov 25 2013 Rex Dieter <rdieter@fedoraproject.org> 20-9
-- plasma4.req fixes for multiple scriptengines
+- plasma4.req: fix bogus self-auto-Requires being generated for script engines
 
 * Tue Nov 19 2013 Rex Dieter <rdieter@fedoraproject.org> 20-8
 - cleanup/fix gpg-agent startup/shutdown
