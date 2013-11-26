@@ -1,5 +1,5 @@
 
-%global rel 8
+%global rel 9
 %global system_kde_theme_ver 19.90
 
 Summary: Config files for kde
@@ -221,6 +221,9 @@ perl -pi -e "s,^View0_URL=.*,View0_URL=file:///usr/share/doc/HTML/index.html," %
 
 
 %changelog
+* Mon Nov 25 2013 Rex Dieter <rdieter@fedoraproject.org> 20-9
+- plasma4.req fixes for multiple scriptengines
+
 * Tue Nov 19 2013 Rex Dieter <rdieter@fedoraproject.org> 20-8
 - cleanup/fix gpg-agent startup/shutdown
 
