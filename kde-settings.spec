@@ -1,5 +1,5 @@
 
-%global rel 10
+%global rel 11
 %global system_kde_theme_ver 19.90
 
 Summary: Config files for kde
@@ -221,6 +221,9 @@ perl -pi -e "s,^View0_URL=.*,View0_URL=file:///usr/share/doc/HTML/index.html," %
 
 
 %changelog
+* Tue Nov 26 2013 Rex Dieter <rdieter@fedoraproject.org> 20-11
+- kwalletrc: whitelist/trust a few well-known trusted apps by default
+
 * Tue Nov 26 2013 Rex Dieter <rdieter@fedoraproject.org> 20-10
 - kwalletrc: +Silently Create Initial Wallet=true
 
