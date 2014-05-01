@@ -1,5 +1,5 @@
 
-%global rel 12
+%global rel 13
 %global system_kde_theme_ver 19.90
 
 Summary: Config files for kde
@@ -221,6 +221,9 @@ perl -pi -e "s,^View0_URL=.*,View0_URL=file:///usr/share/doc/HTML/index.html," %
 
 
 %changelog
+* Thu May 01 2014 Rex Dieter <rdieter@fedoraproject.org> 20-13
+- /etc/pam.d/kdm: pam-kwallet support
+
 * Tue Nov 26 2013 Rex Dieter <rdieter@fedoraproject.org> 20-12
 - kwalletrc: [Auto Allow] kdewallet=+KDE Daemon
 
