@@ -1,11 +1,11 @@
 
-%global rel 13
+%global rel 14
 %global system_kde_theme_ver 19.90
 
 Summary: Config files for kde
 Name:    kde-settings
 Version: 20
-Release: %{rel}%{?dist}.1
+Release: %{rel}%{?dist}
 
 License: MIT
 Url:     http://fedorahosted.org/kde-settings
@@ -221,6 +221,9 @@ perl -pi -e "s,^View0_URL=.*,View0_URL=file:///usr/share/doc/HTML/index.html," %
 
 
 %changelog
+* Mon Jun 30 2014 Rex Dieter <rdieter@fedoraproject.org> 20-14
+- baloo default config: index only well-known dirs (#1114216)
+
 * Sun Jun 08 2014 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 20-13.1
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_21_Mass_Rebuild
 
