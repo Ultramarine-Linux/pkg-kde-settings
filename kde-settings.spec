@@ -1,5 +1,5 @@
 
-%global rel 15
+%global rel 16
 %global system_kde_theme_ver 19.90
 
 Summary: Config files for kde
@@ -221,6 +221,9 @@ perl -pi -e "s,^View0_URL=.*,View0_URL=file:///usr/share/doc/HTML/index.html," %
 
 
 %changelog
+* Thu Jul 03 2014 Rex Dieter <rdieter@fedoraproject.org> 20-16
+- QT_PLUGIN_PATH contains repeated paths (#1115268)
+
 * Wed Jul 02 2014 Rex Dieter <rdieter@fedoraproject.org> 20-15
 - kwalletrc: disable autoclose
 
