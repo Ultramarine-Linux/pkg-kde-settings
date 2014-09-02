@@ -1,10 +1,10 @@
 
-%global rel 17
-%global system_kde_theme_ver 19.90
+%global rel 1
+%global system_kde_theme_ver 20.90
 
 Summary: Config files for kde
 Name:    kde-settings
-Version: 20
+Version: 21
 Release: %{rel}%{?dist}
 
 License: MIT
@@ -227,6 +227,9 @@ perl -pi -e "s,^View0_URL=.*,View0_URL=file:///usr/share/doc/HTML/index.html," %
 
 
 %changelog
+* Tue Sep 02 2014 Rex Dieter <rdieter@fedoraproject.org> 21-1
+- branch for f21 (and new theming)
+
 * Wed Aug 06 2014 Rex Dieter <rdieter@fedoraproject.org> 20-17
 - add kf5/plasma5 support (/etc/xdg/plasma-workspace)
 
