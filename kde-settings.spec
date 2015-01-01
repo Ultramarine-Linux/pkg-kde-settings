@@ -1,5 +1,5 @@
 
-%global rel 1
+%global rel 2
 %global system_kde_theme_ver 20.90
 
 Summary: Config files for kde
@@ -227,6 +227,10 @@ perl -pi -e "s,^View0_URL=.*,View0_URL=file:///usr/share/doc/HTML/index.html," %
 
 
 %changelog
+* Thu Jan 01 2015 Rex Dieter <rdieter@fedoraproject.org> 21-2
+- kwalletrc: empty most of [Wallet] section
+- fixes problems on initial wallet creation with pam_kwallet (#1177991)
+
 * Tue Sep 02 2014 Rex Dieter <rdieter@fedoraproject.org> 21-1
 - branch for f21 (and new theming)
 
