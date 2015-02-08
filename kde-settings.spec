@@ -1,5 +1,5 @@
 
-%global rel 17
+%global rel 18
 %global system_kde_theme_ver 19.90
 
 Summary: Config files for kde
@@ -153,6 +153,7 @@ perl -pi -e "s,^View0_URL=.*,View0_URL=file:///usr/share/doc/HTML/index.html," %
 %{_datadir}/polkit-1/rules.d/11-fedora-kde-policy.rules
 %endif
 # kf5/plasma5 love
+%config(noreplace) %{_sysconfdir}/xdg/kdeglobals
 %dir %{_sysconfdir}/xdg/plasma-workspace/
 %{_sysconfdir}/xdg/plasma-workspace/env/env.sh
 %{_sysconfdir}/xdg/plasma-workspace/env/gpg-agent-startup.sh
@@ -227,6 +228,9 @@ perl -pi -e "s,^View0_URL=.*,View0_URL=file:///usr/share/doc/HTML/index.html," %
 
 
 %changelog
+* Sun Feb 08 2015 Rex Dieter <rdieter@fedoraproject.org> 20-18
+- %%config(noreplace) /etc/xdg/kdeglobals (for kf5)
+
 * Wed Aug 06 2014 Rex Dieter <rdieter@fedoraproject.org> 20-17
 - add kf5/plasma5 support (/etc/xdg/plasma-workspace)
 
