@@ -1,5 +1,5 @@
 
-%global rel 2
+%global rel 3
 %global system_kde_theme_ver 20.90
 
 Summary: Config files for kde
@@ -153,6 +153,7 @@ perl -pi -e "s,^View0_URL=.*,View0_URL=file:///usr/share/doc/HTML/index.html," %
 %{_datadir}/polkit-1/rules.d/11-fedora-kde-policy.rules
 %endif
 # kf5/plasma5 love
+%config(noreplace) %{_sysconfdir}/xdg/kdeglobals
 %dir %{_sysconfdir}/xdg/plasma-workspace/
 %{_sysconfdir}/xdg/plasma-workspace/env/env.sh
 %{_sysconfdir}/xdg/plasma-workspace/env/gpg-agent-startup.sh
@@ -227,6 +228,9 @@ perl -pi -e "s,^View0_URL=.*,View0_URL=file:///usr/share/doc/HTML/index.html," %
 
 
 %changelog
+* Sun Feb 08 2015 Rex Dieter <rdieter@fedoraproject.org> 21-3
+- include kf5 kdeglobals (oxygen default)
+
 * Thu Jan 01 2015 Rex Dieter <rdieter@fedoraproject.org> 21-2
 - kwalletrc: empty most of [Wallet] section
 - fixes problems on initial wallet creation with pam_kwallet (#1177991)
