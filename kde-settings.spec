@@ -1,10 +1,10 @@
 
-%global rel 2
+%global rel 1
 %global system_kde_theme_ver 20.90
 
 Summary: Config files for kde
 Name:    kde-settings
-Version: 21
+Version: 22
 Release: %{rel}%{?dist}
 
 License: MIT
@@ -20,7 +20,8 @@ Requires: kde-filesystem
 # /etc/pam.d/ ownership
 Requires: pam
 Requires: xdg-user-dirs
-Requires: adwaita-cursor-theme
+## add breeze deps here? probably, need more too -- rex
+Requires: breeze-icon-theme
 %if 0%{?fedora}
 # for 11-fedora-kde-policy.rules
 Requires: polkit-js-engine
@@ -31,10 +32,10 @@ Requires(post): coreutils sed
 %description
 %{summary}.
 
+## FIXME
 %package minimal
 Summary: Minimal configuration files for KDE
 Requires: %{name} = %{version}-%{release}
-Requires: kde-workspace-ksplash-themes
 Requires: xorg-x11-xinit
 %description minimal
 %{summary}.
@@ -56,6 +57,7 @@ Requires(post): kde4-macros(api) = %{_kde4_macros_api}
 %description kdm
 %{summary}.
 
+## FIXME
 %package ksplash
 Summary: Configuration files for ksplash
 Requires: %{name} = %{version}-%{release}
@@ -67,6 +69,7 @@ Requires: redhat-logos >= 69.0.0
 %description ksplash 
 %{summary}.
 
+## FIXME
 %package plasma
 Summary: Configuration files for plasma 
 Requires: %{name} = %{version}-%{release}
@@ -153,6 +156,7 @@ perl -pi -e "s,^View0_URL=.*,View0_URL=file:///usr/share/doc/HTML/index.html," %
 %{_datadir}/polkit-1/rules.d/11-fedora-kde-policy.rules
 %endif
 # kf5/plasma5 love
+%{_sysconfdir}/xdg/kdeglobals
 %dir %{_sysconfdir}/xdg/plasma-workspace/
 %{_sysconfdir}/xdg/plasma-workspace/env/env.sh
 %{_sysconfdir}/xdg/plasma-workspace/env/gpg-agent-startup.sh
@@ -227,6 +231,9 @@ perl -pi -e "s,^View0_URL=.*,View0_URL=file:///usr/share/doc/HTML/index.html," %
 
 
 %changelog
+* Sun Feb 08 2015 Rex Dieter <rdieter@fedoraproject.org> 22-1
+- init for f22/plasma5, needs more love
+
 * Thu Jan 01 2015 Rex Dieter <rdieter@fedoraproject.org> 21-2
 - kwalletrc: empty most of [Wallet] section
 - fixes problems on initial wallet creation with pam_kwallet (#1177991)
