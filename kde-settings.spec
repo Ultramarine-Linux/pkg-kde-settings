@@ -1,11 +1,11 @@
 
-%global rel 1
+%global rel 2
 %global system_kde_theme_ver 20.90
 
 Summary: Config files for kde
 Name:    kde-settings
 Version: 22
-Release: %{rel}%{?dist}.1
+Release: %{rel}%{?dist}
 
 License: MIT
 Url:     http://fedorahosted.org/kde-settings
@@ -155,7 +155,7 @@ perl -pi -e "s,^View0_URL=.*,View0_URL=file:///usr/share/doc/HTML/index.html," %
 %{_prefix}/lib/rpm/fileattrs/plasma4.attr
 %{_datadir}/polkit-1/rules.d/11-fedora-kde-policy.rules
 %endif
-# kf5/plasma5 love
+%config(noreplace) %{_sysconfdir}/xdg/kdebugrc
 %config(noreplace) %{_sysconfdir}/xdg/kdeglobals
 %dir %{_sysconfdir}/xdg/plasma-workspace/
 %{_sysconfdir}/xdg/plasma-workspace/env/env.sh
@@ -231,6 +231,11 @@ perl -pi -e "s,^View0_URL=.*,View0_URL=file:///usr/share/doc/HTML/index.html," %
 
 
 %changelog
+* Tue Mar 03 2015 Rex Dieter <rdieter@fedoraproject.org> - 22-2
+- kdeburc: disable debug output
+- kdeglobals: use Sans/Monospace fonts, breeze widgets/icons
+- default gtk config to adwaita (replaces oxygen-gtk)
+
 * Sun Feb 08 2015 Rex Dieter <rdieter@fedoraproject.org> 22-1.1
 - %%config(noreplace) /etc/xdg/kdeglobals
 
