@@ -5,7 +5,7 @@
 Summary: Config files for kde
 Name:    kde-settings
 Version: 22
-Release: %{rel}%{?dist}
+Release: %{rel}%{?dist}.1
 
 License: MIT
 Url:     http://fedorahosted.org/kde-settings
@@ -15,6 +15,9 @@ BuildArch: noarch
 
 BuildRequires: kde-filesystem
 BuildRequires: systemd
+
+# when kdebugrc was moved here
+Conflicts: kf5-kdelibs4support < 5.7.0-3
 
 Requires: kde-filesystem
 # /etc/pam.d/ ownership
@@ -231,6 +234,9 @@ perl -pi -e "s,^View0_URL=.*,View0_URL=file:///usr/share/doc/HTML/index.html," %
 
 
 %changelog
+* Thu Mar 05 2015 Rex Dieter <rdieter@fedoraproject.org> 22-2.1
+- Conflicts: kf5-kdelibs4support < 5.7.0-3 (#1199108)
+
 * Tue Mar 03 2015 Rex Dieter <rdieter@fedoraproject.org> - 22-2
 - kdeburc: disable debug output
 - kdeglobals: use Sans/Monospace fonts, breeze widgets/icons
