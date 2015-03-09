@@ -5,7 +5,7 @@
 Summary: Config files for kde
 Name:    kde-settings
 Version: 22
-Release: %{rel}%{?dist}.1
+Release: %{rel}%{?dist}.2
 
 License: MIT
 Url:     http://fedorahosted.org/kde-settings
@@ -77,7 +77,7 @@ Requires: redhat-logos >= 69.0.0
 Summary: Configuration files for plasma 
 Requires: %{name} = %{version}-%{release}
 %if 0%{?fedora}
-Requires: system-plasma-desktoptheme >= %{system_kde_theme_ver}
+Requires: system-plasma-theme >= %{system_kde_theme_ver}
 %else
 Requires: redhat-logos >= 69.0.0
 %endif
@@ -234,6 +234,9 @@ perl -pi -e "s,^View0_URL=.*,View0_URL=file:///usr/share/doc/HTML/index.html," %
 
 
 %changelog
+* Mon Mar 09 2015 Rex Dieter <rdieter@fedoraproject.org> 22-2.2
+- s/-plasma-desktoptheme/-plasma-theme/ for consistency
+
 * Thu Mar 05 2015 Rex Dieter <rdieter@fedoraproject.org> 22-2.1
 - Conflicts: kf5-kdelibs4support < 5.7.0-3 (#1199108)
 
