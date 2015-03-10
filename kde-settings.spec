@@ -1,11 +1,11 @@
 
-%global rel 2
+%global rel 3
 %global system_kde_theme_ver 20.90
 
 Summary: Config files for kde
 Name:    kde-settings
 Version: 22
-Release: %{rel}%{?dist}.2
+Release: %{rel}%{?dist}
 
 License: MIT
 Url:     http://fedorahosted.org/kde-settings
@@ -153,6 +153,7 @@ perl -pi -e "s,^View0_URL=.*,View0_URL=file:///usr/share/doc/HTML/index.html," %
 %if 0%{?fedora}
 %{_sysconfdir}/kde/env/fedora-bookmarks.sh
 %{_datadir}/kde-settings/
+# these can probably go now -- rex
 %{_prefix}/lib/rpm/plasma4.prov
 %{_prefix}/lib/rpm/plasma4.req
 %{_prefix}/lib/rpm/fileattrs/plasma4.attr
@@ -160,6 +161,7 @@ perl -pi -e "s,^View0_URL=.*,View0_URL=file:///usr/share/doc/HTML/index.html," %
 %endif
 %config(noreplace) %{_sysconfdir}/xdg/kdebugrc
 %config(noreplace) %{_sysconfdir}/xdg/kdeglobals
+%config(noreplace) %{_sysconfdir}/xdg/plasmarc
 %dir %{_sysconfdir}/xdg/plasma-workspace/
 %{_sysconfdir}/xdg/plasma-workspace/env/env.sh
 %{_sysconfdir}/xdg/plasma-workspace/env/gpg-agent-startup.sh
@@ -173,7 +175,6 @@ perl -pi -e "s,^View0_URL=.*,View0_URL=file:///usr/share/doc/HTML/index.html," %
 %dir %{_datadir}/kde-settings/
 %dir %{_datadir}/kde-settings/kde-profile/
 %{_datadir}/kde-settings/kde-profile/default/
-%{_kde4_appsdir}/kconf_update/fedora-kde-display-handler.*
 %if 0%{?rhel}
 %exclude %{_datadir}/kde-settings/kde-profile/default/share/apps/plasma-desktop/init/00-defaultLayout.js
 %endif
@@ -234,6 +235,9 @@ perl -pi -e "s,^View0_URL=.*,View0_URL=file:///usr/share/doc/HTML/index.html," %
 
 
 %changelog
+* Tue Mar 10 2015 Rex Dieter <rdieter@fedoraproject.org> 22-3
+- plasmarc: F22 theme default
+
 * Mon Mar 09 2015 Rex Dieter <rdieter@fedoraproject.org> 22-2.2
 - s/-plasma-desktoptheme/-plasma-theme/ for consistency
 
