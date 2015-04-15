@@ -5,7 +5,7 @@
 Summary: Config files for kde
 Name:    kde-settings
 Version: 22
-Release: %{rel}%{?dist}
+Release: %{rel}%{?dist}.1
 
 License: MIT
 Url:     http://fedorahosted.org/kde-settings
@@ -72,7 +72,6 @@ Requires: redhat-logos >= 69.0.0
 %description ksplash 
 %{summary}.
 
-## FIXME
 %package plasma
 Summary: Configuration files for plasma 
 Requires: %{name} = %{version}-%{release}
@@ -128,6 +127,9 @@ ln -sf ../../../etc/kde/kdm %{buildroot}%{_datadir}/config/kdm
 mkdir -p %{buildroot}%{_localstatedir}/lib/kdm
 mkdir -p %{buildroot}%{_localstatedir}/run/{kdm,xdmctl}
 
+# unpackaged files (at least until fixed upstream)
+rm -fv %{buildroot}%{_datadir}/kde-settings/kde-profile/default/share/config/{ksplashrc,plasmarc}
+
 # rhel stuff
 %if 0%{?rhel}
 rm -rf %{buildroot}%{_sysconfdir}/kde/env/fedora-bookmarks.sh \
@@ -161,12 +163,6 @@ perl -pi -e "s,^View0_URL=.*,View0_URL=file:///usr/share/doc/HTML/index.html," %
 %endif
 %config(noreplace) %{_sysconfdir}/xdg/kdebugrc
 %config(noreplace) %{_sysconfdir}/xdg/kdeglobals
-%config(noreplace) %{_sysconfdir}/xdg/plasmarc
-%dir %{_sysconfdir}/xdg/plasma-workspace/
-%{_sysconfdir}/xdg/plasma-workspace/env/env.sh
-%{_sysconfdir}/xdg/plasma-workspace/env/gpg-agent-startup.sh
-%{_sysconfdir}/xdg/plasma-workspace/env/gtk2_rc_files.sh
-%{_sysconfdir}/xdg/plasma-workspace/shutdown/gpg-agent-shutdown.sh
 %config(noreplace) /etc/pam.d/kcheckpass
 %config(noreplace) /etc/pam.d/kscreensaver
 # drop noreplace, so we can be sure to get the new kiosk bits
@@ -220,10 +216,14 @@ perl -pi -e "s,^View0_URL=.*,View0_URL=file:///usr/share/doc/HTML/index.html," %
 %{_unitdir}/kdm.service
 
 %files ksplash
-%{_datadir}/kde-settings/kde-profile/default/share/config/ksplashrc
+## empty, FIXME
 
 %files plasma
-%{_datadir}/kde-settings/kde-profile/default/share/config/plasmarc
+%config(noreplace) %{_sysconfdir}/xdg/plasmarc
+%{_sysconfdir}/xdg/plasma-workspace/env/env.sh
+%{_sysconfdir}/xdg/plasma-workspace/env/gpg-agent-startup.sh
+%{_sysconfdir}/xdg/plasma-workspace/env/gtk2_rc_files.sh
+%{_sysconfdir}/xdg/plasma-workspace/shutdown/gpg-agent-shutdown.sh
 
 %files pulseaudio
 # nothing, this is a metapackage
@@ -235,6 +235,10 @@ perl -pi -e "s,^View0_URL=.*,View0_URL=file:///usr/share/doc/HTML/index.html," %
 
 
 %changelog
+* Wed Apr 15 2015 Rex Dieter <rdieter@fedoraproject.org> - 22-3.1
+- -plasma: move plasmarc plasma-workspace/{env,shutdown} here
+- omit kde4 ksplashrc, plasmarc
+
 * Tue Mar 10 2015 Rex Dieter <rdieter@fedoraproject.org> 22-3
 - plasmarc: F22 theme default
 
