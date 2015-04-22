@@ -1,11 +1,11 @@
 
-%global rel 3
+%global rel 4
 %global system_kde_theme_ver 20.90
 
 Summary: Config files for kde
 Name:    kde-settings
 Version: 22
-Release: %{rel}%{?dist}.1
+Release: %{rel}%{?dist}
 
 License: MIT
 Url:     http://fedorahosted.org/kde-settings
@@ -235,6 +235,9 @@ perl -pi -e "s,^View0_URL=.*,View0_URL=file:///usr/share/doc/HTML/index.html," %
 
 
 %changelog
+* Wed Apr 22 2015 Rex Dieter <rdieter@fedoraproject.org> 22-4
+- kdmrc: fix kdm theme #1214323)
+
 * Wed Apr 15 2015 Rex Dieter <rdieter@fedoraproject.org> - 22-3.1
 - -plasma: move plasmarc plasma-workspace/{env,shutdown} here
 - omit kde4 ksplashrc, plasmarc
