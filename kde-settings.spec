@@ -220,6 +220,7 @@ perl -pi -e "s,^View0_URL=.*,View0_URL=file:///usr/share/doc/HTML/index.html," %
 
 %files plasma
 %config(noreplace) %{_sysconfdir}/xdg/plasmarc
+%{_datadir}/plasma/shells/org.kde.plasma.desktop/updates/00-start-here-kde-fedora-2.js
 %{_sysconfdir}/xdg/plasma-workspace/env/env.sh
 %{_sysconfdir}/xdg/plasma-workspace/env/gpg-agent-startup.sh
 %{_sysconfdir}/xdg/plasma-workspace/env/gtk2_rc_files.sh
