@@ -1,5 +1,5 @@
 
-%global rel 5
+%global rel 6
 %global system_kde_theme_ver 20.90
 
 Summary: Config files for kde
@@ -235,7 +235,7 @@ perl -pi -e "s,^View0_URL=.*,View0_URL=file:///usr/share/doc/HTML/index.html," %
 
 
 %changelog
-* Wed May 13 2015 Jan Grulich <jgrulich@redhat.com> - 22-5
+* Wed May 13 2015 Jan Grulich <jgrulich@redhat.com> - 22-6
 - use fedora icon in kickoff
 
 * Wed Apr 22 2015 Rex Dieter <rdieter@fedoraproject.org> 22-4
