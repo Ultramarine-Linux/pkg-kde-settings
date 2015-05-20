@@ -1,5 +1,5 @@
 
-%global rel 8
+%global rel 9
 %global system_kde_theme_ver 20.90
 
 Summary: Config files for kde
@@ -232,11 +232,15 @@ perl -pi -e "s,^View0_URL=.*,View0_URL=file:///usr/share/doc/HTML/index.html," %
 
 %files -n qt-settings
 %doc COPYING
+%config(noreplace) %{_sysconfdir}/xdg/qtlogging.ini
 %config(noreplace) %{_sysconfdir}/Trolltech.conf
 %config(noreplace) %{_sysconfdir}/profile.d/qt-graphicssystem.*
 
 
 %changelog
+* Wed May 20 2015 Rex Dieter <rdieter@fedoraproject.org> 22-9
+- qt-settings: qtlogging.ini: disable *.debug logging
+
 * Wed May 20 2015 Rex Dieter <rdieter@fedoraproject.org> 22-8
 - kcminputrc: explicitly set breeze_cursors theme default (#1199521)
 
