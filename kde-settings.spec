@@ -1,5 +1,5 @@
 
-%global rel 7
+%global rel 8
 %global system_kde_theme_ver 20.90
 
 Summary: Config files for kde
@@ -219,6 +219,7 @@ perl -pi -e "s,^View0_URL=.*,View0_URL=file:///usr/share/doc/HTML/index.html," %
 ## empty, FIXME
 
 %files plasma
+%config(noreplace) %{_sysconfdir}/xdg/kcminputrc
 %config(noreplace) %{_sysconfdir}/xdg/plasmarc
 %{_datadir}/plasma/shells/org.kde.plasma.desktop/updates/00-start-here-kde-fedora-2.js
 %{_sysconfdir}/xdg/plasma-workspace/env/env.sh
@@ -236,6 +237,9 @@ perl -pi -e "s,^View0_URL=.*,View0_URL=file:///usr/share/doc/HTML/index.html," %
 
 
 %changelog
+* Wed May 20 2015 Rex Dieter <rdieter@fedoraproject.org> 22-8
+- kcminputrc: explicitly set breeze_cursors theme default (#1199521)
+
 * Wed May 13 2015 Jan Grulich <jgrulich@redhat.com> - 22-7
 - update kickoff icon from working location
 
