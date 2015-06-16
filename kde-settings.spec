@@ -1,5 +1,5 @@
 
-%global rel 10
+%global rel 11
 %global system_kde_theme_ver 20.90
 
 Summary: Config files for kde
@@ -223,9 +223,8 @@ perl -pi -e "s,^View0_URL=.*,View0_URL=file:///usr/share/doc/HTML/index.html," %
 %config(noreplace) %{_sysconfdir}/xdg/plasmarc
 %{_datadir}/plasma/shells/org.kde.plasma.desktop/updates/00-start-here-kde-fedora-2.js
 %{_sysconfdir}/xdg/plasma-workspace/env/env.sh
-%{_sysconfdir}/xdg/plasma-workspace/env/gpg-agent-startup.sh
 %{_sysconfdir}/xdg/plasma-workspace/env/gtk2_rc_files.sh
-%{_sysconfdir}/xdg/plasma-workspace/shutdown/gpg-agent-shutdown.sh
+%{_sysconfdir}/xdg/plasma-workspace/env/gtk3_scrolling.sh
 
 %files pulseaudio
 # nothing, this is a metapackage
@@ -238,6 +237,10 @@ perl -pi -e "s,^View0_URL=.*,View0_URL=file:///usr/share/doc/HTML/index.html," %
 
 
 %changelog
+* Tue Jun 16 2015 Rex Dieter <rdieter@fedoraproject.org> - 22-11
+- env: set GDK_CORE_DEVICE_EVENTS=1 to workaround gtk3 scrolling issues (#1226465)
+- env: omit gpg-agent management, no longer needed (#1229918)
+
 * Wed May 20 2015 Rex Dieter <rdieter@fedoraproject.org> 22-10
 - qt-settings: /etc/xdg/QtProject/qtlogging.ini
 
