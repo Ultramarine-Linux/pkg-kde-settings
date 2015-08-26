@@ -1,10 +1,10 @@
 
-%global rel 11
-%global system_kde_theme_ver 20.90
+%global rel 1
+%global system_kde_theme_ver 23.0
 
 Summary: Config files for kde
 Name:    kde-settings
-Version: 22
+Version: 23
 Release: %{rel}%{?dist}
 
 License: MIT
@@ -171,6 +171,7 @@ perl -pi -e "s,^View0_URL=.*,View0_URL=file:///usr/share/doc/HTML/index.html," %
 %dir %{_datadir}/kde-settings/
 %dir %{_datadir}/kde-settings/kde-profile/
 %{_datadir}/kde-settings/kde-profile/default/
+%{_datadir}/applications/kde-mimeapps.list
 %if 0%{?rhel}
 %exclude %{_datadir}/kde-settings/kde-profile/default/share/apps/plasma-desktop/init/00-defaultLayout.js
 %endif
@@ -224,7 +225,6 @@ perl -pi -e "s,^View0_URL=.*,View0_URL=file:///usr/share/doc/HTML/index.html," %
 %{_datadir}/plasma/shells/org.kde.plasma.desktop/updates/00-start-here-kde-fedora-2.js
 %{_sysconfdir}/xdg/plasma-workspace/env/env.sh
 %{_sysconfdir}/xdg/plasma-workspace/env/gtk2_rc_files.sh
-%{_sysconfdir}/xdg/plasma-workspace/env/gtk3_scrolling.sh
 
 %files pulseaudio
 # nothing, this is a metapackage
@@ -237,6 +237,9 @@ perl -pi -e "s,^View0_URL=.*,View0_URL=file:///usr/share/doc/HTML/index.html," %
 
 
 %changelog
+* Wed Aug 26 2015 Rex Dieter <rdieter@fedoraproject.org> 23-1
+- init for f23
+
 * Tue Jun 16 2015 Rex Dieter <rdieter@fedoraproject.org> - 22-11
 - env: set GDK_CORE_DEVICE_EVENTS=1 to workaround gtk3 scrolling issues (#1226465)
 - env: omit gpg-agent management, no longer needed (#1229918)
