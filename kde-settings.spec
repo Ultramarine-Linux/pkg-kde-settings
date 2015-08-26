@@ -1,5 +1,5 @@
 
-%global rel 1
+%global rel 2
 %global system_kde_theme_ver 23.0
 
 Summary: Config files for kde
@@ -237,6 +237,9 @@ perl -pi -e "s,^View0_URL=.*,View0_URL=file:///usr/share/doc/HTML/index.html," %
 
 
 %changelog
+* Wed Aug 26 2015 Rex Dieter <rdieter@fedoraproject.org> 23-2
+- kde-mimeapps.list: add calligra words,sheets,stage, fix text/plain
+
 * Wed Aug 26 2015 Rex Dieter <rdieter@fedoraproject.org> 23-1
 - init for f23
 
