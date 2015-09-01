@@ -1,5 +1,5 @@
 
-%global rel 2
+%global rel 3
 %global system_kde_theme_ver 23.0
 
 Summary: Config files for kde
@@ -237,6 +237,9 @@ perl -pi -e "s,^View0_URL=.*,View0_URL=file:///usr/share/doc/HTML/index.html," %
 
 
 %changelog
+* Tue Sep 01 2015 Rex Dieter <rdieter@fedoraproject.org> 23-3
+- kde-mimeapps.list: s/kde-dolphin.desktop/org.kde.dolphin.desktop/
+
 * Wed Aug 26 2015 Rex Dieter <rdieter@fedoraproject.org> 23-2
 - kde-mimeapps.list: add calligra words,sheets,stage, fix text/plain
 
