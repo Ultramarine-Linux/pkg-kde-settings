@@ -1,5 +1,5 @@
 
-%global rel 3
+%global rel 4
 %global system_kde_theme_ver 23.0
 
 Summary: Config files for kde
@@ -162,7 +162,6 @@ perl -pi -e "s,^View0_URL=.*,View0_URL=file:///usr/share/doc/HTML/index.html," %
 %{_datadir}/polkit-1/rules.d/11-fedora-kde-policy.rules
 %endif
 %config(noreplace) %{_sysconfdir}/xdg/kdebugrc
-%config(noreplace) %{_sysconfdir}/xdg/kdeglobals
 %config(noreplace) /etc/pam.d/kcheckpass
 %config(noreplace) /etc/pam.d/kscreensaver
 # drop noreplace, so we can be sure to get the new kiosk bits
@@ -220,8 +219,6 @@ perl -pi -e "s,^View0_URL=.*,View0_URL=file:///usr/share/doc/HTML/index.html," %
 ## empty, FIXME
 
 %files plasma
-%config(noreplace) %{_sysconfdir}/xdg/kcminputrc
-%config(noreplace) %{_sysconfdir}/xdg/plasmarc
 %{_datadir}/plasma/shells/org.kde.plasma.desktop/updates/00-start-here-kde-fedora-2.js
 %{_sysconfdir}/xdg/plasma-workspace/env/env.sh
 %{_sysconfdir}/xdg/plasma-workspace/env/gtk2_rc_files.sh
@@ -237,6 +234,10 @@ perl -pi -e "s,^View0_URL=.*,View0_URL=file:///usr/share/doc/HTML/index.html," %
 
 
 %changelog
+* Mon Sep 21 2015 Rex Dieter <rdieter@fedoraproject.org> - 23-4
+- support XDG_CONFIG_DIR (/usr/share/kde-settings/kde-profile/default/xdg)
+- kcminputrc,kdeglobals,plasmarc: explicitly set theming elements
+
 * Tue Sep 01 2015 Rex Dieter <rdieter@fedoraproject.org> 23-3
 - kde-mimeapps.list: s/kde-dolphin.desktop/org.kde.dolphin.desktop/
 
