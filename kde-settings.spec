@@ -1,5 +1,5 @@
 
-%global rel 12
+%global rel 13
 %global system_kde_theme_ver 20.90
 
 Summary: Config files for kde
@@ -161,6 +161,7 @@ perl -pi -e "s,^View0_URL=.*,View0_URL=file:///usr/share/doc/HTML/index.html," %
 %{_prefix}/lib/rpm/fileattrs/plasma4.attr
 %{_datadir}/polkit-1/rules.d/11-fedora-kde-policy.rules
 %endif
+%config(noreplace) %{_sysconfdir}/xdg/baloofilerc
 %config(noreplace) %{_sysconfdir}/xdg/kdebugrc
 %config(noreplace) %{_sysconfdir}/xdg/kdeglobals
 %config(noreplace) /etc/pam.d/kcheckpass
@@ -236,6 +237,9 @@ perl -pi -e "s,^View0_URL=.*,View0_URL=file:///usr/share/doc/HTML/index.html," %
 
 
 %changelog
+* Sat Oct 03 2015 Rex Dieter <rdieter@fedoraproject.org> 22-13
+- baloofilerc: RFE: index only well-known document-centric dirs by default (#1235026)
+
 * Wed Aug 26 2015 Rex Dieter <rdieter@fedoraproject.org> 22-12
 - drop gtk3 scrolling workaround (#1226465)
 
