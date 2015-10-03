@@ -1,5 +1,5 @@
 
-%global rel 4
+%global rel 5
 %global system_kde_theme_ver 23.0
 
 Summary: Config files for kde
@@ -234,6 +234,9 @@ perl -pi -e "s,^View0_URL=.*,View0_URL=file:///usr/share/doc/HTML/index.html," %
 
 
 %changelog
+* Sat Oct 03 2015 Rex Dieter <rdieter@fedoraproject.org> 23-5
+- baloofilerc: index only well-known document-centric dirs by default (#1235026)
+
 * Mon Sep 21 2015 Rex Dieter <rdieter@fedoraproject.org> - 23-4
 - support XDG_CONFIG_DIR (/usr/share/kde-settings/kde-profile/default/xdg)
 - kcminputrc,kdeglobals,plasmarc: explicitly set theming elements
