@@ -1,5 +1,5 @@
 
-%global rel 13
+%global rel 14
 %global system_kde_theme_ver 20.90
 
 Summary: Config files for kde
@@ -225,6 +225,7 @@ perl -pi -e "s,^View0_URL=.*,View0_URL=file:///usr/share/doc/HTML/index.html," %
 %{_datadir}/plasma/shells/org.kde.plasma.desktop/updates/00-start-here-kde-fedora-2.js
 %{_sysconfdir}/xdg/plasma-workspace/env/env.sh
 %{_sysconfdir}/xdg/plasma-workspace/env/gtk2_rc_files.sh
+%{_sysconfdir}/xdg/plasma-workspace/env/gtk3_scrolling.sh
 
 %files pulseaudio
 # nothing, this is a metapackage
@@ -237,6 +238,9 @@ perl -pi -e "s,^View0_URL=.*,View0_URL=file:///usr/share/doc/HTML/index.html," %
 
 
 %changelog
+* Tue Oct 06 2015 Rex Dieter <rdieter@fedoraproject.org> 22-14
+- restore gtk3 scrolling workaround (#1226465)
+
 * Sat Oct 03 2015 Rex Dieter <rdieter@fedoraproject.org> 22-13
 - baloofilerc: RFE: index only well-known document-centric dirs by default (#1235026)
 
