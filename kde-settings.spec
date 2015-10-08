@@ -1,5 +1,5 @@
 
-%global rel 6
+%global rel 7
 %global system_kde_theme_ver 23.0
 
 Summary: Config files for kde
@@ -223,6 +223,7 @@ perl -pi -e "s,^View0_URL=.*,View0_URL=file:///usr/share/doc/HTML/index.html," %
 %{_sysconfdir}/xdg/plasma-workspace/env/env.sh
 %{_sysconfdir}/xdg/plasma-workspace/env/gtk2_rc_files.sh
 %{_sysconfdir}/xdg/plasma-workspace/env/gtk3_scrolling.sh
+%{_sysconfdir}/xdg/plasma-workspace/shutdown/kuiserver5.sh
 
 %files pulseaudio
 # nothing, this is a metapackage
@@ -235,6 +236,9 @@ perl -pi -e "s,^View0_URL=.*,View0_URL=file:///usr/share/doc/HTML/index.html," %
 
 
 %changelog
+* Thu Oct 08 2015 Rex Dieter <rdieter@fedoraproject.org> 23-7
+- workaround lingering kuiserver processes (kde#348123)
+
 * Tue Oct 06 2015 Rex Dieter <rdieter@fedoraproject.org> 23-6
 - restore gtk3 scrolling workaround (#1226465)
 
