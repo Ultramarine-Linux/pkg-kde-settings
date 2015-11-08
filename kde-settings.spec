@@ -1,5 +1,5 @@
 
-%global rel 7
+%global rel 8
 %global system_kde_theme_ver 23.0
 
 Summary: Config files for kde
@@ -161,6 +161,7 @@ perl -pi -e "s,^View0_URL=.*,View0_URL=file:///usr/share/doc/HTML/index.html," %
 %{_prefix}/lib/rpm/fileattrs/plasma4.attr
 %{_datadir}/polkit-1/rules.d/11-fedora-kde-policy.rules
 %endif
+%config(noreplace) %{_sysconfdir}/xdg/kcm-about-distrorc
 %config(noreplace) %{_sysconfdir}/xdg/kdebugrc
 %config(noreplace) /etc/pam.d/kcheckpass
 %config(noreplace) /etc/pam.d/kscreensaver
@@ -236,6 +237,9 @@ perl -pi -e "s,^View0_URL=.*,View0_URL=file:///usr/share/doc/HTML/index.html," %
 
 
 %changelog
+* Sun Nov 08 2015 Rex Dieter <rdieter@fedoraproject.org> 23-8
+- add kcm-about-distrorc (#1279221)
+
 * Thu Oct 08 2015 Rex Dieter <rdieter@fedoraproject.org> 23-7
 - workaround lingering kuiserver processes (kde#348123)
 
