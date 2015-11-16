@@ -1,5 +1,5 @@
 
-%global rel 8
+%global rel 9
 %global system_kde_theme_ver 23.0
 
 Summary: Config files for kde
@@ -237,6 +237,10 @@ perl -pi -e "s,^View0_URL=.*,View0_URL=file:///usr/share/doc/HTML/index.html," %
 
 
 %changelog
+* Mon Nov 16 2015 Rex Dieter <rdieter@fedoraproject.org> 23-9
+- copy plasma update scripts to canonical $XDG_DATA_DIRS/plasma/shells/<package>/contents/updates
+  (needed when plasma-5.5 lands)
+
 * Sun Nov 08 2015 Rex Dieter <rdieter@fedoraproject.org> 23-8
 - add kcm-about-distrorc (#1279221)
 
