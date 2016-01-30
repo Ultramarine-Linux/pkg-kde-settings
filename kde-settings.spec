@@ -1,10 +1,10 @@
 
-%global rel 10
+%global rel 1
 %global system_kde_theme_ver 23.0
 
 Summary: Config files for kde
 Name:    kde-settings
-Version: 23
+Version: 24
 Release: %{rel}%{?dist}
 
 License: MIT
@@ -146,7 +146,7 @@ perl -pi -e "s,^View0_URL=.*,View0_URL=file:///usr/share/doc/HTML/index.html," %
 
 
 %files 
-%doc COPYING
+%license COPYING
 %config(noreplace) %{_sysconfdir}/profile.d/kde.*
 %{_sysconfdir}/kde/env/env.sh
 %{_sysconfdir}/kde/env/gpg-agent-startup.sh
@@ -194,7 +194,7 @@ perl -pi -e "s,^View0_URL=.*,View0_URL=file:///usr/share/doc/HTML/index.html," %
 %{?systemd_postun}
 
 %files kdm
-%doc COPYING
+%license COPYING
 %config(noreplace) /etc/pam.d/kdm*
 # compat symlink
 %{_datadir}/config/kdm
@@ -231,13 +231,16 @@ perl -pi -e "s,^View0_URL=.*,View0_URL=file:///usr/share/doc/HTML/index.html," %
 # nothing, this is a metapackage
 
 %files -n qt-settings
-%doc COPYING
+%license COPYING
 %config(noreplace) %{_sysconfdir}/xdg/QtProject/qtlogging.ini
 %config(noreplace) %{_sysconfdir}/Trolltech.conf
 %config(noreplace) %{_sysconfdir}/profile.d/qt-graphicssystem.*
 
 
 %changelog
+* Sat Jan 30 2016 Rex Dieter <rdieter@fedoraproject.org> 24-1
+- init v24, kde-mimeapps.list: adjust to kf5 versions of ark, dragon, gwenview
+
 * Thu Jan 07 2016 Rex Dieter <rdieter@fedoraproject.org> 23-10
 - revert prior commit, use prefix/plasma/shells/<package>/contents/updates instead
 
