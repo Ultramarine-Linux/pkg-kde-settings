@@ -1,5 +1,5 @@
 
-%global rel 10
+%global rel 11
 %global system_kde_theme_ver 23.0
 
 Summary: Config files for kde
@@ -238,6 +238,9 @@ perl -pi -e "s,^View0_URL=.*,View0_URL=file:///usr/share/doc/HTML/index.html," %
 
 
 %changelog
+* Wed Feb 10 2016 Rex Dieter <rdieter@fedoraproject.org> 23-11
+- merge kde-mimeapps.list fixes/improvements from master/ (#1299586)
+
 * Thu Jan 07 2016 Rex Dieter <rdieter@fedoraproject.org> 23-10
 - revert prior commit, use prefix/plasma/shells/<package>/contents/updates instead
 
