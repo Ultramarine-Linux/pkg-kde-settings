@@ -2,10 +2,13 @@
 %global rel 1
 %global system_kde_theme_ver 23.0
 
+#define to include kdm support
+#global kdm 1
+
 Summary: Config files for kde
 Name:    kde-settings
 Version: 24
-Release: %{rel}%{?dist}.1
+Release: %{rel}%{?dist}.2
 
 License: MIT
 Url:     http://fedorahosted.org/kde-settings
@@ -18,6 +21,12 @@ BuildRequires: systemd
 
 # when kdebugrc was moved here
 Conflicts: kf5-kdelibs4support < 5.7.0-3
+
+%if ! 0%{?kdm}
+Obsoletes: kde-settings-kdm < 24-2
+%endif
+
+Obsoletes: kde-settings-ksplash < 24-2
 
 Requires: kde-filesystem
 # /etc/pam.d/ ownership
@@ -180,6 +189,7 @@ perl -pi -e "s,^View0_URL=.*,View0_URL=file:///usr/share/doc/HTML/index.html," %
 %{_datadir}/kde-settings/kde-profile/minimal/
 %{_sysconfdir}/X11/xinit/xinitrc.d/20-kdedirs-minimal.sh
 
+%if 0%{?kdm}
 %post kdm
 %{?systemd_post:%systemd_post kdm.service}
 (grep '^UserAuthDir=/var/run/kdm$' %{_sysconfdir}/kde/kdm/kdmrc > /dev/null && \
@@ -215,8 +225,9 @@ perl -pi -e "s,^View0_URL=.*,View0_URL=file:///usr/share/doc/HTML/index.html," %
 %attr(0711,root,root) %dir %{_localstatedir}/run/kdm
 %attr(0711,root,root) %dir %{_localstatedir}/run/xdmctl
 %{_unitdir}/kdm.service
+%endif
 
-%files ksplash
+#files ksplash
 ## empty, FIXME
 
 %files plasma
@@ -238,6 +249,9 @@ perl -pi -e "s,^View0_URL=.*,View0_URL=file:///usr/share/doc/HTML/index.html," %
 
 
 %changelog
+* Fri Mar 11 2016 Rex Dieter <rdieter@fedoraproject.org> 24-1.2
+- drop -kdm, -ksplash
+
 * Thu Feb 04 2016 Fedora Release Engineering <releng@fedoraproject.org> - 24-1.1
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_24_Mass_Rebuild
 
