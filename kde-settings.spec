@@ -3,12 +3,12 @@
 %global system_kde_theme_ver 23.0
 
 #define to include kdm support
-#global kdm 1
+%global kdm 1
 
 Summary: Config files for kde
 Name:    kde-settings
 Version: 24
-Release: %{rel}%{?dist}.2
+Release: %{rel}%{?dist}.3
 
 License: MIT
 Url:     http://fedorahosted.org/kde-settings
@@ -249,6 +249,9 @@ perl -pi -e "s,^View0_URL=.*,View0_URL=file:///usr/share/doc/HTML/index.html," %
 
 
 %changelog
+* Sat Mar 12 2016 Rex Dieter <rdieter@fedoraproject.org> 24-1.3
+- (re)enable -kdm (dropping needswork)
+
 * Fri Mar 11 2016 Rex Dieter <rdieter@fedoraproject.org> 24-1.2
 - drop -kdm, -ksplash
 
