@@ -1,6 +1,6 @@
 
-%global rel 1
-%global system_kde_theme_ver 23.0
+%global rel 3
+#global system_kde_theme_ver 23.0
 
 #define to include kdm support
 %global kdm 1
@@ -8,7 +8,7 @@
 Summary: Config files for kde
 Name:    kde-settings
 Version: 24
-Release: %{rel}%{?dist}.3
+Release: %{rel}%{?dist}
 
 License: MIT
 Url:     http://fedorahosted.org/kde-settings
@@ -27,6 +27,7 @@ Obsoletes: kde-settings-kdm < 24-2
 %endif
 
 Obsoletes: kde-settings-ksplash < 24-2
+Obsoletes: kde-settings-minimal < 24-3
 
 Requires: kde-filesystem
 # /etc/pam.d/ ownership
@@ -56,7 +57,7 @@ Requires: xorg-x11-xinit
 Summary: Configuration files for kdm
 # MinShowUID=-1 is only supported from 4.7.1-2 on
 Requires: kdm >= 4.7.1-2
-%if 0%{?fedora}
+%if 0%{?system_kde_theme_ver:1}
 Requires: system-kdm-theme >= %{system_kde_theme_ver}
 %else
 Requires: redhat-logos >= 69.0.0
@@ -73,7 +74,7 @@ Requires(post): kde4-macros(api) = %{_kde4_macros_api}
 %package ksplash
 Summary: Configuration files for ksplash
 Requires: %{name} = %{version}-%{release}
-%if 0%{?fedora}
+%if 0%{?system_kde_theme_ver:1}
 Requires: system-ksplash-theme >= %{system_kde_theme_ver}
 %else
 Requires: redhat-logos >= 69.0.0
@@ -84,14 +85,16 @@ Requires: redhat-logos >= 69.0.0
 %package plasma
 Summary: Configuration files for plasma 
 Requires: %{name} = %{version}-%{release}
-%if 0%{?fedora}
+%if 0%{?system_kde_theme_ver:1}
 Requires: system-plasma-theme >= %{system_kde_theme_ver}
 %else
-Requires: redhat-logos >= 69.0.0
+Requires: system-logos
 %endif
 %description plasma 
 %{summary}.
 
+# FIXME/TODO: can probably consider dropping this subpkg now that we
+# have good comps and soft dependencies support -- rex
 %package pulseaudio
 Summary: Enable pulseaudio support in KDE
 # nothing here to license
@@ -136,9 +139,11 @@ ln -sf ../../../etc/kde/kdm %{buildroot}%{_datadir}/config/kdm
 mkdir -p %{buildroot}%{_localstatedir}/lib/kdm
 mkdir -p %{buildroot}%{_localstatedir}/run/{kdm,xdmctl}
 
-# unpackaged files (at least until fixed upstream)
-rm -fv %{buildroot}%{_datadir}/kde-settings/kde-profile/default/share/config/{ksplashrc,plasmarc}
+## unpackaged files
+# formerly known as -minimal
+rm -fv %{buildroot}%{_sysconfdir}/X11/xinit/xinitrc.d/20-kdedirs-minimal.sh
 
+# FIXME/NEEDSWORK, still (mostly?) kde4
 # rhel stuff
 %if 0%{?rhel}
 rm -rf %{buildroot}%{_sysconfdir}/kde/env/fedora-bookmarks.sh \
@@ -185,9 +190,9 @@ perl -pi -e "s,^View0_URL=.*,View0_URL=file:///usr/share/doc/HTML/index.html," %
 %exclude %{_datadir}/kde-settings/kde-profile/default/share/apps/plasma-desktop/init/00-defaultLayout.js
 %endif
 
-%files minimal
-%{_datadir}/kde-settings/kde-profile/minimal/
-%{_sysconfdir}/X11/xinit/xinitrc.d/20-kdedirs-minimal.sh
+#files minimal
+#{_datadir}/kde-settings/kde-profile/minimal/
+#{_sysconfdir}/X11/xinit/xinitrc.d/20-kdedirs-minimal.sh
 
 %if 0%{?kdm}
 %post kdm
@@ -232,7 +237,6 @@ perl -pi -e "s,^View0_URL=.*,View0_URL=file:///usr/share/doc/HTML/index.html," %
 
 %files plasma
 %{_datadir}/plasma/shells/org.kde.plasma.desktop/contents/updates/00-start-here-kde-fedora-2.js
-%{_datadir}/plasma/shells/org.kde.plasma.desktop/updates/00-start-here-kde-fedora-2.js
 %{_sysconfdir}/xdg/plasma-workspace/env/env.sh
 %{_sysconfdir}/xdg/plasma-workspace/env/gtk2_rc_files.sh
 %{_sysconfdir}/xdg/plasma-workspace/env/gtk3_scrolling.sh
@@ -243,12 +247,16 @@ perl -pi -e "s,^View0_URL=.*,View0_URL=file:///usr/share/doc/HTML/index.html," %
 
 %files -n qt-settings
 %license COPYING
-%config(noreplace) %{_sysconfdir}/xdg/QtProject/qtlogging.ini
 %config(noreplace) %{_sysconfdir}/Trolltech.conf
 %config(noreplace) %{_sysconfdir}/profile.d/qt-graphicssystem.*
 
 
 %changelog
+* Mon Mar 21 2016 Rex Dieter <rdieter@fedoraproject.org> - 24-3
+- drop -minimal
+- drop deprecated kde4 bits
+- generic theming (for now)
+
 * Sat Mar 12 2016 Rex Dieter <rdieter@fedoraproject.org> 24-1.3
 - (re)enable -kdm (dropping needswork)
 
