@@ -8,7 +8,7 @@
 Summary: Config files for kde
 Name:    kde-settings
 Version: 24
-Release: %{rel}%{?dist}
+Release: %{rel}%{?dist}.1
 
 License: MIT
 Url:     http://fedorahosted.org/kde-settings
@@ -111,7 +111,7 @@ Requires: alsa-plugins-pulseaudio
 %package -n qt-settings
 Summary: Configuration files for Qt 
 # qt-graphicssystem.* scripts use lspci
-Requires: pciutils
+#Requires: pciutils
 %description -n qt-settings
 %{summary}.
 
@@ -142,6 +142,7 @@ mkdir -p %{buildroot}%{_localstatedir}/run/{kdm,xdmctl}
 ## unpackaged files
 # formerly known as -minimal
 rm -fv %{buildroot}%{_sysconfdir}/X11/xinit/xinitrc.d/20-kdedirs-minimal.sh
+rm -fv %{buildroot}%{_sysconfdir}/profile.d/qt-graphicssystem.*
 
 # FIXME/NEEDSWORK, still (mostly?) kde4
 # rhel stuff
@@ -248,10 +249,13 @@ perl -pi -e "s,^View0_URL=.*,View0_URL=file:///usr/share/doc/HTML/index.html," %
 %files -n qt-settings
 %license COPYING
 %config(noreplace) %{_sysconfdir}/Trolltech.conf
-%config(noreplace) %{_sysconfdir}/profile.d/qt-graphicssystem.*
+#config(noreplace) %{_sysconfdir}/profile.d/qt-graphicssystem.*
 
 
 %changelog
+* Thu Mar 24 2016 Rex Dieter <rdieter@fedoraproject.org> 24-3.1
+- omit qt-graphicssystem.* shell hacks (#1306524)
+
 * Mon Mar 21 2016 Rex Dieter <rdieter@fedoraproject.org> - 24-3
 - drop -minimal
 - drop deprecated kde4 bits
