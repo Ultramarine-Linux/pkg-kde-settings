@@ -240,8 +240,7 @@ perl -pi -e "s,^View0_URL=.*,View0_URL=file:///usr/share/doc/HTML/index.html," %
 
 
 %changelog
-* Fri Mar 25 2016 Rex Dieter <rdieter@fedoraproject.org> 
-- 23-11.1
+* Fri Mar 25 2016 Rex Dieter <rdieter@fedoraproject.org> - 23-11.1
 - omit qt-graphicssystem.* shell hacks (#1306524)
 - drop /etc/xdg/QtProject/qtlogging.ini (#1227295)
 
