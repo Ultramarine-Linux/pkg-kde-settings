@@ -5,7 +5,7 @@
 Summary: Config files for kde
 Name:    kde-settings
 Version: 23
-Release: %{rel}%{?dist}
+Release: %{rel}%{?dist}.1
 
 License: MIT
 Url:     http://fedorahosted.org/kde-settings
@@ -99,7 +99,7 @@ Requires: alsa-plugins-pulseaudio
 %package -n qt-settings
 Summary: Configuration files for Qt 
 # qt-graphicssystem.* scripts use lspci
-Requires: pciutils
+#Requires: pciutils
 %description -n qt-settings
 %{summary}.
 
@@ -129,6 +129,8 @@ mkdir -p %{buildroot}%{_localstatedir}/run/{kdm,xdmctl}
 
 # unpackaged files (at least until fixed upstream)
 rm -fv %{buildroot}%{_datadir}/kde-settings/kde-profile/default/share/config/{ksplashrc,plasmarc}
+rm -fv %{buildroot}%{_sysconfdir}/profile.d/qt-graphicssystem.*
+rm -fv %{buildroot}%{_sysconfdir}/xdg/QtProject/qtlogging.ini
 
 # rhel stuff
 %if 0%{?rhel}
@@ -232,12 +234,17 @@ perl -pi -e "s,^View0_URL=.*,View0_URL=file:///usr/share/doc/HTML/index.html," %
 
 %files -n qt-settings
 %doc COPYING
-%config(noreplace) %{_sysconfdir}/xdg/QtProject/qtlogging.ini
+#config(noreplace) %{_sysconfdir}/xdg/QtProject/qtlogging.ini
 %config(noreplace) %{_sysconfdir}/Trolltech.conf
-%config(noreplace) %{_sysconfdir}/profile.d/qt-graphicssystem.*
+#config(noreplace) %{_sysconfdir}/profile.d/qt-graphicssystem.*
 
 
 %changelog
+* Fri Mar 25 2016 Rex Dieter <rdieter@fedoraproject.org> 
+- 23-11.1
+- omit qt-graphicssystem.* shell hacks (#1306524)
+- drop /etc/xdg/QtProject/qtlogging.ini (#1227295)
+
 * Wed Feb 10 2016 Rex Dieter <rdieter@fedoraproject.org> 23-11
 - merge kde-mimeapps.list fixes/improvements from master/ (#1299586)
 
