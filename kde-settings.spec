@@ -8,7 +8,7 @@
 Summary: Config files for kde
 Name:    kde-settings
 Version: 24
-Release: %{rel}%{?dist}.1
+Release: %{rel}%{?dist}.2
 
 License: MIT
 Url:     http://fedorahosted.org/kde-settings
@@ -60,7 +60,7 @@ Requires: kdm >= 4.7.1-2
 %if 0%{?system_kde_theme_ver:1}
 Requires: system-kdm-theme >= %{system_kde_theme_ver}
 %else
-Requires: redhat-logos >= 69.0.0
+Requires: system-logos
 %endif
 Requires: xorg-x11-xinit
 Requires(pre): coreutils
@@ -253,6 +253,9 @@ perl -pi -e "s,^View0_URL=.*,View0_URL=file:///usr/share/doc/HTML/index.html," %
 
 
 %changelog
+* Tue Mar 29 2016 Rex Dieter <rdieter@fedoraproject.org> 24-3.2
+- -kdm: Requires: s/redhat-logos/system-logos/
+
 * Thu Mar 24 2016 Rex Dieter <rdieter@fedoraproject.org> 24-3.1
 - omit qt-graphicssystem.* shell hacks (#1306524)
 
