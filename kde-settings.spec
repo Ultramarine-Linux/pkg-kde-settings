@@ -1,14 +1,13 @@
 
-%global rel 3
-#global system_kde_theme_ver 23.0
+%global rel 4
 
 #define to include kdm support
-%global kdm 1
+#global kdm 1
 
 Summary: Config files for kde
 Name:    kde-settings
 Version: 24
-Release: %{rel}%{?dist}.2
+Release: %{rel}%{?dist}
 
 License: MIT
 Url:     http://fedorahosted.org/kde-settings
@@ -21,10 +20,6 @@ BuildRequires: systemd
 
 # when kdebugrc was moved here
 Conflicts: kf5-kdelibs4support < 5.7.0-3
-
-%if ! 0%{?kdm}
-Obsoletes: kde-settings-kdm < 24-2
-%endif
 
 Obsoletes: kde-settings-ksplash < 24-2
 Obsoletes: kde-settings-minimal < 24-3
@@ -131,13 +126,20 @@ tar cpf - . | tar --directory %{buildroot} -xvpf -
 
 cp -p %{SOURCE1} .
 
+%if 0%{?kdm}
 # kdebase/kdm symlink
-rm -rf   %{buildroot}%{_datadir}/config/kdm
+rm -rfv   %{buildroot}%{_datadir}/config/kdm
 ln -sf ../../../etc/kde/kdm %{buildroot}%{_datadir}/config/kdm
 
 # own these
 mkdir -p %{buildroot}%{_localstatedir}/lib/kdm
 mkdir -p %{buildroot}%{_localstatedir}/run/{kdm,xdmctl}
+%else
+rm -rfv %{buildroot}%{_sysconfdir}/{kde/kdm,logrotate.d/kdm,pam.d/kdm*}
+rm -fv %{buildroot}%{_localstatedir}/lib/kdm/backgroundrc
+rm -fv %{buildroot}%{_tmpfilesdir}/kdm.conf
+rm -fv %{buildroot}%{_unitdir}/kdm.service
+%endif
 
 ## unpackaged files
 # formerly known as -minimal
@@ -253,6 +255,10 @@ perl -pi -e "s,^View0_URL=.*,View0_URL=file:///usr/share/doc/HTML/index.html," %
 
 
 %changelog
+* Tue Mar 29 2016 Rex Dieter <rdieter@fedoraproject.org> - 24-4
+- drop -kdm (superceded by kdm-settings subpkg of kde-workspace)
+- ksmserverrc: disable session management
+
 * Tue Mar 29 2016 Rex Dieter <rdieter@fedoraproject.org> 24-3.2
 - -kdm: Requires: s/redhat-logos/system-logos/
 
