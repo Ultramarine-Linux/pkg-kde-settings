@@ -1,5 +1,5 @@
 
-%global rel 4
+%global rel 5
 
 #define to include kdm support
 #global kdm 1
@@ -65,21 +65,10 @@ Requires(post): kde4-macros(api) = %{_kde4_macros_api}
 %description kdm
 %{summary}.
 
-## FIXME
-%package ksplash
-Summary: Configuration files for ksplash
-Requires: %{name} = %{version}-%{release}
-%if 0%{?system_kde_theme_ver:1}
-Requires: system-ksplash-theme >= %{system_kde_theme_ver}
-%else
-Requires: redhat-logos >= 69.0.0
-%endif
-%description ksplash 
-%{summary}.
-
 %package plasma
 Summary: Configuration files for plasma 
 Requires: %{name} = %{version}-%{release}
+Requires: f24-backgrounds-kde
 %if 0%{?system_kde_theme_ver:1}
 Requires: system-plasma-theme >= %{system_kde_theme_ver}
 %else
@@ -235,9 +224,6 @@ perl -pi -e "s,^View0_URL=.*,View0_URL=file:///usr/share/doc/HTML/index.html," %
 %{_unitdir}/kdm.service
 %endif
 
-#files ksplash
-## empty, FIXME
-
 %files plasma
 %{_datadir}/plasma/shells/org.kde.plasma.desktop/contents/updates/00-start-here-kde-fedora-2.js
 %{_sysconfdir}/xdg/plasma-workspace/env/env.sh
@@ -255,6 +241,10 @@ perl -pi -e "s,^View0_URL=.*,View0_URL=file:///usr/share/doc/HTML/index.html," %
 
 
 %changelog
+* Wed Mar 30 2016 Rex Dieter <rdieter@fedoraproject.org> - 24-5
+- plasmarc: Theme=F24
+- drop remnants of -ksplash subpkg
+
 * Tue Mar 29 2016 Rex Dieter <rdieter@fedoraproject.org> - 24-4
 - drop -kdm (superceded by kdm-settings subpkg of kde-workspace)
 - ksmserverrc: disable session management
