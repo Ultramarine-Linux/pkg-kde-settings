@@ -1,5 +1,5 @@
 
-%global rel 5
+%global rel 6
 
 #define to include kdm support
 #global kdm 1
@@ -225,7 +225,6 @@ perl -pi -e "s,^View0_URL=.*,View0_URL=file:///usr/share/doc/HTML/index.html," %
 %endif
 
 %files plasma
-%{_datadir}/plasma/shells/org.kde.plasma.desktop/contents/updates/00-start-here-kde-fedora-2.js
 %{_sysconfdir}/xdg/plasma-workspace/env/env.sh
 %{_sysconfdir}/xdg/plasma-workspace/env/gtk2_rc_files.sh
 %{_sysconfdir}/xdg/plasma-workspace/env/gtk3_scrolling.sh
@@ -241,6 +240,9 @@ perl -pi -e "s,^View0_URL=.*,View0_URL=file:///usr/share/doc/HTML/index.html," %
 
 
 %changelog
+* Tue Apr 19 2016 Rex Dieter <rdieter@fedoraproject.org> - 24-6
+- drop 00-start-here-kde-fedora-2.js
+
 * Wed Mar 30 2016 Rex Dieter <rdieter@fedoraproject.org> - 24-5
 - plasmarc: Theme=F24
 - drop remnants of -ksplash subpkg
