@@ -1,11 +1,11 @@
 
-%global rel 11
+%global rel 12
 %global system_kde_theme_ver 23.0
 
 Summary: Config files for kde
 Name:    kde-settings
 Version: 23
-Release: %{rel}%{?dist}.1
+Release: %{rel}%{?dist}
 
 License: MIT
 Url:     http://fedorahosted.org/kde-settings
@@ -222,8 +222,7 @@ perl -pi -e "s,^View0_URL=.*,View0_URL=file:///usr/share/doc/HTML/index.html," %
 ## empty, FIXME
 
 %files plasma
-%{_datadir}/plasma/shells/org.kde.plasma.desktop/contents/updates/00-start-here-kde-fedora-2.js
-%{_datadir}/plasma/shells/org.kde.plasma.desktop/updates/00-start-here-kde-fedora-2.js
+%{_datadir}/plasma/shells/org.kde.plasma.desktop/contents/updates/00-start-here-1.js
 %{_sysconfdir}/xdg/plasma-workspace/env/env.sh
 %{_sysconfdir}/xdg/plasma-workspace/env/gtk2_rc_files.sh
 %{_sysconfdir}/xdg/plasma-workspace/env/gtk3_scrolling.sh
@@ -240,6 +239,9 @@ perl -pi -e "s,^View0_URL=.*,View0_URL=file:///usr/share/doc/HTML/index.html," %
 
 
 %changelog
+* Sun Jun 26 2016 Rex Dieter <rdieter@fedoraproject.org> - 23-12
+- 00-start-here-1.js: use 'start-here' instead of 'start-here-kde-fedora' (#1344118)
+
 * Fri Mar 25 2016 Rex Dieter <rdieter@fedoraproject.org> - 23-11.1
 - omit qt-graphicssystem.* shell hacks (#1306524)
 - drop /etc/xdg/QtProject/qtlogging.ini (#1227295)
