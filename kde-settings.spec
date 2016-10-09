@@ -1,12 +1,9 @@
 
-%global rel 7
-
-#define to include kdm support
-#global kdm 1
+%global rel 2
 
 Summary: Config files for kde
 Name:    kde-settings
-Version: 24
+Version: 25
 Release: %{rel}%{?dist}
 
 License: MIT
@@ -48,32 +45,11 @@ Requires: xorg-x11-xinit
 %description minimal
 %{summary}.
 
-%package kdm
-Summary: Configuration files for kdm
-# MinShowUID=-1 is only supported from 4.7.1-2 on
-Requires: kdm >= 4.7.1-2
-%if 0%{?system_kde_theme_ver:1}
-Requires: system-kdm-theme >= %{system_kde_theme_ver}
-%else
-Requires: system-logos
-%endif
-Requires: xorg-x11-xinit
-Requires(pre): coreutils
-Requires(post): coreutils grep sed
-Requires(post): kde4-macros(api) = %{_kde4_macros_api}
-%{?systemd_requires}
-%description kdm
-%{summary}.
-
 %package plasma
 Summary: Configuration files for plasma 
 Requires: %{name} = %{version}-%{release}
-Requires: f24-backgrounds-kde
-%if 0%{?system_kde_theme_ver:1}
-Requires: system-plasma-theme >= %{system_kde_theme_ver}
-%else
+Requires: f25-backgrounds-kde
 Requires: system-logos
-%endif
 %description plasma 
 %{summary}.
 
@@ -115,20 +91,11 @@ tar cpf - . | tar --directory %{buildroot} -xvpf -
 
 cp -p %{SOURCE1} .
 
-%if 0%{?kdm}
-# kdebase/kdm symlink
-rm -rfv   %{buildroot}%{_datadir}/config/kdm
-ln -sf ../../../etc/kde/kdm %{buildroot}%{_datadir}/config/kdm
-
-# own these
-mkdir -p %{buildroot}%{_localstatedir}/lib/kdm
-mkdir -p %{buildroot}%{_localstatedir}/run/{kdm,xdmctl}
-%else
+# omit kdm stuff
 rm -rfv %{buildroot}%{_sysconfdir}/{kde/kdm,logrotate.d/kdm,pam.d/kdm*}
 rm -fv %{buildroot}%{_localstatedir}/lib/kdm/backgroundrc
 rm -fv %{buildroot}%{_tmpfilesdir}/kdm.conf
 rm -fv %{buildroot}%{_unitdir}/kdm.service
-%endif
 
 ## unpackaged files
 # formerly known as -minimal
@@ -182,54 +149,15 @@ perl -pi -e "s,^View0_URL=.*,View0_URL=file:///usr/share/doc/HTML/index.html," %
 %exclude %{_datadir}/kde-settings/kde-profile/default/share/apps/plasma-desktop/init/00-defaultLayout.js
 %endif
 
-#files minimal
-#{_datadir}/kde-settings/kde-profile/minimal/
-#{_sysconfdir}/X11/xinit/xinitrc.d/20-kdedirs-minimal.sh
-
-%if 0%{?kdm}
-%post kdm
-%{?systemd_post:%systemd_post kdm.service}
-(grep '^UserAuthDir=/var/run/kdm$' %{_sysconfdir}/kde/kdm/kdmrc > /dev/null && \
- sed -i.rpmsave -e 's|^UserAuthDir=/var/run/kdm$|#UserAuthDir=/tmp|' \
- %{_sysconfdir}/kde/kdm/kdmrc
-) ||:
-
-%preun kdm
-%{?systemd_preun:%systemd_preun kdm.service}
-
-%postun kdm
-%{?systemd_postun}
-
-%files kdm
-%license COPYING
-%config(noreplace) /etc/pam.d/kdm*
-# compat symlink
-%{_datadir}/config/kdm
-%dir %{_sysconfdir}/kde/kdm
-%config(noreplace) %{_sysconfdir}/kde/kdm/kdmrc
-%dir %{_localstatedir}/lib/kdm
-%config(noreplace) %{_localstatedir}/lib/kdm/backgroundrc
-%ghost %config(missingok,noreplace) %verify(not md5 size mtime) %{_sysconfdir}/kde/kdm/README*
-%config(noreplace) %{_sysconfdir}/kde/kdm/Xaccess
-%config(noreplace) %{_sysconfdir}/kde/kdm/Xresources
-%config(noreplace) %{_sysconfdir}/kde/kdm/Xsession
-%config(noreplace) %{_sysconfdir}/kde/kdm/Xsetup
-%config(noreplace) %{_sysconfdir}/kde/kdm/Xwilling
-# own logrotate.d/ avoiding hard dep on logrotate
-%dir %{_sysconfdir}/logrotate.d
-%config(noreplace) %{_sysconfdir}/logrotate.d/kdm
-%{_tmpfilesdir}/kdm.conf
-%attr(0711,root,root) %dir %{_localstatedir}/run/kdm
-%attr(0711,root,root) %dir %{_localstatedir}/run/xdmctl
-%{_unitdir}/kdm.service
-%endif
-
 %files plasma
 %{_datadir}/plasma/shells/org.kde.plasma.desktop/contents/updates/00-start-here-2.js
 %{_sysconfdir}/xdg/plasma-workspace/env/env.sh
 %{_sysconfdir}/xdg/plasma-workspace/env/gtk2_rc_files.sh
 %{_sysconfdir}/xdg/plasma-workspace/env/gtk3_scrolling.sh
 %{_sysconfdir}/xdg/plasma-workspace/shutdown/kuiserver5.sh
+%{_datadir}/plasma/look-and-feel/org.fedoraproject.fedora.desktop/contents/plasmoidsetupscripts/org.kde.plasma.kicker.js
+%{_datadir}/plasma/look-and-feel/org.fedoraproject.fedora.desktop/contents/plasmoidsetupscripts/org.kde.plasma.kickerdash.js
+%{_datadir}/plasma/look-and-feel/org.fedoraproject.fedora.desktop/contents/plasmoidsetupscripts/org.kde.plasma.kickoff.js
 
 %files pulseaudio
 # nothing, this is a metapackage
@@ -241,6 +169,9 @@ perl -pi -e "s,^View0_URL=.*,View0_URL=file:///usr/share/doc/HTML/index.html," %
 
 
 %changelog
+* Sun Oct 09 2016 Rex Dieter <rdieter@fedoraproject.org> - 25-2
+- init kde-settings-25
+
 * Wed Jul 06 2016 Rex Dieter <rdieter@fedoraproject.org> - 24-7
 - better start-here scriplet
 
