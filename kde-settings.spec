@@ -1,5 +1,5 @@
 
-%global rel 7
+%global rel 8
 
 #define to include kdm support
 #global kdm 1
@@ -241,6 +241,9 @@ perl -pi -e "s,^View0_URL=.*,View0_URL=file:///usr/share/doc/HTML/index.html," %
 
 
 %changelog
+* Mon Nov 14 2016 Rex Dieter <rdieter@fedoraproject.org> - 24-8
++- kscreenlockerrc: set background for new plasma-5.8 screenlocker
+
 * Wed Jul 06 2016 Rex Dieter <rdieter@fedoraproject.org> - 24-7
 - better start-here scriplet
 
