@@ -4,7 +4,7 @@
 Summary: Config files for kde
 Name:    kde-settings
 Version: 25
-Release: %{rel}%{?dist}
+Release: %{rel}%{?dist}.1
 
 License: MIT
 Url:     http://fedorahosted.org/kde-settings
@@ -169,6 +169,9 @@ perl -pi -e "s,^View0_URL=.*,View0_URL=file:///usr/share/doc/HTML/index.html," %
 
 
 %changelog
+* Fri Feb 10 2017 Fedora Release Engineering <releng@fedoraproject.org> - 25-2.1
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_26_Mass_Rebuild
+
 * Sun Oct 09 2016 Rex Dieter <rdieter@fedoraproject.org> - 25-2
 - init kde-settings-25
 
