@@ -1,14 +1,14 @@
 
-%global rel 2
+%global rel 3
 
 Summary: Config files for kde
 Name:    kde-settings
 Version: 25
-Release: %{rel}%{?dist}.1
+Release: %{rel}%{?dist}
 
 License: MIT
-Url:     http://fedorahosted.org/kde-settings
-Source0: https://fedorahosted.org/releases/k/d/kde-settings/%{name}-%{version}-%{rel}.tar.xz
+Url:     https://github.com/FedoraKDE/kde-settings
+Source0: https://github.com/FedoraKDE/kde-settings/archive/v%{version}-%{rel}.tar.gz
 Source1: COPYING
 BuildArch: noarch
 
@@ -78,6 +78,9 @@ Summary: Configuration files for Qt
 
 %prep
 %setup -q -n %{name}-%{version}-%{rel}
+
+# omit crud
+rm -fv Makefile
 
 
 %build
@@ -169,6 +172,9 @@ perl -pi -e "s,^View0_URL=.*,View0_URL=file:///usr/share/doc/HTML/index.html," %
 
 
 %changelog
+* Wed Mar 15 2017 Rex Dieter <rdieter@fedoraproject.org> - 25-3
+- mimeapps: prefer plasma-discover (over apper)
+
 * Fri Feb 10 2017 Fedora Release Engineering <releng@fedoraproject.org> - 25-2.1
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_26_Mass_Rebuild
 
