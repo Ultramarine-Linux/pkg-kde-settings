@@ -1,5 +1,5 @@
 
-%global rel 9
+%global rel 8
 
 #define to include kdm support
 #global kdm 1
@@ -7,7 +7,7 @@
 Summary: Config files for kde
 Name:    kde-settings
 Version: 24
-Release: %{rel}%{?dist}
+Release: %{rel}%{?dist}.1
 
 License: MIT
 Url:     http://fedorahosted.org/kde-settings
@@ -241,7 +241,7 @@ perl -pi -e "s,^View0_URL=.*,View0_URL=file:///usr/share/doc/HTML/index.html," %
 
 
 %changelog
-* Mon Mar 20 2017 Rex Dieter <rdieter@fedoraproject.org> - 24-9
+* Mon Mar 20 2017 Rex Dieter <rdieter@fedoraproject.org> - 24-8.1
 - rebuild
 
 * Mon Nov 14 2016 Rex Dieter <rdieter@fedoraproject.org> - 24-8
