@@ -1,5 +1,5 @@
 
-%global rel 3
+%global rel 4
 
 Summary: Config files for kde
 Name:    kde-settings
@@ -48,7 +48,7 @@ Requires: xorg-x11-xinit
 %package plasma
 Summary: Configuration files for plasma 
 Requires: %{name} = %{version}-%{release}
-Requires: f25-backgrounds-kde
+Requires: f26-backgrounds-kde
 Requires: system-logos
 %description plasma 
 %{summary}.
@@ -172,6 +172,9 @@ perl -pi -e "s,^View0_URL=.*,View0_URL=file:///usr/share/doc/HTML/index.html," %
 
 
 %changelog
+* Mon Mar 27 2017 Adam Williamson <awilliam@redhat.com> - 25-4
+- Bump to F26 backgrounds
+
 * Wed Mar 15 2017 Rex Dieter <rdieter@fedoraproject.org> - 25-3
 - mimeapps: prefer plasma-discover (over apper)
 
