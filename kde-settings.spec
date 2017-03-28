@@ -1,10 +1,12 @@
 
-%global rel 4
+%global rel 3
 
 Summary: Config files for kde
 Name:    kde-settings
 Version: 25
-Release: %{rel}%{?dist}
+## FIXME - I can't commit to github, so I had to separate this and Source0
+## - adamw
+Release: 4%{?dist}
 
 License: MIT
 Url:     https://github.com/FedoraKDE/kde-settings
