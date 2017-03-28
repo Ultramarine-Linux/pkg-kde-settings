@@ -6,12 +6,14 @@ Name:    kde-settings
 Version: 25
 ## FIXME - I can't commit to github, so I had to separate this and Source0
 ## - adamw
-Release: 4%{?dist}
+Release: 5%{?dist}
 
 License: MIT
 Url:     https://github.com/FedoraKDE/kde-settings
 Source0: https://github.com/FedoraKDE/kde-settings/archive/v%{version}-%{rel}.tar.gz
 Source1: COPYING
+# Change default theme from 'F25' to 'F26' (as I can't commit to github)
+Patch0: kde-settings-26-theme.patch
 BuildArch: noarch
 
 BuildRequires: kde-filesystem
@@ -79,7 +81,7 @@ Summary: Configuration files for Qt
 
 
 %prep
-%setup -q -n %{name}-%{version}-%{rel}
+%autosetup -p1 -n %{name}-%{version}-%{rel}
 
 # omit crud
 rm -fv Makefile
@@ -174,6 +176,9 @@ perl -pi -e "s,^View0_URL=.*,View0_URL=file:///usr/share/doc/HTML/index.html," %
 
 
 %changelog
+* Mon Mar 27 2017 Adam Williamson <awilliam@redhat.com> - 25-5
+- Patch another thing needed to get correct F26 theme
+
 * Mon Mar 27 2017 Adam Williamson <awilliam@redhat.com> - 25-4
 - Bump to F26 backgrounds
 
