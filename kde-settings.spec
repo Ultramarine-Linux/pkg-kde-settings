@@ -6,7 +6,7 @@ Name:    kde-settings
 Version: 25
 ## FIXME - I can't commit to github, so I had to separate this and Source0
 ## - adamw
-Release: 5%{?dist}
+Release: 5%{?dist}.1
 
 License: MIT
 Url:     https://github.com/FedoraKDE/kde-settings
@@ -31,10 +31,10 @@ Requires: pam
 Requires: xdg-user-dirs
 ## add breeze deps here? probably, need more too -- rex
 Requires: breeze-icon-theme
-%if 0%{?fedora}
+#if 0%{?fedora}
 # for 11-fedora-kde-policy.rules
-Requires: polkit-js-engine
-%endif
+#Requires: polkit-js-engine
+#endif
 
 Requires(post): coreutils sed
 
@@ -176,6 +176,9 @@ perl -pi -e "s,^View0_URL=.*,View0_URL=file:///usr/share/doc/HTML/index.html," %
 
 
 %changelog
+* Thu Mar 30 2017 Rex Dieter <rdieter@fedoraproject.org> - 25-5.1
+- drop Requires: polkit-js-engine
+
 * Mon Mar 27 2017 Adam Williamson <awilliam@redhat.com> - 25-5
 - Patch another thing needed to get correct F26 theme
 
