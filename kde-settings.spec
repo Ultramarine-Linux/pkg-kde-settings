@@ -1,19 +1,19 @@
 
-%global rel 3
+%global rel 6
 
 Summary: Config files for kde
 Name:    kde-settings
 Version: 25
-## FIXME - I can't commit to github, so I had to separate this and Source0
-## - adamw
-Release: 5%{?dist}.1
+Release: %{rel}%{?dist}
 
 License: MIT
 Url:     https://github.com/FedoraKDE/kde-settings
 Source0: https://github.com/FedoraKDE/kde-settings/archive/v%{version}-%{rel}.tar.gz
 Source1: COPYING
+%if 0%{?fedora} > 25
 # Change default theme from 'F25' to 'F26' (as I can't commit to github)
 Patch0: kde-settings-26-theme.patch
+%endif
 BuildArch: noarch
 
 BuildRequires: kde-filesystem
@@ -176,6 +176,9 @@ perl -pi -e "s,^View0_URL=.*,View0_URL=file:///usr/share/doc/HTML/index.html," %
 
 
 %changelog
+* Thu Apr 20 2017 Rex Dieter <rdieter@fedoraproject.org> - 25-6
+- baloofilerc: drop explicit folders= key (use default set in kf5-baloo)
+
 * Thu Mar 30 2017 Rex Dieter <rdieter@fedoraproject.org> - 25-5.1
 - drop Requires: polkit-js-engine
 
