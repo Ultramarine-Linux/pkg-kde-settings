@@ -10,10 +10,6 @@ License: MIT
 Url:     https://github.com/FedoraKDE/kde-settings
 Source0: https://github.com/FedoraKDE/kde-settings/archive/v%{version}-%{rel}.tar.gz
 Source1: COPYING
-%if 0%{?fedora} > 25
-# Change default theme from 'F25' to 'F26' (as I can't commit to github)
-Patch0: kde-settings-26-theme.patch
-%endif
 BuildArch: noarch
 
 BuildRequires: kde-filesystem
