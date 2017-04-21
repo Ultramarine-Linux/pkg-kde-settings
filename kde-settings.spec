@@ -4,7 +4,7 @@
 Summary: Config files for kde
 Name:    kde-settings
 Version: 25
-Release: %{rel}%{?dist}
+Release: %{rel}%{?dist}.1
 
 License: MIT
 Url:     https://github.com/FedoraKDE/kde-settings
@@ -48,7 +48,7 @@ Requires: xorg-x11-xinit
 %package plasma
 Summary: Configuration files for plasma 
 Requires: %{name} = %{version}-%{release}
-Requires: f26-backgrounds-kde
+Requires: f25-backgrounds-kde
 Requires: system-logos
 %description plasma 
 %{summary}.
@@ -172,6 +172,9 @@ perl -pi -e "s,^View0_URL=.*,View0_URL=file:///usr/share/doc/HTML/index.html," %
 
 
 %changelog
+* Fri Apr 21 2017 Rex Dieter <rdieter@fedoraproject.org> - 25-6.1
+- -plasma: fix backgrounds dep
+
 * Thu Apr 20 2017 Rex Dieter <rdieter@fedoraproject.org> - 25-6
 - baloofilerc: drop explicit folders= key (use default set in kf5-baloo)
 
