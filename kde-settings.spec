@@ -4,12 +4,15 @@
 Summary: Config files for kde
 Name:    kde-settings
 Version: 26
-Release: %{rel}%{?dist}.1
+Release: %{rel}%{?dist}.2
 
 License: MIT
 Url:     https://github.com/FedoraKDE/kde-settings
 Source0: https://github.com/FedoraKDE/kde-settings/archive/v%{version}-%{rel}.tar.gz
 Source1: COPYING
+
+Patch0:  kde-settings-27-theme.patch
+
 BuildArch: noarch
 
 BuildRequires: kde-filesystem
@@ -46,11 +49,11 @@ Requires: xorg-x11-xinit
 %{summary}.
 
 %package plasma
-Summary: Configuration files for plasma 
+Summary: Configuration files for plasma
 Requires: %{name} = %{version}-%{release}
-Requires: f26-backgrounds-kde
+Requires: f27-backgrounds-kde
 Requires: system-logos
-%description plasma 
+%description plasma
 %{summary}.
 
 # FIXME/TODO: can probably consider dropping this subpkg now that we
@@ -69,7 +72,7 @@ Requires: alsa-plugins-pulseaudio
 %{summary}.
 
 %package -n qt-settings
-Summary: Configuration files for Qt 
+Summary: Configuration files for Qt
 # qt-graphicssystem.* scripts use lspci
 #Requires: pciutils
 %description -n qt-settings
@@ -121,7 +124,7 @@ perl -pi -e "s,^View0_URL=.*,View0_URL=file:///usr/share/doc/HTML/index.html," %
 %endif
 
 
-%files 
+%files
 %license COPYING
 %config(noreplace) %{_sysconfdir}/profile.d/kde.*
 %{_sysconfdir}/kde/env/env.sh
@@ -172,6 +175,9 @@ perl -pi -e "s,^View0_URL=.*,View0_URL=file:///usr/share/doc/HTML/index.html," %
 
 
 %changelog
+* Wed Sep 20 2017 Jan Grulich <jgrulich@redhat.com> - 26-1.2
+- Update for Fedora 27
+
 * Wed Jul 26 2017 Fedora Release Engineering <releng@fedoraproject.org> - 26-1.1
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_27_Mass_Rebuild
 
@@ -388,7 +394,7 @@ perl -pi -e "s,^View0_URL=.*,View0_URL=file:///usr/share/doc/HTML/index.html," %
 - remove Console login menu option from KDM (#966095)
 
 * Wed May 22 2013 Than Ngo <than@redhat.com> - 19-22
-- disable java by default 
+- disable java by default
 
 * Tue May 21 2013 Rex Dieter <rdieter@fedoraproject.org> 19-21
 - cleanup systemd macros
@@ -560,7 +566,7 @@ perl -pi -e "s,^View0_URL=.*,View0_URL=file:///usr/share/doc/HTML/index.html," %
 - -kdm: Requires: system-kdm-theme >= 15.90
 
 * Mon Oct 31 2011 Rex Dieter <rdieter@fedoraproject.org> 4.7-13.1
-- -kdm: Requires: verne-kdm-theme (#651305) 
+- -kdm: Requires: verne-kdm-theme (#651305)
 
 * Fri Oct 21 2011 Rex Dieter <rdieter@fedoraproject.org> 4.7-13
 - s/kpackagekit/apper/ configs
@@ -641,8 +647,8 @@ perl -pi -e "s,^View0_URL=.*,View0_URL=file:///usr/share/doc/HTML/index.html," %
 - drop old Conflicts
 - Xserver-1.10: Fatal server error: Unrecognized option: -nr (#659684)
 
-* Mon Nov 29 2010 Rex Dieter <rdieter@fedoraproject.org> 4.6-1 
-- init 4.6 
+* Mon Nov 29 2010 Rex Dieter <rdieter@fedoraproject.org> 4.6-1
+- init 4.6
 - /var/run/kdm/ fails to be created on boot (#657785)
 
 * Thu Nov 11 2010 Rex Dieter <rdieter@fedoraproject.org> 4.5-11
