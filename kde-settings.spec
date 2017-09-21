@@ -3,15 +3,13 @@
 
 Summary: Config files for kde
 Name:    kde-settings
-Version: 26
-Release: %{rel}%{?dist}.2
+Version: 27
+Release: %{rel}%{?dist}
 
 License: MIT
 Url:     https://github.com/FedoraKDE/kde-settings
 Source0: https://github.com/FedoraKDE/kde-settings/archive/v%{version}-%{rel}.tar.gz
 Source1: COPYING
-
-Patch0:  kde-settings-27-theme.patch
 
 BuildArch: noarch
 
@@ -175,6 +173,9 @@ perl -pi -e "s,^View0_URL=.*,View0_URL=file:///usr/share/doc/HTML/index.html," %
 
 
 %changelog
+* Thu Sep 21 2017 Jan Grulich <jgrulich@redhat.com> - 27-1
+- Properly update for Fedora 27 (updated tarball)
+
 * Wed Sep 20 2017 Jan Grulich <jgrulich@redhat.com> - 26-1.2
 - Update for Fedora 27
 
