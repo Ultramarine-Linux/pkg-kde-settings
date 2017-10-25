@@ -1,10 +1,10 @@
 
-%global rel 2
+%global rel 1
 
 Summary: Config files for kde
 Name:    kde-settings
 Version: 27
-Release: %{rel}%{?dist}
+Release: %{rel}%{?dist}.1
 
 License: MIT
 Url:     https://github.com/FedoraKDE/kde-settings
@@ -173,7 +173,7 @@ perl -pi -e "s,^View0_URL=.*,View0_URL=file:///usr/share/doc/HTML/index.html," %
 
 
 %changelog
-* Wed Oct 25 2017 Troy Dawson <tdawson@redhat.com> - 27-2
+* Wed Oct 25 2017 Troy Dawson <tdawson@redhat.com> - 27-1.1
 - Cleanup spec file conditionals
 
 * Thu Sep 21 2017 Jan Grulich <jgrulich@redhat.com> - 27-1
