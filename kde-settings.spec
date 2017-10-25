@@ -1,5 +1,5 @@
 
-%global rel 1
+%global rel 2
 
 Summary: Config files for kde
 Name:    kde-settings
@@ -108,7 +108,7 @@ rm -fv %{buildroot}%{_sysconfdir}/profile.d/qt-graphicssystem.*
 
 # FIXME/NEEDSWORK, still (mostly?) kde4
 # rhel stuff
-%if 0%{?rhel}
+%if 0%{?rhel} && 0%{?rhel} <= 7
 rm -rf %{buildroot}%{_sysconfdir}/kde/env/fedora-bookmarks.sh \
        %{buildroot}%{_prefix}/lib/rpm \
        %{buildroot}%{_datadir}/polkit-1/
@@ -129,7 +129,7 @@ perl -pi -e "s,^View0_URL=.*,View0_URL=file:///usr/share/doc/HTML/index.html," %
 %{_sysconfdir}/kde/env/gpg-agent-startup.sh
 %{_sysconfdir}/kde/shutdown/gpg-agent-shutdown.sh
 %{_sysconfdir}/kde/env/gtk2_rc_files.sh
-%if 0%{?fedora}
+%if 0%{?fedora} || 0%{?rhel} > 7
 %{_sysconfdir}/kde/env/fedora-bookmarks.sh
 %{_datadir}/kde-settings/
 # these can probably go now -- rex
@@ -149,7 +149,7 @@ perl -pi -e "s,^View0_URL=.*,View0_URL=file:///usr/share/doc/HTML/index.html," %
 %dir %{_datadir}/kde-settings/kde-profile/
 %{_datadir}/kde-settings/kde-profile/default/
 %{_datadir}/applications/kde-mimeapps.list
-%if 0%{?rhel}
+%if 0%{?rhel} && 0%{?rhel} <= 7
 %exclude %{_datadir}/kde-settings/kde-profile/default/share/apps/plasma-desktop/init/00-defaultLayout.js
 %endif
 
@@ -173,6 +173,9 @@ perl -pi -e "s,^View0_URL=.*,View0_URL=file:///usr/share/doc/HTML/index.html," %
 
 
 %changelog
+* Wed Oct 25 2017 Troy Dawson <tdawson@redhat.com> - 27-2
+- Cleanup spec file conditionals
+
 * Thu Sep 21 2017 Jan Grulich <jgrulich@redhat.com> - 27-1
 - Properly update for Fedora 27 (updated tarball)
 
