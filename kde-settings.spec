@@ -4,7 +4,7 @@
 Summary: Config files for kde
 Name:    kde-settings
 Version: 27
-Release: %{rel}%{?dist}.2
+Release: %{rel}%{?dist}.3
 
 License: MIT
 Url:     https://github.com/FedoraKDE/kde-settings
@@ -173,6 +173,9 @@ perl -pi -e "s,^View0_URL=.*,View0_URL=file:///usr/share/doc/HTML/index.html," %
 
 
 %changelog
+* Fri Feb 09 2018 Igor Gnatenko <ignatenkobrain@fedoraproject.org> - 27-1.3
+- Escape macros in %%changelog
+
 * Wed Feb 07 2018 Fedora Release Engineering <releng@fedoraproject.org> - 27-1.2
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_28_Mass_Rebuild
 
@@ -647,8 +650,8 @@ perl -pi -e "s,^View0_URL=.*,View0_URL=file:///usr/share/doc/HTML/index.html," %
 - add support for the postlogin PAM stack to kdm (#665060)
 
 * Wed Dec 08 2010 Rex Dieter <rdieter@fedoraproject.org> 4.6-2.1
-- %post kdm : sed -e 's|-nr|-background none|' kdmrc (#659684)
-- %post kdm : drop old stuff
+- %%post kdm : sed -e 's|-nr|-background none|' kdmrc (#659684)
+- %%post kdm : drop old stuff
 
 * Fri Dec 03 2010 Rex Dieter <rdieter@fedoraproject.org> - 4.6-2
 - drop old Conflicts
