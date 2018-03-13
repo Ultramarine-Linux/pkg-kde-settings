@@ -1,14 +1,12 @@
 
-%global rel 1
-
 Summary: Config files for kde
 Name:    kde-settings
-Version: 27
-Release: %{rel}%{?dist}.3
+Version: 28.0
+Release: 1%{?dist}
 
 License: MIT
 Url:     https://github.com/FedoraKDE/kde-settings
-Source0: https://github.com/FedoraKDE/kde-settings/archive/v%{version}-%{rel}.tar.gz
+Source0: https://github.com/FedoraKDE/kde-settings/archive/%{version}/%{name}-%{version}.tar.gz
 Source1: COPYING
 
 BuildArch: noarch
@@ -78,7 +76,7 @@ Summary: Configuration files for Qt
 
 
 %prep
-%autosetup -p1 -n %{name}-%{version}-%{rel}
+%autosetup -p1
 
 # omit crud
 rm -fv Makefile
@@ -173,6 +171,9 @@ perl -pi -e "s,^View0_URL=.*,View0_URL=file:///usr/share/doc/HTML/index.html," %
 
 
 %changelog
+* Mon Mar 12 2018 Rex Dieter <rdieter@fedoraproject.org> - 28.0-1
+- Update for Fedora 28
+
 * Fri Feb 09 2018 Igor Gnatenko <ignatenkobrain@fedoraproject.org> - 27-1.3
 - Escape macros in %%changelog
 
