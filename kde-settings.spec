@@ -1,8 +1,8 @@
 
 Summary: Config files for kde
 Name:    kde-settings
-Version: 28.0
-Release: 3%{?dist}
+Version: 29.0
+Release: 1%{?dist}
 
 License: MIT
 Url:     https://github.com/FedoraKDE/kde-settings
@@ -47,7 +47,7 @@ Requires: xorg-x11-xinit
 %package plasma
 Summary: Configuration files for plasma
 Requires: %{name} = %{version}-%{release}
-Requires: f28-backgrounds-kde
+Requires: f29-backgrounds-kde
 Requires: system-logos
 %description plasma
 %{summary}.
@@ -171,6 +171,9 @@ perl -pi -e "s,^View0_URL=.*,View0_URL=file:///usr/share/doc/HTML/index.html," %
 
 
 %changelog
+* Thu Sep 13 2018 Rex Dieter <rdieter@fedoraproject.org> - 29.0-1
+- 29.0
+
 * Fri Jul 13 2018 Fedora Release Engineering <releng@fedoraproject.org> - 28.0-3
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_29_Mass_Rebuild
 
