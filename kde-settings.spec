@@ -2,7 +2,7 @@
 Summary: Config files for kde
 Name:    kde-settings
 Version: 29.0
-Release: 1%{?dist}
+Release: 2%{?dist}
 
 License: MIT
 Url:     https://github.com/FedoraKDE/kde-settings
@@ -87,17 +87,26 @@ rm -fv Makefile
 
 
 %install
-mkdir -p %{buildroot}{%{_datadir}/config,%{_sysconfdir}/kde/kdm}
+mkdir -p %{buildroot}{/usr/share/config,/etc/kde/kdm}
 
 tar cpf - . | tar --directory %{buildroot} -xvpf -
+
+if [ %{_prefix} != /usr ] ; then
+   pushd %{buildroot}
+   mv %{buildroot}/usr %{buildroot}%{_prefix}
+   mv %{buildroot}/etc %{buildroot}%{_sysconfdir}
+   popd
+fi
+
 
 cp -p %{SOURCE1} .
 
 # omit kdm stuff
 rm -rfv %{buildroot}%{_sysconfdir}/{kde/kdm,logrotate.d/kdm,pam.d/kdm*}
 rm -fv %{buildroot}%{_localstatedir}/lib/kdm/backgroundrc
-rm -fv %{buildroot}%{_tmpfilesdir}/kdm.conf
-rm -fv %{buildroot}%{_unitdir}/kdm.service
+# we don't use %%{_tmpfilesdir} and %%{_unitdir} because they don't follow %{_prefix}
+rm -fv %{buildroot}%{_prefix}/lib/tmpfiles.d/kdm.conf
+rm -fv %{buildroot}%{_prefix}/lib/systemd/system/kdm.service
 
 ## unpackaged files
 # formerly known as -minimal
@@ -138,14 +147,11 @@ perl -pi -e "s,^View0_URL=.*,View0_URL=file:///usr/share/doc/HTML/index.html," %
 %endif
 %config(noreplace) %{_sysconfdir}/xdg/kcm-about-distrorc
 %config(noreplace) %{_sysconfdir}/xdg/kdebugrc
-%config(noreplace) /etc/pam.d/kcheckpass
-%config(noreplace) /etc/pam.d/kscreensaver
+%config(noreplace) %{_sysconfdir}/pam.d/kcheckpass
+%config(noreplace) %{_sysconfdir}/pam.d/kscreensaver
 # drop noreplace, so we can be sure to get the new kiosk bits
 %config %{_sysconfdir}/kderc
 %config %{_sysconfdir}/kde4rc
-%dir %{_datadir}/kde-settings/
-%dir %{_datadir}/kde-settings/kde-profile/
-%{_datadir}/kde-settings/kde-profile/default/
 %{_datadir}/applications/kde-mimeapps.list
 %if 0%{?rhel} && 0%{?rhel} <= 7
 %exclude %{_datadir}/kde-settings/kde-profile/default/share/apps/plasma-desktop/init/00-defaultLayout.js
@@ -171,6 +177,10 @@ perl -pi -e "s,^View0_URL=.*,View0_URL=file:///usr/share/doc/HTML/index.html," %
 
 
 %changelog
+* Thu Sep 20 2018 Owen Taylor <otaylor@redhat.com> - 29.0-2
+- Handle %%{_prefix} != /usr
+- Fix double-listed files in %%{_datadir}/kde-settings/
+
 * Thu Sep 13 2018 Rex Dieter <rdieter@fedoraproject.org> - 29.0-1
 - 29.0
 
