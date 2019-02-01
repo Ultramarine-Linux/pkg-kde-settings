@@ -2,7 +2,7 @@
 Summary: Config files for kde
 Name:    kde-settings
 Version: 29.0
-Release: 2%{?dist}
+Release: 3%{?dist}
 
 License: MIT
 Url:     https://github.com/FedoraKDE/kde-settings
@@ -177,6 +177,9 @@ perl -pi -e "s,^View0_URL=.*,View0_URL=file:///usr/share/doc/HTML/index.html," %
 
 
 %changelog
+* Fri Feb 01 2019 Fedora Release Engineering <releng@fedoraproject.org> - 29.0-3
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_30_Mass_Rebuild
+
 * Thu Sep 20 2018 Owen Taylor <otaylor@redhat.com> - 29.0-2
 - Handle %%{_prefix} != /usr
 - Fix double-listed files in %%{_datadir}/kde-settings/
