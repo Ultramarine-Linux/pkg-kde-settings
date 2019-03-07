@@ -2,7 +2,7 @@
 Summary: Config files for kde
 Name:    kde-settings
 Version: 29.0
-Release: 3%{?dist}
+Release: 4%{?dist}
 
 License: MIT
 Url:     https://github.com/FedoraKDE/kde-settings
@@ -30,8 +30,6 @@ Requires: breeze-icon-theme
 # for 11-fedora-kde-policy.rules
 #Requires: polkit-js-engine
 #endif
-
-Requires(post): coreutils sed
 
 %description
 %{summary}.
@@ -177,6 +175,9 @@ perl -pi -e "s,^View0_URL=.*,View0_URL=file:///usr/share/doc/HTML/index.html," %
 
 
 %changelog
+* Thu Mar  7 2019 Tim Landscheidt <tim@tim-landscheidt.de> - 29.0-4
+- Remove obsolete requirement for %%post scriptlet
+
 * Fri Feb 01 2019 Fedora Release Engineering <releng@fedoraproject.org> - 29.0-3
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_30_Mass_Rebuild
 
