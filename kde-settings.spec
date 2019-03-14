@@ -1,8 +1,8 @@
 
 Summary: Config files for kde
 Name:    kde-settings
-Version: 29.0
-Release: 4%{?dist}
+Version: 30.0
+Release: 1%{?dist}
 
 License: MIT
 Url:     https://github.com/FedoraKDE/kde-settings
@@ -45,7 +45,7 @@ Requires: xorg-x11-xinit
 %package plasma
 Summary: Configuration files for plasma
 Requires: %{name} = %{version}-%{release}
-Requires: f29-backgrounds-kde
+Requires: f30-backgrounds-kde
 Requires: system-logos
 %description plasma
 %{summary}.
@@ -175,6 +175,9 @@ perl -pi -e "s,^View0_URL=.*,View0_URL=file:///usr/share/doc/HTML/index.html," %
 
 
 %changelog
+* Thu Mar 14 2019 Rex Dieter <rdieter@fedoraproject.org> - 30.0-1
+- 30.0 (#1688925)
+
 * Thu Mar  7 2019 Tim Landscheidt <tim@tim-landscheidt.de> - 29.0-4
 - Remove obsolete requirement for %%post scriptlet
 
