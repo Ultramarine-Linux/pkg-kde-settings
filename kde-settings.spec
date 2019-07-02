@@ -1,7 +1,7 @@
 
 Summary: Config files for kde
 Name:    kde-settings
-Version: 30.0
+Version: 30.1
 Release: 1%{?dist}
 
 License: MIT
@@ -175,6 +175,9 @@ perl -pi -e "s,^View0_URL=.*,View0_URL=file:///usr/share/doc/HTML/index.html," %
 
 
 %changelog
+* Tue Jul 02 2019 Rex Dieter <rdieter@fedoraproject.org> - 30.1-1
+- kde-mimeapps.list: use kf5 apps where available (#1726152)
+
 * Thu Mar 14 2019 Rex Dieter <rdieter@fedoraproject.org> - 30.0-1
 - 30.0 (#1688925)
 
