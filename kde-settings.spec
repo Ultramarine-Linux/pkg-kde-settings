@@ -1,7 +1,7 @@
 
 Summary: Config files for kde
 Name:    kde-settings
-Version: 29.0
+Version: 29.1
 Release: 1%{?dist}
 
 License: MIT
@@ -171,6 +171,9 @@ perl -pi -e "s,^View0_URL=.*,View0_URL=file:///usr/share/doc/HTML/index.html," %
 
 
 %changelog
+* Mon Aug 12 2019 Kevin Kofler <Kevin@tigcc.ticalc.org> 29.1-1
+- Remove settings that call xdg-user-dir (no longer supported by KConfig)
+
 * Thu Sep 13 2018 Rex Dieter <rdieter@fedoraproject.org> - 29.0-1
 - 29.0
 
