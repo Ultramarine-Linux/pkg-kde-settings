@@ -1,7 +1,7 @@
 
 Summary: Config files for kde
 Name:    kde-settings
-Version: 30.2
+Version: 30.3
 Release: 1%{?dist}
 
 License: MIT
@@ -175,6 +175,12 @@ perl -pi -e "s,^View0_URL=.*,View0_URL=file:///usr/share/doc/HTML/index.html," %
 
 
 %changelog
+* Mon Aug 12 2019 Kevin Kofler <Kevin@tigcc.ticalc.org> 30.3-1
+- Remove settings that call xdg-user-dir (no longer supported by KConfig)
+
+* Thu Jul 25 2019 Fedora Release Engineering <releng@fedoraproject.org> - 30.2-2
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_31_Mass_Rebuild
+
 * Tue Jul 02 2019 Rex Dieter <rdieter@fedoraproject.org> - 30.2-1
 - kde-mimeapps.list: remove ark duplicates
 
