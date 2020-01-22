@@ -1,7 +1,7 @@
 
 Summary: Config files for kde
 Name:    kde-settings
-Version: 30.3
+Version: 31.0
 Release: 1%{?dist}
 
 License: MIT
@@ -45,7 +45,7 @@ Requires: xorg-x11-xinit
 %package plasma
 Summary: Configuration files for plasma
 Requires: %{name} = %{version}-%{release}
-Requires: f30-backgrounds-kde
+Requires: f31-backgrounds-kde
 Requires: system-logos
 %description plasma
 %{summary}.
@@ -175,6 +175,9 @@ perl -pi -e "s,^View0_URL=.*,View0_URL=file:///usr/share/doc/HTML/index.html," %
 
 
 %changelog
+* Tue Sep 10 2019 Adam Williamson <awilliam@redhat.com> - 31.0-1
+- Bump for Fedora 31 (#1749086)
+
 * Mon Aug 12 2019 Kevin Kofler <Kevin@tigcc.ticalc.org> 30.3-1
 - Remove settings that call xdg-user-dir (no longer supported by KConfig)
 
