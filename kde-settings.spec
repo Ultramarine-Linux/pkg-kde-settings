@@ -1,8 +1,8 @@
 
 Summary: Config files for kde
 Name:    kde-settings
-Version: 31.0
-Release: 2%{?dist}
+Version: 32.0
+Release: 1%{?dist}
 
 License: MIT
 Url:     https://github.com/FedoraKDE/kde-settings
@@ -175,6 +175,9 @@ perl -pi -e "s,^View0_URL=.*,View0_URL=file:///usr/share/doc/HTML/index.html," %
 
 
 %changelog
+* Mon Mar 09 2020 Rex Dieter <rdieter@fedoraproject.org> - 32.0-1
+- bump for fedora 32 (#1811160)
+
 * Wed Jan 29 2020 Fedora Release Engineering <releng@fedoraproject.org> - 31.0-2
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_32_Mass_Rebuild
 
