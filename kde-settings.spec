@@ -2,7 +2,7 @@
 Summary: Config files for kde
 Name:    kde-settings
 Version: 32.0
-Release: 1%{?dist}
+Release: 2%{?dist}
 
 License: MIT
 Url:     https://github.com/FedoraKDE/kde-settings
@@ -45,7 +45,7 @@ Requires: xorg-x11-xinit
 %package plasma
 Summary: Configuration files for plasma
 Requires: %{name} = %{version}-%{release}
-Requires: f31-backgrounds-kde
+Requires: f32-backgrounds-kde
 Requires: system-logos
 %description plasma
 %{summary}.
@@ -175,6 +175,9 @@ perl -pi -e "s,^View0_URL=.*,View0_URL=file:///usr/share/doc/HTML/index.html," %
 
 
 %changelog
+* Tue Mar 10 2020 Adam Williamson <awilliam@redhat.com> - 32.0-2
+- Update -plasma backgrounds dep to 32 (#1811160)
+
 * Mon Mar 09 2020 Rex Dieter <rdieter@fedoraproject.org> - 32.0-1
 - bump for fedora 32 (#1811160)
 
