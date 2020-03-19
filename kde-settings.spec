@@ -2,7 +2,7 @@
 Summary: Config files for kde
 Name:    kde-settings
 Version: 31.0
-Release: 1%{?dist}
+Release: 2%{?dist}
 
 License: MIT
 Url:     https://github.com/FedoraKDE/kde-settings
@@ -96,8 +96,13 @@ if [ %{_prefix} != /usr ] ; then
    popd
 fi
 
-
 cp -p %{SOURCE1} .
+
+# default wallpaper symlink
+%if 0%{fedora}
+mkdir -p  %{buildroot}%{_datadir}/wallpapers
+ln -s F31 %{buildroot}%{_datadir}/wallpapers/Fedora
+%endif
 
 # omit kdm stuff
 rm -rfv %{buildroot}%{_sysconfdir}/{kde/kdm,logrotate.d/kdm,pam.d/kdm*}
@@ -164,6 +169,9 @@ perl -pi -e "s,^View0_URL=.*,View0_URL=file:///usr/share/doc/HTML/index.html," %
 %{_datadir}/plasma/look-and-feel/org.fedoraproject.fedora.desktop/contents/plasmoidsetupscripts/org.kde.plasma.kicker.js
 %{_datadir}/plasma/look-and-feel/org.fedoraproject.fedora.desktop/contents/plasmoidsetupscripts/org.kde.plasma.kickerdash.js
 %{_datadir}/plasma/look-and-feel/org.fedoraproject.fedora.desktop/contents/plasmoidsetupscripts/org.kde.plasma.kickoff.js
+%if 0%{?fedora}
+%{_datadir}/wallpapers/Fedora
+%endif
 
 %files pulseaudio
 # nothing, this is a metapackage
@@ -175,6 +183,9 @@ perl -pi -e "s,^View0_URL=.*,View0_URL=file:///usr/share/doc/HTML/index.html," %
 
 
 %changelog
+* Thu Mar 19 2020 Rex Dieter <rdieter@fedoraproject.org> - 31.0-2
+- provide /usr/share/wallpapers/Fedora symlink pointing to default wallpaper (#1812293)
+
 * Tue Sep 10 2019 Adam Williamson <awilliam@redhat.com> - 31.0-1
 - Bump for Fedora 31 (#1749086)
 
