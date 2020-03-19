@@ -142,7 +142,7 @@ perl -pi -e "s,^View0_URL=.*,View0_URL=file:///usr/share/doc/HTML/index.html," %
 
 %check
 %if 0%{?version_maj:1}
-test -f %{_datadir}/wallpapers/F%{version_maj}
+test -f %{_datadir}/wallpapers/F%{version_maj} || ls -l %{_datadir}/wallpapers
 %endif
 
 
