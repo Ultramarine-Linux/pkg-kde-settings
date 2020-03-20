@@ -1,8 +1,8 @@
 
 Summary: Config files for kde
 Name:    kde-settings
-Version: 32.0
-Release: 3%{?dist}
+Version: 32.2
+Release: 1%{?dist}
 
 License: MIT
 Url:     https://github.com/FedoraKDE/kde-settings
@@ -12,7 +12,6 @@ Source1: COPYING
 BuildArch: noarch
 
 BuildRequires: kde-filesystem
-BuildRequires: systemd
 
 %if ! 0%{?bootstrap}
 # for f33+ , consider merging version_maj with version, ie, use Version: 33 --rex
@@ -32,20 +31,8 @@ Requires: pam
 Requires: xdg-user-dirs
 ## add breeze deps here? probably, need more too -- rex
 Requires: breeze-icon-theme
-#if 0%{?fedora}
-# for 11-fedora-kde-policy.rules
-#Requires: polkit-js-engine
-#endif
 
 %description
-%{summary}.
-
-## FIXME
-%package minimal
-Summary: Minimal configuration files for KDE
-Requires: %{name} = %{version}-%{release}
-Requires: xorg-x11-xinit
-%description minimal
 %{summary}.
 
 %package plasma
@@ -93,8 +80,6 @@ rm -fv Makefile
 
 
 %install
-mkdir -p %{buildroot}{/usr/share/config,/etc/kde/kdm}
-
 tar cpf - . | tar --directory %{buildroot} -xvpf -
 
 if [ %{_prefix} != /usr ] ; then
@@ -112,32 +97,7 @@ mkdir -p %{buildroot}%{_datadir}/wallpapers
 ln -s F%{version_maj} %{buildroot}%{_datadir}/wallpapers/Fedora
 %endif
 
-# omit kdm stuff
-rm -rfv %{buildroot}%{_sysconfdir}/{kde/kdm,logrotate.d/kdm,pam.d/kdm*}
-rm -fv %{buildroot}%{_localstatedir}/lib/kdm/backgroundrc
-# we don't use %%{_tmpfilesdir} and %%{_unitdir} because they don't follow %{_prefix}
-rm -fv %{buildroot}%{_prefix}/lib/tmpfiles.d/kdm.conf
-rm -fv %{buildroot}%{_prefix}/lib/systemd/system/kdm.service
-
 ## unpackaged files
-# formerly known as -minimal
-rm -fv %{buildroot}%{_sysconfdir}/X11/xinit/xinitrc.d/20-kdedirs-minimal.sh
-rm -fv %{buildroot}%{_sysconfdir}/profile.d/qt-graphicssystem.*
-
-# FIXME/NEEDSWORK, still (mostly?) kde4
-# rhel stuff
-%if 0%{?rhel} && 0%{?rhel} <= 7
-rm -rf %{buildroot}%{_sysconfdir}/kde/env/fedora-bookmarks.sh \
-       %{buildroot}%{_prefix}/lib/rpm \
-       %{buildroot}%{_datadir}/polkit-1/
-echo "[Theme]" > %{buildroot}%{_datadir}/kde-settings/kde-profile/default/share/config/plasmarc
-echo "name=RHEL7" >> %{buildroot}%{_datadir}/kde-settings/kde-profile/default/share/config/plasmarc
-echo "[KSplash]" > %{buildroot}%{_datadir}/kde-settings/kde-profile/default/share/config/ksplashrc
-echo "Theme=RHEL7" >> %{buildroot}%{_datadir}/kde-settings/kde-profile/default/share/config/ksplashrc
-perl -pi -e "s,^Theme=.*,Theme=/usr/share/kde4/apps/kdm/themes/RHEL7," %{buildroot}%{_sysconfdir}/kde/kdm/kdmrc
-perl -pi -e "s,^HomeURL=.*,HomeURL=file:///usr/share/doc/HTML/index.html," %{buildroot}%{_datadir}/kde-settings/kde-profile/default/share/config/konquerorrc
-perl -pi -e "s,^View0_URL=.*,View0_URL=file:///usr/share/doc/HTML/index.html," %{buildroot}%{_datadir}/kde-settings/kde-profile/default/share/apps/konqueror/profiles/webbrowsing
-%endif
 
 
 %check
@@ -193,10 +153,12 @@ test -f %{_datadir}/wallpapers/F%{version_maj} || ls -l %{_datadir}/wallpapers
 %files -n qt-settings
 %license COPYING
 %config(noreplace) %{_sysconfdir}/Trolltech.conf
-#config(noreplace) %{_sysconfdir}/profile.d/qt-graphicssystem.*
 
 
 %changelog
+* Fri Mar 20 2020 Rex Dieter <rdieter@fedoraproject.org> - 32.2-1
+- 32.2
+
 * Thu Mar 19 2020 Rex Dieter <rdieter@fedoraproject.org> - 32.0-3
 - provide /usr/share/wallpapers/Fedora symlink pointing to default wallpaper (#1812293)
 
