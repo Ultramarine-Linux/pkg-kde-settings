@@ -1,8 +1,8 @@
 
 Summary: Config files for kde
 Name:    kde-settings
-Version: 31.0
-Release: 1%{?dist}
+Version: 32.0
+Release: 3%{?dist}
 
 License: MIT
 Url:     https://github.com/FedoraKDE/kde-settings
@@ -13,6 +13,12 @@ BuildArch: noarch
 
 BuildRequires: kde-filesystem
 BuildRequires: systemd
+
+%if ! 0%{?bootstrap}
+# for f33+ , consider merging version_maj with version, ie, use Version: 33 --rex
+%global  version_maj %(echo %{version} | cut -d. -f1)
+BuildRequires: f%{version_maj}-backgrounds-kde
+%endif
 
 # when kdebugrc was moved here
 Conflicts: kf5-kdelibs4support < 5.7.0-3
@@ -45,7 +51,9 @@ Requires: xorg-x11-xinit
 %package plasma
 Summary: Configuration files for plasma
 Requires: %{name} = %{version}-%{release}
-Requires: f31-backgrounds-kde
+%if 0%{?version_maj:1}
+Requires: f%{version_maj}-backgrounds-kde
+%endif
 Requires: system-logos
 %description plasma
 %{summary}.
@@ -96,8 +104,13 @@ if [ %{_prefix} != /usr ] ; then
    popd
 fi
 
-
 cp -p %{SOURCE1} .
+
+# default wallpaper symlink
+%if 0%{?version_maj:1}
+mkdir -p %{buildroot}%{_datadir}/wallpapers
+ln -s F%{version_maj} %{buildroot}%{_datadir}/wallpapers/Fedora
+%endif
 
 # omit kdm stuff
 rm -rfv %{buildroot}%{_sysconfdir}/{kde/kdm,logrotate.d/kdm,pam.d/kdm*}
@@ -124,6 +137,12 @@ echo "Theme=RHEL7" >> %{buildroot}%{_datadir}/kde-settings/kde-profile/default/s
 perl -pi -e "s,^Theme=.*,Theme=/usr/share/kde4/apps/kdm/themes/RHEL7," %{buildroot}%{_sysconfdir}/kde/kdm/kdmrc
 perl -pi -e "s,^HomeURL=.*,HomeURL=file:///usr/share/doc/HTML/index.html," %{buildroot}%{_datadir}/kde-settings/kde-profile/default/share/config/konquerorrc
 perl -pi -e "s,^View0_URL=.*,View0_URL=file:///usr/share/doc/HTML/index.html," %{buildroot}%{_datadir}/kde-settings/kde-profile/default/share/apps/konqueror/profiles/webbrowsing
+%endif
+
+
+%check
+%if 0%{?version_maj:1}
+test -f %{_datadir}/wallpapers/F%{version_maj} || ls -l %{_datadir}/wallpapers
 %endif
 
 
@@ -164,6 +183,9 @@ perl -pi -e "s,^View0_URL=.*,View0_URL=file:///usr/share/doc/HTML/index.html," %
 %{_datadir}/plasma/look-and-feel/org.fedoraproject.fedora.desktop/contents/plasmoidsetupscripts/org.kde.plasma.kicker.js
 %{_datadir}/plasma/look-and-feel/org.fedoraproject.fedora.desktop/contents/plasmoidsetupscripts/org.kde.plasma.kickerdash.js
 %{_datadir}/plasma/look-and-feel/org.fedoraproject.fedora.desktop/contents/plasmoidsetupscripts/org.kde.plasma.kickoff.js
+%if 0%{?version_maj:1}
+%{_datadir}/wallpapers/Fedora
+%endif
 
 %files pulseaudio
 # nothing, this is a metapackage
@@ -175,6 +197,18 @@ perl -pi -e "s,^View0_URL=.*,View0_URL=file:///usr/share/doc/HTML/index.html," %
 
 
 %changelog
+* Thu Mar 19 2020 Rex Dieter <rdieter@fedoraproject.org> - 32.0-3
+- provide /usr/share/wallpapers/Fedora symlink pointing to default wallpaper (#1812293)
+
+* Tue Mar 10 2020 Adam Williamson <awilliam@redhat.com> - 32.0-2
+- Update -plasma backgrounds dep to 32 (#1811160)
+
+* Mon Mar 09 2020 Rex Dieter <rdieter@fedoraproject.org> - 32.0-1
+- bump for fedora 32 (#1811160)
+
+* Wed Jan 29 2020 Fedora Release Engineering <releng@fedoraproject.org> - 31.0-2
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_32_Mass_Rebuild
+
 * Tue Sep 10 2019 Adam Williamson <awilliam@redhat.com> - 31.0-1
 - Bump for Fedora 31 (#1749086)
 
