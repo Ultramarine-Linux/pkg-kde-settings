@@ -1,8 +1,8 @@
 
 Summary: Config files for kde
 Name:    kde-settings
-Version: 32.2
-Release: 2%{?dist}
+Version: 33
+Release: 1%{?dist}
 
 License: MIT
 Url:     https://github.com/FedoraKDE/kde-settings
@@ -156,6 +156,10 @@ test -f %{_datadir}/wallpapers/F%{version_maj} || ls -l %{_datadir}/wallpapers
 
 
 %changelog
+* Tue Sep 08 2020 Than Ngo <than@redhat.com> - 33-1
+- bump for Fedora 33
+- Fix background image (RHBZ #1872054)
+
 * Tue Jul 28 2020 Fedora Release Engineering <releng@fedoraproject.org> - 32.2-2
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_33_Mass_Rebuild
 
