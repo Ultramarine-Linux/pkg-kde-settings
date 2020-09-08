@@ -1,7 +1,7 @@
 
 Summary: Config files for kde
 Name:    kde-settings
-Version: 33
+Version: 33.0
 Release: 1%{?dist}
 
 License: MIT
