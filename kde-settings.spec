@@ -2,12 +2,13 @@
 Summary: Config files for kde
 Name:    kde-settings
 Version: 33.0
-Release: 1%{?dist}
+Release: 2%{?dist}
 
 License: MIT
 Url:     https://github.com/FedoraKDE/kde-settings
 Source0: https://github.com/FedoraKDE/kde-settings/archive/%{version}/%{name}-%{version}.tar.gz
 Source1: COPYING
+Source2: 99-restart-dbus.sh
 
 BuildArch: noarch
 
@@ -90,6 +91,7 @@ if [ %{_prefix} != /usr ] ; then
 fi
 
 cp -p %{SOURCE1} .
+install -p -D %{SOURCE2} %{buildroot}%{_sysconfdir}/xdg/plasma-workspace/shutdown/99-restart-dbus.sh
 
 # default wallpaper symlink
 %if 0%{?version_maj:1}
@@ -140,6 +142,7 @@ test -f %{_datadir}/wallpapers/F%{version_maj} || ls -l %{_datadir}/wallpapers
 %{_sysconfdir}/xdg/plasma-workspace/env/gtk2_rc_files.sh
 %{_sysconfdir}/xdg/plasma-workspace/env/gtk3_scrolling.sh
 %{_sysconfdir}/xdg/plasma-workspace/shutdown/kuiserver5.sh
+%{_sysconfdir}/xdg/plasma-workspace/shutdown/99-restart-dbus.sh
 %{_datadir}/plasma/look-and-feel/org.fedoraproject.fedora.desktop/contents/plasmoidsetupscripts/org.kde.plasma.kicker.js
 %{_datadir}/plasma/look-and-feel/org.fedoraproject.fedora.desktop/contents/plasmoidsetupscripts/org.kde.plasma.kickerdash.js
 %{_datadir}/plasma/look-and-feel/org.fedoraproject.fedora.desktop/contents/plasmoidsetupscripts/org.kde.plasma.kickoff.js
@@ -156,6 +159,9 @@ test -f %{_datadir}/wallpapers/F%{version_maj} || ls -l %{_datadir}/wallpapers
 
 
 %changelog
+* Fri Oct 16 2020 Rex Dieter <rdieter@fedoraproject.org> - 33.0-2
+- add 99-restart-dbus.sh plasma shutdown script, to forcefully restart user dbus (#1861700)
+
 * Tue Sep 08 2020 Than Ngo <than@redhat.com> - 33-1
 - bump for Fedora 33
 - Fix background image (RHBZ #1872054)
