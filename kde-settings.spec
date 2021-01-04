@@ -2,7 +2,7 @@
 Summary: Config files for kde
 Name:    kde-settings
 Version: 33.0
-Release: 2%{?dist}
+Release: 3%{?dist}
 
 License: MIT
 Url:     https://github.com/FedoraKDE/kde-settings
@@ -53,11 +53,9 @@ Summary: Enable pulseaudio support in KDE
 # nothing here to license
 License: Public Domain
 Requires: %{name} = %{version}-%{release}
-Requires: pulseaudio
-Requires: pulseaudio-module-x11
-## kde3
+Requires: pulseaudio-daemon
+## legacy apps
 Requires: alsa-plugins-pulseaudio
-## kde4: -pulseaudio plugins are installed for all phonon backends by default
 %description pulseaudio
 %{summary}.
 
@@ -159,6 +157,9 @@ test -f %{_datadir}/wallpapers/F%{version_maj} || ls -l %{_datadir}/wallpapers
 
 
 %changelog
+* Mon Jan 04 2021 Rex Dieter <rdieter@fedoraproject.org> - 33.0-3
+- -pulseaudio: Requires: pulseaudio-daemon
+
 * Fri Oct 16 2020 Rex Dieter <rdieter@fedoraproject.org> - 33.0-2
 - add 99-restart-dbus.sh plasma shutdown script, to forcefully restart user dbus (#1861700)
 
