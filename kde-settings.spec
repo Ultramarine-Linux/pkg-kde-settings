@@ -2,7 +2,7 @@
 Summary: Config files for kde
 Name:    kde-settings
 Version: 33.0
-Release: 3%{?dist}
+Release: 4%{?dist}
 
 License: MIT
 Url:     https://github.com/FedoraKDE/kde-settings
@@ -157,6 +157,9 @@ test -f %{_datadir}/wallpapers/F%{version_maj} || ls -l %{_datadir}/wallpapers
 
 
 %changelog
+* Tue Jan 26 2021 Fedora Release Engineering <releng@fedoraproject.org> - 33.0-4
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_34_Mass_Rebuild
+
 * Mon Jan 04 2021 Rex Dieter <rdieter@fedoraproject.org> - 33.0-3
 - -pulseaudio: Requires: pulseaudio-daemon
 
