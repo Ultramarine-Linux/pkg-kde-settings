@@ -2,7 +2,7 @@
 Summary: Config files for kde
 Name:    kde-settings
 Version: 34.0
-Release: 1%{?dist}
+Release: 2%{?dist}
 
 License: MIT
 Url:     https://pagure.io/fedora-kde/kde-settings
@@ -54,7 +54,8 @@ License: Public Domain
 Requires: %{name} = %{version}-%{release}
 Requires: pulseaudio-daemon
 ## legacy apps
-Requires: alsa-plugins-pulseaudio
+Requires: (pipewire-alsa if pipewire-pulseaudio)
+Requires: (alsa-plugins-pulseaudio if pulseaudio)
 %description pulseaudio
 %{summary}.
 
@@ -154,6 +155,9 @@ test -f %{_datadir}/wallpapers/F%{version_maj} || ls -l %{_datadir}/wallpapers
 
 
 %changelog
+* Fri Feb 12 2021 Neal Gompa <ngompa13@gmail.com> - 34.0-2
+- Fix alsa dependency in pulseaudio subpackage
+
 * Fri Feb 12 2021 Rex Dieter <rdieter@fedoraproject.org> - 34.0-1
 - 34.0
 - pagure.io upstream
