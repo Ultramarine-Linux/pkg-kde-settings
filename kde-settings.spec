@@ -1,14 +1,13 @@
 
 Summary: Config files for kde
 Name:    kde-settings
-Version: 33.0
-Release: 4%{?dist}
+Version: 34.0
+Release: 1%{?dist}
 
 License: MIT
-Url:     https://github.com/FedoraKDE/kde-settings
-Source0: https://github.com/FedoraKDE/kde-settings/archive/%{version}/%{name}-%{version}.tar.gz
+Url:     https://pagure.io/fedora-kde/kde-settings
+Source0: https://pagure.io/fedora-kde/kde-settings/archive/%{version}/kde-settings-%{version}.tar.gz
 Source1: COPYING
-Source2: 99-restart-dbus.sh
 
 BuildArch: noarch
 
@@ -89,7 +88,6 @@ if [ %{_prefix} != /usr ] ; then
 fi
 
 cp -p %{SOURCE1} .
-install -p -D %{SOURCE2} %{buildroot}%{_sysconfdir}/xdg/plasma-workspace/shutdown/99-restart-dbus.sh
 
 # default wallpaper symlink
 %if 0%{?version_maj:1}
@@ -140,7 +138,6 @@ test -f %{_datadir}/wallpapers/F%{version_maj} || ls -l %{_datadir}/wallpapers
 %{_sysconfdir}/xdg/plasma-workspace/env/gtk2_rc_files.sh
 %{_sysconfdir}/xdg/plasma-workspace/env/gtk3_scrolling.sh
 %{_sysconfdir}/xdg/plasma-workspace/shutdown/kuiserver5.sh
-%{_sysconfdir}/xdg/plasma-workspace/shutdown/99-restart-dbus.sh
 %{_datadir}/plasma/look-and-feel/org.fedoraproject.fedora.desktop/contents/plasmoidsetupscripts/org.kde.plasma.kicker.js
 %{_datadir}/plasma/look-and-feel/org.fedoraproject.fedora.desktop/contents/plasmoidsetupscripts/org.kde.plasma.kickerdash.js
 %{_datadir}/plasma/look-and-feel/org.fedoraproject.fedora.desktop/contents/plasmoidsetupscripts/org.kde.plasma.kickoff.js
@@ -157,6 +154,10 @@ test -f %{_datadir}/wallpapers/F%{version_maj} || ls -l %{_datadir}/wallpapers
 
 
 %changelog
+* Fri Feb 12 2021 Rex Dieter <rdieter@fedoraproject.org> - 34.0-1
+- 34.0
+- pagure.io upstream
+
 * Tue Jan 26 2021 Fedora Release Engineering <releng@fedoraproject.org> - 33.0-4
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_34_Mass_Rebuild
 
