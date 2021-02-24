@@ -2,7 +2,7 @@
 Summary: Config files for kde
 Name:    kde-settings
 Version: 34.0
-Release: 2%{?dist}
+Release: 3%{?dist}
 
 License: MIT
 Url:     https://pagure.io/fedora-kde/kde-settings
@@ -12,6 +12,9 @@ Source1: COPYING
 BuildArch: noarch
 
 BuildRequires: kde-filesystem
+# xdg-user-dirs hackery
+BuildRequires: desktop-file-utils
+BuildRequires: xdg-user-dirs
 
 %if ! 0%{?bootstrap}
 # for f33+ , consider merging version_maj with version, ie, use Version: 33 --rex
@@ -96,6 +99,16 @@ mkdir -p %{buildroot}%{_datadir}/wallpapers
 ln -s F%{version_maj} %{buildroot}%{_datadir}/wallpapers/Fedora
 %endif
 
+# xdg-user-dirs HACK
+cp -a %{_sysconfdir}/xdg/autostart/xdg-user-dirs.desktop \
+      xdg-user-dirs-kde.desktop
+mkdir -p %{buildroot}%{_sysconfdir}/xdg/autostart
+desktop-file-install \
+  xdg-user-dirs-kde.desktop \
+  --dir=%{buildroot}%{_sysconfdir}/xdg/autostart \
+  --remove-key=X-GNOME-Autostart-Phase \
+  --add-only-show-in=KDE
+
 ## unpackaged files
 
 
@@ -135,6 +148,7 @@ test -f %{_datadir}/wallpapers/F%{version_maj} || ls -l %{_datadir}/wallpapers
 
 %files plasma
 %{_datadir}/plasma/shells/org.kde.plasma.desktop/contents/updates/00-start-here-2.js
+%{_sysconfdir}/xdg/autostart/xdg-user-dirs-kde.desktop
 %{_sysconfdir}/xdg/plasma-workspace/env/env.sh
 %{_sysconfdir}/xdg/plasma-workspace/env/gtk2_rc_files.sh
 %{_sysconfdir}/xdg/plasma-workspace/env/gtk3_scrolling.sh
@@ -155,6 +169,9 @@ test -f %{_datadir}/wallpapers/F%{version_maj} || ls -l %{_datadir}/wallpapers
 
 
 %changelog
+* Wed Feb 24 2021 Rex Dieter <rdieter@fedoraproject.org> - 34.0-3
+- -plasma: +xdg-user-dirs-kde.desktop (#1932447)
+
 * Fri Feb 12 2021 Neal Gompa <ngompa13@gmail.com> - 34.0-2
 - Fix alsa dependency in pulseaudio subpackage
 
