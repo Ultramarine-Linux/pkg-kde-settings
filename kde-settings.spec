@@ -2,7 +2,7 @@
 Summary: Config files for kde
 Name:    kde-settings
 Version: 34.0
-Release: 3%{?dist}
+Release: 4%{?dist}
 
 License: MIT
 Url:     https://pagure.io/fedora-kde/kde-settings
@@ -15,6 +15,11 @@ BuildRequires: kde-filesystem
 # xdg-user-dirs hackery
 BuildRequires: desktop-file-utils
 BuildRequires: xdg-user-dirs
+# ssh-agent.service
+BuildRequires: systemd-rpm-macros
+Source10: ssh-agent.sh
+Source11: ssh-agent.service
+
 
 %if ! 0%{?bootstrap}
 # for f33+ , consider merging version_maj with version, ie, use Version: 33 --rex
@@ -109,6 +114,10 @@ desktop-file-install \
   --remove-key=X-GNOME-Autostart-Phase \
   --add-only-show-in=KDE
 
+# ssh-agent.service
+install -p -m644 -D %{SOURCE10} %{buildroot}%{_sysconfdir}/xdg/plasma-workspace/env/ssh-agent.sh
+install -p -m644 -D %{SOURCE11} %{buildroot}%{_userunitdir}/ssh-agent.service
+
 ## unpackaged files
 
 
@@ -146,6 +155,9 @@ test -f %{_datadir}/wallpapers/F%{version_maj} || ls -l %{_datadir}/wallpapers
 %exclude %{_datadir}/kde-settings/kde-profile/default/share/apps/plasma-desktop/init/00-defaultLayout.js
 %endif
 
+%post plasma
+%systemd_user_post ssh-agent.service
+
 %files plasma
 %{_datadir}/plasma/shells/org.kde.plasma.desktop/contents/updates/00-start-here-2.js
 %{_sysconfdir}/xdg/autostart/xdg-user-dirs-kde.desktop
@@ -159,6 +171,8 @@ test -f %{_datadir}/wallpapers/F%{version_maj} || ls -l %{_datadir}/wallpapers
 %if 0%{?version_maj:1}
 %{_datadir}/wallpapers/Fedora
 %endif
+%{_sysconfdir}/xdg/plasma-workspace/env/ssh-agent.sh
+%{_userunitdir}/ssh-agent.service
 
 %files pulseaudio
 # nothing, this is a metapackage
@@ -169,6 +183,9 @@ test -f %{_datadir}/wallpapers/F%{version_maj} || ls -l %{_datadir}/wallpapers
 
 
 %changelog
+* Thu Feb 25 2021 Rex Dieter <rdieter@fedoraproject.org> - 34.0-4
+- add ssh-agent.service (#1761817)
+
 * Wed Feb 24 2021 Rex Dieter <rdieter@fedoraproject.org> - 34.0-3
 - -plasma: +xdg-user-dirs-kde.desktop (#1932447)
 
