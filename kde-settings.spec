@@ -2,7 +2,7 @@
 Summary: Config files for kde
 Name:    kde-settings
 Version: 34.0
-Release: 4%{?dist}
+Release: 5%{?dist}
 
 License: MIT
 Url:     https://pagure.io/fedora-kde/kde-settings
@@ -183,6 +183,9 @@ test -f %{_datadir}/wallpapers/F%{version_maj} || ls -l %{_datadir}/wallpapers
 
 
 %changelog
+* Sun Feb 28 2021 Rex Dieter <rdieter@fedoraproject.org> - 34.0-5
+- ssh-agent.service improvements
+
 * Thu Feb 25 2021 Rex Dieter <rdieter@fedoraproject.org> - 34.0-4
 - add ssh-agent.service (#1761817)
 
