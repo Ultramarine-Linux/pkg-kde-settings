@@ -4,7 +4,6 @@
 [Unit]
 Description=SSH key agent
 ConditionEnvironment=!SSH_AGENT_PID
-After=plasma-core.target
 
 [Service]
 Type=forking
