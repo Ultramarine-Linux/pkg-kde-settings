@@ -2,7 +2,7 @@
 Summary: Config files for kde
 Name:    kde-settings
 Version: 34.0
-Release: 7%{?dist}
+Release: 8%{?dist}
 
 License: MIT
 Url:     https://pagure.io/fedora-kde/kde-settings
@@ -158,6 +158,9 @@ test -f %{_datadir}/wallpapers/F%{version_maj} || ls -l %{_datadir}/wallpapers
 %post plasma
 %systemd_user_post ssh-agent.service
 
+%preun plasma
+%systemd_user_preun ssh-agent.service
+
 %files plasma
 %{_datadir}/plasma/shells/org.kde.plasma.desktop/contents/updates/00-start-here-2.js
 %{_sysconfdir}/xdg/autostart/xdg-user-dirs-kde.desktop
@@ -183,6 +186,9 @@ test -f %{_datadir}/wallpapers/F%{version_maj} || ls -l %{_datadir}/wallpapers
 
 
 %changelog
+* Tue Mar 02 2021 Rex Dieter <rdieter@fedoraproject.org> - 34.0-8
+- ssh-agent.service improvements
+
 * Mon Mar 01 2021 Rex Dieter <rdieter@fedoraproject.org> - 34.0-7
 - ssh-agent.service: drop After=plasma-core.target
 
