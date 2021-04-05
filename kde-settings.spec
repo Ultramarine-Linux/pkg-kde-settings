@@ -2,7 +2,7 @@
 Summary: Config files for kde
 Name:    kde-settings
 Version: 34.0
-Release: 9%{?dist}
+Release: 10%{?dist}
 
 License: MIT
 Url:     https://pagure.io/fedora-kde/kde-settings
@@ -102,6 +102,7 @@ mkdir -p %{buildroot}%{_datadir}/wallpapers
 ln -s F%{version_maj} %{buildroot}%{_datadir}/wallpapers/Fedora
 %endif
 
+%if %{flatpak} == 0
 # xdg-user-dirs HACK
 cp -a %{_sysconfdir}/xdg/autostart/xdg-user-dirs.desktop \
       xdg-user-dirs-kde.desktop
@@ -111,6 +112,7 @@ desktop-file-install \
   --dir=%{buildroot}%{_sysconfdir}/xdg/autostart \
   --remove-key=X-GNOME-Autostart-Phase \
   --add-only-show-in=KDE
+%endif
 
 # for ssh-agent.serivce, set SSH_AUTH_SOCK
 install -p -m644 -D %{SOURCE10} %{buildroot}%{_sysconfdir}/xdg/plasma-workspace/env/ssh-agent.sh
@@ -119,7 +121,7 @@ install -p -m644 -D %{SOURCE10} %{buildroot}%{_sysconfdir}/xdg/plasma-workspace/
 
 
 %check
-%if 0%{?version_maj:1}
+%if 0%{?version_maj:1} && %{flatpak} == 0
 test -f %{_datadir}/wallpapers/F%{version_maj} || ls -l %{_datadir}/wallpapers
 %endif
 
@@ -154,7 +156,9 @@ test -f %{_datadir}/wallpapers/F%{version_maj} || ls -l %{_datadir}/wallpapers
 
 %files plasma
 %{_datadir}/plasma/shells/org.kde.plasma.desktop/contents/updates/00-start-here-2.js
+%if %{flatpak} == 0
 %{_sysconfdir}/xdg/autostart/xdg-user-dirs-kde.desktop
+%endif 
 %{_sysconfdir}/xdg/plasma-workspace/env/env.sh
 %{_sysconfdir}/xdg/plasma-workspace/env/gtk2_rc_files.sh
 %{_sysconfdir}/xdg/plasma-workspace/env/gtk3_scrolling.sh
@@ -176,6 +180,9 @@ test -f %{_datadir}/wallpapers/F%{version_maj} || ls -l %{_datadir}/wallpapers
 
 
 %changelog
+* Mon Apr 05 2021 Onuralp SEZER <thunderbirdtr@fedoraproject.org> - 34.0-10
+- xdg/autostart removed and wallpaper test disabled for flatpak builds
+
 * Sat Mar 06 2021 Rex Dieter <rdieter@fedoraproject.org> - 34.0-9
 - drop ssh-agent.service, moved to openssh-clients (yay)
 
