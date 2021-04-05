@@ -102,7 +102,7 @@ mkdir -p %{buildroot}%{_datadir}/wallpapers
 ln -s F%{version_maj} %{buildroot}%{_datadir}/wallpapers/Fedora
 %endif
 
-%if %{flatpak} == 0
+%if 0%{?flatpak} == 0
 # xdg-user-dirs HACK
 cp -a %{_sysconfdir}/xdg/autostart/xdg-user-dirs.desktop \
       xdg-user-dirs-kde.desktop
@@ -121,7 +121,7 @@ install -p -m644 -D %{SOURCE10} %{buildroot}%{_sysconfdir}/xdg/plasma-workspace/
 
 
 %check
-%if 0%{?version_maj:1} && %{flatpak} == 0
+%if 0%{?version_maj:1} && 1%{?flatpak} == 0
 test -f %{_datadir}/wallpapers/F%{version_maj} || ls -l %{_datadir}/wallpapers
 %endif
 
@@ -156,7 +156,7 @@ test -f %{_datadir}/wallpapers/F%{version_maj} || ls -l %{_datadir}/wallpapers
 
 %files plasma
 %{_datadir}/plasma/shells/org.kde.plasma.desktop/contents/updates/00-start-here-2.js
-%if %{flatpak} == 0
+%if 0%{?flatpak} == 0
 %{_sysconfdir}/xdg/autostart/xdg-user-dirs-kde.desktop
 %endif 
 %{_sysconfdir}/xdg/plasma-workspace/env/env.sh
