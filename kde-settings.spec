@@ -1,8 +1,8 @@
 
 Summary: Config files for kde
 Name:    kde-settings
-Version: 34.0
-Release: 10%{?dist}
+Version: 34.1
+Release: 1%{?dist}
 
 License: MIT
 Url:     https://pagure.io/fedora-kde/kde-settings
@@ -48,6 +48,8 @@ Requires: %{name} = %{version}-%{release}
 Requires: f%{version_maj}-backgrounds-kde
 %endif
 Requires: system-logos
+Requires: google-noto-sans-fonts
+Requires: google-noto-sans-mono-fonts
 %description plasma
 %{summary}.
 
@@ -180,6 +182,10 @@ test -f %{_datadir}/wallpapers/F%{version_maj} || ls -l %{_datadir}/wallpapers
 
 
 %changelog
+* Mon Apr 05 2021 Rex Dieter <rdieter@fedoraproject.org> - 34.1-1
+- 34.1
+- -plasma: use Noto fonts
+
 * Mon Apr 05 2021 Onuralp SEZER <thunderbirdtr@fedoraproject.org> - 34.0-10
 - xdg/autostart removed and wallpaper test disabled for flatpak builds
 
