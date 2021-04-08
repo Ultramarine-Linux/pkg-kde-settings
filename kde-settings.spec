@@ -1,7 +1,7 @@
 
 Summary: Config files for kde
 Name:    kde-settings
-Version: 34.1
+Version: 34.2
 Release: 1%{?dist}
 
 License: MIT
@@ -182,6 +182,9 @@ test -f %{_datadir}/wallpapers/F%{version_maj} || ls -l %{_datadir}/wallpapers
 
 
 %changelog
+* Thu Apr 08 2021 Rex Dieter <rdieter@fedoraproject.org> - 34.2-1
+- -plasma: explicitly use BreezeTwilight lookandfeel elements (#1947446)
+
 * Mon Apr 05 2021 Rex Dieter <rdieter@fedoraproject.org> - 34.1-1
 - 34.1
 - -plasma: use Noto fonts
