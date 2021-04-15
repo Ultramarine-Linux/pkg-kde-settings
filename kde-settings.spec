@@ -1,7 +1,7 @@
 
 Summary: Config files for kde
 Name:    kde-settings
-Version: 34.2
+Version: 34.3
 Release: 1%{?dist}
 
 License: MIT
@@ -182,6 +182,10 @@ test -f %{_datadir}/wallpapers/F%{version_maj} || ls -l %{_datadir}/wallpapers
 
 
 %changelog
+* Thu Apr 15 2021 Rex Dieter <rdieter@fedoraproject.org> - 34.3-1
+- drop deprecated/unused kde-profile/minimal
+- kdeglobals: cleanup, drop [WM] section causing problems with color scheme
+
 * Thu Apr 08 2021 Rex Dieter <rdieter@fedoraproject.org> - 34.2-1
 - -plasma: explicitly use BreezeTwilight lookandfeel elements (#1947446)
 
