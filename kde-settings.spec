@@ -1,7 +1,7 @@
 
 Summary: Config files for kde
 Name:    kde-settings
-Version: 34.4
+Version: 34.5
 Release: 1%{?dist}
 
 License: MIT
@@ -182,6 +182,9 @@ test -f %{_datadir}/wallpapers/F%{version_maj} || ls -l %{_datadir}/wallpapers
 
 
 %changelog
+* Tue Apr 20 2021 Rex Dieter <rdieter@fedoraproject.org> - 34.5-1
+- kdeglobals: disable user switching (#1929643)
+
 * Thu Apr 15 2021 Rex Dieter <rdieter@fedoraproject.org> - 34.4-1
 - drop deprecated/unused kde-profile/minimal
 - kdeglobals: cleanup, drop [WM] section causing problems with color scheme
