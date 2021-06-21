@@ -1,7 +1,7 @@
 
 Summary: Config files for kde
 Name:    kde-settings
-Version: 34.5
+Version: 34.6
 Release: 1%{?dist}
 
 License: MIT
@@ -182,6 +182,9 @@ test -f %{_datadir}/wallpapers/F%{version_maj} || ls -l %{_datadir}/wallpapers
 
 
 %changelog
+* Mon Jun 21 2021 Rex Dieter <rdieter@fedoraproject.org> - 34.6-1
+- kdeglobals: Use double click to activate desktop icons by default (kdesig issue #17)
+
 * Tue Apr 20 2021 Rex Dieter <rdieter@fedoraproject.org> - 34.5-1
 - kdeglobals: disable user switching (#1929643)
 
