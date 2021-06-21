@@ -164,7 +164,6 @@ test -f %{_datadir}/wallpapers/F%{version_maj} || ls -l %{_datadir}/wallpapers
 %{_sysconfdir}/xdg/plasma-workspace/env/env.sh
 %{_sysconfdir}/xdg/plasma-workspace/env/gtk2_rc_files.sh
 %{_sysconfdir}/xdg/plasma-workspace/env/gtk3_scrolling.sh
-%{_sysconfdir}/xdg/plasma-workspace/shutdown/kuiserver5.sh
 %{_datadir}/plasma/look-and-feel/org.fedoraproject.fedora.desktop/contents/plasmoidsetupscripts/org.kde.plasma.kicker.js
 %{_datadir}/plasma/look-and-feel/org.fedoraproject.fedora.desktop/contents/plasmoidsetupscripts/org.kde.plasma.kickerdash.js
 %{_datadir}/plasma/look-and-feel/org.fedoraproject.fedora.desktop/contents/plasmoidsetupscripts/org.kde.plasma.kickoff.js
