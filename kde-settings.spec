@@ -1,7 +1,7 @@
 
 Summary: Config files for kde
 Name:    kde-settings
-Version: 34.6
+Version: 34.7
 Release: 1%{?dist}
 
 License: MIT
@@ -181,6 +181,9 @@ test -f %{_datadir}/wallpapers/F%{version_maj} || ls -l %{_datadir}/wallpapers
 
 
 %changelog
+* Sun Jul 18 2021 Neal Gompa <ngompa@fedoraproject.org> - 34.7-1
+- kcm-about-distrorc: Drop Website setting and use os-release data instead
+
 * Mon Jun 21 2021 Rex Dieter <rdieter@fedoraproject.org> - 34.6-1
 - kdeglobals: Use double click to activate desktop icons by default (kdesig issue #17)
 
