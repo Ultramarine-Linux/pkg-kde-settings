@@ -2,7 +2,7 @@
 Summary: Config files for kde
 Name:    kde-settings
 Version: 34.7
-Release: 1%{?dist}
+Release: 2%{?dist}
 
 License: MIT
 Url:     https://pagure.io/fedora-kde/kde-settings
@@ -48,8 +48,13 @@ Requires: %{name} = %{version}-%{release}
 Requires: f%{version_maj}-backgrounds-kde
 %endif
 Requires: system-logos
+%if 0%{?rhel} && 0%{?rhel} < 9
+Requires: google-noto-sans-fonts
+Requires: google-noto-mono-fonts
+%else
 Requires: google-noto-sans-fonts
 Requires: google-noto-sans-mono-fonts
+%endif
 %description plasma
 %{summary}.
 
@@ -60,7 +65,11 @@ Summary: Enable pulseaudio support in KDE
 # nothing here to license
 License: Public Domain
 Requires: %{name} = %{version}-%{release}
+%if 0%{?rhel} && 0%{?rhel} < 9
+Requires: pulseaudio
+%else
 Requires: pulseaudio-daemon
+%endif
 ## legacy apps
 Requires: (pipewire-alsa if pipewire-pulseaudio)
 Requires: (alsa-plugins-pulseaudio if pulseaudio)
@@ -114,6 +123,12 @@ desktop-file-install \
   --dir=%{buildroot}%{_sysconfdir}/xdg/autostart \
   --remove-key=X-GNOME-Autostart-Phase \
   --add-only-show-in=KDE
+%endif
+
+%if 0%{?rhel} && 0%{?rhel} < 9
+# for rhel 8 and older with older noto fonts
+sed -e "s/Noto Sans Mono/Noto Mono/g" \
+    -i %{buildroot}%{_datadir}/kde-settings/kde-profile/default/{share/config/kdeglobals,xdg/kdeglobals}
 %endif
 
 # for ssh-agent.serivce, set SSH_AUTH_SOCK
@@ -181,6 +196,9 @@ test -f %{_datadir}/wallpapers/F%{version_maj} || ls -l %{_datadir}/wallpapers
 
 
 %changelog
+* Mon Jul 19 2021 Neal Gompa <ngompa@fedoraproject.org> - 34.7-2
+- Add tweaks for RHEL 8 compatibility
+
 * Sun Jul 18 2021 Neal Gompa <ngompa@fedoraproject.org> - 34.7-1
 - kcm-about-distrorc: Drop Website setting and use os-release data instead
 
