@@ -1,8 +1,8 @@
 
 Summary: Config files for kde
 Name:    kde-settings
-Version: 34.7
-Release: 3%{?dist}
+Version: 35.0
+Release: 1%{?dist}
 
 License: MIT
 Url:     https://pagure.io/fedora-kde/kde-settings
@@ -196,6 +196,9 @@ test -f %{_datadir}/wallpapers/F%{version_maj} || ls -l %{_datadir}/wallpapers
 
 
 %changelog
+* Thu Sep 02 2021 Rex Dieter <rdieter@fedoraproject.org> - 35.0-1
+- 35.0
+
 * Thu Jul 22 2021 Fedora Release Engineering <releng@fedoraproject.org> - 34.7-3
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_35_Mass_Rebuild
 
