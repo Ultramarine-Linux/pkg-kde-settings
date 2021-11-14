@@ -1,18 +1,23 @@
 
 Summary: Config files for kde
 Name:    kde-settings
-Version: 32.0
-Release: 3%{?dist}
+Version: 34.7
+Release: 2%{?dist}
 
 License: MIT
-Url:     https://github.com/FedoraKDE/kde-settings
-Source0: https://github.com/FedoraKDE/kde-settings/archive/%{version}/%{name}-%{version}.tar.gz
+Url:     https://pagure.io/fedora-kde/kde-settings
+Source0: https://pagure.io/fedora-kde/kde-settings/archive/%{version}/kde-settings-%{version}.tar.gz
 Source1: COPYING
 
 BuildArch: noarch
 
 BuildRequires: kde-filesystem
-BuildRequires: systemd
+# xdg-user-dirs hackery
+BuildRequires: desktop-file-utils
+BuildRequires: xdg-user-dirs
+# ssh-agent.service
+BuildRequires: systemd-rpm-macros
+Source10: ssh-agent.sh
 
 %if ! 0%{?bootstrap}
 # for f33+ , consider merging version_maj with version, ie, use Version: 33 --rex
@@ -32,20 +37,8 @@ Requires: pam
 Requires: xdg-user-dirs
 ## add breeze deps here? probably, need more too -- rex
 Requires: breeze-icon-theme
-#if 0%{?fedora}
-# for 11-fedora-kde-policy.rules
-#Requires: polkit-js-engine
-#endif
 
 %description
-%{summary}.
-
-## FIXME
-%package minimal
-Summary: Minimal configuration files for KDE
-Requires: %{name} = %{version}-%{release}
-Requires: xorg-x11-xinit
-%description minimal
 %{summary}.
 
 %package plasma
@@ -55,6 +48,13 @@ Requires: %{name} = %{version}-%{release}
 Requires: f%{version_maj}-backgrounds-kde
 %endif
 Requires: system-logos
+%if 0%{?rhel} && 0%{?rhel} < 9
+Requires: google-noto-sans-fonts
+Requires: google-noto-mono-fonts
+%else
+Requires: google-noto-sans-fonts
+Requires: google-noto-sans-mono-fonts
+%endif
 %description plasma
 %{summary}.
 
@@ -65,11 +65,14 @@ Summary: Enable pulseaudio support in KDE
 # nothing here to license
 License: Public Domain
 Requires: %{name} = %{version}-%{release}
+%if 0%{?rhel} && 0%{?rhel} < 9
 Requires: pulseaudio
-Requires: pulseaudio-module-x11
-## kde3
-Requires: alsa-plugins-pulseaudio
-## kde4: -pulseaudio plugins are installed for all phonon backends by default
+%else
+Requires: pulseaudio-daemon
+%endif
+## legacy apps
+Requires: (pipewire-alsa if pipewire-pulseaudio)
+Requires: (alsa-plugins-pulseaudio if pulseaudio)
 %description pulseaudio
 %{summary}.
 
@@ -93,8 +96,6 @@ rm -fv Makefile
 
 
 %install
-mkdir -p %{buildroot}{/usr/share/config,/etc/kde/kdm}
-
 tar cpf - . | tar --directory %{buildroot} -xvpf -
 
 if [ %{_prefix} != /usr ] ; then
@@ -112,36 +113,32 @@ mkdir -p %{buildroot}%{_datadir}/wallpapers
 ln -s F%{version_maj} %{buildroot}%{_datadir}/wallpapers/Fedora
 %endif
 
-# omit kdm stuff
-rm -rfv %{buildroot}%{_sysconfdir}/{kde/kdm,logrotate.d/kdm,pam.d/kdm*}
-rm -fv %{buildroot}%{_localstatedir}/lib/kdm/backgroundrc
-# we don't use %%{_tmpfilesdir} and %%{_unitdir} because they don't follow %{_prefix}
-rm -fv %{buildroot}%{_prefix}/lib/tmpfiles.d/kdm.conf
-rm -fv %{buildroot}%{_prefix}/lib/systemd/system/kdm.service
+%if 0%{?flatpak} == 0
+# xdg-user-dirs HACK
+cp -a %{_sysconfdir}/xdg/autostart/xdg-user-dirs.desktop \
+      xdg-user-dirs-kde.desktop
+mkdir -p %{buildroot}%{_sysconfdir}/xdg/autostart
+desktop-file-install \
+  xdg-user-dirs-kde.desktop \
+  --dir=%{buildroot}%{_sysconfdir}/xdg/autostart \
+  --remove-key=X-GNOME-Autostart-Phase \
+  --add-only-show-in=KDE
+%endif
+
+%if 0%{?rhel} && 0%{?rhel} < 9
+# for rhel 8 and older with older noto fonts
+sed -e "s/Noto Sans Mono/Noto Mono/g" \
+    -i %{buildroot}%{_datadir}/kde-settings/kde-profile/default/{share/config/kdeglobals,xdg/kdeglobals}
+%endif
+
+# for ssh-agent.serivce, set SSH_AUTH_SOCK
+install -p -m644 -D %{SOURCE10} %{buildroot}%{_sysconfdir}/xdg/plasma-workspace/env/ssh-agent.sh
 
 ## unpackaged files
-# formerly known as -minimal
-rm -fv %{buildroot}%{_sysconfdir}/X11/xinit/xinitrc.d/20-kdedirs-minimal.sh
-rm -fv %{buildroot}%{_sysconfdir}/profile.d/qt-graphicssystem.*
-
-# FIXME/NEEDSWORK, still (mostly?) kde4
-# rhel stuff
-%if 0%{?rhel} && 0%{?rhel} <= 7
-rm -rf %{buildroot}%{_sysconfdir}/kde/env/fedora-bookmarks.sh \
-       %{buildroot}%{_prefix}/lib/rpm \
-       %{buildroot}%{_datadir}/polkit-1/
-echo "[Theme]" > %{buildroot}%{_datadir}/kde-settings/kde-profile/default/share/config/plasmarc
-echo "name=RHEL7" >> %{buildroot}%{_datadir}/kde-settings/kde-profile/default/share/config/plasmarc
-echo "[KSplash]" > %{buildroot}%{_datadir}/kde-settings/kde-profile/default/share/config/ksplashrc
-echo "Theme=RHEL7" >> %{buildroot}%{_datadir}/kde-settings/kde-profile/default/share/config/ksplashrc
-perl -pi -e "s,^Theme=.*,Theme=/usr/share/kde4/apps/kdm/themes/RHEL7," %{buildroot}%{_sysconfdir}/kde/kdm/kdmrc
-perl -pi -e "s,^HomeURL=.*,HomeURL=file:///usr/share/doc/HTML/index.html," %{buildroot}%{_datadir}/kde-settings/kde-profile/default/share/config/konquerorrc
-perl -pi -e "s,^View0_URL=.*,View0_URL=file:///usr/share/doc/HTML/index.html," %{buildroot}%{_datadir}/kde-settings/kde-profile/default/share/apps/konqueror/profiles/webbrowsing
-%endif
 
 
 %check
-%if 0%{?version_maj:1}
+%if 0%{?version_maj:1} && 1%{?flatpak} == 0
 test -f %{_datadir}/wallpapers/F%{version_maj} || ls -l %{_datadir}/wallpapers
 %endif
 
@@ -176,16 +173,19 @@ test -f %{_datadir}/wallpapers/F%{version_maj} || ls -l %{_datadir}/wallpapers
 
 %files plasma
 %{_datadir}/plasma/shells/org.kde.plasma.desktop/contents/updates/00-start-here-2.js
+%if 0%{?flatpak} == 0
+%{_sysconfdir}/xdg/autostart/xdg-user-dirs-kde.desktop
+%endif 
 %{_sysconfdir}/xdg/plasma-workspace/env/env.sh
 %{_sysconfdir}/xdg/plasma-workspace/env/gtk2_rc_files.sh
 %{_sysconfdir}/xdg/plasma-workspace/env/gtk3_scrolling.sh
-%{_sysconfdir}/xdg/plasma-workspace/shutdown/kuiserver5.sh
 %{_datadir}/plasma/look-and-feel/org.fedoraproject.fedora.desktop/contents/plasmoidsetupscripts/org.kde.plasma.kicker.js
 %{_datadir}/plasma/look-and-feel/org.fedoraproject.fedora.desktop/contents/plasmoidsetupscripts/org.kde.plasma.kickerdash.js
 %{_datadir}/plasma/look-and-feel/org.fedoraproject.fedora.desktop/contents/plasmoidsetupscripts/org.kde.plasma.kickoff.js
 %if 0%{?version_maj:1}
 %{_datadir}/wallpapers/Fedora
 %endif
+%{_sysconfdir}/xdg/plasma-workspace/env/ssh-agent.sh
 
 %files pulseaudio
 # nothing, this is a metapackage
@@ -193,10 +193,82 @@ test -f %{_datadir}/wallpapers/F%{version_maj} || ls -l %{_datadir}/wallpapers
 %files -n qt-settings
 %license COPYING
 %config(noreplace) %{_sysconfdir}/Trolltech.conf
-#config(noreplace) %{_sysconfdir}/profile.d/qt-graphicssystem.*
 
 
 %changelog
+* Mon Jul 19 2021 Neal Gompa <ngompa@fedoraproject.org> - 34.7-2
+- Add tweaks for RHEL 8 compatibility
+
+* Sun Jul 18 2021 Neal Gompa <ngompa@fedoraproject.org> - 34.7-1
+- kcm-about-distrorc: Drop Website setting and use os-release data instead
+
+* Mon Jun 21 2021 Rex Dieter <rdieter@fedoraproject.org> - 34.6-1
+- kdeglobals: Use double click to activate desktop icons by default (kdesig issue #17)
+
+* Tue Apr 20 2021 Rex Dieter <rdieter@fedoraproject.org> - 34.5-1
+- kdeglobals: disable user switching (#1929643)
+
+* Thu Apr 15 2021 Rex Dieter <rdieter@fedoraproject.org> - 34.4-1
+- drop deprecated/unused kde-profile/minimal
+- kdeglobals: cleanup, drop [WM] section causing problems with color scheme
+
+* Thu Apr 08 2021 Rex Dieter <rdieter@fedoraproject.org> - 34.2-1
+- -plasma: explicitly use BreezeTwilight lookandfeel elements (#1947446)
+
+* Mon Apr 05 2021 Rex Dieter <rdieter@fedoraproject.org> - 34.1-1
+- 34.1
+- -plasma: use Noto fonts
+
+* Mon Apr 05 2021 Onuralp SEZER <thunderbirdtr@fedoraproject.org> - 34.0-10
+- xdg/autostart removed and wallpaper test disabled for flatpak builds
+
+* Sat Mar 06 2021 Rex Dieter <rdieter@fedoraproject.org> - 34.0-9
+- drop ssh-agent.service, moved to openssh-clients (yay)
+
+* Tue Mar 02 2021 Rex Dieter <rdieter@fedoraproject.org> - 34.0-8
+- ssh-agent.service improvements
+
+* Mon Mar 01 2021 Rex Dieter <rdieter@fedoraproject.org> - 34.0-7
+- ssh-agent.service: drop After=plasma-core.target
+
+* Mon Mar 01 2021 Rex Dieter <rdieter@fedoraproject.org> - 34.0-6
+- ssh-agent.sh: only set SSH_AUTH_SOCK if not already
+
+* Sun Feb 28 2021 Rex Dieter <rdieter@fedoraproject.org> - 34.0-5
+- ssh-agent.service improvements
+
+* Thu Feb 25 2021 Rex Dieter <rdieter@fedoraproject.org> - 34.0-4
+- add ssh-agent.service (#1761817)
+
+* Wed Feb 24 2021 Rex Dieter <rdieter@fedoraproject.org> - 34.0-3
+- -plasma: +xdg-user-dirs-kde.desktop (#1932447)
+
+* Fri Feb 12 2021 Neal Gompa <ngompa13@gmail.com> - 34.0-2
+- Fix alsa dependency in pulseaudio subpackage
+
+* Fri Feb 12 2021 Rex Dieter <rdieter@fedoraproject.org> - 34.0-1
+- 34.0
+- pagure.io upstream
+
+* Tue Jan 26 2021 Fedora Release Engineering <releng@fedoraproject.org> - 33.0-4
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_34_Mass_Rebuild
+
+* Mon Jan 04 2021 Rex Dieter <rdieter@fedoraproject.org> - 33.0-3
+- -pulseaudio: Requires: pulseaudio-daemon
+
+* Fri Oct 16 2020 Rex Dieter <rdieter@fedoraproject.org> - 33.0-2
+- add 99-restart-dbus.sh plasma shutdown script, to forcefully restart user dbus (#1861700)
+
+* Tue Sep 08 2020 Than Ngo <than@redhat.com> - 33-1
+- bump for Fedora 33
+- Fix background image (RHBZ #1872054)
+
+* Tue Jul 28 2020 Fedora Release Engineering <releng@fedoraproject.org> - 32.2-2
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_33_Mass_Rebuild
+
+* Fri Mar 20 2020 Rex Dieter <rdieter@fedoraproject.org> - 32.2-1
+- 32.2
+
 * Thu Mar 19 2020 Rex Dieter <rdieter@fedoraproject.org> - 32.0-3
 - provide /usr/share/wallpapers/Fedora symlink pointing to default wallpaper (#1812293)
 
