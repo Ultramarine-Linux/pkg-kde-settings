@@ -2,7 +2,7 @@
 Summary: Config files for kde
 Name:    kde-settings
 Version: 35.0
-Release: 1%{?dist}
+Release: 2%{?dist}
 
 License: MIT
 Url:     https://pagure.io/fedora-kde/kde-settings
@@ -54,6 +54,7 @@ Requires: google-noto-mono-fonts
 %else
 Requires: google-noto-sans-fonts
 Requires: google-noto-sans-mono-fonts
+Requires: google-noto-serif-fonts
 %endif
 %description plasma
 %{summary}.
@@ -196,6 +197,9 @@ test -f %{_datadir}/wallpapers/F%{version_maj} || ls -l %{_datadir}/wallpapers
 
 
 %changelog
+* Mon Nov 15 2021 Timothée Ravier <tim@siosm.fr> - 35.0-2
+- Add google-noto-serif-fonts as dependency
+
 * Thu Sep 02 2021 Rex Dieter <rdieter@fedoraproject.org> - 35.0-1
 - 35.0
 
