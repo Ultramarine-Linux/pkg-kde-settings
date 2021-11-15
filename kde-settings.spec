@@ -54,6 +54,7 @@ Requires: google-noto-mono-fonts
 %else
 Requires: google-noto-sans-fonts
 Requires: google-noto-sans-mono-fonts
+# Not used strictly, but users expect general noto "family" to be present, so that includes serif too -- rdieter
 Requires: google-noto-serif-fonts
 %endif
 %description plasma
