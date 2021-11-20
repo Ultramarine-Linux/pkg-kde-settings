@@ -1,7 +1,7 @@
 
 Summary: Config files for kde
 Name:    kde-settings
-Version: 34.7
+Version: 35.0
 Release: 2%{?dist}
 
 License: MIT
@@ -54,6 +54,8 @@ Requires: google-noto-mono-fonts
 %else
 Requires: google-noto-sans-fonts
 Requires: google-noto-sans-mono-fonts
+# Not used strictly, but users expect general noto "family" to be present, so that includes serif too -- rdieter
+Requires: google-noto-serif-fonts
 %endif
 %description plasma
 %{summary}.
@@ -196,6 +198,15 @@ test -f %{_datadir}/wallpapers/F%{version_maj} || ls -l %{_datadir}/wallpapers
 
 
 %changelog
+* Mon Nov 15 2021 Timothée Ravier <tim@siosm.fr> - 35.0-2
+- Add google-noto-serif-fonts as dependency
+
+* Thu Sep 02 2021 Rex Dieter <rdieter@fedoraproject.org> - 35.0-1
+- 35.0
+
+* Thu Jul 22 2021 Fedora Release Engineering <releng@fedoraproject.org> - 34.7-3
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_35_Mass_Rebuild
+
 * Mon Jul 19 2021 Neal Gompa <ngompa@fedoraproject.org> - 34.7-2
 - Add tweaks for RHEL 8 compatibility
 
