@@ -1,8 +1,11 @@
+%if 0%{?rhel}
+%global bootstrap 1
+%endif
 
 Summary: Config files for kde
 Name:    kde-settings
 Version: 35.0
-Release: 2%{?dist}
+Release: 2%{?dist}.1
 
 License: MIT
 Url:     https://pagure.io/fedora-kde/kde-settings
@@ -198,6 +201,9 @@ test -f %{_datadir}/wallpapers/F%{version_maj} || ls -l %{_datadir}/wallpapers
 
 
 %changelog
+* Mon Nov 22 2021 Troy Dawson <tdawson@redhat.com> - 35.0-2.1
+- No default Fedora wallpaper for RHEL
+
 * Mon Nov 15 2021 Timothée Ravier <tim@siosm.fr> - 35.0-2
 - Add google-noto-serif-fonts as dependency
 
