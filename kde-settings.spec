@@ -2,7 +2,7 @@
 Summary: Config files for kde
 Name:    kde-settings
 Version: 35.0
-Release: 2%{?dist}
+Release: 3%{?dist}
 
 License: MIT
 Url:     https://pagure.io/fedora-kde/kde-settings
@@ -198,6 +198,9 @@ test -f %{_datadir}/wallpapers/F%{version_maj} || ls -l %{_datadir}/wallpapers
 
 
 %changelog
+* Thu Jan 20 2022 Fedora Release Engineering <releng@fedoraproject.org> - 35.0-3
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_36_Mass_Rebuild
+
 * Mon Nov 15 2021 Timothée Ravier <tim@siosm.fr> - 35.0-2
 - Add google-noto-serif-fonts as dependency
 
