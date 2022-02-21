@@ -1,7 +1,7 @@
 
 Summary: Config files for kde
 Name:    kde-settings
-Version: 35.1
+Version: 36.0
 Release: 1%{?dist}
 
 License: MIT
@@ -198,6 +198,9 @@ test -f %{_datadir}/wallpapers/F%{version_maj} || ls -l %{_datadir}/wallpapers
 
 
 %changelog
+* Mon Feb 21 2022 Timothée Ravier <tim@siosm.fr> - 36.0-1
+- 36.0
+
 * Mon Feb 07 2022 Neal Gompa <ngompa@fedoraproject.org> - 35.1-1
 - kdeglobals: Set the default Look and Feel package to Fedora Breeze
 
