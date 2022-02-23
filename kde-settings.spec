@@ -50,7 +50,7 @@ Requires: system-logos
 Requires: google-noto-sans-fonts
 # Not used strictly, but users expect general noto "family" to be present, so that includes serif too -- rdieter
 Requires: google-noto-serif-fonts
-%if 0%{?rhel} && 0%{?rhel} <= 9
+%if 0%{?rhel} && 0%{?rhel} < 9
 Requires: google-noto-mono-fonts
 %else
 Requires: google-noto-sans-mono-fonts
