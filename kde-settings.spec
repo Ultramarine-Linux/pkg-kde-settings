@@ -1,4 +1,3 @@
-
 Summary: Config files for kde
 Name:    kde-settings
 Version: 36.0
@@ -48,14 +47,13 @@ Requires: %{name} = %{version}-%{release}
 Requires: f%{version_maj}-backgrounds-kde
 %endif
 Requires: system-logos
-%if 0%{?rhel} && 0%{?rhel} < 9
 Requires: google-noto-sans-fonts
-Requires: google-noto-mono-fonts
-%else
-Requires: google-noto-sans-fonts
-Requires: google-noto-sans-mono-fonts
 # Not used strictly, but users expect general noto "family" to be present, so that includes serif too -- rdieter
 Requires: google-noto-serif-fonts
+%if 0%{?rhel} && 0%{?rhel} <= 9
+Requires: google-noto-mono-fonts
+%else
+Requires: google-noto-sans-mono-fonts
 %endif
 %description plasma
 %{summary}.
