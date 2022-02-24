@@ -2,7 +2,7 @@
 Summary: Config files for kde
 Name:    kde-settings
 Version: 35.0
-Release: 2%{?dist}
+Release: 2%{?dist}.1
 
 License: MIT
 Url:     https://pagure.io/fedora-kde/kde-settings
@@ -53,7 +53,8 @@ Requires: google-noto-sans-fonts
 Requires: google-noto-mono-fonts
 %else
 Requires: google-noto-sans-fonts
-Requires: google-noto-sans-mono-fonts
+# Not really required, and not in RHEL 9
+Recommends: google-noto-sans-mono-fonts
 # Not used strictly, but users expect general noto "family" to be present, so that includes serif too -- rdieter
 Requires: google-noto-serif-fonts
 %endif
@@ -198,6 +199,9 @@ test -f %{_datadir}/wallpapers/F%{version_maj} || ls -l %{_datadir}/wallpapers
 
 
 %changelog
+* Thu Feb 24 2022 Troy Dawson <tdawson@redhat.com> - 35.0-2.1
+- Recommend google-noto-sans-mono-fonts instead of require
+
 * Mon Nov 15 2021 Timothée Ravier <tim@siosm.fr> - 35.0-2
 - Add google-noto-serif-fonts as dependency
 
