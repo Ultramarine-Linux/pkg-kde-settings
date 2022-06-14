@@ -1,6 +1,6 @@
 Summary: Config files for kde
 Name:    kde-settings
-Version: 36.0
+Version: 36.1
 Release: 1%{?dist}
 
 License: MIT
@@ -196,6 +196,9 @@ test -f %{_datadir}/wallpapers/F%{version_maj} || ls -l %{_datadir}/wallpapers
 
 
 %changelog
+* Tue Jun 14 2022 Neal Gompa <ngompa@fedoraproject.org> - 36.1-1
+- kdeglobals: Actually set default global theme properly
+
 * Mon Feb 21 2022 Timothée Ravier <tim@siosm.fr> - 36.0-1
 - 36.0
 
