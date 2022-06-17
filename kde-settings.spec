@@ -1,7 +1,7 @@
 Summary: Config files for kde
 Name:    kde-settings
 Version: 36.1
-Release: 1%{?dist}
+Release: 2%{?dist}
 
 License: MIT
 Url:     https://github.com/Ultramarine-Linux/kde-settings
@@ -174,6 +174,9 @@ rm -rfv %{buildroot}/.package_note*
 
 
 rm -rf %{buildroot}/ultramarine-kde-theme-*
+
+%post -n ultramarine-plasma-theme
+cp -v %{_datadir}/plasma/shells/org.kde.latte.shell/contents/templates/Ultramarine.layout.latte %{_datadir}/plasma/shells/org.kde.latte.shell/contents/templates/Default.layout.latte
 
 %check
 %if 0%{?version_maj:1} && 1%{?flatpak} == 0
