@@ -1,3 +1,10 @@
+build/
+*.tar.*
+*.zip
+*.crate
+*.deb
+*.rpm
+
 /kde-settings-22-*.tar.xz
 /kde-settings-23-*.tar.xz
 /kde-settings-24-*.tar.xz

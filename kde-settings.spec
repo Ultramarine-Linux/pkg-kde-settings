@@ -4,9 +4,13 @@ Version: 36.1
 Release: 1%{?dist}
 
 License: MIT
-Url:     https://pagure.io/fedora-kde/kde-settings
-Source0: https://pagure.io/fedora-kde/kde-settings/archive/%{version}/kde-settings-%{version}.tar.gz
+Url:     https://github.com/Ultramarine-Linux/kde-settings
+Source0: https://github.com/Ultramarine-Linux/kde-settings/archive/refs/heads/master.tar.gz#/kde-settings.tar.gz
 Source1: COPYING
+Source2: https://github.com/Ultramarine-Linux/ultramarine-kde-theme/archive/refs/heads/main.zip#/ultramarine-kde-theme.zip
+Source3: org.kde.latte-dock.desktop
+Source4: lattedockrc
+Source5: Ultramarine.layout.latte
 
 BuildArch: noarch
 
@@ -21,7 +25,7 @@ Source10: ssh-agent.sh
 %if ! 0%{?bootstrap}
 # for f33+ , consider merging version_maj with version, ie, use Version: 33 --rex
 %global  version_maj %(echo %{version} | cut -d. -f1)
-BuildRequires: f%{version_maj}-backgrounds-kde
+BuildRequires: ultramarine-backgrounds-kde
 %endif
 
 # when kdebugrc was moved here
@@ -43,8 +47,9 @@ Requires: breeze-icon-theme
 %package plasma
 Summary: Configuration files for plasma
 Requires: %{name} = %{version}-%{release}
+Requires: ultramarine-plasma-theme
 %if 0%{?version_maj:1}
-Requires: f%{version_maj}-backgrounds-kde
+Requires: ultramarine-backgrounds-kde
 %endif
 Requires: system-logos
 Requires: google-noto-sans-fonts
@@ -84,8 +89,17 @@ Summary: Configuration files for Qt
 %{summary}.
 
 
+%package -n ultramarine-plasma-theme
+Summary:  Plasma theme for Ultramarine
+Requires: latte-dock
+Requires: papirus-icon-theme
+Requires: lightly
+%description -n ultramarine-plasma-theme
+%{summary}.
+
+
 %prep
-%autosetup -p1
+%autosetup -p1 -n %{name}-master -a 2
 
 # omit crud
 rm -fv Makefile
@@ -113,17 +127,25 @@ mkdir -p %{buildroot}%{_datadir}/wallpapers
 ln -s F%{version_maj} %{buildroot}%{_datadir}/wallpapers/Fedora
 %endif
 
+mkdir -p %{buildroot}%{_sysconfdir}/xdg/autostart
+
 %if 0%{?flatpak} == 0
 # xdg-user-dirs HACK
 cp -a %{_sysconfdir}/xdg/autostart/xdg-user-dirs.desktop \
       xdg-user-dirs-kde.desktop
-mkdir -p %{buildroot}%{_sysconfdir}/xdg/autostart
 desktop-file-install \
   xdg-user-dirs-kde.desktop \
   --dir=%{buildroot}%{_sysconfdir}/xdg/autostart \
   --remove-key=X-GNOME-Autostart-Phase \
   --add-only-show-in=KDE
 %endif
+
+# Install latte-dock autostart script
+desktop-file-install \
+  %{SOURCE3} \
+  --dir=%{buildroot}%{_sysconfdir}/xdg/autostart \
+  --remove-key=X-GNOME-Autostart-Phase \
+  --add-only-show-in=KDE
 
 %if 0%{?rhel} && 0%{?rhel} < 9
 # for rhel 8 and older with older noto fonts
@@ -134,8 +156,24 @@ sed -e "s/Noto Sans Mono/Noto Mono/g" \
 # for ssh-agent.serivce, set SSH_AUTH_SOCK
 install -p -m644 -D %{SOURCE10} %{buildroot}%{_sysconfdir}/xdg/plasma-workspace/env/ssh-agent.sh
 
+
+
+# latte dock config
+mkdir -p %{buildroot}%{_datadir}/plasma/shells/org.kde.latte.shell/contents/templates/
+cp -a %{SOURCE5} %{buildroot}%{_datadir}/plasma/shells/org.kde.latte.shell/contents/templates/
+
+mkdir -p %{buildroot}%{_sysconfdir}/skel/.config
+cp -av %{SOURCE4} %{buildroot}%{_sysconfdir}/skel/.config/
+
+# copy theme from SOURCE2
+cp -a ultramarine-kde-theme-main %{buildroot}%{_datadir}/plasma/look-and-feel/org.ultramarinelinux.ultramarine.desktop
+
 ## unpackaged files
 
+rm -rfv %{buildroot}/.package_note*
+
+
+rm -rf %{buildroot}/ultramarine-kde-theme-*
 
 %check
 %if 0%{?version_maj:1} && 1%{?flatpak} == 0
@@ -169,12 +207,14 @@ test -f %{_datadir}/wallpapers/F%{version_maj} || ls -l %{_datadir}/wallpapers
 %{_datadir}/applications/kde-mimeapps.list
 %if 0%{?rhel} && 0%{?rhel} <= 7
 %exclude %{_datadir}/kde-settings/kde-profile/default/share/apps/plasma-desktop/init/00-defaultLayout.js
+%exclude /.package_note*
 %endif
 
 %files plasma
 %{_datadir}/plasma/shells/org.kde.plasma.desktop/contents/updates/00-start-here-2.js
 %if 0%{?flatpak} == 0
 %{_sysconfdir}/xdg/autostart/xdg-user-dirs-kde.desktop
+%{_sysconfdir}/xdg/autostart/org.kde.latte-dock.desktop
 %endif 
 %{_sysconfdir}/xdg/plasma-workspace/env/env.sh
 %{_sysconfdir}/xdg/plasma-workspace/env/gtk2_rc_files.sh
@@ -186,6 +226,11 @@ test -f %{_datadir}/wallpapers/F%{version_maj} || ls -l %{_datadir}/wallpapers
 %{_datadir}/wallpapers/Fedora
 %endif
 %{_sysconfdir}/xdg/plasma-workspace/env/ssh-agent.sh
+
+%files -n ultramarine-plasma-theme
+%{_datadir}/plasma/look-and-feel/org.ultramarinelinux.ultramarine.desktop/
+%{_datadir}/plasma/shells/org.kde.latte.shell/contents/templates/Ultramarine.layout.latte
+%{_sysconfdir}/skel/.config/lattedockrc
 
 %files pulseaudio
 # nothing, this is a metapackage
