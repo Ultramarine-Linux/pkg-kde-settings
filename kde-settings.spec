@@ -1,7 +1,8 @@
 Summary: Config files for kde
 Name:    kde-settings
-Version: 36.1
+Version: 37.1
 Release: 2%{?dist}
+Epoch:   1
 
 License: MIT
 Url:     https://github.com/Ultramarine-Linux/kde-settings
@@ -47,7 +48,7 @@ Requires: breeze-icon-theme
 %package plasma
 Summary: Configuration files for plasma
 Requires: %{name} = %{version}-%{release}
-Requires: ultramarine-plasma-theme
+Recommends: ultramarine-plasma-theme
 %if 0%{?version_maj:1}
 Requires: ultramarine-backgrounds-kde
 %endif
@@ -91,7 +92,7 @@ Summary: Configuration files for Qt
 
 %package -n ultramarine-plasma-theme
 Summary:  Plasma theme for Ultramarine
-Requires: latte-dock
+Recommends: latte-dock
 Requires: papirus-icon-theme
 Requires: lightly
 %description -n ultramarine-plasma-theme
